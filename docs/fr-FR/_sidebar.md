@@ -1,0 +1,29 @@
+- [Code for IBM i](/fr-FR/)  
+   - [Connexion](/fr-FR/pages/login.md)  
+- Développement
+   - [Édition et compilation](/fr-FR/pages/developing/editing-compiling.md)  
+   - [Actions](/fr-FR/pages/developing/actions/index.md)  
+      - [Execution](/fr-FR/pages/developing/actions/execution.md)  
+      - [Variables personnalisées](/fr-FR/pages/developing/actions/custom-vars.md)  
+   - [ILEDocs](/fr-FR/pages/developing/iledocs.md)  
+   - Local Development
+      - [Pour Démarrer](/fr-FR/pages/developing/local/getting-started.md)  
+      - [Azure DevOps](/fr-FR/pages/developing/local/azure.md)  
+- Astuces
+   - [Démarrage rapide](/fr-FR/pages/tips/quickstart.md)  
+   - [Astuces](/fr-FR/pages/tips/tricks.md)  
+   - [Terminaux](/fr-FR/pages/tips/terminals.md)  
+   - [CCSID](/fr-FR/pages/tips/ccsid.md)  
+   - [Configurer](/fr-FR/pages/tips/setup.md)  
+- [Explorateurs](/fr-FR/pages/browsers/index.md)  
+   - [Liste des bibliothèques utilisateur](/fr-FR/pages/browsers/user-library-list.md)  
+   - [Explorateur d'objet](/fr-FR/pages/browsers/object-browser.md)  
+   - [Explorateur IFS](/fr-FR/pages/browsers/ifs-browser.md)
+- Paramétrages
+   - [Profils](/fr-FR/pages/settings/profiles.md)
+   - [Connexions](/fr-FR/pages/settings/connection.md)
+   - [Généraux](/fr-FR/pages/settings/global.md)
+- Extensions
+   - [RPGLE language tools](/fr-FR/pages/extensions/rpgle.md)  
+   - [Db2 for i](/fr-FR/pages/extensions/db2i.md)  
+- [Créer une extension](/fr-FR/pages/api/extending.md)  
