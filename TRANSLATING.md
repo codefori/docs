@@ -30,11 +30,11 @@ We choose to use french translation as an example to explain the process.
 1. Translating  
  :eye_speech_bubble: To make me easier the translating,I'm using this useful extension [Vscode Google Translate](https://marketplace.visualstudio.com/items?itemName=funkyremi.vscode-google-translate)  
 
-    1. Add the new langage in the [navbar](./docs/_navbar.md) using the [ISO Langage Code table](http://www.lingoes.net/en/translator/langcode.htm). 
+    1. Add the new language in the [navbar](./docs/_navbar.md) using the [ISO Language Code table](http://www.lingoes.net/en/translator/langcode.htm). 
     1. Copy the [docs](./docs/) folder as the [/docs/fr-FR](./docs/fr-FR/) folder.
     1. Remove the _navbar.md under the [/docs/fr-FR](./docs/fr-FR/) folder. 
     1. Start translating the [side bar](./docs/fr-FR/_sidebar.md) 
-        You have to cchange all the path to yours pages by adding the directory (/fr-FR/) in this case ..
+        You have to change all the path to yours pages by adding the directory (/fr-FR/) in this case ..
         ```
         - [Code for IBM i](/)
           - [Login](/pages/login.md)

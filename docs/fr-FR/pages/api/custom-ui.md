@@ -1,17 +1,17 @@
 
-# Custom UI in Code for IBM i
+# Personnaliser une interface utilisateur dans Code For IBM i
 
-To make it easy for users to write custom UI, we have a CustomUI command that allows the users to define the form fields and handle the submission via a callback function. 
+Pour faciliter la création d'interface utilisateur, une commande `CustomUI` qui permet aux utilisateurs de définir les champs d'un formulaire et de gérer sa soumission via une fonction de rappel (callback). 
 
-* Each form needs at least 1 submit field or buttons.
-* You must `panel.dispose()` in the callback function.
-* Returns `{panel, data}`
+* Chaque formulaire a besoin d'au moins 1 champ ou bouton de soumission.
+* Vous devez `panel.dispose()` dans la fonction de rappel.
+* et retourner `{panel, data}`
 
-You can find the source for this API at `src/api/CustomUI.js`.
+Vous pouvez trouver le source de cette API à `src/api/CustomUI.js`.
 
-### `code-for-ibmi.launchUI` command
+### La commande `code-for-ibmi.launchUI`
 
-Your extension can execute this command with the following:
+Votre extension peut exécuter cette commande comme ce qui suit:
 
 ```js
 vscode.commands.executeCommand(`code-for-ibmi.launchUI`, `UI Tab`, fields, (result) => {
@@ -42,9 +42,9 @@ vscode.commands.executeCommand(`code-for-ibmi.launchUI`, `UI Tab`, fields, (resu
  **/
 ```
 
-## Example
+## Exemple
 
-### Simple example
+### Exemple simple
 
 ```js
 const vscode = require(`vscode`);

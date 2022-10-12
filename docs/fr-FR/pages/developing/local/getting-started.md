@@ -1,55 +1,55 @@
-It is possible for the user to develop in a local workspace folder and deploy+compile on IBM i.
+Il est possible de développer dans un dossier local puis déployer et compiler sur IBM I.
 
-If the user opens a Workspace before connecting to an IBM i:
+Si l'utilisateur ouvre un espace de travail puis se connecte à un IBM I:
 
-1. A new information messgae will show the user what their current library is,
-2. If this is the first time connecting with this workspace, it will 
-   * prompt the user to set a default Deploy directory, 
-   * if no `actions.json` file is found will ask the user if they'd like to create a default
-3. a new right-click option will appear on IFS directories to deploy to that directory
-4. a 'Deploy' button will appear on the status bar
+1. Une message d'information indique la bibliothèque courante (current) à l'utilisateur,
+2. Si c'est la première connexion depuis cet espace de travail (workspace) , il sera 
+   * l'utilisateur est invité à définir un répertoire de déploiement par défaut, 
+   * Si le fichier `actions.json` file n'est pas trouvé, on demande à l'utilisateur s'il souhaite en créer un par défaut
+3. Une nouvelle option sur clic droit apparaît sur les répertoires IFS pour déployer dans ce répertoire
+4. Un bouton `Deploy`» apparaît dans la barre d'état
 
 ## Guides
 
-* This step-by-step guide [in the rpg-git-book](https://worksofliam.github.io/rpg-git-book/7-tooling-vscode.html).
-* A [video tutorial on YouTube](https://www.youtube.com/watch?v=XuiGyWptgDA&t=425s), showing the setup from scratch.
-* Easily cloning from [Azure DevOps](azure.md).
+* Un guide pas à pas [dans le rpg-git-book](https://worksofliam.github.io/rpg-git-book/7-tooling-vscode.html).
+* Un [tutoriel en video YouTube](https://www.youtube.com/watch?v=XuiGyWptgDA&t=425s), détaille cette procédure du début à la fin.
+* En clonant un projet depuis [Azure DevOps](azure.md).
 
-## 1. Opening a Workspace Folder
+## 1. Ouverture d'un dossier comme espace de travail
 
-Opening a folder in Visual Studio Code adds that folder to that Workspace. You need at least one folder open in the Visual Studio Code workspace for local development.
+L'ouverture d'un dossier dans Visual Studio Code ajoute ce dossier à un espace de travail.Vous avez besoin d'au moins un dossier ouvert dans l'espace de travail du code Visual Studio pour le développement local.
 
-## 2. Setting the deploy location
+## 2. Définition de l'emplacement du déploiement
 
-If it is the first time connecting with the workspace it will prompt the user to set a default Deploy directory.
+S'il s'agit de la première connexion avec l'espace de travail, l'utilisateur est invité à définir un répertoire de déploiement par défaut.
 
 ![](../../../assets/local_1.png)
 
-If you would prefer to change the default location, the user can right-click on any directory in the IFS Browser and select the 'Deploy Workspace to location' option.
+Si vous préférez modifier l'emplacement par défaut, l'utilisateur peut cliquer avec le bouton droit sur n'importe quel répertoire du navigateur IFS et sélectionner l'option  `Deploy Workspace to location`.
 
-The user can change the deploy directory at any by using the same right-click option on another directory.
+L'utilisateur peut modifier le répertoire de déploiement en utilisant la même option de clic droit sur un autre répertoire.
 
-## 3. The Deploy button / Running the deployment process
+## 3. Le bouton `Deploy` / exécution du processus de déploiement
 
-Using the 'Deploy' button on the status bar will start the deployment process. If the workspace has more than one folder, the user will have to select which folder they want to deploy.
+L'utilisation du bouton `Deploy` de la barre d'état lance le processus de déploiement. Si l'espace de travail a plus d'un dossier, l'utilisateur devra sélectionner le dossier qu'il souhaite déployer.
 
-There are three options for deployment:
+Il y a trois options pour le déploiement:
 
-1. Working Changes: This only works if the chosen workspace folder is a git repository. Code for IBM i will look at the git status to determine the files that have been changed since the last commit (unstaged and staged) and only uploads those files.
-2. Staged Changes: The same as the "Working Changes" option, but only uploads staged / indexed files.
-3. All: Will upload all files in the chosen workspace folder. Will ignore files that are part of the '.gitignore' file if it exists.
+1. `Working Changes`: Cela ne fonctionne que si le dossier d'espace de travail choisi est un référentiel GIT.Code For IBM i examine le statut GIT ("status") pour déterminer les fichiers qui ont été modifiés depuis le dernier commit (unstaged and staged) et déploie uniquement ces fichiers.
+2. `Staged Changes`: idem que l'option "Working Changes", mais déploie seuelement les fichiers (staged/indexed).
+3. `All`: déploie tous les fichiers dans le dossier d'espace de travail choisi. Les fichiers qui font partie du fichier '.gitignore' sont ignorés.
 
-The user can also defined Actions that are for the 'file' (local) type to run the deploy before running the Action.
+L'utilisateur peut également définir des actions pour le type «fichier» (local) pour exécuter le déploiement avant d'exécuter l'action.
 
-## 4. Workspace Actions (deploy & build)
+## 4. Actions de l'espace de travail (deploy & build)
 
-Similar to other repository settings, users can now store Actions as part of the Workspace. Users can now create `.vscode/actions.json` inside of your Workspace, and can contain Actions that are specific to that Workspace. That configuration file should also be checked into git for that application. Alternatively, if you're using [the new `iproj.json` standard](https://ibm.github.io/ibmi-bob/#/prepare-the-project/project-metadata), the `buildCommand` and `compileCommand` will also appear as Actions automatically.
+Semblable aux autres paramétrages, les utilisateurs peuvent stocker des actions au niveau de l'espace de travail. Les utilisateurs peuvent créer un  ficher `.vscode/actions.json` dans l'espace de travail qui peut contenir des actions spécifiques à cet espace de travail. Ce fichier de configuration doit être versionné par GIT pour cette application. Si vous utilisez [le nouveau fichier standard `iproj.json`](https://ibm.github.io/ibmi-bob/#/prepare-the-project/project-metadata), les commandes de `build` et de `compile` sont crées automatiquement.
 
-There is a tool that can generate an initial `actions.json` file for you. After connecting to a system, open the command palette (F1) and search for 'Launch Actions Setup'. This shows a multi-select window where the user can pick which technologies they're using. Based on the selection, an `actions.json` will be created.
+Il existe un outil qui peut générer un fichier initial `Actions.json` pour vous. Après vous être connecté à un système, ouvrez la palette de commande (F1) and recherchez `Launch Actions Setup`. L'utilisateur peut choisir la technologie de déploiement à utiliser (make,bob) dans une fenêtre. Sur la base de cette sélection, le fichier `actions.json` est créé.
 
 ![](../../../assets/actions_tool.png)
 
-Here is an example `actions.json` setup, which requires deployment to happen before triggering BoB. VS Code will prompt content assist when working with `actions.json`. You could replace BoB with any build system here (e.g. make, or perhaps a vendor-specific tool.).
+Voici un exemple de configuration `actions.json`, qui exige que le déploiement ait lieu avant de déclencher `BOB`. VS Code propose une assistance à la saisie lorsque vous travaillez avec le fichier `actions.json`. Vous pouvez remplacer `BOB` avec n'importe quel système de `BUILD` (c.a.d, make, ou peut-être un outil spécifique d'un fournisseur.).
 
 ```json
 [
@@ -74,6 +74,6 @@ Here is an example `actions.json` setup, which requires deployment to happen bef
 ]
 ```
 
-Now, when the user runs an Action against the local file (with `Control/Command + E`), they will appear in the list. 
+Maintenant, lorsque l'utilisateur demande à lancer une action depuis le fichier courant (via `Control/Command + E`), les actions du  fichier `actions.json` apparaissent dans la liste. 
 
 ![image](https://user-images.githubusercontent.com/3708366/146957104-4a26b4ba-c675-4a40-bb51-f77ea964ecf5.png)

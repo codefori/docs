@@ -1,75 +1,76 @@
 
 # ILEDocs
 
-Code for IBM i follows the ILEDocs standard for writing documentation for the ILE languages. This document mainly covers how to use it with RPGLE free-format.
+Code for IBM i suit la norme ILEDOCS pour écrire la documentation des sources en ILE. Ce document couvre principalement son utilisation en RPGLE format libre.
 
-Code for IBM i will make use of the documentation block to improve content assist and hover support.
+Code for IBM i utilise le bloc de documentation du code pour améliorer l'assistance à la saisie et le survol des zones (Hover).
 
-## Standard format
+## Format standard
 
-### Layout
+### Disposition
 
-The documentation block format is as follows.
+Le format d'un bloc de documentation est le suivant.
 
-1. Start with `///` - this starts the documentation block for the procedure
-2. The first comment is the **title**
-3. The next comments define the **description**
-4. After the description, tags can be used.
-5. End the block with `///` again.
+1. Commencer avec `///` - Cela démarre le bloc de documentation pour la procédure
+2. Le premier commentaire est le **titre**
+3. Les commentaires suivants sont la **description** (multi-lignes possible) 
+4. Après la description, les balises (tags) peuvent être utilisées.
+5. Le bloc se finit par `///`.
 
 ```rpgle
 ///
-// TITLE
+// TITRE
 // DESCRIPTION!
-// Description can be multiline
+// La description peut être multi-lignes  
 // @tag data
 // @tag data
 ///
 Dcl-Proc ...
 ```
 
-### Can be used on
+### Utilisation
 
-Documentation blocks can be used on pretty much any RPG functionality:
+Les blocs de documentation peuvent être utilisés sur à peu près toutes les fonctionnalités RPG:
 
-* Constants
-* Variables/structs
+* Constantes
+* Variables/Structures
 * Procedures
-* Subroutines
+* Sous routines
 
-### Available tags
+### Balises disponibles
 
-All tags start with `@`. Tags in bold are most commonly used.
+Toutes les balises commencent par `@`.  
+Les balises en gras sont les plus couramment utilisées.
 
-* **param** - multi line - Description of the parameter
-* **return** - multi line - Description of the return value
-* **deprecated** - multi line - Description why a program or procedure shouldn't be used and stating any replacement.
-* author - single line - Author of the source code
-* date - single line - Date (any format)
-* brief (title) - single line - Must be the first tag in an ILEDocs block. The tag can also be ignored, see example above.
-* link - multi line - @link http://url Description
-* rev (revision) - multi line - `@rev date author`, following lines are the description of the revision
-* project - single line - Name of the project (so that the module can be placed under the corresponding project in the UI)
-* warning - multi line
-* info - multi line
-* throws - multi line - Id and description of an escape message the user of the program/procedure can expect in certain cases
-* version - single line - version of the module
+* **param** - multi-lignes - Description d'un paramètre
+* **return** - multi-lignes - Description de la valeur de retour
+* **deprecated** - multi-lignes - Décrit Pourquoi un programme ou une procédure ne doit pas être utilisé et indique un remplacement.
+* author - une seule ligne - Auteur du code source
+* date - une seule ligne - Date (Tout format)
+* brief (titre) - une seule ligne - Doit être la première balise d'un bloc ILEDOCS. La balise peut également être ignorée, voir l'exemple ci-dessous.
+* link - multi-lignes - @link http://url Description
+* rev (revision) - multi-lignes - `@rev date author`, Les lignes suivantes sont la description de la révision
+* project - une seule ligne - Nom du projet (afin que le module puisse être placé sous le projet correspondant dans l'interface utilisateur)
+* warning - multi-lignes
+* info - multi-lignes
+* throws - multi-lignes - Id and la description d'un message d'échappement que l'utilisateur du programme / procédure peut s'attendre à rencontre dans certains cas
+* version - une seule ligne - version du module
 
-## Basics
+## Les bases
 
-Basic rules:
+Règles de base:
 
-* All documentation is optional, but the better documentation you provide, the better the content assist and generated documentation is.
-* For each parameter in a procedure, there should be as many `@param` tags which provide a short description of what the parameter is. 
-* The first line of the documentation block is always the title.
+* Toute la documentation est facultative, mais meilleure documentation est la documentation fournie, meilleure est l'assistance à la saisie et la documentation générée.
+* Pour chaque paramètre d'une procédure, il devrait y avoir autant de balises `@param` fournissant une brève description de la nature du paramètre. 
+* La première ligne du bloc de documentation est toujours le titre.
 
 ```rpgle
 ///
-// Transform to lowercase
-// This procedure will take a string and transform it to lowercase
+// Transforme en minuscules
+// Cette procédure prends une chaîne en entrée et la transforme en minuscules
 //
-// @param The string
-// @return The lowercase value
+// @param une chaîne
+// @return une chaîne en minuscules
 ///
 Dcl-Proc ToLower Export;
   Dcl-Pi *N Char(20);

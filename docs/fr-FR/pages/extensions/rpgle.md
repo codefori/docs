@@ -1,69 +1,70 @@
 
-## Install
+## L'installation
 
-The extension can be [installed from the Marketplace](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-rpgle) and is also part of the [IBM i Development Pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack).
+L'extension s'installe depuis la [Marketplace](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-rpgle).
+Elle est incluse dans l'extension [IBM i Development Pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack).
 
-RPGLE language tools also works in VS Code web.
+RPGLE language tools fonctionne aussi dans VS Code web.
 
 ## Usage
 
-The extension has two main pieces of functionality:
+L'extension a deux fonctionnalités principales:
 
-* language tools: content assist, outline view, etc. Supports every version of ILE RPG (fixed, mixed and free-format)
-* linter: configurable linter to check code quality. **Only supports total free-format** (`**FREE`).
+* des outils pour le langage: assistance à la saisie, vue structure (outline view), etc. toutes les versions de format du langage RPG ILE sont supportées (fixe, mixte, libre)
+* Correcteur (linter): un correcteur extensible pour contrôler la qualité du code. **Seulement pour le format libre** (`**FREE`).
 
-The language tools are enabled by default, but the linter must be enabled in the VS Code settings. The linter is always enabled when being used by VS Code web.
+Les outils pour le langage sont activés par défaut, mais le correcteur doit être activé dans les paramètres dans Vs code. Le correcteur est toujours activé avec VS Code web.
 
-## Creating lint configuration
+## Création de configuration des règles du correcteur
 
-You can create lint configuration for all types of file type. Use the 'Open RPGLE lint configuration' command from the command palette to automatically create and open the relative lint configuration from the RPGLE source you are working in.
+Vous pouvez créer une configuration de correcteur pour tous les types de type de fichier. Utilisez la commande `Open RPGLE lint configuration` command de la palette de commandes pour créer et ouvrir automatiquement la configuration du correcteur relative au source RPGLE dans laquelle vous travaillez.
 
-### Relative lint config
+### Configuration de correcteur relative
 
-* If you are developing in `LIB/QRPGLESRC/MYSOURCE.RPGLE`, then the linter config exists in `LIB/VSCODE/RPGLINT.JSON`. Each library has its own rules configuration file, binding it to all RPGLE sources in that library. 
-* When developing in the IFS, linter rules config exist in `.vscode/rpglint.json` relative to the current working directory.
-* When developing in a local workspace, linter rules exist in `.vscode/rpglint.json` relative to the workspace.
+* Si vous développez dans `LIB/QRPGLESRC/MYSOURCE.RPGLE`, la configuration de Linter existe dans `LIB/VSCODE/RPGLINT.JSON`. Chaque bibliothèque a son propre fichier de configuration de règles, le liant à toutes les sources RPGLE de la bibliothèque. 
+* Lors d'un développement dans l'IFS, la configuration des règles existe dans `.vscode/rpglint.json` par rapport au répertoire de travail actuel.
+* Lors du développement dans un espace de travail local, les règles de linter existent dans `.vscode/rpglint.json` par rapport à l'espace de travail.
 
-### Lint options
+### Options du correcteur
 
-Below are some available lint configs. [See the `rpglint.json` schema for the most up to date rules](https://github.com/halcyon-tech/vscode-rpgle/blob/main/src/schemas/rpglint.json).
+Vous trouverez ci-dessous quelques configurations de correcteur disponibles. [Voir le schéma `rpglint.json` pour les règles les plus récentes](https://github.com/halcyon-tech/vscode-rpgle/blob/main/src/schemas/rpglint.json).
 
 | Type | Rule | Value | Description |
 |---|---|---|---|
-| 🌟 | indent | number | Indent for RPGLE. |
-| 🌟 | BlankStructNamesCheck | boolean | Struct names cannot be blank (*N). |
-| 🌟 | QualifiedCheck | boolean | Struct names must be qualified (QUALIFIED). |
-| 🌟 | PrototypeCheck | boolean | Prototypes can only be defined with either EXT, EXTPGM or EXTPROC |
-| 🌟 | ForceOptionalParens | boolean | Expressions must be surrounded by brackets. |
-| 🌟 | NoOCCURS | boolean | OCCURS is not allowed. |
-| 🤔 | NoSELECTAll | boolean | 'SELECT *' is not allowed in Embedded SQL. |
-| 🌟 | UselessOperationCheck | boolean | Redundant operation codes (EVAL, CALLP) not allowed. |
-| 🌟 | UppercaseConstants | boolean | Constants must be in uppercase. |
-| 🌟 | IncorrectVariableCase | boolean | Variable names must match the case of the definition. |
-| 🌟 | RequiresParameter | boolean | Parentheses must be used on a procedure call, even if it has no parameters. |
-| 🌟 | RequiresProcedureDescription | boolean | Procedure titles and descriptions must be provided. |
-| 🌟 | StringLiteralDupe | boolean | Duplicate string literals are not allowed. |
-| 🌟 | RequireBlankSpecial | boolean | *BLANK must be used over empty string literals. |
-| 🌟 | CopybookDirective | string | Force which directive which must be used to include other source. (`COPY` or `INCLUDE`) |
-| 🌟 | UppercaseDirectives | boolean | Directives must be in uppercase. |
-| 🤔 | NoSQLJoins | boolean | JOINs in Embedded SQL are not allowed. |
-| 🌟 | NoGlobalsInProcedures | boolean | Globals are not allowed in procedures. |
-| 🌟 | SpecificCasing | array | Specific casing for op codes, declartions or built-in functions codes. |
-| 🌟 | NoCTDATA | boolean | CTDATA is not allowed. |
-| 🌟 | PrettyComments | boolean | Comments cannot be blank, must start with a space and have correct indentation. |
-| 🌟 | NoGlobalSubroutines | boolean | Global subroutines are not allowed. |
-| 🌟 | NoLocalSubroutines | boolean | Subroutines in procedures are not allowed. |
-| 🌟 | NoUnreferenced | boolean | Unreferenced definitions are not allowed. |
-| 🔒 | NoExternalTo | string array | Calls to certain APIs are not allowed. (EXTPROC / EXTPGM) |
-| 🔒 | NoExecuteImmediate | boolean | Embedded SQL statement with EXECUTE IMMEDIATE not allowed. |
-| 🔒 | NoExtProgramVariable | boolean | Declaring a prototype with EXTPGM and EXTPROC using a procedure is now allowed. |
-| 🤔 | IncludeMustBeRelative | boolean | When using copy or include statements, path must be relative. For members, you must at least include the source file. For streamfiles, it is relative from the working directory. |
-| 🤔 | SQLHostVarCheck | boolean | Warns when referencing variables in Embedded SQL that are also defined locally. | 
+| 🌟 | indent | number | Indentation dans le RPGLE. |
+| 🌟 | BlankStructNamesCheck | boolean | Les noms de structure doivent être renseignées (pas *N). |
+| 🌟 | QualifiedCheck | boolean | Les noms de structure doivent être qualifiés (QUALIFIED). |
+| 🌟 | PrototypeCheck | boolean |Les prototypes ne peuvent être définis qu'avec soit EXT, EXTPGM ou EXTPROC |
+| 🌟 | ForceOptionalParens | boolean | Les expressions doivent être entourées de parenthèses. |
+| 🌟 | NoOCCURS | boolean | OCCURS n'est pas autorisé. |
+| 🤔 | NoSELECTAll | boolean | 'SELECT *' n'est pas autorisé en SQL embarqué. |
+| 🌟 | UselessOperationCheck | boolean | Les codes opérations redondants (EVAL, Callp) ne sont pas autorisés. |
+| 🌟 | UppercaseConstants | boolean | Les constantes doivent être en majuscules.|
+| 🌟 | IncorrectVariableCase | boolean | Les noms de variables doivent correspondre la définition de casse. |
+| 🌟 | RequiresParameter | boolean | Les parenthèses doivent être utilisées lors d'un appel de procédure, même s'il n'a aucun paramètre. |
+| 🌟 | RequiresProcedureDescription | boolean | Les titres et les descriptions des procédures doivent être renseignées. |
+| 🌟 | StringLiteralDupe | boolean | Les littéraux de chaîne en double ne sont pas autorisés. |
+| 🌟 | RequireBlankSpecial | boolean | *BLANK doit être utilisé sur des littéraux de chaîne vides. |
+| 🌟 | CopybookDirective | string | Force quelle directive doit être utilisée pour inclure une autre source. (`COPY` ou `INCLUDE`) |
+| 🌟 | UppercaseDirectives | boolean | Les directives doivent être en majuscules. |
+| 🤔 | NoSQLJoins | boolean | Les jointures en SQL embarqué ne sont pas autorisés. |
+| 🌟 | NoGlobalsInProcedures | boolean | L'utilisation de variables globales n'est pas autorisée dans les procédures. |
+| 🌟 | SpecificCasing | array | Spécifications de casse pour les codes opérations, les déclarations ou le code des fonctions intégrées. |
+| 🌟 | NoCTDATA | boolean | CTDATA n'est pas autorisé. |
+| 🌟 | PrettyComments | boolean | Les commentaires ne peuvent pas être vides et ils doivent commencer par un espace et avoir une indentation correcte. |
+| 🌟 | NoGlobalSubroutines | boolean | Les sous-routines globales ne sont pas autorisées. |
+| 🌟 | NoLocalSubroutines | boolean | Les sous-routines ne sont pas autorisés dans les procédures. |
+| 🌟 | NoUnreferenced | boolean | Les définitions non référencées ne sont pas autorisées. |
+| 🔒 | NoExternalTo | string array | Les appels à certaines API ne sont pas autorisés. (EXTPROC / EXTPGM) |
+| 🔒 | NoExecuteImmediate | boolean | SQL embraqué intégrée avec exécution immédiate non autorisé. |
+| 🔒 | NoExtProgramVariable | boolean | Déclarer un prototype avec EXTPGM et EXTPROC à l'aide d'une procédure est désormais autorisé. |
+| 🤔 | IncludeMustBeRelative | boolean | Lorsque vous utilisez des instructions de copie ou d'inclure, le chemin doit être relatif. Pour les membres, vous devez au moins inclure le fichier source.Pour StreamFiles, il est relatif du répertoire de travail. |
+| 🤔 | SQLHostVarCheck | boolean | Avertit lorsque des variables sont référencées dans du SQL Embarqué et sont également définies localement. | 
 
 **Type key**
 
 | Key | Value |
 |---|---|
-| 🌟 | Clean code |
-| 🤔 | Safe code |
-| 🔒 | Secure code |
+| 🌟 | Code propre |
+| 🤔 | Code sûr |
+| 🔒 | Code sécurisé |

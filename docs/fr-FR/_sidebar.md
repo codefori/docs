@@ -6,7 +6,7 @@
       - [Execution](/fr-FR/pages/developing/actions/execution.md)  
       - [Variables personnalisées](/fr-FR/pages/developing/actions/custom-vars.md)  
    - [ILEDocs](/fr-FR/pages/developing/iledocs.md)  
-   - Local Development
+   - Développement local
       - [Pour Démarrer](/fr-FR/pages/developing/local/getting-started.md)  
       - [Azure DevOps](/fr-FR/pages/developing/local/azure.md)  
 - Astuces

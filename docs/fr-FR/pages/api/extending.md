@@ -1,21 +1,23 @@
-It is possible to write VS Code extensions that are based on Code for IBM i. That means your extension can use the connection that the user creates in your extension. This is not an extension tutorial, but an intro on how to access the APIs available within Code for IBM i.
+Il est possible d'écrire une extension VS Code extensions en se basant sur Code for IBM i.  
+Cela signifie que votre extension peut utiliser la connexion que l'utilisateur crée dans Code For IBM i.  
+Ce n'est pas un tutoriel d'extension, mais une introduction sur la façon d'accéder aux API disponibles dans Code For IBM i.
 
-For example, you might be a vendor that produces lists or HTML that you'd like to be accessible from within Visual Studio Code.
+Par exemple, vous pourriez être un fournisseur qui produit des listes ou HTML que vous souhaitez être accessible à partir de l'intérieur Visual Studio Code.
 
-# Examples
+# Exemples
 
-See the following code bases for large examples of extensions that use Code for IBM i:
+Voir les bases de code en suivant les exemples issus d'extensions complètes basées sur Code for IBM i:
 
 * [VS Code extension to manage IBM i IWS services](https://github.com/halcyon-tech/vscode-ibmi-iws)
 * [Git for IBM i extension](https://github.com/halcyon-tech/git-client-ibmi)
 
-# Command APIs
+# Les commandes de l'API
 
-## Running commands with the user library list
+## Executer une commande avec la liste des bibliothèques d'utilisateurs
 
-Code for IBM i ships a command that can be used by an extension to execute a remote command on the IBM i: `code-for-ibmi.runCommand`.
+Code for IBM i livre une commande qui peut être utilisée par une extension pour exécuter une commande distante sur l'IBM I: `code-for-ibmi.runCommand`.
 
-It has a parameter which is an object with some properties:
+Il a un paramètre qui est un objet (javascript) avec certaines propriétés:
 
 ```ts
 interface CommandInfo {
@@ -27,10 +29,10 @@ interface CommandInfo {
 }
 ```
 
-* Command can also use [Promptable fields](https://halcyon-tech.github.io/vscode-ibmi/#/?id=prompted).
-* When executing a command in the `ile` or `qsh` environment, it will use the library list from the current connection.
+* La commande peut également utiliser des [champs Saisis](/fr-FR/pages/developing/actions/execution?id=invite).
+* Lors de l'exécution d'une commande dans le `ile` ou `qsh` environnement, il utilisera la liste des bibliothèques à partir de la connexion courante.
 
-The command returns an object:
+La commande renvoie un objet:
 
 ```ts
 interface CommandResult {
@@ -54,9 +56,9 @@ const result = await vscode.commands.executeCommand(`code-for-ibmi.runCommand`, 
 });
 ```
 
-## Running SQL queries
+## Exécution de requêtes SQL
 
-Code for IBM i has a command that lets you run SQL statements and get a result back.
+Code for IBM i a une commande qui vous permet d'exécuter des instructions SQL et d'obtenir un résultat.
 
 ```js
 const rows: Object[] = await vscode.commands.executeCommand(`code-for-ibmi.runQuery`, statement);
@@ -66,13 +68,13 @@ const rows: Object[] = await vscode.commands.executeCommand(`code-for-ibmi.runQu
 const rows = await vscode.commands.executeCommand(`code-for-ibmi.runQuery`, statement);
 ```
 
-## Get members and streamfiles
+## Récupérer le contenu d'un membre ou d'un fichier
 
-It is possible for extensions to utilise the file systems provided by Code for IBM i.
+Les extensions peuvent utiliser les systèmes de fichiers fournis par Code for IBM i.
 
-`openTextDocument` returns a [`TextDocument`](https://code.visualstudio.com/api/references/vscode-api#TextDocument).
+`openTextDocument` renvoie un [document en texte](https://code.visualstudio.com/api/references/vscode-api#TextDocument).
 
-**Getting a member**
+**Récupérer un membre**
 
 ```js
 const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
@@ -81,7 +83,7 @@ const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
 }));
 ```
 
-**Getting a streamfile**
+**Récupérer un fichier **
 ```js
 const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
   scheme: `streamfile`,
@@ -89,9 +91,9 @@ const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
 }));
 ```
 
-## Connect to a system
+## Se Connecter à un système
 
-It is possible for your API to automate connecting to an IBM i instead of the user using the connection view.
+Il est possible pour votre API d'automatiser la connexion d'un utilisateur à un IBM I au lieu de l'utilisateur à l'aide de la vue de connexion.
 
 ```js
 const connected: boolean = await vscode.commands.executeCommand(`code-for-ibmi.connectDirect`, ConnectionData);
@@ -103,21 +105,21 @@ if (connected) {
 }
 ```
 
-See `global.d.ts` for the `ConnectionData` interface.
+voir `global.d.ts` pour l'interface `ConnectionData`.
 
-# Specifics
+# Particularités
 
-## Right click options
+## Options de clic droit
 
-It is possible for your extension to add right click options to:
+Il est possible que votre extension ajoute des options de clic droit pour:
 
-* objects in the Object Browser
-* members in the Object Browser
-* directories in the IFS Browser
-* streamfiles in the IFS Browser
-* much more
+* Objets de l'explorateur d'objet
+* Membres de l'explorateur d'objet
+* Répertoires de l'explorateur IFS
+* Fichiers de l'explorateur IFS
+* et bien plus encore...
 
-You would register a command as you'd normally expect, but expect a parameter for the chosen node from the tree view. Here is the sample for deleting a streamfile in the IFS Browser.
+Vous enregistrez une commande comme d'habitude, mais vous ajoutez un paramètre pour le nœud choisi dans l'arborescence.Voici un exemple pour supprimer un fichier dans l'explorateur IFS.
 
 ```js
 context.subscriptions.push(
@@ -153,7 +155,7 @@ context.subscriptions.push(
 );
 ```
 
-Following that, we need to register the command so it has a label. We do this in `package.json`
+Suite à cela, nous devons enregistrer la commande afin qu'elle ait une étiquette.Nous faisons cela dans `package.json`
 
 ```json
 {
@@ -163,7 +165,7 @@ Following that, we need to register the command so it has a label. We do this in
 }
 ```
 
-Finally, we add it to a context menu:
+Enfin, nous l'ajoutons à un menu contextuel:
 
 ```json
 "menus": {
@@ -177,22 +179,22 @@ Finally, we add it to a context menu:
 }
 ```
 
-**When adding your command to a menu context**, there are lots of possible values for your `when` clause:
+**When, ajouter votre commande à un menu contextuel**, Il y a beaucoup de valeurs possibles pour la clause `When` :
 
-* `view` can be `ifsBrowser` or `objectBrowser`.
-* `viewItem` can be different depending on the view:
-   * for `ifsBrowser`, it can be `directory` or `streamfile`
-   * for `objectBrowser`, it can be `member` (source member), `object` (any object), `SPF` (source file) or `filter`.
+* `view` peut être `ifsBrowser` orou `objectBrowser`.
+* `viewItem` peut être différent en fonction de la vue:
+   * Pour `ifsBrowser`, cela peut être `directory` ou `streamfile`
+   * Pour `objectBrowser`, cela peut être `member` (membre source), `object` (tout type d'objet), `SPF` (fichier source) or `filter`.
 
-This allows your extension to provide commands for specific types of objects or specific items in the treeview.
+Cela permet à votre extension de fournir des commandes pour des types spécifiques d'objets ou d'éléments spécifiques dans l'arborescence.
 
-[Read more about the when clause on the VS Code docs website.](https://code.visualstudio.com/api/references/when-clause-contexts)
+[En savoir plus sur la clause when sur le site de documentation de VS Code.](https://code.visualstudio.com/api/references/when-clause-contexts)
 
-## Views
+## Vues
 
-Code for IBM i provides a context so you can control when a command, view, etc, can work. `code-for-ibmi.connected` can and should be used if your view depends on a connection. For example
+Code for IBM i fournit un contexte pour que vous puissiez contrôler quand une commande, vue, etc., peut fonctionner. `code-for-ibmi.connected` peut et doit être utilisé si votre vue dépend d'une connexion.Par exemple
 
-This will show a welcome view when there is no connection:
+Ceci affichera une vue de bienvenue lorsqu'il n'y a pas de connexion:
 
 ```json
 		"viewsWelcome": [{
@@ -202,7 +204,7 @@ This will show a welcome view when there is no connection:
 		}],
 ```
 
-This will show a view when there is a connection:
+Cela montrera une vue lorsqu'il y a une connexion:
 
 ```json
     "views": {
@@ -221,22 +223,22 @@ This will show a view when there is a connection:
 const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`).exports;
 ```
 
-`instance` has some methods for you to use:
+`instance` a quelques méthodes à utiliser:
 
-* `getConnection()`: [`IBMi`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMi.js)`|undefined` to get the current connection. Will return `undefined` when the current workspace is not connected to a remote system.
+* `getConnection()`: [`IBMi`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMi.js)`|undefined` Pour obtenir la connexion courante.Retournera `Undefined` lorsque l'espace de travail actuel n'est pas connecté à un système distant.
 
-* `getContent(): `[`IBMiContent`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMiContent.js) to work with content on the current connection
-  * This API should only be used to upload contents of streamfiles and members.
+* `getContent(): `[`IBMiContent`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMiContent.js) Pour travailler avec du contenu sur la connexion courante
+  * Cette API ne doit être utilisée que pour récupérer le contenu de fichiers et des membres.
 
-* `getConfig(): `[`Configuration`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/Configuration.js) to get/set configuration for the current connection
+* `getConfig(): `[`Configuration`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/Configuration.js) Pour obtenir/définir la configuration de la connexion courante
 
-### Temporary library
+### Bibliothèque temporaire
 
-Please remember that you cannot use `QTEMP` between commands since each command runs in a new job. Please refer to `instance.getConfig().tempLibrary` for the user temporary library.
+N'oubliez pas que vous ne pouvez pas utiliser `QTEMP` parce que chaque commande s'exécute dans un nouveau travail. Prière de se référer à `instance.getConfig().tempLibrary` pour la bibliothèque temporaire de l'utilisateur.
 
-### Storing config specific to the connection
+### Stockage de configuration spécifique à la connexion
 
-It is likely there will configuration that is specific to a connection. You can easily use `Configuration` to get and set configuration for the connection that is specific to your extension:
+Il est probable qu'il y aura une configuration spécifique à une connexion. Vous pouvez facilement utiliser `Configuration` pour obtenir et définir la configuration spécifique pour la connexion  à votre extension:
 
 ```js
 const config = instance.getConfig();
@@ -249,7 +251,7 @@ config.set(`someArray`, someArray);
 
 ### Is there a connection?
 
-You can use `instance.getConnection()` to determine if there is a connection:
+Vous pouvez utiliser `instance.getConnection()` pour déterminer s'il y a une connexion active:
 
 ```js
 async getChildren(element) {
@@ -271,7 +273,8 @@ async getChildren(element) {
 
 ### `connected` event
 
-It is recommended to use the extensions activiation event and make it so the extension is only activated when viewed or a command is activated. If you refer to the **Views** section, make it so the view is only shown when connected and then use an `onView` activiation event. This means by the time the view is used, there should be a connection.
+Il est recommandé d'utiliser l'événement `activationEvents` pour faire en sorte que l'extension soit activée uniquement lorsqu'elle est affichée ou qu'une commande est activée.  
+Si vous vous référez à la section **views**, faites en sorte que la vue soit affichée uniquement lorsqu'elle est connectée, puis utilisez un événement d'activation `OnView`.Cela signifie qu'au moment où la vue est utilisée, il doit avoir une connexion active.
 
 ```json
 "views": {

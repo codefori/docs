@@ -1,47 +1,51 @@
-The Db2 for i is a seperate extension that allows users to browse database schemas on any connected system.
+Le DB2 for I est une extension séparée qui permet aux utilisateurs de parcourir les schémas de base de données sur n'importe quel système connecté.
 
-## Install
-
-The extension can be [installed from the Marketplace](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-db2i) and is also part of the [IBM i Development Pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack).
+## Installation
+L'extension s'installe depuis la [Marketplace](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-db2i).  
+Elle est incluse dans l'extension [IBM i Development Pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack).
 
 ![](../../assets/db2i.png)
 
-## Usage
+## Utilisation
 
-The Db2 for i extension adds a new view called Schema Browser, which allows the user to add existing schemas to the list and will allow them to browse existing objects. The user can also execute SQL queries and view results inside of Visual Studio Code. When editing SQL sources, the user will also have access to content assist.
+L'extension DB2 for I ajoute une nouvelle vue appelée explorateur de schéma (Schema Browser), qui permet à l'utilisateur d'ajouter des schémas existants à la liste puis de parcourir les objets existants de ces schémas.  
+L'utilisateur peut également exécuter des requêtes SQL et afficher les résultats dans VS Code.
+Lors de la modification des sources SQL, l'utilisateur aura également accès à l'assistance à la saisie.
 
-### Respecting current library / schema
+### Respect de la bibliothèque/ schéma courante
 
-The Db2 for i extension respects the current library / scheme as setup in the User Library List view. You can also right click on schemas in the Schema Browser and change the current schema that way.
+L'extension Db2 for i respecte la bibliothéque courante configurée dans l'explorateur de la liste des bibliothèques utilisateur. Vous pouvez également faire un clic droit sur les schémas de l'explorateur de schéma et modifier le schéma courant de cette façon.
 
-### Content assist
+### Assistant de saisie
 
-When writing SQL sources, you will have access to content assist on:
+Lorsque vous rédigez des sources SQL, vous aurez accès à une assistance sur la saisie de contenu sur:
 
-* objects inside of a schema (tables, views, aliases, functions, procedures)
-* columns inside of a table that is declared with the `as` clause
+* objets à l'intérieur d'un schéma (tables, vues, alias, functions, procédures)
+* colonnes à l'intérieur d'une table déclarée avec la clause `as` clause
 
-If you do not qualify an object name, it will default to use the current schema.
+Si vous ne qualifiez pas le nom d'un objet, il utilisera par défaut d'utiliser le schéma courant.
 
-### Executing statements
+### Exécution de requêtes
 
-Either:
+Soit:
 
-* open an existing `.sql` file (source member, streamfile or local file)
-* create a new file
-    1. create a file (control / command + N)
-    2. change the language ID to `sql`
+* Ouvrez un fichier `.sql` existant (membre source, fichier Stream ou local)
+* Créer un nouveau fichier
+    1. Créer un fichier(`control / command + N`)
+    2. Changer l'ID de langue en `sql`
 
-After you have an SQL source open, you can either:
+Après avoir ouvert une source SQL, vous pouvez soit:
 
-* Move your cursor onto the statement you want to execute and:
-    * use the play button in the top right to execute
-    * use the shortcut (control / command + R) to execute the statement
+* Déplacez votre curseur sur l'instruction que vous souhaitez exécuter et:
+    * Utilisez le bouton `play` en haut à droite pour exécuter
+    * Utilisez le raccourci (`control / command + R`) pour exécuter l'instruction
 
-The result set will appear below the statement. As your scroll through the result set, more data will load. This is to speed up the performance of the query.
+L'ensemble des résultats apparaîtra sous l'instruction.  
+Lorsque vous défilez parmi l'ensemble des résultats, plus de données se chargeront.Cela permet d'optimiser les performances de la requête.
 
-SQL statements get executed with SQL naming in the extension.
+Les instructions SQL sont exécutées avec la dénomination SQL. (schémas.table)
 
-### Viewing table contents
+### Affichage du contenu de la table
 
-If you are using the Schema Browser to browse objects, you are able to use the 'view' icon when hovering over a table item which will automatically open and execute a basic select statement.
+Si vous utilisez l'explorateur de schéma pour parcourir des objets, vous pouvez utiliser l'icône `view` sur une de table.  
+Cela ouvre automatiquement une fenêtre d’exécution avec une instruction SELECT basique.

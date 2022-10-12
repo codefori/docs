@@ -1,21 +1,20 @@
-When using Visual Studio Code and git, it is possible to open the project up automatically from Azure DevOps.
+Lorsque vous utilisez Visual Studio Code et git, il est possible d'ouvrir le projet automatiquement à partir d'Azure DevOps.
 
-Find the repository you want to work with on Azure DevOps and press the Clone button. Make sure HTTPS is selected and before continuing, make sure the git credentials are visable - those will be used later.
+Trouver le référentiel avec lequel vous souhaitez travailler sur Azure DevOps et appuyez sur le bouton `Clone`. Assurez-vous que HTTPS est sélectionné et avant de continuer, assurez-vous que les informations d'identification GIT soient visibles - Elles seront utilisées plus tard.
 
 ![](../../../assets/azure-1.png)
 
-When ready, copy the password to your clipboard and select 'Clone in VS Code'. This will launch VS Code and make sure the user wants to run this action:
+Lorsque vous êtes prêt, copiez le mot de passe dans votre presse-papiers et sélectionnez `Clone in VS Code`. Cela lancera VS code et s'assure que l'utilisateur souhaite exécuter cette action:
 
 ![](../../../assets/azure-2.png)
 
-VS Code will ask you where you want to clone the repository to.
+VS Code vous demande où vous souhaitez cloner le référentiel 
 
 ![](../../../assets/azure-3.png)
 
-When the clone is done, it will ask you if you want to Open the repository folder. Selecting 'Open' will add it to the Workspace.
+Lorsque le clone est terminé, il vous demandera si vous souhaitez ouvrir le dossier cloné. Sélectionnez `Open` pour l'ajouter à l'espace de travail.
 
-Now the source code is on your local machine, you can go ahead and connect to your development system. Since this is a brand new folder, you will be asked if you'd like to set the default deploy directory. It is recommended to use the default.
-
+Maintenant que le code source est sur votre machine locale, vous pouvez vous connecter à votre IBM i de développement. Comme il s'agit d'un tout nouveau dossier, il vous sera demandé si vous souhaitez définir le répertoire de déploiement par défaut.Il est recommandé d'utiliser la valeur par défaut.
 ![](../../../assets/azure-4.png)
 
-From here, you can start developing and compiling. If this is your first time, be sure to read the [Local Development](getting-started.md) documentation to understand what the deploy directory is used for and how to run compile commands.
+Maintenant, vous pouvez commencer à développer et à compiler. Si c'est votre première fois, assurez-vous de lire la documentation [développement local](/fr-FR/pages/developing/local/getting-started.md) pour comprendre à quoi sert le répertoire de déploiement et comment exécuter les commandes de compilation.
