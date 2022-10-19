@@ -8,6 +8,7 @@
    - [ILEDocs](pages/developing/iledocs.md)
    - Local Development
       - [Getting started](pages/developing/local/getting-started.md)
+      - [Project Structure](pages/developing/local/structure.md)
       - [Azure DevOps](pages/developing/local/azure.md)
 - Tips
    - [Quick Start](pages/tips/quickstart.md)
