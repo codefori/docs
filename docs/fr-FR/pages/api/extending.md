@@ -249,7 +249,7 @@ someArray.push(someUserItem);
 config.set(`someArray`, someArray);
 ```
 
-### Is there a connection?
+### Y a-t-il une connexion?
 
 Vous pouvez utiliser `instance.getConnection()` pour déterminer s'il y a une connexion active:
 
