@@ -1,44 +1,45 @@
-This page outlines a recommended project structure when using git with your ILE sources. Code for IBM i and subsequent extensions will follow this structure for local development.
+Cette page décrit une structure de projet recommandée lors de l'utilisation de Git avec vos sources ILE. Code for IBM i et les extensions ultérieures suivront cette structure pour le développement local.
 
-## Lowercase file names
+## Nom de fichier en minuscules
 
-It is recommend to always use lowercase file names. Generally, it is easier on the eyes and follows the standard of most other environments. You could also consider using camelCase.
+Il est recommandé de nommer les fichiers en minuscules.Généralement, C'est plus facile pour les yeux et suit la norme de la plupart des autres environnements.Vous pouvez également envisager d'utiliser Camelcase.
 
 * `ord500.pgm.sqlrpgle`
 * `ord600.pgm.cblle`
 * `qrpglesrc/faq500.rpgle`
 
-## Valid extensions
+## Extensions valides
 
-The extensions used for your source can generally follow suit from member attributes (e.g. `.rpgle`, `.sqlrpgle`, `.cblle`, `.clle`, etc).
+Les extensions utilisées pour votre source peuvent se "caler" sur ceux des attributs des membres (e.g. `.rpgle`, `.sqlrpgle`, `.cblle`, `.clle`, etc).
 
-But, it is encouraged to use an additional extension to identify that your source is a program or a module in addition to the regular extension.
+Mais, il est encouragé à utiliser une extension supplémentaire pour identifier si votre source est un programme ou un module en plus de l'extension régulière.
 
-* `sale10.rpgle` indicates a module (which could become a service program, or part of a multi-module program)
-* `ord600.pgm.cbble` indicates that is source should become a program
+* `sale10.rpgle` indique un module (qui pourrait devenir un programme de service, ou une partie d'un programme multi-module)
+* `ord600.pgm.cbble` indique que la source devrait devenir un programme
 
-## Includes and copybooks
+## "Includes" et "Copybooks"
 
-It is recommended that all includes (also referred to as copybooks or headers) for RPGLE and COBOL use the extension of `.xxxinc`.
+Il est recommandé que toutes les clauses copy "includes" (aussi nommées "copybooks" ou "headers") pour RPGLE et COBOL utilisent l'extension `.xxxinc`.
 
-For example:
+Par exemple:
 
-* `ordsrv.rpgleinc` is a RPGLE include.
-* `pwrdta.cblleinc` is a COBOL include.
+* `ordsrv.rpgleinc` est un "include" pour un RPG.
+* `pwrdta.cblleinc` est un "include" pour un COBOL.
 
-For C and C++, you should continue to use the standard `.h` for header files.
+Pour C et C ++, vous devez continuer à utiliser le `.h` standard pour les fichiers d'en-tête.
 
-## Include statements (RPGLE)
+## clauses COPY (RPGLE)
 
-When using `/COPY` and `/INCLUDE` in RPGLE with a local project, the path should always be relative to the project directory and not relative to the active file. Generally, the more explicit you can be, the easier it will be the maintain long term.
+Lorsque vous utilisez `/COPY` et `/INCLUDE` en RPGLE dans un projet local, le chemin doit toujours être relatif au répertoire du projet et non par rapport au fichier actif.  
+Généralement, plus vous pouvez être explicite, plus il sera facile de maintenir à long terme.
 
-* Works: `/copy 'faq500.rpgleinc'`,
-* **Improved**: `/copy 'qrpgleref/faq500.rpgleinc`
+* :heavy_check_mark: : `/copy 'faq500.rpgleinc'`,
+* :heavy_check_mark: :slightly_smiling_face: : `/copy 'qrpgleref/faq500.rpgleinc`
 
-While it is possible to use `INCDIR` and then not provide a directory on the include statement, when reading the code, it is a lot clearer where the file is coming from.
+Bien qu'il soit possible d'utiliser `INCDIR` et ainsi ne pas fournir de répertoire pour l'inclusion, Lors de la lecture du code, il est beaucoup plus clair de voir d'où vient le fichier.
 
-If you want to not be relative from the root, make sure you specify your 'include directories' inside the [`iproj.json` file with the `includePath` property](https://ibm.github.io/ibmi-bob/#/prepare-the-project/iproj-json?id=includepath).
+Si vous ne voulez pas être relatif par rapport à la racine, spécifier votre répertoire d'inclusion dans la propriété [`includePath` du fichier `iproj.json`](https://ibm.github.io/ibmi-bob/#/prepare-the-project/iproj-json?id=includepath).
 
-## Example project structure
+## Exemple de structure de projet
 
-Check out the [company_system](https://github.com/worksofliam/company_system) repository for a good example project which follows these rules.
+Vérifiez le dépôt [company_system](https://github.com/worksofliam/company_system) d'un exemple de projet suivant ces règles.
