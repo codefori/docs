@@ -57,7 +57,7 @@ Below are some available lint configs. [See the `rpglint.json` schema for the mo
 | 🔒 | NoExternalTo | string array | Calls to certain APIs are not allowed. (EXTPROC / EXTPGM) |
 | 🔒 | NoExecuteImmediate | boolean | Embedded SQL statement with EXECUTE IMMEDIATE not allowed. |
 | 🔒 | NoExtProgramVariable | boolean | Declaring a prototype with EXTPGM and EXTPROC using a procedure is now allowed. |
-| 🤔 | IncludeMustBeRelative | boolean | When using copy or include statements, path must be relative. For members, you must at least include the source file. For streamfiles, it is relative from the working directory. |
+| 🤔🌟 | IncludeMustBeRelative | boolean | When using copy or include statements, path must be relative to the root. Usage is only recommended for local/workspace projects. |
 | 🤔 | SQLHostVarCheck | boolean | Warns when referencing variables in Embedded SQL that are also defined locally. | 
 
 **Type key**
