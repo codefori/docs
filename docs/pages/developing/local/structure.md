@@ -33,7 +33,7 @@ For C and C++, you should continue to use the standard `.h` for header files.
 When using `/COPY` and `/INCLUDE` in RPGLE with a local project, the path should always be relative to the project directory and not relative to the active file. Generally, the more explicit you can be, the easier it will be the maintain long term.
 
 * Works: `/copy 'faq500.rpgleinc'`,
-* **Improved**: `/copy 'qrpgleref/faq500.rpgleinc`
+* **Improved**: `/copy 'qrpgleref/faq500.rpgleinc'`
 
 While it is possible to use `INCDIR` and then not provide a directory on the include statement, when reading the code, it is a lot clearer where the file is coming from.
 
