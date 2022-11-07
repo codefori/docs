@@ -215,7 +215,7 @@ This will show a view when there is a connection:
     }
 ```
 
-# Imports
+# Exports
 
 ```
 const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`).exports;
@@ -224,11 +224,10 @@ const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibm
 `instance` has some methods for you to use:
 
 * `getConnection()`: [`IBMi`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMi.js)`|undefined` to get the current connection. Will return `undefined` when the current workspace is not connected to a remote system.
-
-* `getContent(): `[`IBMiContent`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMiContent.js) to work with content on the current connection
+* `getContent()`: [`IBMiContent`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMiContent.js) to work with content on the current connection
   * This API should only be used to upload contents of streamfiles and members.
-
-* `getConfig(): `[`Configuration`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/Configuration.js) to get/set configuration for the current connection
+* `getConfig()`: to get configuration for the current connection
+* `setConfig(newConfig)`: to set the configuration for the current connection
 
 ### Temporary library
 
@@ -240,11 +239,12 @@ It is likely there will configuration that is specific to a connection. You can 
 
 ```js
 const config = instance.getConfig();
-const someArray = config.get(`someArray`) || [];
+let {someArray} = config || [];
 
 someArray.push(someUserItem);
 
-config.set(`someArray`, someArray);
+config[`someArray`] = someArray;
+instance.setConfig(config);
 ```
 
 ### Is there a connection?
