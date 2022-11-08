@@ -33,7 +33,7 @@ You can create lint configuration for all types of file type. Use the 'Open RPGL
 
 ### Lint options
 
-Below are some available lint configs. [See the `rpglint.json` schema for the most up to date rules](https://github.com/halcyon-tech/vscode-rpgle/blob/main/src/schemas/rpglint.json).
+Below are some available lint configs. [See the `rpglint.json` schema for the most up to date rules](https://github.com/halcyon-tech/vscode-rpgle/blob/main/schemas/rpglint.json).
 
 | Type | Rule | Value | Description |
 |---|---|---|---|
