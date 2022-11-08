@@ -20,9 +20,16 @@ You can create lint configuration for all types of file type. Use the 'Open RPGL
 
 ### Relative lint config
 
-* If you are developing in `LIB/QRPGLESRC/MYSOURCE.RPGLE`, then the linter config exists in `LIB/VSCODE/RPGLINT.JSON`. Each library has its own rules configuration file, binding it to all RPGLE sources in that library. 
-* When developing in the IFS, linter rules config exist in `.vscode/rpglint.json` relative to the current working directory.
-* When developing in a local workspace, linter rules exist in `.vscode/rpglint.json` relative to the workspace.
+* If you are developing in source members (`LIB/QRPGLESRC/MYSOURCE.RPGLE`)
+   * the the linter config exists in `LIB/VSCODE/RPGLINT.JSON`. 
+   * Each library has its own rules configuration file, binding it to all RPGLE sources in that library. 
+   * config changes get pickup when RPGLE sources are re-opened.
+* When developing in the IFS:
+   * linter rules config exist in `.vscode/rpglint.json` relative to the current working directory.
+   * config changes get pickup when RPGLE sources are re-opened.
+* When developing in a local workspace
+   * linter rules exist in `.vscode/rpglint.json` relative to the workspace.
+   * Local RPGLE gets scanned automatically when config is changed
 
 ### Lint options
 
@@ -59,6 +66,7 @@ Below are some available lint configs. [See the `rpglint.json` schema for the mo
 | 🔒 | NoExtProgramVariable | boolean | Declaring a prototype with EXTPGM and EXTPROC using a procedure is now allowed. |
 | 🤔🌟 | IncludeMustBeRelative | boolean | When using copy or include statements, path must be relative to the root. Usage is only recommended for local/workspace projects. |
 | 🤔 | SQLHostVarCheck | boolean | Warns when referencing variables in Embedded SQL that are also defined locally. | 
+| 🤔 | RequireOtherBlock | boolean | Requires `SELECT` blocks to have an `OTHER` block. |
 
 **Type key**
 
