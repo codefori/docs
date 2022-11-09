@@ -1,7 +1,19 @@
 
 The information below is specific to the linter in the RPGLE extension.
 
-### Relative lint config
+## Opening the linter config
+
+Use `vscode-rpgle.openLintConfig` to open the rules configuration for the source you're working in.
+
+![Open Lint Configuration command](../../../assets/rpgle/OpenLintConfig.png)
+
+Or you can right click on a library filter:
+
+![Open Lint Config with a click](../../../assets/rpgle/OpenLintConfig_02.png)
+
+If a linter rules file does not exist, you will be asked asked if you want to create one. The created file will provide some default rules, as below.
+
+## Relative lint config
 
 * If you are developing in source members (`LIB/QRPGLESRC/MYSOURCE.RPGLE`)
    * the the linter config exists in `LIB/VSCODE/RPGLINT.JSON`. 
@@ -14,7 +26,7 @@ The information below is specific to the linter in the RPGLE extension.
    * linter rules exist in `.vscode/rpglint.json` relative to the workspace.
    * Local RPGLE gets scanned automatically when config is changed
 
-### Lint options
+## Lint options
 
 Below are some available lint configs. [See the `rpglint.json` schema for the most up to date rules](https://github.com/halcyon-tech/vscode-rpgle/blob/main/schemas/rpglint.json).
 
@@ -58,3 +70,56 @@ Below are some available lint configs. [See the `rpglint.json` schema for the mo
 | 🌟 | Clean code |
 | 🤔 | Safe code |
 | 🔒 | Secure code |
+
+### `SpecificCasing` example
+
+This rule allows you to specify the casing required for any or all declares or BIFs.
+
+If you want all `DCL` to be lower case and all `BIF`s to be upper case, then it would be coded like this:
+
+```json
+   "SpecificCasing":[
+      {"operation": "*BIF","expected": "*upper"},
+      {"operation": "*DECLARE", "expected": "*lower"}
+   ]
+```
+
+If you wanted `%parms` and `%timestamp` to always be lower case, amd all other BIFs to be upper case, then it would be coded like this:
+
+```json
+   "SpecificCasing": [
+      {
+         "operation": "%parms",
+         "expected": "*lower"
+      },
+      {
+         "operation": "%timestamp",
+         "expected": "*lower"
+      },
+      {
+         "operation": "*bif",
+         "expected": "*upper"
+      }
+   ]
+```
+
+Note: The order of entries above is important.
+
+Or, if for some reason, you wanted `%timestamp` to always be coded as `%TimeStamp` then it could be coded like this:
+
+```json
+   "SpecificCasing": [
+      {
+         "operation": "%parms",
+         "expected": "*lower"
+      },
+      {
+         "operation": "%timestamp",
+         "expected": "*TimeStamp"
+      },
+      {
+         "operation": "*bif",
+         "expected": "*upper"
+      }
+   ]
+```
