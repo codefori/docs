@@ -2,6 +2,7 @@
    - [Login](pages/login.md)
 - Developing
    - [Editing and compiling](pages/developing/editing-compiling.md)
+   - [Source Dates](pages/developing/sourcedates.md)
    - [Actions](pages/developing/actions/index.md)
       - [Execution](pages/developing/actions/execution.md)
       - [Custom Variables](pages/developing/actions/custom-vars.md)

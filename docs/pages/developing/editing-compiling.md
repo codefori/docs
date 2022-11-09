@@ -1,6 +1,4 @@
-## Editing and Compiling
-
-### Editing
+## Editing
 
 Click on a source member or stream file in the browser to open it. You can have multiple sources open.
 
@@ -19,9 +17,9 @@ To maximize your editing tab try:
 
 ### Source dates
 
-Source date support must be enabled and are disabled by default. This can be changed in the Connection Settings. 
+Source date support must be enabled and are disabled by default. This can be changed in the Connection Settings. See more on the [Source Dates page](sourcedates.md).
 
-### Compiling
+## Compiling
 
 Compile the **active tab** with Ctrl+E.
 
