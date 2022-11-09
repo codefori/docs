@@ -1,5 +1,7 @@
 # RPGLE in Visual Studio Code
 
+<img src="https://github.com/halcyon-tech/vscode-rpgle/blob/main/media/logo.png?raw=true" height="150px" align="right" style="border-radius: 5%;" />
+
 RPGLE is a typed language built specifically to run on IBM i. It is primarily used for business transactions, large data processing, data entry and web APIs.
 
 Check out [this YouTube video from the Visual Studio Code YouTube channel](https://www.youtube.com/watch?v=JRI7K8Y7cjQ) on IBM i and RPGLE.
