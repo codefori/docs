@@ -26,6 +26,8 @@
    - [Connection](pages/settings/connection.md)
    - [Global](pages/settings/global.md)
 - Extensions
-   - [RPGLE language tools](pages/extensions/rpgle.md)
+   * RPGLE
+       - [Intro](pages/extensions/rpgle/index.md)
+       - [Linter](pages/extensions/rpgle/linter.md)
    - [Db2 for i](pages/extensions/db2i.md)
 - [Extending](pages/api/extending.md)

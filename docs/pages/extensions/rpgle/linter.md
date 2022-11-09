@@ -1,22 +1,5 @@
 
-## Install
-
-The extension can be [installed from the Marketplace](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-rpgle) and is also part of the [IBM i Development Pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack).
-
-RPGLE language tools also works in VS Code web.
-
-## Usage
-
-The extension has two main pieces of functionality:
-
-* language tools: content assist, outline view, etc. Supports every version of ILE RPG (fixed, mixed and free-format)
-* linter: configurable linter to check code quality. **Only supports total free-format** (`**FREE`).
-
-The language tools are enabled by default, but the linter must be enabled in the VS Code settings. The linter is always enabled when being used by VS Code web.
-
-## Creating lint configuration
-
-You can create lint configuration for all types of file type. Use the 'Open RPGLE lint configuration' command from the command palette to automatically create and open the relative lint configuration from the RPGLE source you are working in.
+The information below is specific to the linter in the RPGLE extension.
 
 ### Relative lint config
 
