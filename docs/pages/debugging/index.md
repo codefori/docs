@@ -2,6 +2,8 @@ It is possible to use Code for IBM i to make remote debugging easy.
 
 There is a new `debug` property in the `actions.json` file which tells Code for IBM i to connect to the remote debugger. `&PORT` is a new variable that is a random number between 40000 and 50000. This doesn't guarantee this port is available.
 
+When debugging remotely, local environment variables are not passed to the server. Environment configuration will need to be setup separately. Common practice is to have a shell script/dotenv/etc to setup your environment variables before invoking the debugger on the server.
+
 | Support     | Environment |
 |-------------|---------|
 | 🤔 Coming soon | ILE (COBOL/RPG/CL/etc) |
