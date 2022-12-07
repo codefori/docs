@@ -1,3 +1,5 @@
+> This feature is not yet available. See the [PR on GitHub](https://github.com/halcyon-tech/vscode-ibmi/pull/967).
+
 It is possible to use Code for IBM i to make remote debugging easy.
 
 There is a new `debug` property in the `actions.json` file which tells Code for IBM i to connect to the remote debugger. `&PORT` is a new variable that is a random number between 40000 and 50000. This doesn't guarantee this port is available.
