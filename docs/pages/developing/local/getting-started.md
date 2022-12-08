@@ -77,3 +77,66 @@ Here is an example `actions.json` setup, which requires deployment to happen bef
 Now, when the user runs an Action against the local file (with `Control/Command + E`), they will appear in the list. 
 
 ![image](https://user-images.githubusercontent.com/3708366/146957104-4a26b4ba-c675-4a40-bb51-f77ea964ecf5.png)
+
+## Extras
+
+### PASE environment variables
+
+When you run Actions in the pase environment, all variables from VS Code (things like `&CURLIB`, `&BUILDLIB`, custom variables, `.env` variables) are inherited into the spawned pase shell.
+
+For example, let's say we had this shell script and this Action:
+
+```sh
+echo "Welcome"
+echo "The current library is $CURLIB"
+```
+
+```json
+  {
+    "name": "Run my shell script",
+    "command": "chmod +x ./myscript.sh && ./myscript.sh",
+    "extensions": [
+      "GLOBAL"
+    ],
+    "environment": "pase",
+    "deployFirst": true
+  }
+```
+
+You will see the output:
+
+```
+Current library: USERLIB
+Library list: QDEVTOOLS SAMPLE
+Commands:
+		chmod +x ./myscript.sh && ./myscript.sh
+
+Welcome
+The current library is USERLIB
+```
+
+### Environment file
+
+As well as custom variables defined in the User Library List view, users can also make use `.env` files.
+
+ The `.env` file allows each developer to define their own configuration. For example, standard development practice with git is everyone developing in their own environment - so developers might build into their own libraries.
+
+ ```sh
+ # developer A:
+ DEVLIB=DEVALIB
+ ```
+
+ ```sh
+ # developer B:
+ DEVLIB=DEVBLIB
+ ```
+
+ ```jsonc
+ // iproj.json
+ {
+   "objlib": "&DEVLIB",
+   "actions": []
+ }
+ ```
+
+ If every developer is compiling into the same (shared) library, then an environment file is not needed and you can specify that build library in the project file. You can also use environment variables in Actions.
