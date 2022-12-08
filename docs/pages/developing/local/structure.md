@@ -5,12 +5,12 @@ This page outlines a recommended project structure when using git with your ILE 
 It is recommend to always use lowercase file names. Generally, it is easier on the eyes and follows the standard of most other environments. You could also consider using camelCase.
 
 * `ord500.pgm.sqlrpgle`
-* `ord600.pgm.cblle`
+* `ord600.pgm.cbble`
 * `qrpglesrc/faq500.rpgle`
 
 ## Valid extensions
 
-The extensions used for your source can generally follow suit from member attributes (e.g. `.rpgle`, `.sqlrpgle`, `.cblle`, `.clle`, etc).
+The extensions used for your source can generally follow suit from member attributes (e.g. `.rpgle`, `.sqlrpgle`, `.cbble`, `.clle`, etc).
 
 But, it is encouraged to use an additional extension to identify that your source is a program or a module in addition to the regular extension.
 
@@ -24,7 +24,7 @@ It is recommended that all includes (also referred to as copybooks or headers) f
 For example:
 
 * `ordsrv.rpgleinc` is a RPGLE include.
-* `pwrdta.cblleinc` is a COBOL include.
+* `pwrdta.cbbleinc` is a COBOL include.
 
 For C and C++, you should continue to use the standard `.h` for header files.
 
