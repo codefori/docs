@@ -68,7 +68,7 @@ const rows = await vscode.commands.executeCommand(`code-for-ibmi.runQuery`, stat
 
 ## Get members and streamfiles
 
-It is possible for extensions to utilise the file systems provided by Code for IBM i.
+It is possible for extensions to utilize the file systems provided by Code for IBM i.
 
 `openTextDocument` returns a [`TextDocument`](https://code.visualstudio.com/api/references/vscode-api#TextDocument).
 
@@ -229,7 +229,9 @@ const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibm
 * `getConfig()`: to get configuration for the current connection
 * `setConfig(newConfig)`: to set the configuration for the current connection
 
-### Temporary library
+## FAQs
+
+### Getting the temporary library
 
 Please remember that you cannot use `QTEMP` between commands since each command runs in a new job. Please refer to `instance.getConfig().tempLibrary` for the user temporary library.
 
@@ -269,9 +271,9 @@ async getChildren(element) {
 }
 ```
 
-### `connected` event
+### `connected` context
 
-It is recommended to use the extensions activiation event and make it so the extension is only activated when viewed or a command is activated. If you refer to the **Views** section, make it so the view is only shown when connected and then use an `onView` activiation event. This means by the time the view is used, there should be a connection.
+It is recommended to use the extensions activation event and make it so the extension is only activated when viewed or a command is activated. If you refer to the **Views** section, make it so the view is only shown when connected and then use an `onView` activation event. This means by the time the view is used, there should be a connection.
 
 ```json
 "views": {
