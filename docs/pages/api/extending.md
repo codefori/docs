@@ -217,17 +217,31 @@ This will show a view when there is a connection:
 
 # Exports
 
+As well as the basic VS Code command API, you can get access to the Code for IBM i API with the VS Code `getExtension` API.
+
 ```
 const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`).exports;
 ```
 
-`instance` has some methods for you to use:
+## Typings
 
-* `getConnection()`: [`IBMi`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMi.js)`|undefined` to get the current connection. Will return `undefined` when the current workspace is not connected to a remote system.
-* `getContent()`: [`IBMiContent`](https://github.com/halcyon-tech/vscode-ibmi/blob/master/src/api/IBMiContent.js) to work with content on the current connection
-  * This API should only be used to upload contents of streamfiles and members.
-* `getConfig()`: to get configuration for the current connection
-* `setConfig(newConfig)`: to set the configuration for the current connection
+> These type definitions are not officially supported yet.
+
+We provide TS type definitions to make using the Code for IBM i API easier. They can be installed via `npm`:
+
+```sh
+npm i halcyon-tech/vscode-ibmi-types
+```
+
+It can then be imported and used in combination with `getExtension`:
+
+```ts
+import {CodeForIBMi} from 'vscode-ibmi-types';
+
+//...
+
+vscode.extensions.getExtension<CodeForIBMi>('halcyontechltd.code-for-ibmi')
+```
 
 ## FAQs
 
@@ -306,6 +320,8 @@ function activate(context) {
 ```
 
 ## Event listener
+
+> This event API is not yet available.
 
 The Code for IBM i API provides an event listener. This allows your extension to fire an event when something happens in Code for IBM i.
 
