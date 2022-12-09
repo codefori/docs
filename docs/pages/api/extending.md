@@ -225,22 +225,20 @@ const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibm
 
 ## Typings
 
-> These type definitions are not officially supported yet.
-
 We provide TS type definitions to make using the Code for IBM i API easier. They can be installed via `npm`:
 
 ```sh
-npm i halcyon-tech/vscode-ibmi-types
+npm i @halcyontech/vscode-ibmi-types
 ```
 
 It can then be imported and used in combination with `getExtension`:
 
 ```ts
-import {CodeForIBMi} from 'vscode-ibmi-types';
+import {CodeForIBMi} from '@halcyontech/vscode-ibmi-types';
 
 //...
 
-vscode.extensions.getExtension<CodeForIBMi>('halcyontechltd.code-for-ibmi')
+const ext = vscode.extensions.getExtension<CodeForIBMi>('halcyontechltd.code-for-ibmi')
 ```
 
 **As Code for IBM i updates, the API may change.** It is recommended you always keep the types packaged updated as the extension updates, incase the API interfaces change. We plan to make the VS Code command API interfaces stable so they will not break as often after they have been released.
