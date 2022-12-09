@@ -243,7 +243,7 @@ import {CodeForIBMi} from 'vscode-ibmi-types';
 vscode.extensions.getExtension<CodeForIBMi>('halcyontechltd.code-for-ibmi')
 ```
 
-**As Code for IBM i updates, the API may change.** It is recommended you always keep your types update as the extension updates incase the API interfaces change. We plan to make the VS Code command API interfaces stable so they will not break as often after they have been released.
+**As Code for IBM i updates, the API may change.** It is recommended you always keep the types packaged updated as the extension updates, incase the API interfaces change. We plan to make the VS Code command API interfaces stable so they will not break as often after they have been released.
 
 ## FAQs
 
