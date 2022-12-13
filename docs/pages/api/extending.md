@@ -321,14 +321,12 @@ function activate(context) {
 
 ## Event listener
 
-> This event API is not yet available.
-
 The Code for IBM i API provides an event listener. This allows your extension to fire an event when something happens in Code for IBM i.
 
 ```js
 const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`);
 
-instance.on(`connected`, () => {
+instance.onEvent(`connected`, () => {
   console.log(`It connected!`);
 });
 ```
