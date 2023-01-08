@@ -20,6 +20,10 @@ Actions can be edited in settings.json, but also more easily by clicking **Actio
 
 Connections can be edited in settings.json, but you'd typically add additional connections as in *Connect First Time*, above.
 
+You may use the following variables in any of the strings within Connections:
+- ```${userHome}``` = replaced with the user's home directory.
+- ```${pathSeparator}``` = replaced with the path separator.  (Typically "\\" on Windows or "/" on Mac/Unix/Linux.)
+
 ### Connection Settings
 
 These are the various setting relating to the items in the browsers, e.g., the list of source files in the OBJECT BROWSER. While these can be edited in settings.json, most can be more easily maintained by clicking or right clicking on an item in the browser.
