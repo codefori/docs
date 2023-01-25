@@ -8,7 +8,6 @@ When debugging remotely, local environment variables are not passed to the serve
 
 | Support     | Environment |
 |-------------|---------|
-| 🤔 Coming soon | ILE (COBOL/RPG/CL/etc) |
 | ✅ | Node.js |
 | ✅ | Python  |
 | ❌ Planned | PHP |
