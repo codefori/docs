@@ -6,6 +6,16 @@ Debugging ILE programs is now available inside of Visual Studio Code. We've adde
 
 # Starting to debug
 
+After configuring the Debug Service, launching a debug session is a click of a button away. When you have active source open, a new Debug button will appear in the navigation bar. Breakpoints can be set prior to debugging, or during the debugging session.
+
+![](./debug1.png)
+
+Clicking the Debug button will display an input box which will allow the user to customise the command which starts the debug job. This allows the developer to pass in parameters, or call another program to launch the debug session.
+
+After the debug session has started, every session will break on entry. You can read more about the debugging UI on the [Debug actions section on the Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging#_debug-actions).
+
+![](./debug2.png)
+
 # Configuring the debugger
 
 ## General requirements
