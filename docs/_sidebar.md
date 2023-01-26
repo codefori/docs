@@ -6,6 +6,7 @@
    - [Actions](pages/developing/actions/index.md)
       - [Execution](pages/developing/actions/execution.md)
       - [Custom Variables](pages/developing/actions/custom-vars.md)
+   - [Debugging](pages/developing/debug/debug.md)
    - [ILEDocs](pages/developing/iledocs.md)
    - Local Development
       - [Getting started](pages/developing/local/getting-started.md)
