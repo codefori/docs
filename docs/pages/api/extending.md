@@ -234,7 +234,7 @@ npm i @halcyontech/vscode-ibmi-types
 It can then be imported and used in combination with `getExtension`:
 
 ```ts
-import {CodeForIBMi} from '@halcyontech/vscode-ibmi-types';
+import type { CodeForIBMi } from '@halcyontech/vscode-ibmi-types';
 
 //...
 
