@@ -1,5 +1,3 @@
-> This feature is not yet available. See the [PR on GitHub](https://github.com/halcyon-tech/vscode-ibmi/pull/1021).
-
 # ILE Debugging
 
 Debugging ILE programs is now available inside of Visual Studio Code. We've added UI to make sure setting up the Debug Service to be a swift process.
