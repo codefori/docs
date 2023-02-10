@@ -68,3 +68,31 @@ The 'Start debug service' button will spin up the Debug Service. If the Debug Se
 You can also start the Debug Service through the command palette:
 
 ![](./setup3_b.png)
+
+# Common issues
+
+## IP not in cert list
+
+**It is always recommended you use a hostname in the connection settings** to make use of the debugger.
+
+For now, it is **not** recommended to use an IP address to connect to the debugger (when running in secure mode).
+
+![](./error_1.png)
+
+*Error that is shown when connecting to the debugger if connecting using an IP address.*
+
+This error occurs when the hostname used to connect to the debugger (which might be the IP address that was configured in the connection settings) is not the same as the host name created as part of the certificate.
+
+If you are using a system that doesn't have a host name (for example `YOURSYSTEM`, or `pub400.com`), then an entry should be added to your device's 'hosts' file. This entry should be the same on all devices in your network to ensure that everyone is using the same hostname.
+
+* Windows: `c:\Windows\System32\Drivers\etc\hosts`
+* Mac: `/etc/hosts`
+
+Your entry might look like this:
+
+```hosts
+# IP HOSTNAME
+192.168.0.20 MYIBMI
+```
+
+If you find that you've added your local hostname entry and the error is still occurring, then you may need to delete the existing certificates from `/QIBM/ProdData/IBMiDebugService/bin/certs` on the IFS and generate them again in the Walkthrough.
