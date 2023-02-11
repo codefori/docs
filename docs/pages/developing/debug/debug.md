@@ -21,10 +21,10 @@ After the debug session has started, every session will break on entry. You can 
 * PTFs
 * Certificates setup on the server
    * created in `/QIBM/ProdData/IBMiDebugService/bin/certs`
-* Local client certificate
-   * created in the home directory on the device running Visual Studio Code
 * IBM i Debug extension
    * installed into Visual Studio Code
+* Local client certificate (**optional**)
+   * can be imported with the 'Import local certificate' command
 
 ## Required PTFs
 
@@ -47,17 +47,11 @@ After connecting to a system in Code for IBM i, if the PTFs are installed but th
 
 ### Generating certificates
 
-This Walkthrough can easily configure the Debug Service and start it up. The last three steps have buttons to 'Generate certificates', 'Download certificate' and 'Start debug service'. Running them in order will do all the work to setup the service.
+This Walkthrough can easily configure the Debug Service and start it up. The last steps have buttons to 'Generate certificates' and 'Start debug service'. Running them in order will do all the work to setup the service.
 
 ![](./setup2_a.png)
 
 *It will ask you to confirm the initialisation.*
-
-![](./setup2_b.png)
-
-*It will not let you regenerate certificates. The existing certificates have to be deleted manually. This is a safety measure.*
-
-Whenever you generate new certificates on the server, it will automatically download the client certificate. Now, because the client certificate exists on the server, Code for IBM i will be automatically downloaded onto other users devices when they connect to the server.
 
 ### Starting the server
 
@@ -71,11 +65,19 @@ You can also start the Debug Service through the command palette:
 
 # Common issues
 
+## `STRDBGSVR` requirement
+
+The Debug Service that is started depends on the traditional Debug Server.
+
+![](./error_2.png)
+
+If you recieve this message, do as it says. Simply start the Debug Server with `STRDBGSVR` from a greenscreen.
+
+It does mean that both a Debug Service and Debug Server are running. The Debug Service is used for VS Code and Merlin, which talks to the Debug Server to interact with IBM i.
+
 ## IP not in cert list
 
-**It is always recommended you use a hostname in the connection settings** to make use of the debugger.
-
-For now, it is **not** recommended to use an IP address to connect to the debugger (when running in secure mode).
+**It is always recommended you use a hostname in the connection settings to make use of the debugger when in secure mode**.
 
 ![](./error_1.png)
 
