@@ -65,6 +65,12 @@ You can also start the Debug Service through the command palette:
 
 # Common issues
 
+## Debug hangs
+
+There is a [known issue](https://github.com/halcyon-tech/vscode-ibmi/issues/1059) that when you start debugging from VS Code, the debugger hangs and doesn't launch.
+
+The fix is to check if you've got a prior debug job stuck in `MSGW`. You can do this with `WRKACTJOB`, or a similar command like `WRKSBSJOB QBATCH`.
+
 ## `STRDBGSVR` requirement
 
 The Debug Service that is started depends on the traditional Debug Server.
