@@ -53,6 +53,16 @@ This Walkthrough can easily configure the Debug Service and start it up. The las
 
 *It will ask you to confirm the initialisation.*
 
+### Starting the server
+
+The 'Start debug service' button will spin up the Debug Service. If the Debug Service is already running, it will ask you if you want to end the existing instance before starting a new one - this is a requirement. It is not recommended to run two instances of the Debug Service at once.
+
+![](./setup3_a.png)
+
+You can also start the Debug Service through the command palette:
+
+![](./setup3_b.png)
+
 ## Debug Service ports
 
 The Debug Service depends on two ports by default:
@@ -68,16 +78,6 @@ If `DBGSRV_SECURED_PORT` is changed, make sure to:
 
 * restart the Debug Service
 * change the Debug Service port number in the connection settings to your new port (`DBGSRV_SECURED_PORT`). **Every user will need to do this step.**
-
-### Starting the server
-
-The 'Start debug service' button will spin up the Debug Service. If the Debug Service is already running, it will ask you if you want to end the existing instance before starting a new one - this is a requirement. It is not recommended to run two instances of the Debug Service at once.
-
-![](./setup3_a.png)
-
-You can also start the Debug Service through the command palette:
-
-![](./setup3_b.png)
 
 # FAQ
 
