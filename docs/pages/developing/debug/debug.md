@@ -72,6 +72,14 @@ As depicted in this diagram, the client (VS Code, IBM i Debug) connects to the D
 * The Debug Service is started up inside of Visual Studio Code as documented above. In the future it will also be possible to start it from Navigator for i.
 * The Debug Server is started up with `STRDBGSVR`. You may get an error message in VS Code if you attempt to debug when the Debug Server is not running.
 
+> I can't see the variables when debugging CL
+
+![](./debug4.png)
+
+This is a limitation for CL. The local variables will not show up in the Variables view for CL. You can add a local variable to the Watch view to inspect its value. The CL limitation also exists in RDi.
+
+[See GitHub issue here](https://github.com/halcyon-tech/vscode-ibmi/issues/1069).
+
 # Common issues
 
 ## Debug hangs
