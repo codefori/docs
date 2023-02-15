@@ -1,5 +1,3 @@
-# ILE Debugging
-
 Debugging ILE programs is now available inside of Visual Studio Code. We've added UI to make sure setting up the Debug Service to be a swift process.
 
 # Starting to debug
@@ -62,6 +60,17 @@ The 'Start debug service' button will spin up the Debug Service. If the Debug Se
 You can also start the Debug Service through the command palette:
 
 ![](./setup3_b.png)
+
+# FAQ
+
+> What's the difference between the Debug Service and Debug Server?
+
+![](./debug3.png)
+
+As depicted in this diagram, the client (VS Code, IBM i Debug) connects to the Debug Service, which talks to the Debug Server.
+
+* The Debug Service is started up inside of Visual Studio Code as documented above. In the future it will also be possible to start it from Navigator for i.
+* The Debug Server is started up with `STRDBGSVR`. You may get an error message in VS Code if you attempt to debug when the Debug Server is not running.
 
 # Common issues
 
