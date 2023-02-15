@@ -68,7 +68,7 @@ You can also start the Debug Service through the command palette:
 The Debug Service depends on two ports by default:
 
 * Port 8001 (unsecure port)
-   * this port is not used for anything in regards to debugging, though it is required to start the Debug Service
+   * this port is not used for anything in regards to debugging, though it is required to start and stop the Debug Service
 * Port 8005 (secure port)
    * this port is used by all debugging clients and is required to start the Debug Service.
 
