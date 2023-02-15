@@ -1,3 +1,5 @@
+# ILE Debugging
+
 Debugging ILE programs is now available inside of Visual Studio Code. We've added UI to make sure setting up the Debug Service to be a swift process.
 
 # Starting to debug
@@ -51,6 +53,22 @@ This Walkthrough can easily configure the Debug Service and start it up. The las
 
 *It will ask you to confirm the initialisation.*
 
+## Debug Service ports
+
+The Debug Service depends on two ports by default:
+
+* Port 8001 (unsecure port)
+   * this port is not used for anything in regards to debugging, though it is required to start the Debug Service
+* Port 8005 (secure port)
+   * this port is used by all debugging clients and is required to start the Debug Service.
+
+These ports can be changed in `/QIBM/ProdData/IBMiDebugService/bin/DebugService.env`, both `DBGSRV_PORT` and `DBGSRV_SECURED_PORT` respectively.
+
+If `DBGSRV_SECURED_PORT` is changed, make sure to:
+
+* restart the Debug Service
+* change the Debug Service port number in the connection settings to your new port (`DBGSRV_SECURED_PORT`). **Every user will need to do this step.**
+
 ### Starting the server
 
 The 'Start debug service' button will spin up the Debug Service. If the Debug Service is already running, it will ask you if you want to end the existing instance before starting a new one - this is a requirement. It is not recommended to run two instances of the Debug Service at once.
@@ -63,7 +81,7 @@ You can also start the Debug Service through the command palette:
 
 # FAQ
 
-> What's the difference between the Debug Service and Debug Server?
+### What's the difference between the Debug Service and Debug Server?
 
 ![](./debug3.png)
 
@@ -72,7 +90,7 @@ As depicted in this diagram, the client (VS Code, IBM i Debug) connects to the D
 * The Debug Service is started up inside of Visual Studio Code as documented above. In the future it will also be possible to start it from Navigator for i.
 * The Debug Server is started up with `STRDBGSVR`. You may get an error message in VS Code if you attempt to debug when the Debug Server is not running.
 
-> I can't see the variables when debugging CL
+### I can't see the variables when debugging CL
 
 ![](./debug4.png)
 
@@ -88,15 +106,15 @@ There is a [known issue](https://github.com/halcyon-tech/vscode-ibmi/issues/1059
 
 The fix is to check if you've got a prior debug job stuck in `MSGW`. You can do this with `WRKACTJOB`, or a similar command like `WRKSBSJOB QBATCH`.
 
+**Users should no longer face this issue** as we now submit debug jobs to `QSYSWRK` with `QSYSNOMAX`.
+
 ## `STRDBGSVR` requirement
 
 The Debug Service that is started depends on the traditional Debug Server.
 
 ![](./error_2.png)
 
-If you recieve this message, do as it says. Simply start the Debug Server with `STRDBGSVR` from a greenscreen.
-
-It does mean that both a Debug Service and Debug Server are running. The Debug Service is used for VS Code and Merlin, which talks to the Debug Server to interact with IBM i.
+If you receive this message, do as it says. Simply start the Debug Server with `STRDBGSVR` from a greenscreen.
 
 ## IP not in cert list
 
