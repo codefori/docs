@@ -81,6 +81,8 @@ Content assist provides code completion, hover information, and formatting issue
 
 ![](../../../assets/rpgle/intellisense.png)
 
+You can turn the content assist from showing up automatically by changing the 'Suggest On Trigger Characters' setting.
+
 ### Hover information
 
 Hover over any definitions (variable, structure, procedures, etc) to see type information and documentation.
