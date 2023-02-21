@@ -2,7 +2,7 @@ These are setting  which affect the extension (and therefore *every* connection)
 
 - Use the standard VS Code <kbd>Ctrl</kbd> + <kbd>,</kbd> and click Extensions
 - or click File/Preferences/Settings and click Extensions
--or  press <kbd>F1</kbd>, search for ```Preferences: Open Settings (UI)``` and click extensions.
+- or press <kbd>F1</kbd>, search for ```Preferences: Open Settings (UI)``` and click Extensions.
 
 Settings for the extension will be under ```Code for IBM i```
 
@@ -11,6 +11,12 @@ Settings for the extension will be under ```Code for IBM i```
 Most of the setting have a self explanatory description. A few have notes below.
 
 **It is not recommended editing the JSON manually. If you do, restart/reload VS Code so Code for IBM i can pickup the changes.**
+
+### IFS deletion warning (Safe delete)
+
+If enabled, when the user tries to delete a directory, they will be asked to confirm the deletion by typing in the directory's name.
+
+![](./safeDelete.png)
 
 ### Actions
 
