@@ -2,14 +2,57 @@ It is possible to write VS Code extensions that are based on Code for IBM i. Tha
 
 For example, you might be a vendor that produces lists or HTML that you'd like to be accessible from within Visual Studio Code.
 
-# Examples
+# Exports
 
-See the following code bases for large examples of extensions that use Code for IBM i:
+As well as the basic VS Code command API, you can get access to the Code for IBM i API with the VS Code `getExtension` API.
 
-* [VS Code extension to manage IBM i IWS services](https://github.com/halcyon-tech/vscode-ibmi-iws)
-* [Git for IBM i extension](https://github.com/halcyon-tech/git-client-ibmi)
+```
+const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`).exports;
+```
+
+## Typings
+
+We provide TS type definitions to make using the Code for IBM i API easier. They can be installed via `npm`:
+
+```sh
+npm i @halcyontech/vscode-ibmi-types
+```
+
+It can then be imported and used in combination with `getExtension`:
+
+```ts
+import type { CodeForIBMi } from '@halcyontech/vscode-ibmi-types';
+
+//...
+
+const ext = vscode.extensions.getExtension<CodeForIBMi>('halcyontechltd.code-for-ibmi');
+```
+
+**As Code for IBM i updates, the API may change.** It is recommended you always keep the types packaged updated as the extension updates, incase the API interfaces change. We plan to make the VS Code command API interfaces stable so they will not break as often after they have been released.
+
+## Event listener
+
+The Code for IBM i API provides an event listener. This allows your extension to fire an event when something happens in Code for IBM i.
+
+```js
+const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`);
+
+instance.onEvent(`connected`, () => {
+  console.log(`It connected!`);
+});
+```
+
+### Available events
+
+| ID          | Event                                    |
+|-------------|------------------------------------------|
+| `connected` | When Code for IBM i connects to a system |
+| `disconnected` | When Code for IBM i is disconnected from a system |
+| `deployLocation` | When a deploy location changes |
 
 # Command APIs
+
+**Note: Most of these command based interfaces are available through the Code for IBM i export.**
 
 ## Running commands with the user library list
 
@@ -93,8 +136,10 @@ const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
 
 It is possible for your API to automate connecting to an IBM i instead of the user using the connection view.
 
-```js
-const connected: boolean = await vscode.commands.executeCommand(`code-for-ibmi.connectDirect`, ConnectionData);
+```ts
+const connectionData: ConnectionData = {...};
+
+const connected: boolean = await vscode.commands.executeCommand(`code-for-ibmi.connectDirect`, connectionData);
 
 if (connected) {
   // do a thing.
@@ -103,9 +148,7 @@ if (connected) {
 }
 ```
 
-See `global.d.ts` for the `ConnectionData` interface.
-
-# Specifics
+# VS Code integration
 
 ## Right click options
 
@@ -215,64 +258,21 @@ This will show a view when there is a connection:
     }
 ```
 
-# Exports
+# FAQs
 
-As well as the basic VS Code command API, you can get access to the Code for IBM i API with the VS Code `getExtension` API.
-
-```
-const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`).exports;
-```
-
-## Typings
-
-We provide TS type definitions to make using the Code for IBM i API easier. They can be installed via `npm`:
-
-```sh
-npm i @halcyontech/vscode-ibmi-types
-```
-
-It can then be imported and used in combination with `getExtension`:
-
-```ts
-import type { CodeForIBMi } from '@halcyontech/vscode-ibmi-types';
-
-//...
-
-const ext = vscode.extensions.getExtension<CodeForIBMi>('halcyontechltd.code-for-ibmi')
-```
-
-**As Code for IBM i updates, the API may change.** It is recommended you always keep the types packaged updated as the extension updates, incase the API interfaces change. We plan to make the VS Code command API interfaces stable so they will not break as often after they have been released.
-
-## FAQs
-
-### Getting the temporary library
+## Getting the temporary library
 
 Please remember that you cannot use `QTEMP` between commands since each command runs in a new job. Please refer to `instance.getConfig().tempLibrary` for the user temporary library.
 
-### Storing config specific to the connection
-
-It is likely there will configuration that is specific to a connection. You can easily use `Configuration` to get and set configuration for the connection that is specific to your extension:
-
-```js
-const config = instance.getConfig();
-let {someArray} = config || [];
-
-someArray.push(someUserItem);
-
-config[`someArray`] = someArray;
-instance.setConfig(config);
-```
-
-### Is there a connection?
+## Is there a connection?
 
 You can use `instance.getConnection()` to determine if there is a connection:
 
-```js
+```ts
 async getChildren(element) {
   const connection = instance.getConnection();
 
-  /** @type {vscode.TreeItem[]} */
-  let items = [];
+  let items: TreeItem[] = [];
 
   if (connection) {
     //Do work here...
@@ -285,7 +285,7 @@ async getChildren(element) {
 }
 ```
 
-### `connected` context
+## `connected` context
 
 It is recommended to use the extensions activation event and make it so the extension is only activated when viewed or a command is activated. If you refer to the **Views** section, make it so the view is only shown when connected and then use an `onView` activation event. This means by the time the view is used, there should be a connection.
 
@@ -307,7 +307,7 @@ It is recommended to use the extensions activation event and make it so the exte
 ```
 
 ```js
-const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`);
+const { instance } = vscode.extensions.getExtension<CodeForIBMi>(`halcyontechltd.code-for-ibmi`);
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -319,20 +319,9 @@ function activate(context) {
 }
 ```
 
-## Event listener
+## Examples
 
-The Code for IBM i API provides an event listener. This allows your extension to fire an event when something happens in Code for IBM i.
+See the following code bases for large examples of extensions that use Code for IBM i:
 
-```js
-const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`);
-
-instance.onEvent(`connected`, () => {
-  console.log(`It connected!`);
-});
-```
-
-### Available events
-
-| ID          | Event                                    |
-|-------------|------------------------------------------|
-| `connected` | When Code for IBM i connects to a system |
+* [VS Code extension to manage IBM i IWS services](https://github.com/halcyon-tech/vscode-ibmi-iws)
+* [Git for IBM i extension](https://github.com/halcyon-tech/git-client-ibmi)
