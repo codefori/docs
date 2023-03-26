@@ -30,12 +30,42 @@ const ext = vscode.extensions.getExtension<CodeForIBMi>('halcyontechltd.code-for
 
 **As Code for IBM i updates, the API may change.** It is recommended you always keep the types packaged updated as the extension updates, incase the API interfaces change. We plan to make the VS Code command API interfaces stable so they will not break as often after they have been released.
 
+## Example import
+
+This example can be used as a simple way to access the Code for IBM i instance.
+
+```ts
+import { CodeForIBMi } from "@halcyontech/vscode-ibmi-types";
+import Instance from "@halcyontech/vscode-ibmi-types/api/Instance";
+import { Extension, extensions } from "vscode";
+
+let baseExtension: Extension<CodeForIBMi>|undefined;
+
+/**
+ * This should be used on your extension activation.
+ */
+export function loadBase(): CodeForIBMi|undefined {
+  if (!baseExtension) {
+    baseExtension = (extensions ? extensions.getExtension(`halcyontechltd.code-for-ibmi`) : undefined);
+  }
+  
+  return (baseExtension && baseExtension.isActive && baseExtension.exports ? baseExtension.exports : undefined);
+}
+
+/**
+ * Used when you want to fetch the extension 'instance' (the connection)
+ */
+export function getInstance(): Instance|undefined {
+  return (baseExtension && baseExtension.isActive && baseExtension.exports ? baseExtension.exports.instance : undefined);
+}
+```
+
 ## Event listener
 
 The Code for IBM i API provides an event listener. This allows your extension to fire an event when something happens in Code for IBM i.
 
 ```js
-const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibmi`);
+const instance = getInstance();
 
 instance.onEvent(`connected`, () => {
   console.log(`It connected!`);
@@ -50,13 +80,11 @@ instance.onEvent(`connected`, () => {
 | `disconnected` | When Code for IBM i is disconnected from a system |
 | `deployLocation` | When a deploy location changes |
 
-# Command APIs
-
-**Note: Most of these command based interfaces are available through the Code for IBM i export.**
+# APIs
 
 ## Running commands with the user library list
 
-Code for IBM i ships a command that can be used by an extension to execute a remote command on the IBM i: `code-for-ibmi.runCommand`.
+Code for IBM i ships an API (via VS Code command) that can be used by an extension to execute a remote command on the IBM i.
 
 It has a parameter which is an object with some properties:
 
@@ -97,16 +125,28 @@ const result = await vscode.commands.executeCommand(`code-for-ibmi.runCommand`, 
 });
 ```
 
+You can also provide a custom library list and current library when executing a command in the `ile` environment:
+
+```js
+const detail: CommandResult = {
+  environment: `ile`,
+  command: `CRTBNDRPG...`,
+  env: {
+    // Space delimited library list
+    '&LIBL': 'LIBA LIBB LIBC'
+    '&CURLIB': 'LIBD'
+  }
+}
+```
+
 ## Running SQL queries
 
 Code for IBM i has a command that lets you run SQL statements and get a result back.
 
-```js
-const rows: Object[] = await vscode.commands.executeCommand(`code-for-ibmi.runQuery`, statement);
+```ts
+const instance = getInstance();
 
-// or
-
-const rows = await vscode.commands.executeCommand(`code-for-ibmi.runQuery`, statement);
+const rows = await instance.getContent().runSQL(`select * from schema.yourtable`);
 ```
 
 ## Get members and streamfiles
@@ -287,7 +327,7 @@ async getChildren(element) {
 
 ## `connected` context
 
-It is recommended to use the extensions activation event and make it so the extension is only activated when viewed or a command is activated. If you refer to the **Views** section, make it so the view is only shown when connected and then use an `onView` activation event. This means by the time the view is used, there should be a connection.
+If you refer to the **Views** section, you can make it so the view is only shown when connected. This means by the time the view is used, there should be a connection.
 
 ```json
 "views": {
@@ -304,19 +344,6 @@ It is recommended to use the extensions activation event and make it so the exte
 "activationEvents": [
     "onView:yourIbmiView"
 ]
-```
-
-```js
-const { instance } = vscode.extensions.getExtension<CodeForIBMi>(`halcyontechltd.code-for-ibmi`);
-
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-function activate(context) {
-  const connection = instance.getConnection();
-  if (connection) {
-    // do initial work
-  }
-}
 ```
 
 ## Examples
