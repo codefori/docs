@@ -29,9 +29,7 @@ It's recommended you also install the [IBM i Development Pack](https://marketpla
 
 ## Extension Development
 
-1. clone repo
-2. ```npm i```
-3. 'Run extension' from VS Code debug.
+Check out our [Developer documentation](./pages/api/developer.md) page!
 
 ## Getting Started
 
