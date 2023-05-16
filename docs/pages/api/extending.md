@@ -79,6 +79,7 @@ instance.onEvent(`connected`, () => {
 | `connected` | When Code for IBM i connects to a system |
 | `disconnected` | When Code for IBM i is disconnected from a system |
 | `deployLocation` | When a deploy location changes |
+| `deploy` | When a deploy successfully finishes |
 
 # APIs
 
