@@ -29,7 +29,7 @@ It's recommended you also install the [IBM i Development Pack](https://marketpla
 
 ## Extension Development
 
-Check out our [Developer documentation](./pages/api/developer.md) page!
+Check out our [Developer documentation](./pages/dev/getting_started.md) page!
 
 ## Getting Started
 
