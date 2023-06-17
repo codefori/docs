@@ -1,6 +1,6 @@
 This page consists of fixes to weird errors users receive based on system configuration.
 
-## Unexpected packet before version
+## Error in shell configuration
 
 This error appears when you have lines in startup files that write to standard out. Usually the main issue is when the following commands exist in the `.bashrc` file (non-login startup file).
 

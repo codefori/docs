@@ -79,6 +79,7 @@ instance.onEvent(`connected`, () => {
 | `connected` | When Code for IBM i connects to a system |
 | `disconnected` | When Code for IBM i is disconnected from a system |
 | `deployLocation` | When a deploy location changes |
+| `deploy` | When a deploy successfully finishes |
 
 # APIs
 
@@ -155,22 +156,39 @@ It is possible for extensions to utilize the file systems provided by Code for I
 
 `openTextDocument` returns a [`TextDocument`](https://code.visualstudio.com/api/references/vscode-api#TextDocument).
 
-**Getting a member**
+#### Getting a member
 
 ```js
+//Member located on *SYSBAS
 const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
   scheme: `member`,
   path: `/${library}/${file}/${name}.${extension}`
 }));
+
+//Member located on an iASP
+const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
+  scheme: `member`,
+  path: `/${iasp}/${library}/${file}/${name}.${extension}`,
+  query: 'readonly=true' //Optional: open in read-only mode
+}));
 ```
 
-**Getting a streamfile**
+#### Getting a streamfile
 ```js
 const doc = await vscode.workspace.openTextDocument(vscode.Uri.from({
   scheme: `streamfile`,
-  path: streamfilePath
+  path: streamfilePath,
+  query: 'readonly=true' //Optional: open in read-only mode
 }));
 ```
+
+#### File system options
+Both `member` and `streamfile` file systems support the following query parameters:
+
+| Name        | Type      | Description                                                  |
+|-------------|-----------|--------------------------------------------------------------|
+| `readonly`  | `boolean` | Open the text editor in read only mode. Defaults to `false`. |
+
 
 ## Connect to a system
 
