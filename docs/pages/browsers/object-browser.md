@@ -24,6 +24,16 @@ To create another filter,  click the filter icon to open up the new filter dialo
 
 ![Additional Filters](../../assets/Browser_06.png)
 
+#### Create Quick Filters
+
+To quickly create filters without having to fill out the filter dialog, click on the **Create Quick Filter** icon. When prompted, enter a filter that matches one of the following formats:
+
+- `LIB*`
+- `LIB/OBJ/MBR.MBRTYPE (OBJTYPE)`
+  - Note: All parameters except the library are optional. For parameters which are not provided, the same defaults as the filter dialog will be used.
+
+![Create Quick Filter](../../assets/Browser_11.png)
+
 #### Filter Examples
 
 **Single File Filter**
