@@ -1,5 +1,8 @@
 Source dates are supported in Code for IBM i, but not by default.
 
+## Prerequisites to using source dates
+For source dates to be enabled, the QCCSID system value must not be 65535. Here is [IBM's page about setting QCCSID](https://www.ibm.com/docs/en/i/7.5?topic=faqs-i-system-value-qccsid).
+
 ## Source date settings
 
 Source dates can be enabled in the connection settings.
