@@ -1,4 +1,4 @@
-This page contains useful information for getting started with git on IBM i.
+This page contains useful information for getting started with git on IBM i. Items marked with 🏢 indicate a vendor (ISV/services) or sponsored article.
 
 ## General git
 
@@ -7,7 +7,9 @@ This page contains useful information for getting started with git on IBM i.
 * [IBM i git project structure](https://halcyon-tech.github.io/docs/#/pages/developing/local/structure)
 * [Using Git with Visual Studio Code (Official Beginner Tutorial video)](https://www.youtube.com/watch?v=i_23KUAEtUM&list=PLj6YeMhvp2S7abEHqkUPRkCSt4N2wpTwD&index=7)
 * [VS Code and git (Playlist)](https://www.youtube.com/watch?v=3o_01F04bZ4&list=PLj6YeMhvp2S7abEHqkUPRkCSt4N2wpTwD)
-* [Five Reasons we use git to manage IBM i source code](https://www.seidengroup.com/2019/08/14/five-reasons-we-use-git-to-manage-ibm-i-source-code/)
+* [ITJungle: Making Git Part of Your Modernization Strategy](https://www.itjungle.com/2023/06/26/making-git-part-of-your-modernization-strategy/) 🏢
+* [Five Reasons we use git to manage IBM i source code](https://www.seidengroup.com/2019/08/14/five-reasons-we-use-git-to-manage-ibm-i-source-code/) 🏢
+* [‘True Git’ – the right and wrong approaches to Git on IBM i](https://www.arcadsoftware.com/news-events/blog/true-git-the-right-and-wrong-approaches-to-git-on-ibm-i/) 🏢
 
 ## VS Code and git
 
