@@ -12,6 +12,7 @@ This page contains useful information for getting started with git on IBM i. Ite
 * [DevOps on IBM i](https://github.com/worksofliam/blog/issues/37)
 * [Why git? Intro (with change management comparison)](https://github.com/worksofliam/blog/issues/19)
 * [IBM i git project structure](https://halcyon-tech.github.io/docs/#/pages/developing/local/structure)
+* [The RPG and Git book](https://github.com/worksofliam/rpg-git-book/blob/main/1-introduction.md)
 * [ITJungle: Making Git Part of Your Modernization Strategy](https://www.itjungle.com/2023/06/26/making-git-part-of-your-modernization-strategy/) 🏢
 * [Five Reasons we use git to manage IBM i source code](https://www.seidengroup.com/2019/08/14/five-reasons-we-use-git-to-manage-ibm-i-source-code/) 🏢
 * [‘True Git’ – the right and wrong approaches to Git on IBM i](https://www.arcadsoftware.com/news-events/blog/true-git-the-right-and-wrong-approaches-to-git-on-ibm-i/) 🏢
