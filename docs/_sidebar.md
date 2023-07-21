@@ -33,7 +33,7 @@
        - [Intro](pages/extensions/rpgle/index.md)
        - [Linter](pages/extensions/rpgle/linter.md)
        - [FAQ](pages/extensions/rpgle/faq.md)
-   - [Db2 for i](pages/extensions/db2i.md)
+   - [Db2 for i](pages/extensions/db2i/index.md)
 - Developing
    - [Getting started](pages/dev/getting_started.md)
    - [Scope](pages/dev/scope.md)
