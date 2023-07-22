@@ -1,4 +1,4 @@
-The Db2 for i is a seperate extension that allows users to browse database schemas, run statements, and more, on any connected system.
+The Db2 for i extension allows users to browse database schemas, execute SQL statements, and more, on an IBM i.
 
 ![](./main.png)
 
@@ -8,7 +8,7 @@ The extension can be [installed from the Marketplace](https://marketplace.visual
 
 ### Server Component
 
-As of 0.3.0, the Db2 for i extension requires a server component. The component provides improved performance and makes it easy for us to add better features. The Db2 for i extension will manage the server component installation when you connect to a system with Code for IBM i and will ask the user to confirm any installation or update. The server component is installed into `$HOME/.vscode`, which means a per-user installation. [The server component is also open-source](https://github.com/ThePrez/CodeForIBMiServer).
+As of 0.3.0, the Db2 for i extension requires a server component. The component provides improved performance and makes it easy for us to add advanced features. The Db2 for i extension manages the server component installation when you connect to an IBM i with Code for IBM i and will ask the user to confirm any installation or update. The server component is installed into `$HOME/.vscode`, which means a per-user installation. [The server component is also open-source](https://github.com/ThePrez/CodeForIBMiServer).
 
 ## Executing statements
 
@@ -25,9 +25,9 @@ After you have an SQL file open, you can either:
     * use the play button in the top right to execute
     * use the shortcut (control / command + R) to execute the statement
 
-The result set will appear below the statement. As your scroll through the result set, more data will load. This is to speed up the performance of the query. When you run a statement, it will be prepended to the Query History view so you can access it again in the future.
+The result set will appear below the statement. As your scroll through the result set, more data will load. When you execute an SQL statement, it will be prepended to your Query History view, where it remains readily accessible.
 
-SQL statements get executed with the active job selected in the SQL Job Manager view.
+SQL statements are executed using the active job selected in the SQL Job Manager view.
 
 ## SQL Job Manager
 
@@ -35,18 +35,18 @@ This view allows users to manage different SQL jobs, each with their own unique 
 
 ![](./sqlJobManager-newJob.png)
 
-Your active job will be marked with a highlighted icon. **The active job is what runs all statements** that powers the Schema Browser, content assist, user run statements, etc. You can change the active job by simply clicking between them. You will see the highlighted icon change to indicate the active job.
+Your active job will be marked with a highlighted icon. **The active job is used for all SQL statement execution, ** including SQL that powers the Schema Browser, user-executed SQL statements, etc. You can change the active job by simply clicking the job you choose to use. You will see the highlighted icon change to indicate the active job.
 
 ### Editing job configuration
 
-You can use the pencil icon on any running job to edit the JDBC settings. Changing them and saving the changes will restart the job with the changes applied.
+You can use the pencil icon on any job to edit the JDBC properties. When the Apply Changes button is pressed, any changes are saved and the job is restarted, to fully apply the changes.
 
-You are able to right click on any job to save those job settings for it be re-used later. Using the 'Save settings to config' right click item will prompt you to enter a name for that configuration. After that, you will see a 'Saved Configuration' node appear, with all your saved configs. Clicking on a saved config will launch a new job with those pre-defined settings. You can use the pencil icon on any saved configuration to edit it.
+You are able to right-click on any job to save those job settings, allowing it to be easily reused. Using the 'Save settings to config' right-click action will prompt you to enter a name for the configuration. Once saved, you will see a 'Saved Configuration' folder appear, with all your saved configs. Clicking on a saved config will launch a new job with those pre-defined settings. You can use the pencil icon on any saved configuration to edit it.
 
 ## Using the Schema Browser
 
-The Db2 for i extension adds a view called Schema Browser which allows the user to add existing schemas to the list and will allow them to browse existing objects. You can right click on SQL objects to show more options. Each different SQL object type may have unique options. 
+The Db2 for i extension adds a view called Schema Browser which allows the user to add existing schemas to the list and will allow them to browse existing database objects. You can right-click on SQL objects to show more actions. Each SQL object type may have unique actions. 
 
 ### Viewing table contents
 
-If you are using the Schema Browser to browse objects, you are able to use the 'view' icon when hovering over a table, view, or alias item which will automatically open and execute a basic select statement.
+If you are using the Schema Browser to browse objects, you are able to use the 'View contents' icon when hovering over a table, view, or alias to cause a basic SQL select statement to be generated and executed.
