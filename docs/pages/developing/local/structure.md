@@ -37,7 +37,10 @@ When using `/COPY` and `/INCLUDE` in RPGLE with a local project, the path should
 
 While it is possible to use `INCDIR` and then not provide a directory on the include statement, when reading the code, it is a lot clearer where the file is coming from.
 
-If you want your local project to resolve files on the IFS, make sure you specify your 'include directories' inside the [`iproj.json` file with the `includePath` property](https://ibm.github.io/ibmi-bob/#/prepare-the-project/iproj-json?id=includepath) to the paths where the compiler should look up.
+If you want your local project to resolve files on the IFS, make sure you specify your 'include directories' 
+
+* by using the `INCDIR` parameter available on most ILE compilers,
+* or inside the [`iproj.json` file with the `includePath` property](https://ibm.github.io/ibmi-bob/#/prepare-the-project/iproj-json?id=includepath) to the paths where the compiler should look up (this is supported by ibmi-bob)
 
 ## Example project structure
 

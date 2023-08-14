@@ -43,7 +43,7 @@ The user can also defined Actions that are for the 'file' (local) type to run th
 
 ## 4. Workspace Actions (deploy & build)
 
-Similar to other repository settings, users can now store Actions as part of the Workspace. Users can now create `.vscode/actions.json` inside of your Workspace, and can contain Actions that are specific to that Workspace. That configuration file should also be checked into git for that application. Alternatively, if you're using [the new `iproj.json` standard](https://ibm.github.io/ibmi-bob/#/prepare-the-project/project-metadata), the `buildCommand` and `compileCommand` will also appear as Actions automatically.
+Similar to other repository settings, users can now store Actions as part of the Workspace. Users can now create `.vscode/actions.json` inside of your Workspace, and can contain Actions that are specific to that Workspace. That configuration file should also be checked into git for that application.
 
 There is a tool that can generate an initial `actions.json` file for you. After connecting to a system, open the command palette (F1) and search for 'Launch Actions Setup'. This shows a multi-select window where the user can pick which technologies they're using. Based on the selection, an `actions.json` will be created.
 
@@ -132,11 +132,16 @@ As well as custom variables defined in the User Library List view, users can als
  ```
 
  ```jsonc
- // iproj.json
- {
-   "objlib": "&DEVLIB",
-   "actions": []
- }
+ // actions.json
+ [
+  {
+    "name": "Deploy & build with ibmi-bob 🔨",
+    "command": "error=*EVENTF lib1=&DEVLIB makei -f &BASENAME",
+    "extensions": [
+      "GLOBAL"
+    ],
+    "environment": "pase",
+    "deployFirst": true
+  }
+ ]
  ```
-
- If every developer is compiling into the same (shared) library, then an environment file is not needed and you can specify that build library in the project file. You can also use environment variables in Actions.
