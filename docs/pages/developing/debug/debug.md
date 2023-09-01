@@ -14,6 +14,10 @@ After the debug session has started, every session will break on entry. You can 
 
 ![](./debug2.png)
 
+To debug a program, this can be done from the Object Browser by right-clicking on the program and selecting the **Debug Program** option. Like before this will also display an input box to modify the command which starts the debug job.
+
+![](./debug3.png)
+
 # Configuring the debugger
 
 ## General requirements
@@ -31,9 +35,9 @@ After the debug session has started, every session will break on entry. You can 
 To make use of the Debug Service, you need the following PTFs:
 
 * Host debugger in 5770SS1:
-   * IBM i 7.5 PTF SI80368 and SI81035
-   * IBM i 7.4 PTF SI80364 and SI81031
-   * IBM i 7.3 PTF SI79707 and SI80858
+   * IBM i 7.5 PTF SI83666 and SI81035
+   * IBM i 7.4 PTF SI83683 and SI81031
+   * IBM i 7.3 PTF SI83692 and SI80858
 
 After you have installed the PTFs, the connection inside of Visual Studio Code will need to be restarted.
 
@@ -83,7 +87,7 @@ If `DBGSRV_SECURED_PORT` is changed, make sure to:
 
 ### What's the difference between the Debug Service and Debug Server?
 
-![](./debug3.png)
+![](./debug4.png)
 
 As depicted in this diagram, the client (VS Code, IBM i Debug) connects to the Debug Service, which talks to the Debug Server.
 
@@ -92,7 +96,7 @@ As depicted in this diagram, the client (VS Code, IBM i Debug) connects to the D
 
 ### I can't see the variables when debugging CL
 
-![](./debug4.png)
+![](./debug5.png)
 
 This is a limitation for CL. The local variables will not show up in the Variables view for CL. You can add a local variable to the Watch view to inspect its value. The CL limitation also exists in RDi.
 
