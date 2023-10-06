@@ -1,25 +1,25 @@
-In Code for IBM i, there is the ability to open a 5250 terminal in it's own tab. This means that all almost all developer needs are integrated into the editor. You have the choice of launching a 5250 terminal or a pase shell right in the editor.
+In Code for IBM i you can open a 5250 terminal in it's own tab, so almost all developer needs are integrated into the editor. You can launch either a 5250 terminal or a pase shell right in the editor.
 
 ![Screenshot 2021-12-06 at 12 07 22 PM](https://user-images.githubusercontent.com/3708366/144915006-20d44162-23ec-4f04-beec-889f989cd497.png)
 
 _Shows explorer, RPGLE code, problems, outline view and 5250 terminal._
 
-## Termimal requirements
+## Terminal Startup
 
-Previously, to bring up the pase environment, you had to use the VS Code termimal to log into the system again (using SSH). While this worked fine, it still meant that you had to log in a second time - because you would have already connected when using Code for IBM i.
+Hover over the connected system in the Status Bar:
 
-Now, there is a new clickable button to select which Termimal you want to launch:
+![System Quick Pick menu](../../assets/Terminals_01.png)
 
-![image](https://user-images.githubusercontent.com/3708366/144915672-6f2dbea4-c3cc-453c-8cdf-43297e9cf602.png)
+Click  ``Terminals`` in the quick pick menu, then choose a terminal:
 
-Clicking the Terminals button which launch a quick pick menu, where you can select which Terminal type you want. It will use the existing connection you have in Code for IBM i.
+![Choose termimal](../../assets/Terminals_02.png)
 
 * PASE: will launch into the pase environment
-* 5250: will launch a 5250 emulator right into the connected system. For this functionality, `tn5250` must be installed on the remote system. This can be installed via yum.
+* 5250: will launch a 5250 emulator to the connected system. 
 
-## 5250 requirements & settings
+## 5250 Requirements & Settings
 
-The only requirement to launch a 5250 emulator is to have tn5250 installed. This can be [installed via yum](https://www.seidengroup.com/php-documentation/how-to-set-up-the-ibm-i-open-source-environment/). After you have it installed, you're good to go!
+To launch a 5250 emulator you must have tn5250 installed on the remote system. This can be [installed via yum](https://www.seidengroup.com/php-documentation/how-to-set-up-the-ibm-i-open-source-environment/). After you have it installed, you're good to go!
 
 Code for IBM i provides additional settings so you can setup your termimal how you like. The most common setting is likely the CCSID mapping configuration, which lets you set the encoding for the terminal.
 
