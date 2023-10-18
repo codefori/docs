@@ -104,6 +104,13 @@ Just like definitions, you are able to find all references to definitions with G
 
 ![](../../../assets/rpgle/peef_refs.png)
 
+### Go to implementation
+
+Go to implementation works for procedures in two ways.
+
+* For all sources (members/streamfiles/local) it will do a lookup of the procedure name in the binding directories you have specified in the `BNDDIR` header/control-spec and try to open the source up for it.
+* For local projects it will take you to the implementation of an export procedure wherever it is in your project.
+
 ## Linter
 
 The extension ships with a built-in linter to ensure developers write the cleanest code. The linter is un-opinionated and is highly configurable.
