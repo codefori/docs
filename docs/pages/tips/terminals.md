@@ -19,7 +19,9 @@ Click  ``Terminals`` in the quick pick menu, then choose a terminal:
 
 ## 5250 Requirements & Settings
 
-To launch a 5250 emulator you must have tn5250 installed on the remote system. This can be [installed via yum](https://www.seidengroup.com/php-documentation/how-to-set-up-the-ibm-i-open-source-environment/). After you have it installed, you're good to go!
+To launch a 5250 emulator, you must have tn5250 installed on the remote system. This can be [installed via yum](https://www.seidengroup.com/php-documentation/how-to-set-up-the-ibm-i-open-source-environment/). 
+
+After you have installed tn5250, you should be able to launch the 5250 terminal, but if not: before connecting to your server, right-click on the server and choose “Connect and Reload Server Settings.”
 
 Code for IBM i provides additional settings so you can setup your termimal how you like. The most common setting is likely the CCSID mapping configuration, which lets you set the encoding for the terminal.
 
