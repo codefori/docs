@@ -29,6 +29,27 @@ The result set will appear below the statement. As your scroll through the resul
 
 SQL statements are executed using the active job selected in the SQL Job Manager view.
 
+### SQL processors
+
+Newer version of SQL provided by Db2 for i allows you to run CL commands in a script. There are also `json`, `csv`, and `sql` processors, which will open the result set in the chosen format.
+
+```sql
+-- result set as normal table
+select * from sample.employee;
+
+-- result set as JSON, will open in a new file
+json: select * from sample.employee;
+
+-- result set as CSV, will open in a new file
+csv: select * from sample.employee;
+
+-- result set as SQL insert statement
+sql: select * from sample.employee;
+
+-- run CL commands. output is directed to IBM i output channel
+cl: dspffd sample/employee
+```
+
 ## SQL Job Manager
 
 This view allows users to manage different SQL jobs, each with their own unique JDBC configuration. A new job can be created by clicking the database icon in the SQL Job Manage title bar. Or, if you have not created a new job before, there is a big button to do the same action.
