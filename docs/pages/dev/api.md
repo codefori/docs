@@ -370,3 +370,7 @@ See the following code bases for large examples of extensions that use Code for 
 
 * [VS Code extension to manage IBM i IWS services](https://github.com/halcyon-tech/vscode-ibmi-iws)
 * [Git for IBM i extension](https://github.com/halcyon-tech/git-client-ibmi)
+
+# vscode-ibmi environment variable
+
+We provide environment variables so Code for IBM i can be controlled by managed environments. See [Variables](./variables.md).

@@ -38,3 +38,4 @@
    - [Getting started](pages/dev/getting_started.md)
    - [Scope](pages/dev/scope.md)
    - [API](pages/dev/api.md)
+   - [Variables](pages/dev/variables.md)
