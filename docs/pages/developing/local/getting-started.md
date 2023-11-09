@@ -148,7 +148,7 @@ DEVLIB=DEVBLIB
 
 ### Branch library
 
-There is a special variable for generating a library name based on the branch name. That variable is `&BRANCHLIB`.
+There is a special variable for generating a library name based on the branch name. That variable is `&BRANCHLIB`. The Source Orbit tool also supports this same branch library name logic.
 
 The ideal branch name is `<type>/<name>`. If the name contains a part in the branch name, like a bug/issue tracker number, then that will be used in the library name since it has more uniqueness to it.
 
