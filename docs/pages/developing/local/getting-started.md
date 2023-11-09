@@ -119,29 +119,43 @@ The current library is USERLIB
 
 As well as custom variables defined in the User Library List view, users can also make use `.env` files.
 
- The `.env` file allows each developer to define their own configuration. For example, standard development practice with git is everyone developing in their own environment - so developers might build into their own libraries.
+The `.env` file allows each developer to define their own configuration. For example, standard development practice with git is everyone developing in their own environment - so developers might build into their own libraries.
 
- ```sh
- # developer A:
- DEVLIB=DEVALIB
- ```
+```sh
+# developer A:
+DEVLIB=DEVALIB
+```
 
- ```sh
- # developer B:
- DEVLIB=DEVBLIB
- ```
+```sh
+# developer B:
+DEVLIB=DEVBLIB
+```
 
- ```jsonc
- // actions.json
- [
-  {
-    "name": "Deploy & build with ibmi-bob 🔨",
-    "command": "error=*EVENTF lib1=&DEVLIB makei -f &BASENAME",
-    "extensions": [
-      "GLOBAL"
-    ],
-    "environment": "pase",
-    "deployFirst": true
-  }
- ]
- ```
+```jsonc
+// actions.json
+[
+ {
+   "name": "Deploy & build with ibmi-bob 🔨",
+   "command": "error=*EVENTF lib1=&DEVLIB makei -f &BASENAME",
+   "extensions": [
+     "GLOBAL"
+   ],
+   "environment": "pase",
+   "deployFirst": true
+ }
+]
+```
+
+### Branch library
+
+There is a special variable for generating a library name based on the branch name. That variable is `&BRANCHLIB`.
+
+The ideal branch name is `<type>/<name>`. If the name contains a part in the branch name, like a bug/issue tracker number, then that will be used in the library name since it has more uniqueness to it.
+
+| Branch name            | Branch library name |
+| ---------------------- | ------------------- |
+| MAIN                   | MAIN                |
+| SUPERLONGNAME          | SUPERLONGN          |
+| feature/coolthing      | FEACOOLTHI          |
+| feature/1234-coolthing | FEA1234             |
+| bug/bad_bug-5678       | BUG5678             |
