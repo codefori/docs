@@ -17,7 +17,7 @@ To maximize your editing tab try:
 
 ### Source dates
 
-Source date support must be enabled and are disabled by default. This can be changed in the Connection Settings. See more on the [Source Dates page](sourcedates.md).
+Source date support must be enabled and is disabled by default. This can be changed in the Connection Settings. See more on the [Source Dates page](sourcedates.md).
 
 ## Compiling
 
@@ -38,7 +38,7 @@ If the compile fails, you will see an error message like this:
 
 ![Complile failed](../../assets/EditComp-04.png)
 
-In the source, the errors will be highlighted with squiggly lines, and if you hover over the squiggly line you see details of the error:
+In the source errors will be highlighted with squiggly lines, and if you hover over the squiggly line you see details of the error:
 
 ![Squiggly errors](../../assets/EditComp-05.png)
 
@@ -46,9 +46,16 @@ You can jump to the next error with **F8**.  **Shift+F8** for the previous error
 
 ![F8 next error](../../assets/EditComp-05A.png)
 
-If you have the PROBLEMS tab open in the Panel, it shows the list of errors. Clicking on a line in the PROBLEMS tab will take you to the line in the source. (Ctrl+J opens the panel, Ctrk+Shift+M opens the PROBLEMS tab.)
+If you have the PROBLEMS tab open in the Panel, it shows the list of errors. Clicking on a line in the PROBLEMS tab will take you to the line in the source.
+
 
 ![Problems tab](../../assets/EditComp-06.png)
+
+Ctrl+J opens the panel, Ctrj+Shift+M opens the PROBLEMS tab. 
+
+To have PROBLEMS tab always open automatically, change this setting:
+
+```Code-for-ibmi: Post Action View``` Determine which view should be shown when running Actions
 
 Decide which Errors, Warnings or Info messages to show using the Filter icon. If you have been compiling several sources then you may also want to check **Show Active File Only**;
 
@@ -60,6 +67,25 @@ You can remove all the squiggly line using F1 and searching for IBM i Clear Diag
 
 ### Compile Listing
 
-If you have *Log Compile Output* checked in settings (see *Settings: Global*, below), then compile listings are found under the Output tab by selecting IBM i Output.  Use the shortcut Output icon on the tool bar to jump to the compile listing.
+The compile listing is always routed to a terminal, should you need to review it.
 
-![Output button](../../assets/EditComp-09.png)
+![Compile List in Terminal](../../assets/compile_list_01.png)
+
+Terminal Notes
+
+- Terminals are generally found in the panel, as shown above. You can instead open them in a editor with this setting:
+
+  ```Terminal › Integrated: Default Location```
+Controls where newly created terminals will appear.
+
+- If you are compiling large programs you may wish to adjust this setting:
+
+  ```Terminal › Integrated: Scrollback```
+Controls the maximum number of lines the terminal keeps in its buffer. 
+
+- You may wish to adjust the line height in the terminal, with this setting:
+
+  ```Terminal › Integrated: Line Height```
+Controls the line height of the terminal. 
+
+
