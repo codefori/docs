@@ -11,8 +11,8 @@
    - Local Development
       - [Getting started](pages/developing/local/getting-started.md)
       - [Project Structure](pages/developing/local/structure.md)
+      - [Local Actions](pages/developing/local/actions.md)
       - [Azure DevOps](pages/developing/local/azure.md)
-      - [Remote Debugging](pages/developing/local/debug.md)
 - Tips
    - [Quick Start](pages/tips/quickstart.md)
    - [Tricks](pages/tips/tricks.md)
