@@ -1,5 +1,53 @@
 This page outlines a recommended project structure when using git with your ILE sources. Code for IBM i and subsequent extensions will follow this structure for local development.
 
+## File names & 'member text'
+
+It is recommended the name of the source matches the name of the created object. For example 
+
+* `ord500.pgm.rpgle` would become the `ORD500.PGM` object
+* `ord500.cmd` would become the `ORD500.CMD` object
+
+Since member text is traditionally associated with members, it is not longer possible to do that with the standard hirearchial file system. There are two options for associating 'text' (the description) with a piece of source code.
+
+### Using `%TEXT` in your source
+
+You can use `%TEXT:` in any comments in your source code. This works for any programming language you use.
+
+```rpgle
+**free
+
+// %TEXT: This program is for order entry
+
+dcl-pi ORD500;
+end-pi;
+
+//...
+
+return;
+```
+
+```sql
+-- %TEXT: Order entry table
+create or replace table xyz (...);
+```
+
+### Using `TEXT` option (in RPGLE)
+
+In the H-spec or `CTL-OPT` operation code, you can use the `TEXT` keyword to specify the text.
+
+```rpgle
+**free
+
+ctl-opt text('This program is for order entry');
+
+dcl-pi ORD500;
+end-pi;
+
+//...
+
+return;
+```
+
 ## Lowercase file names
 
 It is recommend to always use lowercase file names. Generally, it is easier on the eyes and follows the standard of most other environments. You could also consider using camelCase.

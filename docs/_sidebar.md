@@ -9,9 +9,11 @@
    - [Debugging](pages/developing/debug/debug.md)
    - [ILEDocs](pages/developing/iledocs.md)
    - Local Development
+      - [Git](pages/developing/local/git.md)
       - [Getting started](pages/developing/local/getting-started.md)
       - [Project Structure](pages/developing/local/structure.md)
       - [Local Actions](pages/developing/local/actions.md)
+      - [Migrating to git](pages/developing/local/migrate.md)
       - [Azure DevOps](pages/developing/local/azure.md)
 - Tips
    - [Quick Start](pages/tips/quickstart.md)
@@ -19,7 +21,6 @@
    - [Terminals](pages/tips/terminals.md)
    - [CCSID](pages/tips/ccsid.md)
    - [Setup](pages/tips/setup.md)
-   - [Git](pages/tips/git.md)
 - [Browsers](pages/browsers/index.md)
    - [User Library List](pages/browsers/user-library-list.md)
    - [Object Browser](pages/browsers/object-browser.md)

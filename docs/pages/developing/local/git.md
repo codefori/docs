@@ -11,7 +11,7 @@ This page contains useful information for getting started with git on IBM i. Ite
 
 * [DevOps on IBM i](https://github.com/worksofliam/blog/issues/37)
 * [Why git? Intro (with change management comparison)](https://github.com/worksofliam/blog/issues/19)
-* [IBM i git project structure](https://halcyon-tech.github.io/docs/#/pages/developing/local/structure)
+* [IBM i git project structure](structure.md)
 * [The RPG and Git book](https://github.com/worksofliam/rpg-git-book/blob/main/1-introduction.md)
 * [ITJungle: Making Git Part of Your Modernization Strategy](https://www.itjungle.com/2023/06/26/making-git-part-of-your-modernization-strategy/) 🏢
 * [Five Reasons we use git to manage IBM i source code](https://www.seidengroup.com/2019/08/14/five-reasons-we-use-git-to-manage-ibm-i-source-code/) 🏢
@@ -20,7 +20,6 @@ This page contains useful information for getting started with git on IBM i. Ite
 ## VS Code and git
 
 * [Visual Studio Code, RPGLE and git: Your first repo](https://github.com/worksofliam/blog/issues/61)
-* [Getting started with Local IBM i Development](https://halcyon-tech.github.io/docs/#/pages/developing/local/getting-started)
 * [Using VS Code to write your RPGLE code (video)](https://www.youtube.com/watch?v=qDjXzKP0RYg)
 * [Creating your first IBM i project (video)](https://www.youtube.com/watch?v=XuiGyWptgDA)
 
