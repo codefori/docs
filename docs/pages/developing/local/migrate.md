@@ -1,7 +1,7 @@
 
 ## What migration means
 
-Migration actually means copying the source member contents to the IFS. Only one person has to do this step. Once all the source is migrated into git, I would recommend **developers start developing locally with your new git repositor**y. If you let someone edit the source members while migrating the source to the IFS, you will have to re-copy the changed members.
+Migration actually means copying the source member contents to the IFS. Only one person has to do this step. Once all the source is migrated into git, I would recommend **developers start developing locally with your new git repository**. If you let someone edit the source members while migrating the source to the IFS, you will have to re-copy the changed members.
 
 For example, your library, source physical files and members might look like this:
 
@@ -47,13 +47,12 @@ Make sure that when you migrate code, you are migrating code into a directory wh
 2. The type of the source member becomes the extension when in the IFS.
 3. Files and directories of sources are usually stored as all lowercase.
 4. It is recommended you retain the 10 character limit on programs, commands, modules, etc - any source related to Db2 for i doesn't matter as much as Db2 for i and most ILE languages support 'long names'
-5. Sources on the IFS should be stored as encoding 1208 (UTF-8) or 1252.
 
 ## Tools used for migration
 
 Initially migrating the source code can be the hardest part of the entire process, but once it's done: it's done. There are many ways to do it, but this will only describe two.
 
-### 1. Manually migrating
+### Manually migrating
 
 All a migration consists of is moving source members to the IFS. To our benefit, the `CPYTOSTMF` command exists, which can be used to copy a source member to a stream file. For example:
 
@@ -63,7 +62,7 @@ CPYTOSTMF FROMMBR('/QSYS.lib/DEVLIB.lib/QRPGLESRC.file/PROGRAMA.mbr') TOSTMF('/h
 
 On the basis of this command, you would have to run this command for each source member you want to migrate.
 
-### 2. Using the migrate tool
+### Using the migrate tool
 
 There is an open source migrate tool, simply named 'migrate', which automates the copying of source members into a directory. It also creates the streamfiles with the correct extensions.
 
@@ -105,6 +104,10 @@ This would create three directories in `/home/BARRY/myproject` like the followin
 ```
 
 Note that it will create all directories and stream files with lowercase names.
+
+### IBM Project Explorer Migration tool
+
+Check out the IBM Project Explorer documentation on how to use [their migration process](https://ibm.github.io/vscode-ibmi-projectexplorer/#/pages/projectExplorer/migrate-source).
 
 ### Other possible ways.
 

@@ -12,8 +12,9 @@
       - [Git](pages/developing/local/git.md)
       - [Getting started](pages/developing/local/getting-started.md)
       - [Project Structure](pages/developing/local/structure.md)
-      - [Azure DevOps](pages/developing/local/azure.md)
+      - [Local Actions](pages/developing/local/actions.md)
       - [Migrating to git](pages/developing/local/migrate.md)
+      - [Azure DevOps](pages/developing/local/azure.md)
 - Tips
    - [Quick Start](pages/tips/quickstart.md)
    - [Tricks](pages/tips/tricks.md)
