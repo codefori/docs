@@ -103,7 +103,8 @@ If you wanted `%parms` and `%timestamp` to always be lower case, amd all other B
    ]
 ```
 
-Note: The order of entries above is important.
+> [!ATTENTION]
+> The order of entries above is important.
 
 Or, if for some reason, you wanted `%timestamp` to always be coded as `%TimeStamp` then it could be coded like this:
 

@@ -44,6 +44,7 @@ When complete, **click Save**. If you simply close the tab, nothing will be save
 
 ### Actions storage
 
-If you change or add actions as below, then all actions are saved in the ```code-for-ibmi.actions``` section in ```settings.json```. You can also edit the```code-for-ibmi.actions``` section manually. If it doesn't exist, you can create you own ```code-for-ibmi.actions``` section in ```settings.json```.  
+If you change or add actions as below, then all actions are saved in the `code-for-ibmi.actions` section in `settings.json`. You can also edit the`code-for-ibmi.actions` section manually. If it doesn't exist, you can create you own `code-for-ibmi.actions` section in `settings.json`.  
 
-**Note:** When  a  ```code-for-ibmi.actions``` section  exists in ```settings.json``` the set of actions is loaded from there, not from the default set in the extension.
+> [!WARNING]
+> When a `code-for-ibmi.actions` section exists in `settings.json` the set of actions is loaded from there, not from the default set in the extension. We don't recommend ending the `settings.json` manually and instead using the Actions view.

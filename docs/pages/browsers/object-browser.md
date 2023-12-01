@@ -16,7 +16,8 @@ The above filter example lists all source files in library LENNONS1:
 
 ![Expanded filter](../../assets/Browser_05.png)
 
-Note that the filter name has the filter definition the right.
+> [!NOTE]
+> The filter name has the filter definition to the right.
 
 #### Create Additional Filters
 
@@ -30,7 +31,9 @@ To quickly create filters without having to fill out the filter dialog, click on
 
 - `LIB*`
 - `LIB/OBJ/MBR.MBRTYPE (OBJTYPE)`
-  - Note: All parameters except the library are optional. For parameters which are not provided, the same defaults as the filter dialog will be used.
+
+> [!NOTE]
+> All parameters except the library are optional. For parameters which are not provided, the same defaults as the filter dialog will be used.
 
 ![Create Quick Filter](../../assets/Browser_11.png)
 

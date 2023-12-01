@@ -103,7 +103,8 @@ This would create three directories in `/home/BARRY/myproject` like the followin
         /pgm3.clle
 ```
 
-Note that it will create all directories and stream files with lowercase names.
+> [!NOTE]
+> It will create all directories and stream files with lowercase names.
 
 ### IBM Project Explorer Migration tool
 

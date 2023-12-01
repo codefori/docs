@@ -18,7 +18,8 @@ Tip: next time, try using 'IBM i: Connect to previous'
 5. Click on the filter to expand the members in the source file.
 6. Click on a member to open it.
 
- **Note:** There is no member locking and the extension defaults to not retaining source dates.
+ > [!NOTE]
+> There is no member locking and the extension defaults to not retaining source dates.
 
 ### How do I compile my source code?
 

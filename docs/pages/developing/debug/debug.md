@@ -43,11 +43,12 @@ After you have installed the PTFs, the connection inside of Visual Studio Code w
 
 ## Configuring & starting the service
 
-It's important to note that there only needs to be one instance of the Debug Service running. All developers share the Debug Service.
-
 After connecting to a system in Code for IBM i, if the PTFs are installed but the service is not configured (i.e. the certificates don't exist) you will see a notice asking if you'd like to open the Walkthrough to configure the Debug Service. Clicking the button will open the Walkthrough.
 
 ![](./setup1.png)
+
+> [!TIP]
+> There only needs to be one instance of the Debug Service running. All developers share the Debug Service.
 
 ### Generating certificates
 

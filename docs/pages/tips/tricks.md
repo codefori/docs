@@ -9,30 +9,13 @@ Compare two sources, whether they are members or streamfiles.
 
 ### Running SQL statement
 
-Install the [Db2 for IBM i extension](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-db2i) for this functionality.
+Install the [Db2 for IBM i extension](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-db2i) for this functionality. [Check out the documentation here](pages/extensions/db2i/index).
 
-It is also possible to run SQL statements right from the editor in an SQL file. You can either highlight the statement you want to run or move your anchor over the statement and use Ctrl+R/Cmd+R to execute the statement. **note: statements only run in SQL mode and does not inherit the library list**
+It is also possible to run SQL statements right from the editor in an SQL file. You can either highlight the statement you want to run or move your anchor over the statement and use Ctrl+R/Cmd+R to execute the statement.
 
 SQL result sets appear in the 'IBM i: Results' panel.
 
 ![assets/db_03.png](../../assets/db_03.png)
-
-Much like the SQL pre-processor, you can now run CL commands from an SQL scripts. As well as CL commands, you can also get your SQL result set back as `json` or `csv`.
-
-```
--- result set as normal table
-select * from sample.employee;
-
--- result set as JSON, will open in a new file
-json: select * from sample.employee;
-
--- result set as CSV, will open in a new file
-csv: select * from sample.employee;
-
--- run CL commands. output is directed to IBM i output channel
-cl: dspffd sample/employee
-```
-
 
 ### Search source files and IFS directories
 
