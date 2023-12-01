@@ -1,0 +1,24 @@
+{
+  "panels": {
+    "scope": "md, markdown",
+    "prefix": "panels",
+    "body": [
+      "<!-- panels:start -->",
+      "",
+      "<!-- div:left-panel -->",
+      "",
+      "<!-- div:right-panel -->",
+      "",
+      "<!-- panels:end -->",
+    ]
+  },
+  "warning": {
+    "scope": "md, markdown",
+    "prefix": "warning",
+    "body": [
+      "> [!${1:NOTE|TIP|WARNING|ATTENTION}]",
+      "> ${2:message}",
+    ]
+  },
+  }
+}
