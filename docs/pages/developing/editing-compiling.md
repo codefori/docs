@@ -65,17 +65,45 @@ If the compile completes without error you will see an informational message lik
 
 ### Compile Errors
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 If the compile fails, you will see an error message like this:
+
+<!-- div:right-panel -->
 
 ![Complile failed](../../assets/EditComp-04.png)
 
+<!-- panels:end -->
+
+---
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 In the source errors will be highlighted with squiggly lines, and if you hover over the squiggly line you see details of the error:
+
+<!-- div:right-panel -->
 
 ![Squiggly errors](../../assets/EditComp-05.png)
 
+<!-- panels:end -->
+
+---
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 You can jump to the next error with **F8**.  **Shift+F8** for the previous error.
 
+<!-- div:right-panel -->
+
 ![F8 next error](../../assets/EditComp-05A.png)
+
+<!-- panels:end -->
 
 ---
 
@@ -85,7 +113,7 @@ You can jump to the next error with **F8**.  **Shift+F8** for the previous error
 
 If you have the **Problems** tab open in the Panel, it shows the list of errors. Clicking on a line in the **Problems** tab will take you to the line in the source.
 
-Ctrl+J opens the panel, Ctrj+Shift+M opens the **Problems** tab. 
+Ctrl+J opens the panel, Ctrt+Shift+M opens the **Problems** tab. 
 
 <!-- div:right-panel -->
 
