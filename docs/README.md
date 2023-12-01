@@ -18,10 +18,19 @@ Optionally, ensure you know how to connect to pase from a shell. See this [offic
 
 ## Installation
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 From the Visual Studio Code Marketplace: [Code for IBM i](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.code-for-ibmi)
 
-Or from the Extensions icon in the Activity Bar (on the left):
+Or from the Extensions view inside of Visual Studio Code.
+
+<!-- div:right-panel -->
+
 ![assets/install_01,png](assets/install_01.png)
+
+<!-- panels:end -->
 
 ### Recommended Extensions
 

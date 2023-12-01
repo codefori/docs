@@ -1,13 +1,25 @@
 ### Comparing sources
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 Compare two sources, whether they are members or streamfiles.
 
 1. right click on either type, choose 'Select for compare'
 2. right click the other source you'd like to compare with and choose 'Compare with Selected'
 
+<!-- div:right-panel -->
+
 ![assets/compare_01.png](../../assets/compare_01.png)
 
+<!-- panels:end -->
+
 ### Running SQL statement
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
 
 Install the [Db2 for IBM i extension](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-db2i) for this functionality. [Check out the documentation here](pages/extensions/db2i/index).
 
@@ -15,7 +27,12 @@ It is also possible to run SQL statements right from the editor in an SQL file. 
 
 SQL result sets appear in the 'IBM i: Results' panel.
 
+<!-- div:right-panel -->
+
 ![assets/db_03.png](../../assets/db_03.png)
+
+<!-- panels:end -->
+
 
 ### Search source files and IFS directories
 

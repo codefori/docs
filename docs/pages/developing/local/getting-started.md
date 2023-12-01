@@ -47,9 +47,19 @@ The user can also defined Actions that are for the 'file' (local) type to run th
 
 Similar to other repository settings, users can now store Actions as part of the Workspace. Users can now create `.vscode/actions.json` inside of your Workspace, and can contain Actions that are specific to that Workspace. That configuration file should also be checked into git for that application.
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 There is a tool that can generate an initial `actions.json` file for you. After connecting to a system, open the command palette (F1) and search for 'Launch Actions Setup'. This shows a multi-select window where the user can pick which technologies they're using. Based on the selection, an `actions.json` will be created.
 
+<!-- div:right-panel -->
+
 ![](../../../assets/actions_tool.png)
+
+<!-- panels:end -->
+
+---
 
 Here is an example `actions.json` setup, which requires deployment to happen before triggering BoB. VS Code will prompt content assist when working with `actions.json`. You could replace BoB with any build system here (e.g. make, or perhaps a vendor-specific tool.).
 

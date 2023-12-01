@@ -1,16 +1,28 @@
-These are setting  which affect the extension (and therefore *every* connection). To adjust the extension's global setting,  either:
+These are setting  which affect the extension (and therefore *every* connection). To adjust the extension's global setting, either:
 
 - Use the standard VS Code <kbd>Ctrl</kbd> + <kbd>,</kbd> and click Extensions
 - or click File/Preferences/Settings and click Extensions
 - or press <kbd>F1</kbd>, search for `Preferences: Open Settings (UI)` and click Extensions.
 
-Settings for the extension will be under `Code for IBM i`
+<!-- panels:start -->
 
-![assets/settings_01.png](../../assets/settings_01.png)
+<!-- div:left-panel -->
+
+Settings for the extension will be under `Code for IBM i`
 
 Most of the setting have a self explanatory description. A few have notes below.
 
 **It is not recommended editing the JSON manually. If you do, restart/reload VS Code so Code for IBM i can pickup the changes.**
+
+<!-- div:right-panel -->
+
+![assets/settings_01.png](../../assets/settings_01.png)
+
+<!-- panels:end -->
+
+---
+
+
 
 ### IFS deletion warning (Safe delete)
 
@@ -36,18 +48,28 @@ These are the various setting relating to the items in the browsers, e.g., the l
 
 ### Log Compile Output
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 When enabled, spool files will be logged from the command execution.
-These spool files can be found under the **OUTPUT** tab (View->Output, or Ctrl + Shift + U). Select **IBM i Output** in the drop down on the right.
+These spool files can be found under the **Output** tab (View->Output, or Ctrl + Shift + U). Select **IBM i Output** in the drop down on the right.
+
+<!-- div:right-panel -->
+
 
 ![Panel on Right](../../assets/LogOutput_01.png)
 
-You can clear the OUTPUT tab using the **Clear Output** icon on the right.
+<!-- panels:end -->
+
+You can clear the Output tab using the **Clear Output** icon on the right.
+
 ![Clear output](../../assets/LogOutput_02.png)
 
 You can change the font size in the OUTPUT tab in your settings.json thus:
 
 ```json
 "[Log]": {
-        "editor.fontSize": 11
-    },
+    "editor.fontSize": 11
+},
 ```

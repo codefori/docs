@@ -22,6 +22,10 @@ There are two types of editing modes for source dates
 
 ## Source date filtering
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 This feature is only enabled when using 'Diff mode' tracking, as well as having the source dates gutter enabled.
 
 Hovering over the gutter will show two buttons to:
@@ -29,12 +33,28 @@ Hovering over the gutter will show two buttons to:
 * show changes since last save, which opens a new diff view with the changes
 * start a new search based on the source date
 
+<!-- div:right-panel -->
+
 ![Editing max space](../../assets/sourcedates_1.png)
 
-Starting a search based on date will allow the user to enter a new date filter in `YYMMDD` format. The gutter will highlight any dates on or after the date the user entered.
+<!-- panels:end -->
 
-![Editing max space](../../assets/sourcedates_2.png)
+---
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
+Starting a search based on date will allow the user to enter a new date filter in `YYMMDD` format. The gutter will highlight any dates on or after the date the user entered.
 
 Hovering over the gutter again will show another button to clear the filter.
 
 There is also a button on the status bar the user can use to start a new date filter.
+
+<!-- div:right-panel -->
+
+![Editing max space](../../assets/sourcedates_2.png)
+
+<!-- panels:end -->
+
+---

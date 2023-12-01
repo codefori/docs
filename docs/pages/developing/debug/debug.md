@@ -4,19 +4,47 @@ Debugging ILE programs is now available inside of Visual Studio Code. We've adde
 
 # Starting to debug
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 After configuring the Debug Service, launching a debug session is a click of a button away. When you have active source open, a new Debug button will appear in the navigation bar. Breakpoints can be set prior to debugging, or during the debugging session.
 
+<!-- div:right-panel -->
+
 ![](./debug1.png)
+
+<!-- panels:end -->
+
+---
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
 
 Clicking the Debug button will display an input box which will allow the user to customise the command which starts the debug job. This allows the developer to pass in parameters, or call another program to launch the debug session.
 
 After the debug session has started, every session will break on entry. You can read more about the debugging UI on the [Debug actions section on the Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging#_debug-actions).
 
+<!-- div:right-panel -->
+
 ![](./debug2.png)
 
-To debug a program, this can be done from the Object Browser by right-clicking on the program and selecting the **Debug Program** option. Like before this will also display an input box to modify the command which starts the debug job.
+<!-- panels:end -->
+
+---
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
+To debug a program from the Object Browser, right-click on the program object and select the **Debug Program** option. Like before this will also display an input box to modify the command which starts the debug job.
+
+<!-- div:right-panel -->
 
 ![](./debug3.png)
+
+<!-- panels:end -->
 
 # Configuring the debugger
 
@@ -43,30 +71,68 @@ After you have installed the PTFs, the connection inside of Visual Studio Code w
 
 ## Configuring & starting the service
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 After connecting to a system in Code for IBM i, if the PTFs are installed but the service is not configured (i.e. the certificates don't exist) you will see a notice asking if you'd like to open the Walkthrough to configure the Debug Service. Clicking the button will open the Walkthrough.
 
+<!-- div:right-panel -->
+
 ![](./setup1.png)
+
+<!-- panels:end -->
+
+---
 
 > [!TIP]
 > There only needs to be one instance of the Debug Service running. All developers share the Debug Service.
 
 ### Generating certificates
 
-This Walkthrough can easily configure the Debug Service and start it up. The last steps have buttons to 'Generate certificates' and 'Start debug service'. Running them in order will do all the work to setup the service.
+<!-- panels:start -->
 
-![](./setup2_a.png)
+<!-- div:left-panel -->
+
+This Walkthrough can easily configure the Debug Service and start it up. The last steps have buttons to 'Generate certificates' and 'Start debug service'. Running them in order will do all the work to setup the service.
 
 *It will ask you to confirm the initialisation.*
 
+<!-- div:right-panel -->
+
+![](./setup2_a.png)
+
+<!-- panels:end -->
+
+---
+
 ### Starting the server
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
 
 The 'Start debug service' button will spin up the Debug Service. If the Debug Service is already running, it will ask you if you want to end the existing instance before starting a new one - this is a requirement. It is not recommended to run two instances of the Debug Service at once.
 
+<!-- div:right-panel -->
+
 ![](./setup3_a.png)
+
+<!-- panels:end -->
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
 
 You can also start the Debug Service through the command palette:
 
+<!-- div:right-panel -->
+
 ![](./setup3_b.png)
+
+<!-- panels:end -->
+
+---
 
 ## Debug Service ports
 
@@ -88,20 +154,36 @@ If `DBGSRV_SECURED_PORT` is changed, make sure to:
 
 ### What's the difference between the Debug Service and Debug Server?
 
-![](./debug4.png)
+<!-- panels:start -->
+
+<!-- div:left-panel -->
 
 As depicted in this diagram, the client (VS Code, IBM i Debug) connects to the Debug Service, which talks to the Debug Server.
 
 * The Debug Service is started up inside of Visual Studio Code as documented above. In the future it will also be possible to start it from Navigator for i.
 * The Debug Server is started up with `STRDBGSVR`. You may get an error message in VS Code if you attempt to debug when the Debug Server is not running.
 
+<!-- div:right-panel -->
+
+![](./debug4.png)
+
+<!-- panels:end -->
+
 ### I can't see the variables when debugging CL
 
-![](./debug5.png)
+<!-- panels:start -->
+
+<!-- div:left-panel -->
 
 This is a limitation for CL. The local variables will not show up in the Variables view for CL. You can add a local variable to the Watch view to inspect its value. The CL limitation also exists in RDi.
 
 [See GitHub issue here](https://github.com/halcyon-tech/vscode-ibmi/issues/1069).
+
+<!-- div:right-panel -->
+
+![](./debug5.png)
+
+<!-- panels:end -->
 
 # Common issues
 

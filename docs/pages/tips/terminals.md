@@ -6,16 +6,34 @@ _Shows explorer, RPGLE code, problems, outline view and 5250 terminal._
 
 ## Terminal Startup
 
-Hover over the connected system in the Status Bar:
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
+Hover over the connected system in the Status Bar
+
+<!-- div:right-panel -->
 
 ![System Quick Pick menu](../../assets/Terminals_01.png)
 
-Click  `Terminals` in the quick pick menu, then choose a terminal:
+<!-- panels:end -->
+
+---
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
+Click  **Terminals** in the quick pick menu, then choose a terminal:
+
+* **PASE** will launch into the pase environment
+* **5250** will launch a 5250 emulator to the connected system. 
+
+<!-- div:right-panel -->
 
 ![Choose termimal](../../assets/Terminals_02.png)
 
-* PASE: will launch into the pase environment
-* 5250: will launch a 5250 emulator to the connected system. 
+<!-- panels:end -->
 
 ## 5250 Requirements & Settings
 

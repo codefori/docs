@@ -22,25 +22,49 @@ Example: to run the 'CRTBNDRPG' Action, you must open a source member with eithe
 
 ### View/Change/Add Actions
 
- Click **Actions** on the status bar, then view, change or add new Actions in this UI:
-![Action List UI](../../../assets/actions_01.png)
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
+**Hover over your connection name** in the status bar and when the submenu appears, select Actions to show a list of available Actions.
 
 - Click on an action to change it.
 - Add actions with New Action.
 - Copy an existing action and modify it with Duplicate.
 
-Adding or changing, you see this same UI:
+<!-- div:right-panel -->
 
-![Action edit UI](../../../assets/actions_02.png)
+![Action List UI](../../../assets/actions_01.png)
 
-In the example above we are editing 'Create Bound RPG Program (CRTBNDRPG)'. We can change any of the properties.
+<!-- panels:end -->
+
+---
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
+Adding or changing Actions shows the same UI.
+
+In the example we are editing 'Create Bound RPG Program (CRTBNDRPG)'. We can change any of the properties.
 
 - '**Command to run**' is the command that will be executed. Notice it has portions of text that start with an `&` (ampersand) - such text is a "variable" that will be substituted when the action is run. Commands can have different variables based on what 'Type' (member, streamfile, object) is specified. Note that in addition to the supplied variables, you can create your own variables.  See "Custom Variables", below.
+
 - '**Extensions**' defines the list of extensions that can use this Action. For `CRTBNDRPG`, that usually means only `RPGLE` and `RPG`, so we would enter: `RPGLE, RPG`.
+
 - '**Types**' determines which type of object can run this action. For example, if your Action only applies to source members, then choose 'Member' from the dropdown.
+
 - '**Environment**' determine where the command should be run. In this case, `CRTBNDRPG` needs to run in the ILE environment since it's an ILE command. You also have the option to run commands through PASE or QShell.
 
 When complete, **click Save**. If you simply close the tab, nothing will be saved.
+
+<!-- div:right-panel -->
+
+![Action edit UI](../../../assets/actions_02.png)
+
+<!-- panels:end -->
+
+---
 
 ### Actions storage
 
