@@ -23,11 +23,19 @@
         .sidebar>h1 img {
             max-width: 3em;
         }
-        :root{
+
+        :root {
             /* Document */
             --docsify-example-panels-document-width: 70%;
             --docsify-example-panels-left-panel-width: 50%;
             --docsify-example-panels-right-panel-width: 50%;
+        }
+
+        @media only screen and (max-device-width: 768px) {
+            :root {
+                /* Document */
+                --docsify-example-panels-document-width: 100%;
+            }
         }
     </style>
 </head>
