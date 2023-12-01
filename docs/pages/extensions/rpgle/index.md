@@ -30,7 +30,7 @@ To ensure the RPGLE extension is working, we can write the source code for a ver
 
 Create a folder called `HelloWorld` and open VS Code in that folder (`code .` opens VS Code in the current folder):
 
-```bash
+```terminal
 mkdir HelloWorld
 cd HelloWorld
 code .

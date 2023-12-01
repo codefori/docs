@@ -14,7 +14,7 @@ const { instance } = vscode.extensions.getExtension(`halcyontechltd.code-for-ibm
 
 We provide TS type definitions to make using the Code for IBM i API easier. They can be installed via `npm`:
 
-```sh
+```terminal
 npm i @halcyontech/vscode-ibmi-types
 ```
 

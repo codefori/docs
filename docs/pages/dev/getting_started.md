@@ -10,7 +10,7 @@ It's very easy to work with the vscode-ibmi extension.
 
 To build a .`vsix` of the extension, you can use:
 
-```
+```terminal
 npm run package
 ```
 
