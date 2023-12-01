@@ -6,6 +6,10 @@ There is a tool that can generate an initial `actions.json` file for you. After 
 
 When you run Actions in the pase environment, all variables from VS Code (things like `&CURLIB`, `&BUILDLIB`, custom variables, `.env` variables) are inherited into the spawned pase shell.
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 For example, let's say we had this shell script and this Action:
 
 ```sh
@@ -25,6 +29,8 @@ echo "The current library is $CURLIB"
   }
 ```
 
+<!-- div:right-panel -->
+
 You will see the output:
 
 ```
@@ -37,21 +43,19 @@ Welcome
 The current library is USERLIB
 ```
 
+<!-- panels:end -->
+
 ## Environment file
 
 As well as custom variables defined in the User Library List view, users can also make use of the `.env` file.
 
 The `.env` file allows each developer to define their own configuration. For example, standard development practice with git is everyone developing in their own environment - so developers might build into their own libraries. The `.env` file should always be in the `.gitignore` file.
 
-```sh
-# developer A:
-DEVLIB=DEVALIB
-```
+<!-- panels:start -->
 
-```sh
-# developer B:
-DEVLIB=DEVBLIB
-```
+<!-- div:left-panel -->
+
+### `actions.json`
 
 ```jsonc
 // actions.json
@@ -67,6 +71,22 @@ DEVLIB=DEVBLIB
  }
 ]
 ```
+
+<!-- div:right-panel -->
+
+### Developer specific `.env` files
+
+```sh
+# developer A:
+DEVLIB=DEVALIB
+```
+
+```sh
+# developer B:
+DEVLIB=DEVBLIB
+```
+
+<!-- panels:end -->
 
 ### Branch library
 

@@ -3,6 +3,10 @@
 
 Migration actually means copying the source member contents to the IFS. Only one person has to do this step. Once all the source is migrated into git, I would recommend **developers start developing locally with your new git repository**. If you let someone edit the source members while migrating the source to the IFS, you will have to re-copy the changed members.
 
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
 For example, your library, source physical files and members might look like this:
 
 ```
@@ -19,6 +23,8 @@ DEVLIB
   - QCMDSRC
     - STARTJOB.CMD
 ```
+
+<!-- div:right-panel -->
 
 Where the resulting layout in the IFS could be very similar:
 
@@ -38,6 +44,9 @@ Where the resulting layout in the IFS could be very similar:
     /qcmdsrc
       startjob.cmd
 ```
+
+<!-- panels:end -->
+
 
 Make sure that when you migrate code, you are migrating code into a directory which is a local repository (e.g. you cloned it) so you can commit & push changes as you make them. For example, make your first commit when you've migrated the code and then make another (or multiple) after you fix up the 'copybooks'.
 
@@ -80,13 +89,25 @@ Building this solution will create the `MIGRATE` library and inside is the `MIGS
 
 If we had a library with source physical files and wanted to migrate them into a new project directory, we would have to run the command once to migrate the source physical file. It will copy the source member into the IFS as a 1208 (UTF-8) streamfile. If the file or folder it tries to create already exists, it will fail. In the last chapter, we created `/home/BARRY/myproject` as a git repository.
 
-```
-MIGSRCPF LIBRARY(TESTPROJ) SOURCEPF(QRPGLESRC) OUTDIR('/home/BARRY/myproject')
-MIGSRCPF LIBRARY(TESTPROJ) SOURCEPF(QRPGLEREF) OUTDIR('/home/BARRY/myproject')
-MIGSRCPF LIBRARY(TESTPROJ) SOURCEPF(QCLLESRC)  OUTDIR('/home/BARRY/myproject')
+This would create three directories in `/home/BARRY/myproject` like the following:
+
+<!-- panels:start -->
+
+<!-- div:left-panel -->
+
+```cl
+MIGSRCPF LIBRARY(TESTPROJ) 
+         SOURCEPF(QRPGLESRC) 
+         OUTDIR('/home/BARRY/myproject')
+MIGSRCPF LIBRARY(TESTPROJ) 
+         SOURCEPF(QRPGLEREF) 
+         OUTDIR('/home/BARRY/myproject')
+MIGSRCPF LIBRARY(TESTPROJ) 
+         SOURCEPF(QCLLESRC) 
+         OUTDIR('/home/BARRY/myproject')
 ```
 
-This would create three directories in `/home/BARRY/myproject` like the following:
+<!-- div:right-panel -->
 
 ```
 /home
@@ -102,6 +123,8 @@ This would create three directories in `/home/BARRY/myproject` like the followin
         /pgm2.clle
         /pgm3.clle
 ```
+
+<!-- panels:end -->
 
 > [!NOTE]
 > It will create all directories and stream files with lowercase names.
