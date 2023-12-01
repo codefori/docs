@@ -12,7 +12,7 @@ Complete this form. (You need either a password or a private key)
 
 ![](../assets/connect_03.png)
 
-Alternatively, press <kbd>F1</kbd>, search for ```IBM i: New Connection```, and complete the above form.
+Alternatively, press <kbd>F1</kbd>, search for `IBM i: New Connection`, and complete the above form.
 
 ### Connect Subsequent
 
@@ -27,7 +27,7 @@ of the IBM i system you are connected to.
 
 ### Logout (Disconnect)
 
-To close a connection and logout out, press <kbd>F1</kbd>, search for ```IBM i: Disconnect from current connection```
+To close a connection and logout out, press <kbd>F1</kbd>, search for `IBM i: Disconnect from current connection`
 
 ### Unstable Connections (Reconnect)
 

@@ -55,7 +55,7 @@ Ctrl+J opens the panel, Ctrj+Shift+M opens the PROBLEMS tab.
 
 To have PROBLEMS tab always open automatically, change this setting:
 
-```Code-for-ibmi: Post Action View``` Determine which view should be shown when running Actions
+`Code-for-ibmi: Post Action View` Determine which view should be shown when running Actions
 
 Decide which Errors, Warnings or Info messages to show using the Filter icon. If you have been compiling several sources then you may also want to check **Show Active File Only**;
 
@@ -75,17 +75,17 @@ Terminal Notes
 
 - Terminals are generally found in the panel, as shown above. You can instead open them in a editor with this setting:
 
-  ```Terminal › Integrated: Default Location```
+  `Terminal › Integrated: Default Location`
 Controls where newly created terminals will appear.
 
 - If you are compiling large programs you may wish to adjust this setting:
 
-  ```Terminal › Integrated: Scrollback```
+  `Terminal › Integrated: Scrollback`
 Controls the maximum number of lines the terminal keeps in its buffer. 
 
 - You may wish to adjust the line height in the terminal, with this setting:
 
-  ```Terminal › Integrated: Line Height```
+  `Terminal › Integrated: Line Height`
 Controls the line height of the terminal. 
 
 

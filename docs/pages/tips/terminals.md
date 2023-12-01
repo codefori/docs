@@ -10,7 +10,7 @@ Hover over the connected system in the Status Bar:
 
 ![System Quick Pick menu](../../assets/Terminals_01.png)
 
-Click  ``Terminals`` in the quick pick menu, then choose a terminal:
+Click  `Terminals` in the quick pick menu, then choose a terminal:
 
 ![Choose termimal](../../assets/Terminals_02.png)
 

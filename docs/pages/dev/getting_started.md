@@ -3,7 +3,7 @@ It's very easy to work with the vscode-ibmi extension.
 ### Developing and debugging
 
 1. clone repo
-2. ```npm i```
+2. `npm i`
 3. 'Run extension' from VS Code debug.
 
 ### Creating a `.vsix`

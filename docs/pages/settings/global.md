@@ -2,9 +2,9 @@ These are setting  which affect the extension (and therefore *every* connection)
 
 - Use the standard VS Code <kbd>Ctrl</kbd> + <kbd>,</kbd> and click Extensions
 - or click File/Preferences/Settings and click Extensions
-- or press <kbd>F1</kbd>, search for ```Preferences: Open Settings (UI)``` and click Extensions.
+- or press <kbd>F1</kbd>, search for `Preferences: Open Settings (UI)` and click Extensions.
 
-Settings for the extension will be under ```Code for IBM i```
+Settings for the extension will be under `Code for IBM i`
 
 ![assets/settings_01.png](../../assets/settings_01.png)
 
@@ -27,8 +27,8 @@ Actions can be edited in settings.json, but also more easily by clicking **Actio
 Connections can be edited in settings.json, but you'd typically add additional connections as in *Connect First Time*, above.
 
 You may use the following variables in any of the strings within Connections:
-- ```${userHome}``` = replaced with the user's home directory.
-- ```${pathSeparator}``` = replaced with the path separator.  (Typically "\\" on Windows or "/" on Mac/Unix/Linux.)
+- `${userHome}` = replaced with the user's home directory.
+- `${pathSeparator}` = replaced with the path separator.  (Typically "\\" on Windows or "/" on Mac/Unix/Linux.)
 
 ### Connection Settings
 
@@ -46,8 +46,8 @@ You can clear the OUTPUT tab using the **Clear Output** icon on the right.
 
 You can change the font size in the OUTPUT tab in your settings.json thus:
 
-````json
+```json
 "[Log]": {
         "editor.fontSize": 11
     },
-````
+```
