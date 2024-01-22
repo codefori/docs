@@ -112,6 +112,18 @@ Go to implementation works for procedures in two ways.
    * Look up uses the Code for IBM i library list if the binding directory is not qualified with a library.
 * For local projects it will take you to the implementation of an export procedure wherever it is in your project.
 
+### Format Document
+
+You can automatically fix all indentation of your free-format sources by using Format Document inside of VS Code.
+
+*Open the Command Palette (F1/Control+Shift+P) -> 'Format Document'*
+
+### Extract to new procedure
+
+When using all free-format source code, you are able to use 'Extract to procedure' which will take the selected lines of code and wrap it into a new procedure and make all variable referenced into parameters.
+
+![](../../../assets/rpgle/extract_procedure.png)
+
 ## Linter
 
 The extension ships with a built-in linter to ensure developers write the cleanest code. The linter is un-opinionated and is highly configurable.
