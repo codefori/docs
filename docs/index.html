@@ -15,7 +15,6 @@
         href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
     <style>
         /* cover image fix */
-
         section.cover.show {
             height: 100%;
         }
@@ -23,6 +22,11 @@
         .sidebar>h1 img {
             max-width: 3em;
         }
+
+        nav.app-nav li ul {
+            min-width: 130px;
+        }
+
 
         :root {
             /* Document */
@@ -46,9 +50,16 @@
     <script>
         window.$docsify = {
             name: 'Code for IBM i',
+            nameLink: {
+                '/es/': '#/es/',
+                '/': '#/',
+            },
             repo: 'https://github.com/codefori/vscode-ibmi',
             logo: "media/icon.png",
             loadSidebar: true,
+            autoHeader: true,
+            loadNavbar: true,
+            mergeNavbar: true,
             auto2top: true,
             subMaxLevel: 2,
             'flexible-alerts': {
