@@ -3,8 +3,8 @@ It is possible for the user to develop in a local workspace folder and deploy+co
 If the user opens a Workspace before connecting to an IBM i:
 
 1. A new information messgae will show the user what their current library is,
-2. If this is the first time connecting with this workspace, it will 
-   * prompt the user to set a default Deploy directory, 
+2. If this is the first time connecting with this workspace, it will
+   * prompt the user to set a default Deploy directory,
    * if no `actions.json` file is found will ask the user if they'd like to create a default
 3. a new right-click option will appear on IFS directories to deploy to that directory
 4. a 'Deploy' button will appear on the status bar
@@ -33,13 +33,15 @@ The user can change the deploy directory at any by using the same right-click op
 
 Using the 'Deploy' button on the status bar will start the deployment process. If the workspace has more than one folder, the user will have to select which folder they want to deploy.
 
-There are three options for deployment:
+There are five options for deployment:
 
 1. Working Changes: This only works if the chosen workspace folder is a git repository. Code for IBM i will look at the git status to determine the files that have been changed since the last commit (unstaged and staged) and only uploads those files.
 2. Staged Changes: The same as the "Working Changes" option, but only uploads staged / indexed files.
 3. All: Will upload all files in the chosen workspace folder. Will ignore files that are part of the '.gitignore' file if it exists.
+4. Changes: Will upload only files that VSCode knows have changed in the workspace since the last deploy.
+5. Compare: Will compare every file in the local workspace against the deploy location and upload only those detected as different (by means of MD5 checksums). This is also the only method that will delete files from the deploy location, if they have been removed from the local workspace folder.
 
-The user can also defined Actions that are for the 'file' (local) type to run the deploy before running the Action.
+The user can also define Actions that are for the 'file' (local) type to run the deploy before running the Action.
 
 ## 4. Workspace Actions (deploy & build)
 
@@ -86,6 +88,6 @@ Here is an example `actions.json` setup, which requires deployment to happen bef
 ]
 ```
 
-Now, when the user runs an Action against the local file (with `Control/Command + E`), they will appear in the list. 
+Now, when the user runs an Action against the local file (with `Control/Command + E`), they will appear in the list.
 
 ![image](https://user-images.githubusercontent.com/3708366/146957104-4a26b4ba-c675-4a40-bb51-f77ea964ecf5.png)
