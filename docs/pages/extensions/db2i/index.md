@@ -71,3 +71,11 @@ The Db2 for i extension adds a view called Schema Browser which allows the user 
 ### Viewing table contents
 
 If you are using the Schema Browser to browse objects, you are able to use the 'View contents' icon when hovering over a table, view, or alias to cause a basic SQL select statement to be generated and executed.
+
+## Visual Explain
+
+We have added Visual Explain into the database extension with a more lightweight approach of explain data. The typically run button on the document now has options to either run, run and explain or explain without running, which will show the explain nodes and node details in the same result set view.
+
+The Visual Explain view has button on the header to control which nodes should be highlights, as well as the ability to export the data as JSON, and more.
+
+![](./dove.png)
