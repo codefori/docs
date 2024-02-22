@@ -1,5 +1,22 @@
 This page consists of fixes to weird errors users receive based on system configuration.
 
+## Action showing `is not an identifier`
+
+Your Action output showing something like `is not an identifier` is usually due to bash not being your default shell, which is recommended when using Code for IBM i.
+
+```
+Running Action: Deploy and build 🔨 (1:45:02 PM)
+Working directory: /home/x/test
+Commands:
+                /QOpenSys/pkgs/bin/gmake BIN_LIB=JONESF1 OPTS=*EVENTF
+
+bsh: LOCALPATH=c:\Development\x\qrpglesrc\test11.rpgle: is not an identifier
+
+Fetching errors for JONESF1/TEST11.
+```
+
+Code for IBM i can check and set bash as your default shell. Disconnect from your connection, right click on the connection where the error is appearing and select 'Connect and Reload Server Settings'. If you have bash installed, you should see a message about setting bash as your default shell.
+
 ## Error in shell configuration
 
 This error appears when you have lines in startup files that write to standard out. Usually the main issue is when the following commands exist in the `.bashrc` file (non-login startup file).
