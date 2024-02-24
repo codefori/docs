@@ -183,7 +183,7 @@ As depicted in this diagram, the client (VS Code, IBM i Debug) connects to the D
 
 This is a limitation for CL. The local variables will not show up in the Variables view for CL. You can add a local variable to the Watch view to inspect its value. The CL limitation also exists in RDi.
 
-[See GitHub issue here](https://github.com/codefori/vscode-ibmi/issues/1069)<Icon name="github" color="white" class="icon-inline" />.
+[See GitHub issue here](https://github.com/codefori/vscode-ibmi/issues/1069)<Icon name="github" class="icon-inline" />.
 
 </Card><Card>
 
@@ -195,7 +195,7 @@ This is a limitation for CL. The local variables will not show up in the Variabl
 
 ## Debug hangs
 
-There is a [known issue](https://github.com/codefori/vscode-ibmi/issues/1059)<Icon name="github" color="white" class="icon-inline" /> that when you start debugging from VS Code, the debugger hangs and doesn't launch.
+There is a [known issue](https://github.com/codefori/vscode-ibmi/issues/1059)<Icon name="github" class="icon-inline" /> that when you start debugging from VS Code, the debugger hangs and doesn't launch.
 
 The fix is to check if you've got a prior debug job stuck in `MSGW`. You can do this with `WRKACTJOB`, or a similar command like `WRKSBSJOB QBATCH`.
 
