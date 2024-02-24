@@ -7,7 +7,8 @@ Here belongs documentation for Code for IBM i and any subsequent extension.
 To work on this documentation:
 
 - clone repo
-- install docsify ```npm i docsify-cli -g```
-- run local with ```docsify serve docs/```
-- by default, runs on http://localhost:3000
-- Read more about [Docsify](https://docsify.js.org/#/)
+- install astro ```npm i```
+- run local with ```npm run dev```
+- by default, runs on http://localhost:4321/docs/
+- test build with ```npm run build```
+- Read more about [Astro](https://starlight.astro.build/getting-started/)🚀
