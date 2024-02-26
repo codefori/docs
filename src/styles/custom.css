@@ -1,5 +1,11 @@
-/* Dark mode colors. */
+/* Overrides */
 :root {
+	--sl-content-width: 72rem; /* 45rem by default */
+	--sl-sidebar-width: 17rem; /* 18.75rem by default */
+}
+
+/* Dark mode colors. */
+:root[data-teheme='dark']{
 	--sl-color-accent-low: hsl(203, 36%, 30%);
 	--sl-color-accent: hsl(201, 36%, 50%);
 	--sl-color-accent-high: hsl(201, 36%, 70%);
@@ -44,8 +50,8 @@
 		transition: transform 0.2s ease;
 	}
 
-	.sl-markdown-content .card :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)):hover { 
-		transform: scale(4);
+	.sl-markdown-content .card :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)):active { 
+		transform: scale(2);
 		filter:drop-shadow(2px 2px 6px black);
 		z-index: 9;
 		position: relative;
