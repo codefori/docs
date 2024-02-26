@@ -52,7 +52,8 @@ Below are some available lint configs. [See the `rpglint.json` schema for the mo
 | 🌟 | StringLiteralDupe | boolean | Duplicate string literals are not allowed. |
 | 🌟 | RequireBlankSpecial | boolean | *BLANK must be used over empty string literals. |
 | 🌟 | CopybookDirective | string | Force which directive which must be used to include other source. (`COPY` or `INCLUDE`) |
-| 🌟 | UppercaseDirectives | boolean | Directives must be in uppercase. |
+| 🌟 | DirectivesCase | string | Directives must be in the specified case. (`lower` or `upper`) |
+| 🌟 | UppercaseDirectives | boolean | **Deprecated** use `DirectivesCase` instead. Directives must be in uppercase. |
 | 🤔 | NoSQLJoins | boolean | JOINs in Embedded SQL are not allowed. |
 | 🌟 | NoGlobalsInProcedures | boolean | Globals are not allowed in procedures. |
 | 🌟 | SpecificCasing | array | Specific casing for op codes, declartions or built-in functions codes. |
@@ -89,7 +90,7 @@ If you want all `DCL` to be lower case and all `BIF`s to be upper case, then it 
    ]
 ```
 
-If you wanted `%parms` and `%timestamp` to always be lower case, amd all other BIFs to be upper case, then it would be coded like this:
+If you wanted `%parms` and `%timestamp` to always be lower case, and all other BIFs to be upper case, then it would be coded like this:
 
 ```json
    "SpecificCasing": [
