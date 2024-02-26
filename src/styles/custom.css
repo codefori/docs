@@ -5,7 +5,7 @@
 }
 
 /* Dark mode colors. */
-:root[data-teheme='dark']{
+:root[data-theme='dark']{
 	--sl-color-accent-low: hsl(203, 36%, 30%);
 	--sl-color-accent: hsl(201, 36%, 50%);
 	--sl-color-accent-high: hsl(201, 36%, 70%);
