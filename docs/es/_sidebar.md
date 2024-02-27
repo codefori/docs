@@ -1,0 +1,42 @@
+- [Código para IBM i](./es/README.md)
+   - [Inicio de Sesión](es/pages/login.md)
+- Desarrollo
+   - [Edición y Compilación](es/pages/developing/editing-compiling.md)
+   - [Fechas de Origen](es/pages/developing/sourcedates.md)
+   - [Acciones](es/pages/developing/actions/index.md)
+      - [Ejecución](es/pages/developing/actions/execution.md)
+      - [Variables Personalizadas](es/pages/developing/actions/custom-vars.md)
+   - [Depuración](es/pages/developing/debug/debug.md)
+   - [ILEDocs](es/pages/developing/iledocs.md)
+   - Desarrollo Local
+      - [Git](es/pages/developing/local/git.md)
+      - [Primeros Pasos](es/pages/developing/local/getting-started.md)
+      - [Estructura del Proyecto](es/pages/developing/local/structure.md)
+      - [Acciones Locales](es/pages/developing/local/actions.md)
+      - [Migración a Git](es/pages/developing/local/migrate.md)
+      - [Azure DevOps](es/pages/developing/local/azure.md)
+- [Navegadores](es/pages/browsers/index.md)
+   - [Lista de Bibliotecas de Usuario](es/pages/browsers/user-library-list.md)
+   - [Navegador de Objetos](es/pages/browsers/object-browser.md)
+   - [Navegador de IFS](es/pages/browsers/ifs-browser.md)
+- Consejos
+   - [Inicio Rápido](es/pages/tips/quickstart.md)
+   - [Trucos](es/pages/tips/tricks.md)
+   - [Terminales](es/pages/tips/terminals.md)
+   - [CCSID](es/pages/tips/ccsid.md)
+   - [Configuración](es/pages/tips/setup.md)
+- Configuraciones
+   - [Perfiles](es/pages/settings/profiles.md)
+   - [Conexión](es/pages/settings/connection.md)
+   - [Global](es/pages/settings/global.md)
+- Extensiones
+   * RPGLE
+       - [Introducción](es/pages/extensions/rpgle/index.md)
+       - [Linter](es/pages/extensions/rpgle/linter.md)
+       - [Preguntas Frecuentes](es/pages/extensions/rpgle/faq.md)
+   - [Db2 for i](es/pages/extensions/db2i/index.md)
+- Desarrollo
+   - [Primeros Pasos](es/pages/dev/getting_started.md)
+   - [Alcance](es/pages/dev/scope.md)
+   - [API](es/pages/dev/api.md)
+   - [Variables](es/pages/dev/variables.md)
