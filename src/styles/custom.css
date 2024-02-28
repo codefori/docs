@@ -43,6 +43,10 @@
 	min-width: var(--sl-sidebar-width);
 }
 
+.card {
+	border-color: transparent !important; /* --sl-color-gray-5 by default */
+}
+
 @media (min-width: 72rem) {
 	.main-pane:hover {
 		position: relative;
