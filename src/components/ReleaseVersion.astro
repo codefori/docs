@@ -1,0 +1,14 @@
+---
+import { fetchFromGitHub } from './githubAPI';
+
+// Fetch the latest release server-side
+const release = await fetchFromGitHub('releases/latest');
+
+// Extract the version number
+let version = '';
+if (release) {
+    version = release.tag_name;
+}
+---
+
+{version}
