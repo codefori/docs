@@ -25,14 +25,23 @@ export default defineConfig({
 			customCss: [
 				'./src/styles/custom.css',	
 			],
-			sidebar: [
+			sidebar: 
+			[
+				{
+					label: 'Home',
+					link: '/',
+				},
 				{
 					label: 'Login',
-					link: 'login',
+					link: 'login/',
 					badge: {
 						variant: 'note',
 						text: 'Start Here!'
 					}
+				},
+				{
+					label: 'Quick Start',
+					link: 'quickstart/',
 				},
 				{
 					label: 'Developing',
@@ -43,7 +52,7 @@ export default defineConfig({
 						},
 						{
 							label: 'Source Dates',
-							link: 'developing/sourcedates',
+							link: 'developing/sourcedates/',
 						},
 						{
 							label: 'Actions',
@@ -74,10 +83,6 @@ export default defineConfig({
 				{
 					label: 'Tips',
 					autogenerate: { directory: 'tips/' },
-					badge: {
-						variant: 'tip',
-						text: '& Tricks',
-					},
 					collapsed: false,
 				},
 				{
