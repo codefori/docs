@@ -5,7 +5,7 @@ dotenv.config();
 const baseURL = 'https://api.github.com/repos';
 const owner = 'codefori';
 const repo = 'vscode-ibmi';
-const token = process.env.GITHUB_TOKEN || '';
+const token = process.env.API_GITHUB_TOKEN || '';
 
 /**
  * Fetch data from GitHub API.

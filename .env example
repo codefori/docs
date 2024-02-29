@@ -1,2 +1,2 @@
 # Github Token with `public_repo` scope https://github.com/settings/tokens
-GITHUB_TOKEN= 
+API_GITHUB_TOKEN= 
