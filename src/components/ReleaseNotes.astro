@@ -1,0 +1,28 @@
+---
+import { marked } from 'marked';
+import { fetchFromGitHub } from './githubAPI';
+
+// Fetch the releases server-side
+const releases = await fetchFromGitHub('releases');
+
+// Check if releases is defined before trying to parse
+let releasesBodyHtml = [];
+if (releases) {
+    releasesBodyHtml = releases.map((release : any) => {
+        return {
+            name: release.name,
+            body: marked(release.body)
+        };
+    });
+}
+---
+
+{releasesBodyHtml.map((release: any) => (
+    <div>
+        <h2>{release.name}</h2>
+        <div set:html={release.body}></div>
+        <br />
+        <hr />
+        <br />
+    </div>
+))}
