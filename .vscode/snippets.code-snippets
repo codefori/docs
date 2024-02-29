@@ -3,13 +3,13 @@
     "scope": "md, markdown",
     "prefix": "panels",
     "body": [
-      "<!-- panels:start -->",
+      "<CardGrid>",
       "",
-      "<!-- div:left-panel -->",
+      "<Card>",
       "",
-      "<!-- div:right-panel -->",
+      "</Card><Card>",
       "",
-      "<!-- panels:end -->",
+      "</Card></CardGrid>",
       "",
       "---"
     ]
@@ -18,8 +18,9 @@
     "scope": "md, markdown",
     "prefix": "warning",
     "body": [
-      "> [!${1:NOTE|TIP|WARNING|ATTENTION}]",
-      "> ${2:message}",
+      "<Aside type="${1:note|tip|caution|danger}">,
+      "   ${2:message}",
+      "</Aside>"
     ]
   },
   
