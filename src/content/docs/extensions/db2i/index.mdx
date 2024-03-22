@@ -64,7 +64,7 @@ This view allows users to manage different SQL jobs, each with their own unique 
 
 ![](./sqlJobManager-newJob.png)
 
-Your active job will be marked with a highlighted icon. **The active job is used for all SQL statement execution, ** including SQL that powers the Schema Browser, user-executed SQL statements, etc. You can change the active job by simply clicking the job you choose to use. You will see the highlighted icon change to indicate the active job.
+Your active job will be marked with a highlighted icon. **The active job is used for all SQL statement execution**, including SQL that powers the Schema Browser, user-executed SQL statements, etc. You can change the active job by simply clicking the job you choose to use. You will see the highlighted icon change to indicate the active job.
 
 ### Editing job configuration
 
@@ -106,6 +106,8 @@ There are a few ways to create an IBM i Notebook:
 2. You can find 'IBMi i: New Notebook' in the command palette.
 3. Open a `.inb` file (which stands for 'i Notebook')
 
+**You can also find Notebook samples from the Examples view, under Notebooks.**
+
 ### The life of a Notebook
 
 A notebook is made up of cells. A cell is asscociated with a language (for example, `sql`, `cl`, or `markdown`). Cells (other than `markdown`) can be executed. Each cell has a result and typically gets rendered below the cell input after execution. 
@@ -133,7 +135,7 @@ To render a chart using SQL in a Notebook, two rules must be met:
 1. You must provide the chart type (via comment tag or statement prefix)
 2. There must be a `LABEL` column for the X axis.
 3. One or more numeric columns for the plotted data
-   * You can also provide a `_description` string column for each numeric column to provide additional information in the tooltip
+   * You can also provide a `_desc` string column for each numeric column to provide additional information in the tooltip
    * For numeric columns to use formatted names, provide a fixed column name: `salary as "Salary"`
 
 Optional tags as comments can also be provided. Optional tags are formatted as so:
@@ -143,6 +145,17 @@ Optional tags as comments can also be provided. Optional tags are formatted as s
 * `y` - for a title to appear on the Y axis
 
 <Tabs>
+<TabItem label="Prefix">
+
+```sql
+bar: select
+  empno as label,
+  salary
+from sample.employee limit 10
+```
+
+</TabItem>
+
 <TabItem label="Tags">
 
 ```sql
