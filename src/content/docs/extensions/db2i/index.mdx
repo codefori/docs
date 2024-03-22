@@ -85,3 +85,96 @@ We have added Visual Explain into the database extension with a more lightweight
 The Visual Explain view has button on the header to control which nodes should be highlights, as well as the ability to export the data as JSON, and more.
 
 ![](./dove.png)
+
+## Notebooks
+
+Notebooks now supports Db2 for IBM i when using the database extension. If you have not heard of Notebooks before, [check out this blog post](https://code.visualstudio.com/blogs/2021/11/08/custom-notebooks) on the Visual Studio Blog. IBM i Notebooks allow users to build documents of markdown, SQL statements and CL commands all in one view, that can be saved, re-used, re-run and shared to other people. This allows you to create documentation, a step-by-step guide, and many other things, specifically for IBM i.
+
+![](./notebook.png)
+
+<Aside type="tip">
+We are expecting a full release of Notebooks in vscode-db2i 1.0.0.
+</Aside>
+
+### How to create a Notebook
+
+There are a few ways to create an IBM i Notebook:
+
+1. You can use the 'New Notebook' button on the SQL Job Manager
+2. You can find 'IBMi i: New Notebook' in the command palette.
+3. Open a `.inb` file (which stands for 'i Notebook')
+
+### The life of a Notebook
+
+A notebook is made up of cells. A cell is asscociated with a language (for example, `sql`, `cl`, or `markdown`). Cells (other than `markdown`) can be executed. Each cell has a result and typically gets rendered below the cell input after execution. 
+
+Execution is different for each language type:
+
+* If it is `sql`, then a table will be returned of the result set. Notebooks do not support paging - it will return all rows. The SQL statements will be executed through the selected job in the SQL Job Manager.
+* If the language is `cl`, then when it is executed it will run a CL command and return the resulting output.
+
+You are able to use the stop and play buttons on the cells to request a cancellation of the execution.
+
+### Charting with SQL
+
+Notebooks have the power to chart data that is returned from the database. It is most useful for rendering numerical data (on the Y axis) by another value (on the X axix). Here are the supported chart types, which are used for specifying the chart type:
+
+* bar
+* line
+* doughnut
+* pie
+* polar area (`polarArea`)
+* radar
+
+To render a chart using SQL in a Notebook, two rules must be met:
+
+1. You must provide the chart type (via comment tag or statement prefix)
+2. There must be a `LABEL` column for the X axis.
+3. One or more numeric columns for the plotted data
+   * You can also provide a `_description` string column for each numeric column to provide additional information in the tooltip
+   * For numeric columns to use formatted names, provide a fixed column name: `salary as "Salary"`
+
+Optional tags as comments can also be provided. Optional tags are formatted as so:
+
+* `chart` - which can be used instead of the chart prefix
+* `title` - appears above the chart for a title
+* `y` - for a title to appear on the Y axis
+
+<Tabs>
+<TabItem label="Tags">
+
+```sql
+--chart: bar
+select 
+  empno as label, 
+  salary
+from sample.employee limit 10
+```
+
+</TabItem>
+<TabItem label="Tooltip">
+
+```sql
+--chart: bar
+--y: NZD
+select empno as label, 
+  salary as "Salary", 'Does not include ' concat rtrim(char(bonus)) concat '\nbonus for ' concat rtrim(firstnme) as "Salary_desc"
+from sample.employee limit 10
+```
+
+</TabItem>
+<TabItem label="Multiple Datapoints">
+
+```sql
+--title: 
+--chart: line
+select 
+  empno as label, 
+  salary, bonus
+from sample.employee
+order by salary asc
+limit 10
+```
+
+</TabItem>
+</Tabs>
