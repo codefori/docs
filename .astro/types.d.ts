@@ -325,6 +325,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"quickstart.mdx": {
+	id: "quickstart.mdx";
+  slug: "quickstart";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "settings/connection.mdx": {
 	id: "settings/connection.mdx";
   slug: "settings/connection";
@@ -349,13 +356,6 @@ declare module 'astro:content' {
 "tips/ccsid.mdx": {
 	id: "tips/ccsid.mdx";
   slug: "tips/ccsid";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"tips/quickstart.mdx": {
-	id: "tips/quickstart.mdx";
-  slug: "tips/quickstart";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
