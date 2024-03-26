@@ -4,6 +4,8 @@ sidebar:
     order: 4 
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 Similar to other repository settings, users can now store Actions as part of the Workspace. Users can now create `.vscode/actions.json` inside of your Workspace, and can contain Actions that are specific to that Workspace. That configuration file should also be checked into git for that application.
 
 Running local Actions will execute the commands with the working directory as the deploy directory.
@@ -138,3 +140,36 @@ The `&BRANCHLIB` variable will always start with `VS` followed by a deterministi
  }
 ]
 ```
+
+### `.env` and ILE actions
+
+When you are compiling local sources using `"environment": "ile"`, then it will use the User Library List for the job. You can use the `CURLIB` and `LIBL` variables to override them. This is useful because then it allows project-specific library lists.
+
+<Tabs>
+<TabItem label="actions.json">
+
+```json
+[
+  {
+    "name": "Compile with CRTBNDRPG 🔨",
+    "command": "CRTBNDRPG PGM(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTRLS(*CURRENT) TGTCCSID(*JOB)",
+    "environment": "ile",
+    "deployFirst": true,
+    "extensions": [
+      "RPGLE"
+    ]
+  }
+]
+```
+
+</TabItem>
+<TabItem label=".env">
+
+```sh
+# developer A:
+CURLIB=BLDLIB
+LIBL=MYDB SAMPLE SYSTOOLS
+```
+
+</TabItem>
+</Tabs>
