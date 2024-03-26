@@ -80,6 +80,41 @@ The Db2 for i extension adds a view called Schema Browser which allows the user 
 
 If you are using the Schema Browser to browse objects, you are able to use the 'View contents' icon when hovering over a table, view, or alias to cause a basic SQL select statement to be generated and executed.
 
+## SQL Error Logging Facility (SELF)
+
+SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the Results View. 
+
+Additional documentation of SELF can be found [here](https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self)
+
+![](./selfcodes.png)
+
+Each item in the SELF view is for a specific `SQLCODE` which is displayed in parenthesis. The `SQLCODE` tracks the actual error or warning triggered by a given SQL statement. 
+
+- An error SQLCODE must be preceded by a single minus sign ('-').
+- A warning SQLCODE can be preceded by an optional plus sign ('+').
+
+When an item is expanded or hovered over, information about the `SQLCODE` is displayed such as the Job Name, Call Stack, Additional Details, and the SQL statement. The counter on the right of each item denotes the number of occurrences(🔥) of the specific `SQLCODE` . Once the number of occurrences for a given code is greater than 100, we display 💯.
+
+### Enabling SELF in VSCode
+
+To capture SQL errors or warnings, enable the SELF Default in your VSCode settings. This will be the Default `SYSIBMADM.SELFCODES` global variable for all jobs. By default, the `SELFCODES` level is set to *NONE.
+
+- *ERROR specifies all SQLCODEs that are error conditions (negative values).
+- *WARN specifies all SQLCODEs that are warning conditions (positive
+values).
+- *ALL specifies all SQLCODEs that are error or warning conditions.
+- *NONE turns off SELF processing.
+
+![](./selfdefault.png)
+
+The SELF Level can also be set on a per job basis by right clicking on the active job in the [SQL Job Manager](#sql-job-manager)
+
+### Auto Refresh
+
+![](./selfauto.png)
+
+We added the option for users to configure `Auto Refresh` on the SELF view. When enabled, the SELF view will update on a constant interval (every 30 seconds). The SELF view can be cleared by clicking the trash icon. 
+
 ## Visual Explain
 
 We have added Visual Explain into the database extension with a more lightweight approach of explain data. The typically run button on the document now has options to either run, run and explain or explain without running, which will show the explain nodes and node details in the same result set view.
