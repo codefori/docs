@@ -138,25 +138,9 @@ If the Debug Service is not correctly configured, a warning sign will appear nex
    There only needs to be one instance of the Debug Service running and therefore the certificates should only be generated once. All developers share the Debug Service.
 </Aside>
 
----
+#### Generating certificates
 
-### Generating certificates
-
-<CardGrid>
-
-<Card>
-
-This Walkthrough can easily configure the Debug Service and start it up. The last steps have buttons to 'Generate certificates' and 'Start debug service'. Running them in order will do all the work to setup the service.
-
-*It will ask you to confirm the initialisation.*
-
-If certificates already exist on the server, you may see a slightly different message as Code for IBM i will not replace existing certificates.
-
-</Card><Card>
-
-![](./setup2_a.png)
-
-</Card></CardGrid>
+By default, certificates are generated in `/QIBM/UserData/IBMiDebugService/certs` (which is the recommended location). If these certificates are deleted for some reason, they can be simply regenerated from the Manage view as described above. They are used only to encrypt the traffic between the clients and Debug Service.
 
 ---
 
