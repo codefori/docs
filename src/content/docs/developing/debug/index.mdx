@@ -139,9 +139,48 @@ If the Debug Service is not correctly configured, a warning sign will appear nex
 </Aside>
 
 #### Generating certificates
+The Debug Service needs a certificate to be able to be started. This is required because the Debug Service is basically a web server exposing web services through HTTPS, and encrypting the traffic on HTTPS requires a certificate. Supported formats for the certificate are `PKCS12` and `JKS`. If Code for IBM i is used to generate the certificate, it will use the PKCS12 format.
 
-By default, certificates are generated in `/QIBM/UserData/IBMiDebugService/certs` (which is the recommended location). If these certificates are deleted for some reason, they can be simply regenerated from the Manage view as described above. They are used only to encrypt the traffic between the clients and Debug Service.
+By default, certificates are generated in `/QIBM/UserData/IBMiDebugService/certs` (which is the recommended location). The path to the Debug Service certificate is set in `/QIBM/ProdData/IBMiDebugService/bin/DebugService.env` with `DEBUG_SERVICE_KEYSTORE_FILE`.
 
+The Debug Service certificate can only be generated if it's missing. In this case, the IBM i Debugger view will show this error:
+
+![](./debug10.png)
+
+Clicking on the Setup Service Certificate button will start a process that offers to either generate a certificate or import an existing one (`PKCS12` format only). Once the certificate is successfully generated or imported, two files will be found under `/QIBM/UserData/IBMiDebugService/certs`:
+* `debug_service.pfx`
+  * the Debug Service certificate, used by the service to encrypt the communication.
+* `debug_service.crt`
+  * the client certificate that clients must download if the `Secure Debug` option is turned on in Code for IBM i.
+
+If these certificates are deleted for some reason, they can be simply regenerated from the IBM i Debugger view as described above. They are used only to encrypt the traffic between the clients and Debug Service.
+
+If `Secure Debug` is on and the client certificate cannot be found locally or does not match the remote certificate, Code for IBM i will show a warning in the IBM i Debugger view and offer an action to import the client certificate.
+
+![](./debug11.png)
+
+
+#### Starting the Debug Service from Code for IBM i
+Starting the Debug Service can be done from the IBM i Debugger view and requires `*ALLOBJ` special authority.
+
+![](./debug12.png)
+
+Clicking on the action to start the Service will first show a prompt showing `SBMJOB` parameters. Since the shell script that starts the service will be submitted, this lets you modify the submission parameters if needed. Only the `CMD` and `JOB` parameters are imposed.
+
+![](./debug13.png)
+
+Once the prompt is validated, the SBMJOB command will be executed and Code for IBM i will monitor its execution until the Debug Service is actually started (or fails to start).
+
+#### Starting the Debug Service outside of Code for IBM i
+If the Debug Service was configured from Code for IBM i (i.e the certificate was generated from Code for IBM i), then it is possible to start the Debug Service by running the same `SBMJOB` command that Code for IBM i uses:
+
+```
+SBMJOB CMD(STRQSH CMD('/QOpenSys/pkgs/bin/bash -c /QIBM/ProdData/IBMiDebugService/bin/startDebugService.sh')) JOB(DBGSVCE) JOBQ(QSYS/QUSRNOMAX) JOBD(QSYS/QSYSJOBD) USER(*CURRENT)
+```
+
+<Aside type="tip">
+   This will only work if Code for IBM i was used to configure the Service and generate its certificate.
+</Aside>
 ---
 
 ## Debug Service ports
