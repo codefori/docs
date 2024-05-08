@@ -353,6 +353,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"tips/bash.mdx": {
+	id: "tips/bash.mdx";
+  slug: "tips/bash";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "tips/ccsid.mdx": {
 	id: "tips/ccsid.mdx";
   slug: "tips/ccsid";
