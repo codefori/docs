@@ -10,7 +10,7 @@ import { CardGrid, Card } from '@astrojs/starlight/components';
 
 <Card>
 
-Click the IBM i icon and then 'Connect to an IBM i'.
+Click on the IBM i icon and then on 'Connect to an IBM i'.
 
 </Card><Card>
 
@@ -21,61 +21,57 @@ Click the IBM i icon and then 'Connect to an IBM i'.
 ---
 
 <CardGrid>
-
 <Card>
+Enter the systems details in the window that appears. You need either a password or a private key.
 
-Enter in the systems details in the window that appears. You need either a password or a private key.
-
-Alternatively, press <kbd>F1</kbd>, search for `IBM i: New Connection`, and complete the above form.
-
-</Card><Card>
-
+Alternatively, press <kbd>F1</kbd>, search for `IBM i: New Connection`, and complete the form.
+</Card>
+<Card>
 ![](../../assets/connect_03.png)
-
-</Card></CardGrid>
+</Card>
+</CardGrid>
 
 ### Connect Subsequent
 
 <CardGrid>
-
 <Card>
-
 If you have already connected to an IBM i system, click on the conection in the IBM i: Servers browser.
-
-</Card><Card>
-
+</Card>
+<Card>
 ![](../../assets/connect_04.png)
-
-</Card></CardGrid>
-
----
+</Card>
+</CardGrid>
 
 <CardGrid>
-
 <Card>
-
-After logging in, a status bar item will appear showing the name of the IBM i system you are connected to.
-
-</Card><Card>
-
+After logging in, a status bar item will appear showing the name of the IBM i system to which you are connected.
+</Card>
+<Card>
 ![assets/connect_05.png](../../assets/connect_05.png)
-
-</Card></CardGrid>
+</Card>
+</CardGrid>
 
 ### Logout (Disconnect)
-
-To close a connection and logout out, press <kbd>F1</kbd>, search for `IBM i: Disconnect from current connection`
-
-### Unstable Connections (Reconnect)
-
+You can close a connection  and logout out from a server in several ways
 <CardGrid>
 
 <Card>
+Use the keyboard: <kbd>Ctrl(Cmd)</kbd> + <kbd>Alt</kbd > + <kbd>D</kbd>
+</Card>
+<Card>
+</Card>
+<Card>
+Click the `Disconnect from system` icon in the status bar... 
+</Card>
+<Card>
+![Dicconnect icon](../../assets/connect_08.png)
+</Card>
+<Card>
+Press <kbd>F1</kbd> and search for `IBM i: Disconnect`
+</Card>
+<Card>
+![Search Disconnect](../../assets/connect_07.png)
+</Card>
 
-If your connection is unstable and is sometimes lost, check the setting "Show Reconnect Button". See *Settings: Global*, below. This will add a "Force reconnect to system" button to the task bar.
+</CardGrid>
 
-</Card><Card>
-
-![Reconnect Button](../../assets/connect_06.png)
-
-</Card></CardGrid>

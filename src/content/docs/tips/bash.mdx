@@ -1,0 +1,37 @@
+---
+title: Bash Shell
+---
+
+import { Icon } from '@astrojs/starlight/components';
+
+A shell runs programs and provides a scripting language. The _Code for IBM i_ extension connects to the IBM i using the *Secure Shell (SSH) protocol*.
+
+There are a number of shells available, but the *bash* shell is more capable than the default shell program on IBM i.
+
+_*You must change your default shell to `bash`*_. If you do not, parts of _Code for IBM i_ will not work correctly.
+
+## Is the Bash Shell Installed?
+
+The easiest way is to enter `which bash` in an SSH terminal session. 
+
+This should return `/QOpenSys/pkgs/bin/bash`.  If it doesn't then you need to talk to you system admin about getting [IBM i Open Source Tools](https://ibmi-oss-docs.readthedocs.io/en/latest/README.html) installed.
+
+## Setting Bash as the Default Shell
+
+When you connect to a server,  _Code for IBM i_ checks that bash is your default shell. If bash is not the default shell,  it will offer to set bash as the default. 
+
+![bash set offer](../../../assets/Tips_Bash_Offer.png)
+
+This is the most convenient way to set bash as your default shell. You can ignore this prompt, but be aware that not all capabalities may work.
+
+You can get information on setting bash as your default shell [from IBM here](https://ibmi-oss-docs.readthedocs.io/en/latest/troubleshooting/SETTING_BASH.html).
+
+## Adding Bash to your PATH
+
+You must have `/QOpenSys/pkgs/bin/bash` in your PATH.  [IBM provides documentation](https://ibmi-oss-docs.readthedocs.io/en/latest/troubleshooting/SETTING_PATH.html) on how to do this using a `.profile` or `.bashrc` file in your home directory.
+
+Note that if you use a `.bashrc` file it must *_not_* contain any `echo` or `liblist` statements.
+
+## Disconnect to Take Effect
+
+After setting bash as your default shell, disconneect from the server so the change take effect.
