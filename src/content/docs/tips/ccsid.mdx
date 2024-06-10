@@ -48,3 +48,14 @@ Some links to pages which containing information on variant characters:
 - [IBM definition of Variant characters](https://www.ibm.com/docs/en/db2-for-zos/11?topic=ccsids-variant-characters)<Icon name="external" color="cyan" class="icon-inline" />
 - [IBM Support](https://www.ibm.com/support/pages/what-impact-changing-qccsid-shipped-65535-another-ccsid)<Icon name="external" color="cyan" class="icon-inline" />
 - [Wikipedia](https://en.wikipedia.org/wiki/EBCDIC)<Icon name="external" color="cyan" class="icon-inline" />
+
+## Quoted/delimited object names
+
+Code for IBM i is using SQL more and more to fetch system information. This includes information like system object names. Object names in the operating system are typically stored as raw hex values (therefore 65535), but are not tagged with what CCSID the name is. Back in the old days, the name encoding used to be determined by the client (In 5250, the client can set what encoding they read the data stream as).
+
+Since Code for IBM i tries to depend on the server to handle all encoding translations, this becomes a bit of an issue with system names since the OS is not storing what the object name encoding is. There for:
+
+1. we only support object names in ASCII/37 encoding.
+2. we cannot support quoted/delimited object names with non-ASCII characters since the OS doesn't know what encoding it is and the client doesn't know how to handle 65535.
+
+Learn more about object naming rules [in the IBM documentation](https://www.ibm.com/docs/en/i/7.1?topic=rules-names-name).
