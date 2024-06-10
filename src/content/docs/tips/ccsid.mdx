@@ -59,3 +59,47 @@ Since Code for IBM i tries to depend on the server to handle all encoding transl
 2. we cannot support quoted/delimited object names with non-ASCII characters since the OS doesn't know what encoding it is and the client doesn't know how to handle 65535.
 
 Learn more about object naming rules [in the IBM documentation](https://www.ibm.com/docs/en/i/7.1?topic=rules-names-name).
+
+### Deep dive
+
+Use the following SQL/CL commands to create an object with a qualified name.
+
+```sql
+cl: CHGUSRPRF USRPRF(liam) CCSID(273);
+select CHARACTER_CODE_SET_ID from table( QSYS2.QSYUSRINFO( USERNAME => upper('liam') ) );
+
+-- create ugly object
+cl: CRTLIB LIB("AÜ§#$%Ä") TEXT("§#$öße");
+cl: CRTSRCPF FILE("AÜ§#$%Ä"/"àáãÄ£ø") RCDLEN(112) CCSID(273) TEXT("Üä$öß");
+cl: ADDPFM FILE("AÜ§#$%Ä"/"àáãÄ£ø") MBR("§#$MAN") SRCTYPE(CBLLE) TEXT("§#$öße");
+
+-- check it exists
+cl: CHKOBJ OBJ(QSYS/\"AÜ§#\$%Ä\") OBJTYPE(*LIB) AUT(*NONE);
+```
+
+The following shows that the object can be returned when using `for bit data`, but object name is incorrect since the OS doesn't store the encoding of the object name.
+
+```sql
+With MEMBERS As (
+   SELECT
+      rtrim(cast(a.system_table_schema as char(10) for bit data)) as LIBRARY_BIT,
+      rtrim(cast(a.system_table_schema as char(10))) as LIBRARY,
+      b.avgrowsize as RECORD_LENGTH,
+      a.iasp_number as ASP,
+      rtrim(cast(a.system_table_name as char(10))) AS SOURCE_FILE,
+      rtrim(cast(b.system_table_member as char(10))) as NAME,
+      coalesce(rtrim(cast(b.source_type as varchar(10))), '') as TYPE,
+      coalesce(rtrim(varchar(b.partition_text)), '') as TEXT,
+      b.NUMBER_ROWS as LINES,
+      extract(epoch from (b.CREATE_TIMESTAMP))*1000 as CREATED,
+      extract(epoch from (b.LAST_SOURCE_UPDATE_TIMESTAMP))*1000 as CHANGED
+   FROM qsys2.systables AS a
+      JOIN qsys2.syspartitionstat AS b
+      ON b.table_schema = a.table_schema AND
+         b.table_name = a.table_name
+)
+Select * From MEMBERS
+where LIBRARY_BIT like '%Ü%'
+```
+
+![Bad result set](../../../assets/ccsid1.png)
