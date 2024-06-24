@@ -3,10 +3,7 @@ title: Git and IBM i workshop
 template: splash
 ---
 
-Most sections are made up of two parts:
-
-* Purpose
-* Tasks
+import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 
 ## Outline
 
@@ -27,13 +24,15 @@ Most sections are made up of two parts:
 
 This is a BYOD (bring your own device) workshop and some software and accounts are required.
 
-### Signup to GitHub
+### Tasks
+
+#### Signup to GitHub
 
 If you don't have a GitHub account, you are going to need one for this workshop. We will be creating new repositories and working with others.
 
 [Sign up here](http://github.com/signup).
 
-### Install GitHub Desktop
+#### Install GitHub Desktop
 
 We will use GitHub Desktop to make cloning and working with git repositories easier. It is a great tool for beginners.
 
@@ -41,17 +40,23 @@ We will use GitHub Desktop to make cloning and working with git repositories eas
 
 **After you have installed GitHub Desktop**, launch GitHub Desktop and sign into your GitHub account. This will make working with GitHub repositories easier.
 
-### Install Visual Studio Code
+#### Install Visual Studio Code
 
 We are using VS Code to write our code. It is a free, open-source editor with great extensibility.
 
 [Download it here for free](https://code.visualstudio.com/download).
 
-### Install Code for IBM i
+#### Install Code for IBM i
 
 We are using the Code for IBM i extension to write, deploy and compile our RPGLE code. It is an extension that can be used for IBM i development in many ways.
 
 **After you have installed Visual Studio Code**, then go ahead and install the [Code for IBM i extension](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.code-for-ibmi), or, to make life easier in the future, install the [IBM i Development pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack).
+
+#### Access to an IBM i
+
+If you are doing this workshop as part of a hosted lab, then a user profile and system will be provided to you. If you're using your own system, then ensure SSH is running on your system. [Check out the requirements](../../).
+
+---
 
 ## Goals
 
@@ -63,8 +68,92 @@ Here are some common terms that you will read throughout this workshop.
 
 | Term | Meaning |
 | - | - |
-| Repository | The place where files and history of those files are stored. |
+| Repository | The place, usually a directory, where files and history of those files are stored. |
 | Clone | The act of 'copying' (literally cloning) the repository from another location. |
 | Push | Pushing commits from one repository to another |
 | Deploy | Moving files/sources from your local workspace to an IBM i server |
+| Workspace | Visual Studio Code with one or more folders opened |
 
+---
+
+## Understanding Local Development
+
+Unlike developing in source members, or developing in the IFS, IBM i code will actually be written on a local device - like a laptop or desktop system. This is actually new to the ecosystem, since it is not typically done for IBM i development.
+
+This is done because all of the best git tools are developed to run on systems other than IBM i (GitHub Desktop being one of them!) and using git without great tools can be painful for beginners.
+
+This sometimes leads to the question of 'well how do we compile if not developing on IBM i'; this is where the 'Deploy' process comes in. More on that later.
+
+### Tasks
+
+#### 1. Create a new folder on your local device
+
+Simply create a new directory somewhere on your device. This directory will become a git repository.
+
+```sh
+mkdir myrepo
+```
+
+#### 2. Opening a Workspace Folder
+
+Opening a folder in Visual Studio Code adds that folder to that Workspace. You need at least one folder open in the Visual Studio Code workspace for local development.
+
+To open a directory in Visual Studio Code, you can go to File→Open and select the folder you created in step 1.
+
+#### 3. Connect to an IBM i system
+
+Using the Code for IBM i extension, you can create a new connection to an IBM i system.
+
+![](./assets/connect_1.png)
+
+<Aside type="note">
+Ensure the folder is opened before connecting to a system.
+</Aside>
+
+#### 3. Setting the deploy location
+
+If it is the first time connecting with the workspace it will prompt the user to set a default Deploy directory.
+
+![](./assets/deploy_1.png)
+
+If you would prefer to change the default location, the user can right-click on any directory in the IFS Browser and select the 'Deploy Workspace to location' option.
+
+The user can change the deploy directory at any by using the same right-click option on another directory.
+
+---
+
+## Compiling your first program
+
+Now that you have a directory to write some code and a connection made in Visual Studio Code, it's almost time to write code. Before that, there are some concepts we must understand.
+
+#### Folder structure
+
+Since we are not developing in source members, there are not as many rules as the QSYS file system.
+
+* Files can be any case
+* Can use any extension with any length
+* Unlike QSYS, we can have folders within folders
+
+It is not an issue to continue using folder names like `QRPGLESRC`, or `qddssrc`, but it is always recommended to use lowercase naming.
+
+You can read more on [folder structure for git projects](../../developing/local/structure/) in the Code for IBM i documentation.
+
+#### How Actions are stored
+
+Actions are synonymous for compile commands. An Action defines how the compile command should be run. When doing local development, Actions are stored in the folder `.vscode`, and inside that `actions.json` (`.vscode/actions.json`).
+
+Here is an example Action that would be found in the `actions.json` file:
+
+TODO: add CRTBNDRPG example action
+
+Actions are stored as part of the repository so they can be shared between developers. Generally, we want developers to use the same compile commands. Therefore, it is convenient to store them as part of the repository.
+
+### Tasks
+
+#### 1. Creating `actions.json`
+
+#### 2. Writing the first program
+
+#### 3. Deploy and build
+
+#### 4. Using copybooks / includes
