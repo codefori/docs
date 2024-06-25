@@ -144,7 +144,19 @@ Actions are synonymous for compile commands. An Action defines how the compile c
 
 Here is an example Action that would be found in the `actions.json` file:
 
-TODO: add CRTBNDRPG example action
+```json
+[
+  {
+    "name": "Compile with CRTBNDRPG 🔨",
+    "command": "CRTBNDRPG PGM(&CURLIB/&NAME) SRCSTMF('&RELATIVEPATH') OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTRLS(*CURRENT) TGTCCSID(*JOB)",
+    "environment": "ile",
+    "deployFirst": true,
+    "extensions": [
+      "RPGLE"
+    ]
+  }
+]
+```
 
 Actions are stored as part of the repository so they can be shared between developers. Generally, we want developers to use the same compile commands. Therefore, it is convenient to store them as part of the repository.
 
@@ -152,7 +164,42 @@ Actions are stored as part of the repository so they can be shared between devel
 
 #### 1. Creating `actions.json`
 
+<CardGrid>
+<Card>
+There is a tool that can generate an initial `actions.json` file for you. After connecting to a system, open the command palette (**F1**) and search for 'Launch Actions Setup'. This shows a multi-select window where the user can pick which technologies they're using. Based on the selection, an `actions.json` will be created.
+
+</Card><Card>
+![](./assets/actions_tool.png)
+
+</Card></CardGrid>
+
 #### 2. Writing the first program
+
+Next, you can create your first program.
+
+<CardGrid>
+<Card>
+
+1. Create a directory and give it a name like `src`, or `qrpglesrc`, or whatever name you would like.
+2. Create a new file inside of that directory named `mypgm.pgm.rpgle`. We use `.pgm.` for later, as it is an indicator that it is a program.
+3. Fill the new file with the source code shown here.
+
+</Card><Card>
+
+```rpgle
+**free
+
+dcl-s mytext char(20);
+
+mytext = 'Hello from the world';
+
+dsply mytext;
+
+return;
+```
+
+</Card></CardGrid>
+
 
 #### 3. Deploy and build
 
