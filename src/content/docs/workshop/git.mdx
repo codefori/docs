@@ -15,8 +15,7 @@ import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 6. Making additional changes
 7. Making a public repository
 8. Cloning repositories - clone from github using GHD, open in VS Code
-9. Making branches - make the branch, make and push your commits
-10. Making a pull request - make a PR on GitHub
+9. Making branches and PRs - make the branch, make and push your commits, make a PR on GitHub
 
 ---
 
@@ -71,6 +70,7 @@ Here are some common terms that you will read throughout this workshop.
 | Push | Pushing commits from one repository to another |
 | Deploy | Moving files/sources from your local workspace to an IBM i server |
 | Workspace | Visual Studio Code with one or more folders opened |
+| PR | Acronym for Pull Request |
 
 ---
 
@@ -89,7 +89,7 @@ This sometimes leads to the question of 'well how do we compile if not developin
 Simply create a new directory somewhere on your device. This directory will become a git repository.
 
 ```sh
-mkdir myrepo
+mkdir myworkshop
 ```
 
 #### 2. Opening a Workspace Folder
@@ -412,3 +412,194 @@ Navigating to your GitHub profile will show the repository and all the history f
 
 ![](./assets/publish_4.png)
 
+<Aside type="tip">
+If you're feeling daring, give someone else access to your repo and let them do the next section against your repository. You can grant access to other GitHub users by heading to the Settings tab in your repository, and then adding them under the Collaborators tab.
+</Aside>
+
+---
+
+## Cloning repositories
+
+<Aside type="caution">
+For the future parts of this workshop, you need to ensure your repository was published to GitHub. If it has not, do not continue onward.
+</Aside>
+
+To show that files and history is stored in git, we are going to delete the local directory/repository and then clone it again. You will use this cloning mechanism when working on other projects too.
+
+### Tasks
+
+#### 1. Delete the local directory
+
+Completely close Visual Studio Code and then delete the folder through either:
+
+1. the system explorer of the OS you are using
+2. through the command like: `rm -rf myworkshop`
+
+#### 2. Clone the repository
+
+<CardGrid>
+<Card>
+
+Reopen Visual Studio Code, **open the Command Palette** (F1 or Control/Command+Shift+P) and **search for 'Git: Clone'**. After selecting that option, **select 'Clone from GitHub'** in the new list.
+
+</Card><Card>
+
+![](./assets/clone_1.png)
+
+![](./assets/clone_2.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+The next list will allow you to search and find repositories on GitHub to clone. You can enter in your GitHub username, followed by a forward-slash, then your repo name to find the repository you published. (`youruser/yourrepo`).
+
+It may ask where you would like to clone the repository to, in which you can select a location that suits you.
+
+</Card><Card>
+
+![](./assets/clone_3.png)
+
+</Card></CardGrid>
+
+Lastly, it will ask how you want to open the repository. Selecting any option is okay.
+
+<Aside type="tip">
+Now you have cloned the repository, the development flow can start again after you have connected to a system: edit, compile, test.
+</Aside>
+
+---
+
+## Creating branches and PRs
+
+Typically development is not done in the branch that is initially created (which is typically called `main`). Instead, you would create a new branch, where changes would be made, and before they are merged back in, they can be reviewed. Code reviews will be covered in the next part.
+
+If you are new to the concept of branching, [check out this guide from Atlassian](https://www.atlassian.com/git/tutorials/using-branches).
+
+### Tasks
+
+#### 1. Create a new branch
+
+<CardGrid>
+<Card>
+
+To create a branch:
+
+1. **select the current branch name in the bottom left corner** of VS Code (in the screenshot, it is showing `main` as the current branch)
+2. when the quickpick appears, select 'Create new branch...', and then **enter in a branch name**; something like `mynewbranch` or `somethingrandom`.
+
+</Card><Card>
+
+![](./assets/pr_1.png)
+
+</Card></CardGrid>
+
+<Aside type="tip">
+You can also use the quickpick view to change to other branches made by other people!
+</Aside>
+
+#### 2. Make new commits
+
+You should see the branch name change in the bottom left corner of VS Code to the branch you created (the screenshot shows `mynewbranch`).
+
+<CardGrid>
+<Card>
+
+1. For your next commit, you can **simply make a change to the constant in the header file**. Then, Source Control view will update with the change you make.
+2. When you've reviewed your changes, entered a commit message, you can **click 'Commit' to commit code** to this branch.
+
+</Card><Card>
+
+![](./assets/pr_2.png)
+
+</Card></CardGrid>
+
+<Aside type="tip">
+Typically, you would do the dev/test/compile loop before making a commit to ensure the code is correct. It's not good practice to commit code that has not been tested.
+</Aside>
+
+#### 3. Publish the branch
+
+Publishing the branch means moving the branch and commits from your local device to the remote repository so others can have access to it.
+
+<CardGrid>
+<Card>
+
+When you have no unstaged or staged changes, the Commit button should turn into the Publish button. **Clicking the Publish** button should copy your branch to the remote repository.
+
+</Card><Card>
+
+![](./assets/pr_3.png)
+
+</Card></CardGrid>
+
+#### 4. Create a Pull Request
+
+<CardGrid>
+<Card>
+
+Head over to your repository on GitHub, and you should see a notice appear above all else displaying that a push has been made to a new branch.
+
+Click the 'Compare & pull request' button to start the PR creation process.
+
+</Card><Card>
+
+![](./assets/pr_4.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+This will take you to another page where the code changes can be reviewed, plus a title and description of the changes can be provided.
+
+When the title and description has been provided, you can click the 'Create pull request' button.
+
+</Card><Card>
+
+![](./assets/pr_5.png)
+
+</Card></CardGrid>
+
+#### 5. Review and merge
+
+Typically, when the PR has been created, this is time for one or more people to review the changes you have made. They might pull and checkout the branch on their own device, and then compile the changes manually, and check that everything works as expected. You can see in the UI, you can do a number of things:
+
+* view the commits made to this branch
+* review the changed code and leave comments of specific lines of code
+* request other people to review the PR
+* leave general comments
+* request further changes or approve and merge the PR
+
+Since no one else will be reviewing your Pull Request, you can merge by clicking on the 'Merge pull request' button.
+
+![](./assets/pr_6.png)
+
+When the merge happens, the commits will be copied from this branch into the branch where the current was branched from. In this instance, `mynewbranch` was created from `main`, so therefore, the commits will be copied back into `main`. **This only happens on the remote repository. Developers will need to pull the commits down to the local device after the merge**.
+
+#### 6. Update your local repo
+
+<CardGrid>
+<Card>
+
+Like when creating a new branch, select on the current branch name in the lower left corner of VS Code (the screenshot showing `mynewbranch`), and then select `main` in the quickpick to checkout to `main`.
+
+</Card><Card>
+
+![](./assets/pr_7.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+You won't have the changes from the merge until you do a 'pull'. A *pull* simply means pulling commits and branches from the remote repo to your local cloned repo. Visual Studio Code has a 'sync' button next to the branch selection button. Clicking this will both push and pull changes against the remote repo.
+
+After syncing, you will have all the missing changes on your local device.
+
+</Card><Card>
+
+![](./assets/pr_8.png)
+
+</Card></CardGrid>
