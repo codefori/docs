@@ -26,6 +26,12 @@ This is a BYOD (bring your own device) workshop and some software and accounts a
 
 ### Tasks
 
+#### Install git
+
+If you're on Mac or Linux, git is usually shipped with the OS. If you are on Windows, you may need to install git if you do not have it.
+
+[Check out the git website for installing git](https://git-scm.com/download/win).
+
 #### Signup to GitHub
 
 If you don't have a GitHub account, you are going to need one for this workshop. We will be creating new repositories and working with others.
@@ -293,3 +299,42 @@ return;
 
 ## Initialising your git repository
 
+<Aside type="note">
+Going forward, git is required on your system. See the requirements at the start of this workshop for a list.
+</Aside>
+
+Your repositories should have three files at this point:
+
+1. `mypgm.pgm.rpgle`
+2. `constants.rpgleinc`
+3. `actions.json`
+
+To track this files in git, we need to turn the root directory with these files into a git repository. This can be done in two ways:
+
+1. from the command line: `git init`, or
+2. through Visual Studio Code's Source Control view. Switch to that view and select the 'Initialise git repository' and then the view will show the files to be tracked.
+
+<CardGrid>
+<Card>
+
+TODO: screenshot showing 'initialise git repository'
+
+</Card><Card>
+
+TODO: screenshot showing untracked files in source control view
+
+</Card></CardGrid>
+
+
+<CardGrid>
+<Card>
+
+All new files in the Source Control view have the letter 'A' next to this, which stands for 'Added'. It is 'added' because it is a new file to the git repository. When you hover over the files in the view, you will see a plus (+) icon appear on it (as well as the parent note). **Select the plus (+) on each file to stage the file**.
+
+</Card><Card>
+
+TODO: screenshot of the staged files with a commit message ready
+
+</Card></CardGrid>
+
+When the files are staged, enter a commit message above and then select 'Commit'. This will take the staged files, create a commit with the changes and store them into the history of the repository. The list of files will then be empty, since it will show only changes sources in the 'working tree' (e.g. the directory).
