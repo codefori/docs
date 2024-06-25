@@ -192,7 +192,7 @@ The current library should be unique to your user and not shared by multiple use
 
 </Card><Card>
 
-TODO: screenshot of current library
+![](./assets/change_curlib_1.png)
 
 </Card></CardGrid>
 
@@ -236,10 +236,12 @@ To build, from your source code you can either:
 1. Use the shortcut: Control + E (Windows/Linux), Command + E (Mac)
 2. Find the 'Run Action' button in the editor UI.
 
+The first quickpick is going to show with a list of the Actions as defined in the `actions.json` file. If you correctly selected *RPGLE* when creating the Actions, then **you should see an option for 'Create RPGLE Program'**. Select that, and the deploy and build will commence.
+
 <CardGrid>
 <Card>
 
-This will show a quickpick so the user can select which deployment method they want to use. **To keep things simple, use Compare if it shown**.
+Following that, another quickpick will show so the user can select which deployment method they want to use. **To keep things simple, use Compare if it shown**.
 
 </Card><Card>
 
@@ -247,9 +249,9 @@ This will show a quickpick so the user can select which deployment method they w
 
 </Card></CardGrid>
 
-Following that, another quickpick is going to show with a list of the Actions as defined in the `actions.json` file. If you correctly selected *RPGLE* when creating the Actions, then **you should see an option for 'Create Bound RPG Program'**. Select that, and the deploy and build will commence. Following the build, you can navigate to the Terminal tab to see the command that was submitted, as well as the spool file from the compiler.
+Following the choices of Action and deploy method, you can navigate to the Terminal tab to see the command that was submitted, as well as the spool file from the compiler.
 
-TODO: screenshot showing compiled code with spool open
+![](./assets/deploy_3.png)
 
 #### 5. Using copybooks / includes
 
@@ -314,17 +316,7 @@ To track this files in git, we need to turn the root directory with these files 
 1. from the command line: `git init`, or
 2. through Visual Studio Code's Source Control view. Switch to that view and select the 'Initialise git repository' and then the view will show the files to be tracked.
 
-<CardGrid>
-<Card>
-
-TODO: screenshot showing 'initialise git repository'
-
-</Card><Card>
-
-TODO: screenshot showing untracked files in source control view
-
-</Card></CardGrid>
-
+![](./assets/git_1.png)
 
 <CardGrid>
 <Card>
@@ -333,8 +325,97 @@ All new files in the Source Control view have the letter 'A' next to this, which
 
 </Card><Card>
 
-TODO: screenshot of the staged files with a commit message ready
+![](./assets/git_2.png)
 
 </Card></CardGrid>
 
-When the files are staged, enter a commit message above and then select 'Commit'. This will take the staged files, create a commit with the changes and store them into the history of the repository. The list of files will then be empty, since it will show only changes sources in the 'working tree' (e.g. the directory).
+When the files are staged, **enter a commit message above and then select 'Commit'**. This will take the staged files, create a commit with the changes and store them into the history of the repository. The list of files will then be empty, since it will show only changes sources in the 'working tree' (e.g. the directory).
+
+![](./assets/git_3.png)
+
+## Making additional changes
+
+Since the repository has been created, any new changes that are made (be it modifications, deletions or new files) will be tracked. The Source Control view will reflect this.
+
+<CardGrid>
+<Card>
+
+**Open up the header file and make a change to the `MYLABEL` constant**.
+
+</Card><Card>
+
+```rpgle
+**free
+
+dcl-c MYLABEL 'Hello from the lab';
+```
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+After saving the file, the Source Control view will automatically update to show changes in the repository.
+
+</Card><Card>
+
+![](./assets/git_4.png)
+
+</Card></CardGrid>
+
+Like before, the changed file, now tagged with 'M' (for modified), can be hovered on and will show the plus (+). Clicking on the plus will stage it the file, then a commit message can be provided before clicking on the 'Commit' button.
+
+<Aside type="tip">
+You can optionally recompile your program source to see the change in the program.
+</Aside>
+
+---
+
+## Making a GitHub repository
+
+<Aside type="note">
+Going forward, a free GitHub account is required. Please see the requirements for the signup link.
+</Aside>
+
+Using git on your local machine is great for when you are developing. But, when you are working in a team, it's useful to have collaborations tools so code can be shared and worked on by other people. For the purpose of this workshop, we will be creating a repository in GitHub. There are also plenty of other services, such as GitLab, or Azure DevOps.
+
+### Tasks
+
+#### 1. Publish to GitHub
+
+<CardGrid>
+<Card>
+
+When you have no unstaged or staged changes, the Commit button should turn into the Publish button. Clicking the Publish button should show a popup asking you to sign in to GitHub.
+
+</Card><Card>
+
+![](./assets/publish_1.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+That will take you to GitHub to sign in, and eventually, in your browser, a popup will show asking if you'd like to navigate back to Visual Studio Code. **Be sure to Allow this**.
+
+</Card><Card>
+
+![](./assets/publish_2.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+Lastly, it will ask if you want to make this a public or private repository on your GitHub account. Select either, and then it will automatically publish and connect to the remote repository.
+
+</Card><Card>
+
+![](./assets/publish_3.png)
+
+</Card></CardGrid>
+
+Navigating to your GitHub profile will show the repository and all the history for anyone who has access to see.
+
+![](./assets/publish_4.png)
