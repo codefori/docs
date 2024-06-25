@@ -14,8 +14,8 @@ import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 5. Initialising your git repository
 6. Making additional changes
 7. Making a public repository
-8. Cloning repositories - clone from github using GHD, open in VS Code
-9. Making branches and PRs - make the branch, make and push your commits, make a PR on GitHub
+8. Cloning repositories
+9. Making branches and PRs
 
 ---
 
@@ -576,7 +576,9 @@ Since no one else will be reviewing your Pull Request, you can merge by clicking
 
 ![](./assets/pr_6.png)
 
-When the merge happens, the commits will be copied from this branch into the branch where the current was branched from. In this instance, `mynewbranch` was created from `main`, so therefore, the commits will be copied back into `main`. **This only happens on the remote repository. Developers will need to pull the commits down to the local device after the merge**.
+<Aside type="note">
+When the merge happens, the commits will be copied from this branch into the branch where the current was branched from. In this instance, `mynewbranch` was created from `main`, so therefore, the commits will be copied back into `main`. **This only happens on the remote repository. Developers will need to pull the commits down to the local device after the merge**. (covered in the next section!)
+</Aside>
 
 #### 6. Update your local repo
 
