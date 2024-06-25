@@ -166,14 +166,35 @@ Actions are stored as part of the repository so they can be shared between devel
 
 <CardGrid>
 <Card>
-There is a tool that can generate an initial `actions.json` file for you. After connecting to a system, open the command palette (**F1**) and search for 'Launch Actions Setup'. This shows a multi-select window where the user can pick which technologies they're using. Based on the selection, an `actions.json` will be created.
+There is a tool that can generate an initial `actions.json` file for you. After connecting to a system, open the command palette (**F1**) and search for 'Launch Actions Setup'. This shows a multi-select window where the user can pick which technologies they're using. Based on the selection, an `actions.json` will be created. 
+
+**For the next step, ensure RPGLE is selected.**
 
 </Card><Card>
 ![](./assets/actions_tool.png)
 
 </Card></CardGrid>
 
-#### 2. Writing the first program
+#### 2. Set your current library
+
+Notice in your `action.json` file, where each command is defined, the `&CURLIB` variable is used in place of the target library. This variable is set based on the User Library List view in Visual Studio Code.
+
+<CardGrid>
+<Card>
+
+The current library should be unique to your user and not shared by multiple users. You are able to right click on the current library and select 'Change current library' and enter the unique library.
+
+</Card><Card>
+
+TODO: screenshot of current library
+
+</Card></CardGrid>
+
+<Aside type="note">
+If you are following this workshop as part of a hosted lab, a library will be provided to you.
+</Aside>
+
+#### 3. Writing the first program
 
 Next, you can create your first program.
 
@@ -200,7 +221,7 @@ return;
 
 </Card></CardGrid>
 
-#### 3. Deploy and build
+#### 4. Deploy and build
 
 Once you have connecting to a system, setup the repo Actions and created your first piece of source code, then it is time to build that source code. From here on out, the dev-test loop is simple: make changes and then build.
 
@@ -220,4 +241,55 @@ This will show a quickpick so the user can select which deployment method they w
 
 </Card></CardGrid>
 
-#### 4. Using copybooks / includes
+Following that, another quickpick is going to show with a list of the Actions as defined in the `actions.json` file. If you correctly selected *RPGLE* when creating the Actions, then **you should see an option for 'Create Bound RPG Program'**. Select that, and the deploy and build will commence. Following the build, you can navigate to the Terminal tab to see the command that was submitted, as well as the spool file from the compiler.
+
+TODO: screenshot showing compiled code with spool open
+
+#### 5. Using copybooks / includes
+
+When developing locally, 'member style' includes are no longer used for `/COPY` or `/INCLUDE` statements. Instead, we can use 'posix style' includes, which means using a path relative to the root of the directory.
+
+<CardGrid>
+<Card>
+
+1. Create a new directory for copybooks/header files. Usually a name like `qrpgleref`, or `headers`, works.
+2. Create a brand new source file in that new directory, named `constants.rpgleinc`, with the content shown here:
+
+</Card><Card>
+
+```rpgle
+**free
+
+dcl-c MYLABEL 'Hello from the world';
+```
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+3. Go back to the original source that was created and add a `/copy` or `/include` statement to bring in the new file that was created.
+4. Add a reference to the constant that was defined in the included file.
+
+</Card><Card>
+
+```rpgle
+**free
+
+/copy 'qrpgleref/constants.rpgleinc'
+
+dcl-s mytext char(20);
+
+mytext = MYLABEL;
+
+dsply mytext;
+
+return;
+```
+
+</Card></CardGrid>
+
+5. Recompile your source using the shortcut (Command/Control+E) or the UI.
+
+## Initialising your git repository
+
