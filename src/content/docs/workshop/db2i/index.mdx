@@ -9,7 +9,7 @@ import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 
 * requirements
 * Connecting to a system
-* Using the job manager - starting and editing jobs. Saving configs and starting jobs from saved config
+* Using the job manager
 * Executing statements - running statements regularly, running in a view, statement history, cancelling a statement, dealing with host variables, commitment control UI
 * Writing SQL - content assist for schemas, table columns, signature info for functions/procedures
 * Exporting data - cover the different types of export modes
@@ -193,3 +193,66 @@ Here are the main items to remember from this section:
 * SQL statements run in a unique job
 * The user can maintain multiple jobs through the SQL Job Manager
 * The user can change the selected job by clicking on it. The selected job is highlighted with a checkmark
+
+## Executing statements
+
+### Intro
+
+As discovered in the last section, it is possible to run statements in an SQL document with the ▶️ (play) button, or with the Command/Control+R keyboard shortcut. But there is more, like running statements in a unique view, seeing the statement history, and managing commitment control.
+
+### Tasks
+
+#### 1. Executing statements
+
+#### 2. Executing a statement in a unique view
+
+#### 3. Cancelling a statement
+
+#### 4. Using statement history
+
+#### 5. Dealing with host variables
+
+#### 6. Managing commitments control
+
+## Writing SQL
+
+### Intro
+
+Seeing results is useful, but you become an expert when you know how to find out the information you want. By understanding how the content assist works in Visual Studio Code, you can practically navigate entire schemas while you're writing SQL statements.
+
+### Tasks
+
+#### 1. Looking for schemas
+
+#### 2. Looking at objects in schemas
+
+#### 3. Columns from tables, views, and table functions
+
+#### 4. Procedure and function call signatures
+
+## Exporting data
+
+### Intro
+
+The Db2 for IBM i extension provides simple ways to export result sets to multiple formats. The SQL processor has support for something called a 'statement prefix', which tells the SQL runner how to process the statement. ACS has support for the `cl` prefix, but VS Code adds to that by supporting `csv`, `json` and `sql`.
+
+### Task
+
+Try executing a statement to generate a CSV document, JSON document and SQL insert statement:
+
+```sql
+-- result set as normal table
+select * from sample.employee;
+
+-- result set as JSON, will open in a new file
+json: select * from sample.employee;
+
+-- result set as CSV, will open in a new file
+csv: select * from sample.employee;
+
+-- result set as SQL insert statement
+sql: select * from sample.employee;
+
+-- run CL commands. output is directed to IBM i output channel
+cl: dspffd sample/employee
+```
