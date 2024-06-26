@@ -251,7 +251,7 @@ Every time you execute a statement, then the statement will be prepended to the 
 
 </Card></CardGrid>
 
-#### 5. Managing commitment control
+#### 4. Managing commitment control
 
 VS Code has a simple UI to show if your job has changes pending to commit in your job. In the screenshot an update statement has been execute, and the result view shows that 1 row was updated. When your job has committment control setup, the hotbar item will highlight when there are pending changes in your job. Hovering on the hotbar item with your current job will show new Commit and Rollback buttons.
 
@@ -269,17 +269,98 @@ For this, **commitment control will need to be turned on for your job**. Edit yo
 
 Seeing results is useful, but you become an expert when you know how to find out the information you want. By understanding how the content assist works in Visual Studio Code, you can practically navigate entire schemas while you're writing SQL statements.
 
+<Aside type="note">
+Triggering the content assist refers to the keyboard shortcut to make the content assist appear in the editor. The shortcut is always Control+Space (on all Windows, Mac and Linux.) You can type at any point when the content assist list is open to filter the items down.
+</Aside>
+
 ### Tasks
 
-#### 1. Looking for schemas
+#### 1. SQL functions
 
-#### 2. Looking at objects in schemas
+<CardGrid>
+<Card>
 
-#### 3. Columns from tables, views, and table functions
+By default, when you trigger the content assist, VS Code will show available SQL functions as snippets.
 
-#### 4. Procedure and function call signatures
+Selecting the item from the list will insert it at the cursors location and, if available, show the required parameters.
 
-#### 5. Dealing with host variables
+</Card><Card>
+
+![](./assets/writing_1.png)
+
+</Card></CardGrid>
+
+#### 2. Looking for schemas
+
+<CardGrid>
+<Card>
+
+You can trigger the content assist at any point and expect to see a list of schemas available to you. Each schema entry has the double bracket icon
+: `{}`
+
+</Card><Card>
+
+![](./assets/writing_2.png)
+
+</Card></CardGrid>
+
+#### 3. Looking at objects in schemas
+
+If you enter a dot (`.`) after a schema, it will show available objects in the schema that you can reference, with the applicable type and text. Different object types have different icons.
+
+<CardGrid>
+<Card>
+
+![](./assets/writing_3_a.png)
+
+</Card><Card>
+
+![](./assets/writing_3_b.png)
+
+</Card></CardGrid>
+
+#### 4. Columns from tables, views, and table functions
+
+<CardGrid>
+<Card>
+
+When you reference tables, views, table functions, etc, then you will also have access to the columns of those objects in the content assist.
+
+<Aside type="note">
+When referencing multiple objects in SQL statements, it's always recommended to use corralation names:
+
+```sql
+select d.deptno, d.deptname from sample.department as d;
+```
+</Aside>
+
+</Card><Card>
+
+![](./assets/writing_4.png)
+
+</Card></CardGrid>
+
+#### 5. Procedure and function call signatures
+
+<CardGrid>
+<Card>
+
+When calling a function or procedure, after entering an open round bracket (`(`), then the signature information should appear. This shows, as you are writing the parameters to the routine, what the current information is for the current parameter you are writing for.
+
+</Card><Card>
+
+![](./assets/writing_5.png)
+
+</Card></CardGrid>
+
+#### 6. Dealing with host variables
+
+<CardGrid>
+<Card>
+
+If you have host variables in a statement you are trying to execute, you will find that the statement does not execute right away. Instead, it will highlight the host variables so the user can replace them correctly. You are able to Tab and Shift+Tab between the host variables. When the variables have been removed, then the statement can be executed.
+
+</Card><Card>
 
 ```sql
 select * from qsys2.columns
@@ -288,6 +369,8 @@ where
     is_nullable = ?
 limit 10;
 ```
+
+</Card></CardGrid>
 
 ---
 
