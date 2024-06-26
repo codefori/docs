@@ -102,6 +102,10 @@ export default defineConfig({
 							autogenerate: { directory: 'extensions/rpgle/' }, 
 							collapsed: true,
 						},
+						{ 
+							label: 'CLLE',
+							link: 'extensions/clle'
+						}
 					],
 					collapsed: false,
 				},
