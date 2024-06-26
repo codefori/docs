@@ -7,10 +7,10 @@ import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 
 ## Outline
 
-* requirements
+* Requirements:
 * Connecting to a system
 * Using the job manager
-* Executing statements - running statements regularly, running in a view, statement history, cancelling a statement, dealing with host variables, commitment control UI
+* Executing statements - running statements regularly, running in a view, statement history, canceling a statement, dealing with host variables, commitment control UI
 * Writing SQL - content assist for schemas, table columns, signature info for functions/procedures
 * Exporting data - cover the different types of export modes
 * Schema browser - adding/removing entries, browsing schemas, viewing different object types, generating SQL, right click options
@@ -81,9 +81,9 @@ There are three areas that should be known when using the database extension in 
 <CardGrid>
 <Card>
 
-The job manager is used to maintain different jobs, all which can be used to execute different SQL statements. You can spin up a new job by clicking the ⛁ (database) icon. Notice that the current job (in the screenshot) has the icon highlighted green. The highlighted job indicates the job that is going to be used when running SQL statements in VS Code. We call this the 'selected job'.
+The job manager is used to maintain different jobs, all of which can be used to execute different SQL statements. You can spin up a new job by clicking the ⛁ (database) icon. Notice that the current job (in the screenshot) has the icon highlighted green. The highlighted job indicates the job that is going to be used when running SQL statements in VS Code. We call this the 'selected job'.
 
-Each job has a set of icons when hovering over the item. Each job has unique JDBC settings, all which can be edited by clicking on the ✎ (pencil) icon. You can also see the job log of a job by selecting on the ℹ (info) button.
+Each job has a set of icons when hovering over the item. Each job has unique JDBC settings, all of which can be edited by clicking on the ✎ (pencil) icon. You can also see the job log of a job by selecting on the ℹ (info) button.
 
 There are also additional buttons to open new SQL documents and notebooks.
 
@@ -229,7 +229,7 @@ When executing a statement, the play button will turn into a ⓧ (cancel) button
 Try executing this statement, then use the ⓧ (cancel) button to stop it:
 
 ```sql
-select count(*) from qsys2.syscolumns a, qsys2.syscolumns b where 1=1
+select count(*) from qsys2.syscolumns2 a, qsys2.syscolumns2 b where 1=1
 ```
 
 </Card><Card>
@@ -243,7 +243,7 @@ select count(*) from qsys2.syscolumns a, qsys2.syscolumns b where 1=1
 <CardGrid>
 <Card>
 
-Every time you execute a statement, then the statement will be prepended to the statement history so it can be accessed again quickly in the future. Statements in history are grouped by time period; last day, last week, last month, etc. Hovering over an entry will show it and clicking on it will open it into a brand new document. Single items can be cleared from history, and the entire history can also be cleared.
+Every time you execute a statement, the statement will be prepended to the statement history so it can be accessed again quickly in the future. Statements in history are grouped by time period; last day, last week, last month, etc. Hovering over an entry will show it and clicking on it will open it into a brand new document. Single items can be cleared from history, and the entire history can also be cleared.
 
 </Card><Card>
 
@@ -282,7 +282,7 @@ Triggering the content assist refers to the keyboard shortcut to make the conten
 
 By default, when you trigger the content assist, VS Code will show available SQL functions as snippets.
 
-Selecting the item from the list will insert it at the cursors location and, if available, show the required parameters.
+Selecting the item from the list will insert it at the cursor location and, if available, show the required parameters.
 
 </Card><Card>
 
@@ -327,7 +327,7 @@ If you enter a dot (`.`) after a schema, it will show available objects in the s
 When you reference tables, views, table functions, etc, then you will also have access to the columns of those objects in the content assist.
 
 <Aside type="note">
-When referencing multiple objects in SQL statements, it's always recommended to use corralation names:
+When referencing multiple objects in SQL statements, it's always recommended to use table correlation names:
 
 ```sql
 select d.deptno, d.deptname from sample.department as d;
@@ -358,12 +358,12 @@ When calling a function or procedure, after entering an open round bracket (`(`)
 <CardGrid>
 <Card>
 
-If you have host variables in a statement you are trying to execute, you will find that the statement does not execute right away. Instead, it will highlight the host variables so the user can replace them correctly. You are able to Tab and Shift+Tab between the host variables. When the variables have been removed, then the statement can be executed.
+If you have host variables in a statement you are trying to execute, you will find that the statement does not execute right away. Instead, it will highlight the host variables so the user can replace them correctly. You can Tab and Shift+Tab between the host variables. When the variables have been removed, then the statement can be executed.
 
 </Card><Card>
 
 ```sql
-select * from qsys2.columns
+select * from qsys2.syscolumns2
 where 
     data_type = :theType and
     is_nullable = ?
@@ -378,7 +378,7 @@ limit 10;
 
 ### Intro
 
-The Db2 for IBM i extension provides simple ways to export result sets to multiple formats. The SQL processor has support for something called a 'statement prefix', which tells the SQL runner how to process the statement. ACS has support for the `cl` prefix, but VS Code adds to that by supporting `csv`, `json` and `sql`.
+The Db2 for IBM i extension provides simple ways to export result sets to multiple formats. The SQL processor supports a 'statement prefix', which tells the SQL execution how to process the statement. ACS has support for the `cl` prefix, but VS Code adds to that by supporting `csv`, `json` and `sql`.
 
 ### Task
 
