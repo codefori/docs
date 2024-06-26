@@ -7,7 +7,7 @@ import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 
 ## Outline
 
-* requirements - vscode, extensions
+* requirements
 * Connecting to a system
 * Using the job manager - starting and editing jobs. Saving configs and starting jobs from saved config
 * Executing statements - running statements regularly, running in a view, statement history, cancelling a statement, dealing with host variables, commitment control UI
@@ -46,4 +46,142 @@ If you are doing this workshop as part of a hosted lab, then a user profile and 
 
 ## Goals
 
-The main goal of this workshop is to understand how you can write IBM i code (be it RPGLE, COBOL, CL, etc) when storing source code inside of a git repository. This is made easy through some of the functionality provided in Code for IBM i (the extension) as part of Visual Studio Code.
+The main goal of this workshop is to understand how you can use Visual Studio Code to make it easier to work with the database while you work on developing applications.
+
+---
+
+## Connecting to a system
+
+### Tasks
+
+Using the Code for IBM i extension, you can create a new connection to an IBM i system.
+
+![](./assets/connect_1.png)
+
+If the database extension has never been seen before, you will see a popup asking if you'd like to start an SQL Job. For now, select 'Yes' or 'Always'. More will be covered on this later.
+
+![](./assets/connect_2.png)
+
+### Db2 for i User Interface
+
+![](./assets/connect_3.png)
+
+There are three areas that should be known when using the database extension in Visual Studio Code:
+
+1. This database icon is where the database extension can be found inside of VS Code. Clicking it will load the available database panels.
+2. When the database extension is select, the panels will show here. Most functionality can be found here.
+3. The database extension has a quick pick item on the status bar, which the user can hover over to quickly access specific information.
+
+---
+
+## Using the job manager
+
+### Intro
+
+<CardGrid>
+<Card>
+
+The job manager is used to maintain different jobs, all which can be used to execute different SQL statements. You can spin up a new job by clicking the ⛁ (database) icon. Notice that the current job (in the screenshot) has the icon highlighted green. The highlighted job indicates the job that is going to be used when running SQL statements in VS Code. We call this the 'selected job'.
+
+Each job has a set of icons when hovering over the item. Each job has unique JDBC settings, all which can be edited by clicking on the ✎ (pencil) icon. You can also see the job log of a job by selecting on the ℹ (info) button.
+
+There are also additional buttons to open new SQL documents and notebooks.
+
+</Card><Card>
+
+![](./assets/jobmanager_1.png)
+
+</Card></CardGrid>
+
+### Tasks
+
+#### 1. Spin up two jobs
+
+<CardGrid>
+<Card>
+
+For this task, we are going to spin up two jobs that have unique settings for when we run SQL statements.
+
+You can spin up a new job by clicking the ⛁ (database) icon.
+
+<Aside type="note">
+The selected job will change when you create new jobs.
+</Aside>
+
+</Card><Card>
+
+![](./assets/jobmanager_2.png)
+
+</Card></CardGrid>
+
+#### 2. Configure the jobs
+
+<CardGrid>
+<Card>
+
+Click on the ✎ (pencil) icon of the first job and see that a new tab opens where JDBC settings can be edited.
+
+For a simple change, edit the library list entry under the System tab. **Scroll to the bottom of the page and select 'Apple changes'** to save. The job will be restarted when the changes are applied.
+
+Do this for both jobs that you have.
+
+</Card><Card>
+
+![](./assets/jobmanager_3.png)
+
+</Card></CardGrid>
+
+#### 3. Execute statements on both jobs
+
+<CardGrid>
+<Card>
+
+Use the 'Open SQL document' on the SQL Job Manager view to create an empty SQL document. This new document can be used to test the library list change with an SQL statement:
+
+```sql
+select * from qsys2.library_list_info
+```
+
+To execute the statement, either the ▶️ (play) button can be pressed - or the shortcut Control/Command+R - can be used to execute the statement. The result set should appear below the SQL document.
+
+Do this with both SQL jobs that were started.
+
+</Card><Card>
+
+![](./assets/jobmanager_4.png)
+
+</Card></CardGrid>
+
+<Aside type="note">
+When selecting on a job in the SQL Job Manager, it becomes the selected job, and will be used when the user executes an SQL statement.
+</Aside>
+
+#### 4. Save your job configuration
+
+<CardGrid>
+<Card>
+
+Once a job has been configured to your liking, you are able to save the configuration so next time you start a job the settings will already be applied.
+
+Right click on a job and select 'Save settings into config'. This will allow you to provide a name for the configuration.
+
+</Card><Card>
+
+![](./assets/jobmanager_5.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+A new group will appear in the SQL Job Manager with your saved configurations.
+
+* click on the configuration to start a new job with that configuration
+* use the ✎ (pencil) icon to edit the configuration
+* use the 🗑️ (trash/bin) icon to delete the configuration
+
+</Card><Card>
+
+![](./assets/jobmanager_6.png)
+
+</Card></CardGrid>
