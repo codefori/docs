@@ -194,6 +194,8 @@ Here are the main items to remember from this section:
 * The user can maintain multiple jobs through the SQL Job Manager
 * The user can change the selected job by clicking on it. The selected job is highlighted with a checkmark
 
+---
+
 ## Executing statements
 
 ### Intro
@@ -204,15 +206,62 @@ As discovered in the last section, it is possible to run statements in an SQL do
 
 #### 1. Executing statements
 
-#### 2. Executing a statement in a unique view
+<CardGrid>
+<Card>
 
-#### 3. Cancelling a statement
+Use the 'Open SQL document' on the SQL Job Manager view to create an empty SQL document. When the active editor is an SQL file (usually the `.sql` extension), then the ▶️ (play) button will appear. 
 
-#### 4. Using statement history
+Clicking the ▶️ (play) button will show a drop down, and the first entry in the list is the action to execute the statement. This shows the view in the lower panel with a scrollable result set.
 
-#### 5. Dealing with host variables
+</Card><Card>
 
-#### 6. Managing commitments control
+![](./assets/jobmanager_4.png)
+
+</Card></CardGrid>
+
+#### 2. Cancelling a statement
+
+<CardGrid>
+<Card>
+
+When executing a statement, the play button will turn into a ⓧ (cancel) button, which doesn't immediately cancel, but instead requests that job should cancel the current running statement.
+
+Try executing this statement, then use the ⓧ (cancel) button to stop it:
+
+```sql
+select count(*) from qsys2.syscolumns a, qsys2.syscolumns b where 1=1
+```
+
+</Card><Card>
+
+![](./assets/execute_2.png)
+
+</Card></CardGrid>
+
+#### 3. Using statement history
+
+<CardGrid>
+<Card>
+
+Every time you execute a statement, then the statement will be prepended to the statement history so it can be accessed again quickly in the future. Statements in history are grouped by time period; last day, last week, last month, etc. Hovering over an entry will show it and clicking on it will open it into a brand new document. Single items can be cleared from history, and the entire history can also be cleared.
+
+</Card><Card>
+
+![](./assets/execute_3.png)
+
+</Card></CardGrid>
+
+#### 5. Managing commitment control
+
+VS Code has a simple UI to show if your job has changes pending to commit in your job. In the screenshot an update statement has been execute, and the result view shows that 1 row was updated. When your job has committment control setup, the hotbar item will highlight when there are pending changes in your job. Hovering on the hotbar item with your current job will show new Commit and Rollback buttons.
+
+<Aside type="note">
+For this, **commitment control will need to be turned on for your job**. Edit your job settings, and under the System tab, set 'Auto commit' to False, 'Transaction isolation' to 'Read uncommitted' and 'True autocommit' to false.
+</Aside>
+
+![](./assets/execute_4.png)
+
+---
 
 ## Writing SQL
 
@@ -229,6 +278,18 @@ Seeing results is useful, but you become an expert when you know how to find out
 #### 3. Columns from tables, views, and table functions
 
 #### 4. Procedure and function call signatures
+
+#### 5. Dealing with host variables
+
+```sql
+select * from qsys2.columns
+where 
+    data_type = :theType and
+    is_nullable = ?
+limit 10;
+```
+
+---
 
 ## Exporting data
 
