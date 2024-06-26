@@ -388,6 +388,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"workshop/db2i/index.mdx": {
+	id: "workshop/db2i/index.mdx";
+  slug: "workshop/db2i";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "workshop/git/index.mdx": {
 	id: "workshop/git/index.mdx";
   slug: "workshop/git";

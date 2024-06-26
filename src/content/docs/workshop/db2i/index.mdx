@@ -1,0 +1,49 @@
+---
+title: Db2 for IBM i, for the developer
+template: splash
+---
+
+import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
+
+## Outline
+
+* requirements - vscode, extensions
+* Connecting to a system
+* Using the job manager - starting and editing jobs. Saving configs and starting jobs from saved config
+* Executing statements - running statements regularly, running in a view, statement history, cancelling a statement, dealing with host variables, commitment control UI
+* Writing SQL - content assist for schemas, table columns, signature info for functions/procedures
+* Exporting data - cover the different types of export modes
+* Schema browser - adding/removing entries, browsing schemas, viewing different object types, generating SQL, right click options
+* Visual explain - explain types, explaining a statement, how to read the data, exporting the data, configuring which nodes to highlight, generating create index statements
+* SELF - what is self, how to enable it, using the error view, creating an intentional error, turning SELF on outside of VS Code
+* Notebooks - what is a notebook, creating your first notebooks, different cell types, saving and sharing notebooks, charting with notebooks, chart tooltips, chart * datapoints, exporting notebooks, opening a notebook from SQL files
+
+---
+
+## Requirements
+
+This is a BYOD (bring your own device) workshop and some software and accounts are required.
+
+### Tasks
+
+#### Install Visual Studio Code
+
+We are using VS Code to write our code. It is a free, open-source editor with great extensibility.
+
+[Download it here for free](https://code.visualstudio.com/download).
+
+#### Install Code for IBM i and the Db2 for i extension
+
+We are using the Code for IBM i extension to connect to IBM i systems, and then using the Db2 for IBM i extension to work with the database.
+
+**After you have installed Visual Studio Code**, then go ahead and install the [Code for IBM i extension](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.code-for-ibmi) and the [Db2 for IBM i extension](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.vscode-db2i), or, to make life easier in the future, install the [IBM i Development pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack) which contains those extensions and more.
+
+#### Access to an IBM i
+
+If you are doing this workshop as part of a hosted lab, then a user profile and system will be provided to you. If you're using your own system, then ensure SSH is running on your system. [Check out the requirements](../../).
+
+---
+
+## Goals
+
+The main goal of this workshop is to understand how you can write IBM i code (be it RPGLE, COBOL, CL, etc) when storing source code inside of a git repository. This is made easy through some of the functionality provided in Code for IBM i (the extension) as part of Visual Studio Code.
