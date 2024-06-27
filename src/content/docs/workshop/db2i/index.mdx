@@ -505,17 +505,125 @@ Visual Explain is.....
 
 ### Intro
 
-SELF is...
+SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the Results View. Additional documentation of SELF can be found [here](https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self).
+
+<Aside type="caution">
+SELF can only work with users who has `*ALLOBJ` authority. This is because... Scott write here. This section may have to be skipped in the lab environment due to lack of authority.
+</Aside>
 
 ### Tasks
 
 #### 1. Enable SELF for jobs
 
+SELF can be turned on at a job level or a system level. In this workshop we are only going to cover turning on SELF at the job level.
+
+There are four modes to capture errors with:
+
+| Mode | Info |
+| - | - |
+| `*NONE` | Capture no errors |
+| `*WARNING` | Capture any errors where the `SQLCODE` is above `0` |
+| `*ERROR` | Capture any errors where the `SQLCODE` is below `0` |
+| `*ALL` | Capture both warnings and errors |
+
+##### Turn on SELF for an SQL job
+
+<CardGrid>
+<Card>
+
+You can right click on any SQL job that has been created inside of the SQL Job Manager, and set the logging level. This will show a quick pick where you can select the mode.
+
+The job will then start to capture errors and warnings.
+
+</Card><Card>
+
+![](./assets/self_1.png)
+
+</Card></CardGrid>
+
+##### Turn on SELF for all new jobs
+
+<CardGrid>
+<Card>
+
+You can also ensure that any new job started by the SQL Job Manager has SELF already enabled. Click the ⚙️ (cog/settings) icon in the SQL Job Manager view. This will open the VS Code settings tab showing the SELF configuration options. You can then set the default logging mode.
+
+<Aside type="note">
+This will not change any already running job.
+</Aside>
+
+</Card><Card>
+
+![](./assets/self_2.png)
+
+</Card></CardGrid>
+
 #### 2. Using the error view
+
+The SELF view can be found next to the result set view. It is collapsed by default, and clicking on it can be expanded.
+
+Each item in the SELF view is for a specific `SQLCODE` which is displayed in parenthesis. The `SQLCODE` tracks the actual error or warning triggered by a given SQL statement. 
+
+- An error `SQLCODE` must be preceded by a single minus sign (`-`).
+- A warning `SQLCODE` can be preceded by an optional plus sign (`+`).
+
+When an item is expanded or hovered over, information about the `SQLCODE` is displayed such as the Job Name, Call Stack, Additional Details, and the SQL statement. The counter on the right of each item denotes the number of occurrences (🔥) of the specific `SQLCODE`. Once the number of occurrences for a given code is greater than 100, we display 💯.
+
+![](./assets/self_3.png)
+
+<Aside type="note">
+If you are unable to locate the SELF view, you can use F1→filter 'focus SELF'.
+</Aside>
 
 #### 3. Capturing errors from programs
 
+This part will demostrate how to capture errors from ILE programs that utilise embedded SQL.
+
+<CardGrid>
+<Card>
+
+Create a new member in a source file, or create a streamfile in the IFS, and give it the attribute/extension `.sqlrpgle`. Fill the member with the following content, and then compile it using the Create SQL RPGLE program Action (`CRTSQLRPGI` command).
+
+<Aside type="note">
+To create a new member, navigate to the Object Browser, add a `*SRCPF` filter to a schema/library you are working with, right click on the filter and create a source file, then right click on the source file and create a new member.
+</Aside>
+
+</Card><Card>
+
+```rpgle
+**free
+
+dcl-s mystatement varchar(100);
+
+mystatement = 'select * from scooby.dooby';
+
+exec sql execute immediate :mystatement;
+
+return;
+```
+
+</Card></CardGrid>
+
+Then, SQL can be used to call the program as if it were a procedure.
+
+This is only recommended for the purposes of this workshop: `call yourlib.thesqlpgm()`.
+
+![](./assets/self_4.png)
+
+<Aside type="note">
+If no error appeared:
+
+1. ensure that SELF is enabled on the selected job with `*ALL` mode.
+2. either refresh the SELF view manually, or turn on auto refresh - both are buttons on the SELF view panel.
+</Aside>
+
 #### 4. Using SELF outside of VS Code
+
+The SELF view will show any errors captured by the same user that is connected inside of Visual Studio Code. You can use the SQL statement to set the SELF mode in any job where SQL can be run. Then, when logs occur in those jobs, they will appear in the SELF view.
+
+```sql
+SET SYSIBMADM.SELFCODES = '*ALL';
+```
 
 ---
 
