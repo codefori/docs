@@ -407,17 +407,77 @@ cl: dspffd sample/employee
 
 ### Intro
 
-Schema Browser is....
+Schema Browser is a view where users can explorer schemas, and SQL objects inside of those schemas. Additionally, context options on some objects as well as viewing columns or parameters to others.
 
 ### Tasks
 
 #### 1. Adding and removing schemas
 
+To add schemas to the Schema Browser, select the 'Manage Schema Browser List'. When the list appears, you are able to filter down and select the schemas you want to appear in the list. Select OK when the items have been selected correctly.
+
+<CardGrid>
+<Card>
+
+![](./assets/schemas_1.png)
+
+</Card><Card>
+
+![](./assets/schemas_2.png)
+
+</Card></CardGrid>
+
 #### 2. Browsing schemas
+
+<CardGrid>
+<Card>
+
+When schemas are expanded, objects are grouped by object type. Expanding a type will show the objects in that schema of that type.
+
+Tables and views have a button on each item to quickly view the data, which will open a new SQL document with a pre-written `select` statement and will automatically execute it.
+
+</Card><Card>
+
+![](./assets/schemas_3.png)
+
+</Card></CardGrid>
 
 #### 3. Object options
 
+<CardGrid>
+<Card>
+
+Some objects have right-click context options on there. 
+
+All objects will have the ability to delete and rename.
+
+</Card><Card>
+
+![](./assets/schemas_4.png)
+
+</Card></CardGrid>
+
 #### 4. Generating SQL
+
+<CardGrid>
+<Card>
+
+All SQL objects will have the 'Generate SQL' option, which will generate the SQL that can be used to recreate the object.
+
+<Aside type="note">
+Further provements are going to be made to 'Generate SQL' in the future to make it more configurable.
+</Aside>
+
+</Card><Card>
+
+![](./assets/schemas_5.png)
+
+</Card></CardGrid>
+
+#### 5. Filtering / searching a schema
+
+All schemas have the ability to filter objects in a schema to find something specific. Click on the 🔎 (search) icon, which will show a input box where a case-insensitive name can be provided.
+
+![](./assets/schemas_6.png)
 
 ---
 
