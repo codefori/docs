@@ -13,10 +13,10 @@ import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 * Executing statements - running statements regularly, running in a view, statement history, canceling a statement, dealing with host variables, commitment control UI
 * Writing SQL - content assist for schemas, table columns, signature info for functions/procedures
 * Exporting data - cover the different types of export modes
-* Schema browser - adding/removing entries, browsing schemas, viewing different object types, generating SQL, right click options
-* Visual explain - explain types, explaining a statement, how to read the data, exporting the data, configuring which nodes to highlight, generating create index statements
+* Schema browser - adding/removing entries, browsing schemas, viewing different object types, generating SQL, right-click options
+* Visual explain - explain types, explain a statement, how to read the data, export the data, configure which nodes to highlight, generating create index statements
 * SELF - what is self, how to enable it, using the error view, creating an intentional error, turning SELF on outside of VS Code
-* Notebooks - what is a notebook, creating your first notebooks, different cell types, saving and sharing notebooks, charting with notebooks, chart tooltips, chart * datapoints, exporting notebooks, opening a notebook from SQL files
+* Notebooks - what is a notebook, creating your first notebooks, different cell types, saving and sharing notebooks, charting with notebooks, chart tooltips, chart * data points, exporting notebooks, opening a notebook from SQL files
 
 ---
 
@@ -42,7 +42,8 @@ We are using the Code for IBM i extension to connect to IBM i systems, and then 
 
 If you are doing this workshop as part of a hosted lab, then a user profile and schema with sample data will be provided to you. 
 
-If you're using your own system, then ensure SSH is running on your system. [Check out the requirements](../../). You can use `qsys.create_sql_sample` to create the same sample data.
+If you're using your own system, ensure that SSH is running on your system. [Check out the requirements](../../). You can use `qsys.create_sql_sample` to create the same sample data.
+QSYS/STRTCPSVR SERVER(*SSHD) -> The CL command that starts the Secure Shell (SSH) Daemon server.
 
 ---
 
@@ -163,7 +164,7 @@ When clicking on a job in the SQL Job Manager, it becomes the selected job, and 
 <CardGrid>
 <Card>
 
-Once a job has been configured to your liking, you are able to save the configuration so next time you start a job the settings will already be applied.
+Once a job has been configured to your liking, you can save the configuration so next time you start a job the settings will already be applied.
 
 Right click on a job and select 'Save settings into config'. This will allow you to provide a name for the configuration.
 
@@ -255,7 +256,7 @@ Every time you execute a statement, the statement will be prepended to the state
 
 #### 4. Managing commitment control
 
-VS Code has a simple UI to show if your job has changes pending to commit in your job. In the screenshot an update statement has been execute, and the result view shows that 1 row was updated. When your job has committment control setup, the hotbar item will highlight when there are pending changes in your job. Hovering on the hotbar item with your current job will show new Commit and Rollback buttons.
+VS Code has a simple UI to show if your job has changes pending to commit in your job. In the screenshot, an update statement has been executed, and the result view shows that 1 row was updated. When your job has commitment control setup, the hotbar item will highlight when there are pending changes in your job. Hovering on the hotbar item with your current job will show new Commit and Rollback buttons.
 
 <Aside type="note">
 For this, **commitment control will need to be turned on for your job**. Edit your job settings, and under the System tab, set 'Auto commit' to False, 'Transaction isolation' to 'Read uncommitted' and 'True autocommit' to false.
@@ -409,7 +410,7 @@ cl: dspffd sample/employee
 
 ### Intro
 
-Schema Browser is a view where users can explorer schemas, and SQL objects inside of those schemas. Additionally, context options on some objects as well as viewing columns or parameters to others.
+Schema Browser is a view where users can explore schemas, and SQL objects inside of those schemas. Additionally, context options on some objects as well as viewing columns or parameters to others.
 
 ### Tasks
 
@@ -466,7 +467,7 @@ All objects will have the ability to delete and rename.
 All SQL objects will have the 'Generate SQL' option, which will generate the SQL that can be used to recreate the object.
 
 <Aside type="note">
-Further provements are going to be made to 'Generate SQL' in the future to make it more configurable.
+Further improvements are going to be made to 'Generate SQL' in the future to make it more configurable.
 </Aside>
 
 </Card><Card>
@@ -477,7 +478,7 @@ Further provements are going to be made to 'Generate SQL' in the future to make 
 
 #### 5. Filtering / searching a schema
 
-All schemas have the ability to filter objects in a schema to find something specific. Click on the 🔎 (search) icon, which will show a input box where a case-insensitive name can be provided.
+All schemas have the ability to filter objects in a schema to find something specific. Click on the 🔎 (search) icon, which will show an input box where a case-insensitive name can be provided.
 
 ![](./assets/schemas_6.png)
 
@@ -491,7 +492,7 @@ Visual Explain is.....
 
 ### Tasks
 
-#### 1. Explaing a statement
+#### 1. Explaining a statement
 
 #### 2. Reading the VE data
 
@@ -510,7 +511,8 @@ Visual Explain is.....
 SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the Results View. Additional documentation of SELF can be found [here](https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self).
 
 <Aside type="caution">
-SELF can only work with users who has `*ALLOBJ` authority. This is because... Scott write here. This section may have to be skipped in the lab environment due to lack of authority.
+SELF can only work with users who have `*ALLOBJ` authority. This is because SELF data could contain information about other users and what SQL they're executing. 
+This section may have to be skipped in the lab environment due to lack of authority.
 </Aside>
 
 ### Tasks
@@ -526,7 +528,7 @@ There are four modes to capture errors with:
 | `*NONE` | Capture no errors |
 | `*WARNING` | Capture any errors where the `SQLCODE` is above `0` |
 | `*ERROR` | Capture any errors where the `SQLCODE` is below `0` |
-| `*ALL` | Capture both warnings and errors |
+| `*ALL` | Capture both warnings and errors, `SQLCODE` != `0`  |
 
 ##### Turn on SELF for an SQL job
 
@@ -579,12 +581,12 @@ If you are unable to locate the SELF view, you can use F1→filter 'focus SELF'.
 
 #### 3. Capturing errors from programs
 
-This part will demostrate how to capture errors from ILE programs that utilise embedded SQL.
+This part will demonstrate how to capture errors from ILE programs that utilize embedded SQL.
 
 <CardGrid>
 <Card>
 
-Create a new member in a source file, or create a streamfile in the IFS, and give it the attribute/extension `.sqlrpgle`. Fill the member with the following content, and then compile it using the Create SQL RPGLE program Action (`CRTSQLRPGI` command).
+Create a new member in a source file, or create a stream file in the IFS, and give it the attribute/extension `.sqlrpgle`. Fill the member with the following content, and then compile it using the Create SQL RPGLE program Action (`CRTSQLRPGI` command).
 
 <Aside type="note">
 To create a new member, navigate to the Object Browser, add a `*SRCPF` filter to a schema/library you are working with, right click on the filter and create a source file, then right click on the source file and create a new member.
@@ -616,7 +618,7 @@ This is only recommended for the purposes of this workshop: `call yourlib.thesql
 If no error appeared:
 
 1. ensure that SELF is enabled on the selected job with `*ALL` mode.
-2. either refresh the SELF view manually, or turn on auto refresh - both are buttons on the SELF view panel.
+2. either refresh the SELF view manually or turn on auto refresh - both are buttons on the SELF view panel.
 </Aside>
 
 #### 4. Using SELF outside of VS Code
