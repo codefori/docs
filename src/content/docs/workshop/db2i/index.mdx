@@ -490,17 +490,124 @@ All schemas have the ability to filter objects in a schema to find something spe
 
 Visual Explain is.....
 
+<Aside type="note">
+For this section, we are using the sample database. If you're doing this workshop as part of a lab, the sample data will be created for you automatically. You can use `qsys.create_sql_sample` to create the same sample data if you are using your own system.
+</Aside>
+
 ### Tasks
 
 #### 1. Explaining a statement
 
+<CardGrid>
+<Card>
+
+Explaining SQL is as simple as executing an SQL statement. Do a select against `employee` and be sure to use a predicate (`where` clause):
+
+```sql
+SELECT * FROM SNDBX57.EMPLOYEE
+where job = 'MANAGER';
+```
+
+</Card><Card>
+
+![](./assets/explain_1.png)
+
+</Card></CardGrid>
+
+<Aside type="note">
+Note that when choosing ‘Explain without running’, the SQL Query Engine (SQE) isn’t executing the query, but rather giving the user optimizer insight prior to executing the query.
+</Aside>
+
 #### 2. Reading the VE data
+
+<CardGrid>
+<Card>
+
+The first most action is a lightbulb icon that acts as the access point for ‘Advised Indexes and Statistics’. Click on it and you’ll see that SQE would appreciate having a binary radix index where the index key is JOB. This is no surprise, because it could be much faster to find all rows that have a specific value for JOB if an index exists over that column. However, keep in mind that index advice is just that, advice, and a proper index strategy includes awareness of existing indexes and observation of usage statistics and index advice.
+
+</Card><Card>
+
+![](./assets/explain_2.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+If we love the advice SQE is showing us, we can click on the ‘Generate SQL for Advised Indexes’ and voila!, a CREATE INDEX (SQL) statement will be generated.
+
+</Card><Card>
+
+![](./assets/explain_3.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+We might want to revise the index name before executing, if we indeed decide to establish the index.
+
+</Card><Card>
+
+![](./assets/explain_4.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+To see summary detail for the VE detail, locate your mouse pointer over the ‘Table Scan’ row.
+
+</Card><Card>
+
+![](./assets/explain_5.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+To see the full VE details, click on ‘Display details’.
+
+</Card><Card>
+
+![](./assets/explain_6.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+Use the Command+Option+f key sequence to cause the VE search bar to magically appear.
+
+Type in goal to find all occurrences of of “goal” within the VE detail. The SQL optimization goal is one of many interesting tidbits to be found within VE detail.
+
+</Card><Card>
+
+![](./assets/explain_7.png)
+
+</Card></CardGrid>
+
+<CardGrid>
+<Card>
+
+Please remember that SQE is a cost-based optimizer. It looks at all available options and statistics, and make the best choice for query implementation. In this situation, a table scan was used, probably because there are only 42 rows in this sample database table.
+ 
+Use the nifty Command+Option+f search facility and search on ‘index’. As shown in the image, you see the indexes that SQE considered using.
+
+Return to the SQL query and execute the query, using ‘Run and explain statement’. Note that VE shows the same approach (Table Scan) for the implementation of the query. Why wasn’t the index used?
+
+</Card><Card>
+
+![](./assets/explain_8.png)
+
+![](./assets/explain_9.png)
+
+</Card></CardGrid>
 
 #### 3. Configuring node highlighting
 
 #### 4. Exporting the data
-
-#### 5. Generating `create index` statements
 
 ---
 
@@ -635,22 +742,102 @@ SET SYSIBMADM.SELFCODES = '*ALL';
 
 ### Intro
 
-Notebooks are...
+Notebooks are documents that contain a mix of rich Markdown, executable code snippets, and accompanying rich output. These are all separated into distinct cells and can be interleaved in any order. They are great storytelling devices, allowing you to interleave Markdown elements like images, math equations, and explanatory text with your code. Notebooks can be a perfect way to share and explain your ideas with coworkers or the public community.
+
+Notebooks support executing SQL statements and rendering tables, CL results and charts from Db2 for IBM i data directly in cell results.
+
+Checkout [this Visual Studio Code blog](https://code.visualstudio.com/blogs/2021/11/08/custom-notebooks) for more information Notebook support.
 
 ### Tasks
 
 #### 1. Creating your first Notebook
 
-#### 2. Using different cell types
+There are a few ways to create an IBM i Notebook:
+
+1. You can use the 'New Notebook' button on the SQL Job Manager
+2. You can find 'IBMi i: New Notebook' in the command palette.
+3. Open a `.inb` file (which stands for 'i Notebook')
+
+<CardGrid>
+<Card>
+
+Above and below all cells will be two buttons to either:
+
+* Add a code cell, or
+* Add a markdown.
+
+Each cell has a language asscoiated with it, which determines how the cell will be executed.
+
+</Card><Card>
+
+![](./assets/notebooks_1.png)
+
+</Card></CardGrid>
+
+#### 2. Executing a cell
+
+<CardGrid>
+<Card>
+
+Based on the language tagged in the cell determines how the cell will be executed and result will be rendered. By default, when using SQL, a table will be produced. Other types include CL and markdown.
+
+On each cell is a ▶️ (play) button which will execute the cell, or you can use the keyboard shortcut Control+Enter. SQL statements will get executed in the selected job inside of the SQL Job Manager.
+
+</Card><Card>
+
+![](./assets/notebooks_2_a.png)
+
+</Card></CardGrid>
+
+Multiple cells of different languages can be combined to build a notebook. This shows a notebook built with markdown and CL cells.
+
+![](./assets/notebooks_2_b.png)
 
 #### 3. Saving and sharing Notebooks
 
+When working with Notebooks inside of VS Code, they can be saved like regular files. IBM i specific Notebooks use the `.inb` extension as an indicator it's used against IBM i and so VS Code knows how to open and execute it correctly.
+
+You can use File→Save or File→Save As to save the Notebook onto your local device. Everything in the Notebook gets saved - including the result set - so when you or someone else opens the Notebook again, the previously run results will be there until overwritten. The cells can be run again and the prior results replaced.
+
 #### 4. Charting with Notebooks
 
-#### 5. Chart tooltips
+In a prior section, we had shown new prefixes like `json`, `csv`, etc. When using Notebooks, there are additional prefixes will allow for charts to be generated inside of a Notebook from Db2 for IBM i result sets.
 
-#### 6. Chart datapoints
+<CardGrid>
+<Card>
 
-#### 7. Exporting Notebooks
+1. Add a new SQL cell in a Notebook
+2. Write the statement provided into the cell
+   * See the prefix used here (`pie`). This is the chart type.
+3. Execute the cell and see the chart
 
-#### 8. Opening Notebooks from SQL files
+```sql
+pie: select JOB_NAME as label, CPU_TIME
+from table(QSYS2.ACTIVE_JOB_INFO(
+    SUBSYSTEM_LIST_FILTER => 'QUSRWRK,QSYSWRK'
+)) A 
+ORDER BY CPU_TIME DESC 
+LIMIT 10
+```
+
+</Card><Card>
+
+![](./assets/notebooks_3.png)
+
+</Card></CardGrid>
+
+<Aside type="note">
+There are important concepts to remember about charting statements:
+
+* A chart won't be labeled without a `LABEL` column
+* Each numeric column become datapoints in the chart
+* A chart type is required. [See the documentation](../../extensions/db2i/#charting-with-sql) for the available chart types.
+</Aside>
+
+#### 5. Chart datapoints
+
+If multiple numeric colimns 
+
+#### 6. Exporting Notebooks
+
+#### 7. Opening Notebooks from SQL files
