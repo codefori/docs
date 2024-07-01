@@ -283,6 +283,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"extensions/clle/index.mdx": {
+	id: "extensions/clle/index.mdx";
+  slug: "extensions/clle";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "extensions/db2i/index.mdx": {
 	id: "extensions/db2i/index.mdx";
   slug: "extensions/db2i";
