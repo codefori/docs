@@ -506,7 +506,9 @@ All schemas have the ability to filter objects in a schema to find something spe
 
 ### Intro
 
-Visual Explain is.....
+Visual Explain is an essential tool for anyone who wants to use SQL Query Engine (SQE) insight to understand the performance characteristics of their SQL.
+Visual Explain is often referred to as VE. SQE, as a cost-based optimizer, considers many factors before settling on the "plan" for query implementation. 
+By using VE during development and unit tests, IBM i application developers can gain crucial performance insights, and tune their SQL prior to promotion.
 
 <Aside type="note">
 For this section, we are using the sample database. If you're doing this workshop as part of a lab, the sample data will be created for you automatically. You can use `qsys.create_sql_sample` to create the same sample data if you are using your own system.
@@ -563,7 +565,7 @@ If we love the advice SQE is showing us, we can click on the ‘Generate SQL for
 <CardGrid>
 <Card>
 
-We might want to revise the index name before executing, if we indeed decide to establish the index.
+We might want to revise the index name before executing if we indeed decide to establish the index.
 
 </Card><Card>
 
@@ -598,7 +600,7 @@ To see the full VE details, click on ‘Display details’.
 
 Use the Command+Option+f key sequence to cause the VE search bar to magically appear.
 
-Type in goal to find all occurrences of of “goal” within the VE detail. The SQL optimization goal is one of many interesting tidbits to be found within VE detail.
+Type in goal to find all occurrences of “goal” within the VE detail. The SQL optimization goal is one of many interesting tidbits to be found within VE detail.
 
 </Card><Card>
 
@@ -636,7 +638,7 @@ As mentioned in the part before, all nodes can be hover on for more detail. When
 
 <br />
 
-It is possible to configure which nodes will be highlighted in the Explain results. As depicted in the screenshot below, click the ⚙️ (cog/settings) in the Visual Explain view. This will open a new tab with settings, where options can be toggled which control which nodes will be highlighted.
+It is possible to configure which nodes will be highlighted in the Explain results. As depicted in the screenshot below, click the ⚙️ (cog/settings) in the Visual Explain view. This will open a new tab with settings, where options can be toggled which controls which nodes will be highlighted.
 
 </Card><Card>
 
@@ -781,7 +783,7 @@ SET SYSIBMADM.SELFCODES = '*ALL';
 
 Notebooks are documents that contain a mix of rich Markdown, executable code snippets, and accompanying rich output. These are all separated into distinct cells and can be interleaved in any order. They are great storytelling devices, allowing you to interleave Markdown elements like images, math equations, and explanatory text with your code. Notebooks can be a perfect way to share and explain your ideas with coworkers or the public community.
 
-Notebooks support executing SQL statements and rendering tables, CL results and charts from Db2 for IBM i data directly in cell results.
+Notebooks support executing SQL statements and rendering tables, CL results, and charts from Db2 for IBM i data directly in cell results.
 
 Checkout [this Visual Studio Code blog](https://code.visualstudio.com/blogs/2021/11/08/custom-notebooks) for more information Notebook support.
 
@@ -803,7 +805,7 @@ Above and below all cells will be two buttons to either:
 * Add a code cell, or
 * Add a markdown cell.
 
-Each cell has a language asscoiated with it, which determines how the cell will be executed.
+Each cell has a language associated with it, which determines how the cell will be executed.
 
 </Card><Card>
 
@@ -816,7 +818,7 @@ Each cell has a language asscoiated with it, which determines how the cell will 
 <CardGrid>
 <Card>
 
-Based on the language tagged in the cell determines how the cell will be executed and result will be rendered. By default, when using SQL, a table will be produced. Other types include CL and markdown.
+Based on the language tag in the cell determines how the cell will be executed and result will be rendered. By default, when using SQL, a table will be produced. Other types include CL and markdown.
 
 On each cell is a ▶️ (play) button which will execute the cell, or you can use the keyboard shortcut Control+Enter. SQL statements will get executed in the selected job inside of the SQL Job Manager.
 
