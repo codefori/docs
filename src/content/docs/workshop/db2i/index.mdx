@@ -207,7 +207,23 @@ As discovered in the last section, it is possible to run statements in an SQL do
 
 ### Tasks
 
-#### 1. Executing statements
+#### 1. SQL Naming Mode
+
+The naming mode used for your SQL is a configuration option that you should strictly control. The Naming can be set by editing a job in the SQL Job Manager, under the Format tab.
+
+<CardGrid>
+<Card>
+
+* **System naming** - The '/' character is used to separate the library or schema name from the table or view name. Using system naming allows the user to leverage the library list (*LIBL) as the mechanism to resolve unqualified object names. System naming is unique to Db2 for i.
+* **SQL naming** - The '.' character is used to separate the library or schema name from the table or view name. SQL naming is based upon the SQL standard.
+
+</Card><Card>
+
+![](./assets/execute_1.png)
+
+</Card></CardGrid>
+
+#### 2. Executing statements
 
 <CardGrid>
 <Card>
@@ -222,7 +238,7 @@ Clicking the ▶️ (play) button will show a drop down, and the first entry in 
 
 </Card></CardGrid>
 
-#### 2. Cancelling a statement
+#### 3. Cancelling a statement
 
 <CardGrid>
 <Card>
@@ -243,7 +259,7 @@ where 1=1
 
 </Card></CardGrid>
 
-#### 3. Using statement history
+#### 4. Using statement history
 
 <CardGrid>
 <Card>
@@ -256,7 +272,7 @@ Every time you execute a statement, the statement will be prepended to the state
 
 </Card></CardGrid>
 
-#### 4. Managing commitment control
+#### 5. Managing commitment control
 
 VS Code has a simple UI to show if your job has changes pending to commit in your job. In the screenshot, an update statement has been executed, and the result view shows that 1 row was updated. When your job has commitment control setup, the hotbar item will highlight when there are pending changes in your job. Hovering on the hotbar item with your current job will show new Commit and Rollback buttons.
 
