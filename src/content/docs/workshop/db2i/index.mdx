@@ -764,7 +764,7 @@ There are a few ways to create an IBM i Notebook:
 Above and below all cells will be two buttons to either:
 
 * Add a code cell, or
-* Add a markdown.
+* Add a markdown cell.
 
 Each cell has a language asscoiated with it, which determines how the cell will be executed.
 
@@ -836,8 +836,57 @@ There are important concepts to remember about charting statements:
 
 #### 5. Chart datapoints
 
-If multiple numeric colimns 
+<CardGrid>
+<Card>
+
+If multiple numeric columns are returned in the result set, then they will be plotted as multiple data points in the resulting chart.
+
+```sql
+bar: select empno as label, salary, bonus 
+from sample.employee 
+order by salary 
+desc limit 10
+```
+
+</Card><Card>
+
+![](./assets/notebooks_4.png)
+
+</Card></CardGrid>
 
 #### 6. Exporting Notebooks
 
+Using the Export button at the top of each Notebook document allows the user to save contents into a static HTML file. This file can be shared, published, or exported as PDF from most browsers.
+
+![](./assets/notebooks_5.png)
+
+<Aside type="note">
+You can use the `hideStatement` tag in the input SQL cell to hide the statement in the exported document.
+
+```sql
+--hideStatement: true
+bar: select empno as label, salary, bonus 
+from sample.employee 
+order by salary 
+desc limit 10
+```
+
+[See the documentation](../../extensions/db2i/#charting-with-sql) for more information on tags.
+</Aside>
+
 #### 7. Opening Notebooks from SQL files
+
+Any SQL document can be converted to a new Notebook. Each SQL statement in the document will become a unique SQL cell.
+
+<CardGrid>
+<Card>
+
+Under the ▶️ (play) button is 'Open as Notebook'. Selecting that will open the Notebook in a new tab.
+
+</Card><Card>
+
+![](./assets/notebooks_6_a.png)
+
+</Card></CardGrid>
+
+![](./assets/notebooks_6_b.png)
