@@ -3,7 +3,7 @@ title: Db2 for IBM i, for the developer
 template: splash
 ---
 
-import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
+import { Aside, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Outline
 
@@ -725,7 +725,156 @@ When an item is expanded or hovered over, information about the `SQLCODE` is dis
 If you are unable to locate the SELF view, you can use F1→filter 'focus SELF'.
 </Aside>
 
-#### 3. Capturing errors from programs
+#### 3. Help for SQL warnings and errors in procedures
+
+In this section we'll discover how SELF can help identify and isolate SQL coding issues. The SQL standard dictates when a code issue is designated as an SQL warning or SQL error. In either situation, it's well worth your time to see what SELF is capturing and decide how to remediate the code.
+
+As you move through the following 6 examples, start by creating the example procedure in your schema. Then, use the SQL CALL statement to call the procedure. Finally, take a close look at the SELF detail and try to ascertain why the SQL warning or error occurred, and what you'd do to fix the issue.
+
+<Tabs>
+<TabItem label="Example 1">
+
+```sql
+--
+-- Cause an SQL warning
+--
+create or replace procedure coolstuff.proc1()
+begin
+declare v1 integer;
+declare v2 integer;
+
+select 1+1, 2+2, 3+3 into v1, v2 
+ from sysibm.sysdummy1;
+ 
+end;
+
+--
+-- Force SQL warnings
+--
+call coolstuff.proc1();
+```
+
+</TabItem>
+<TabItem label="Example 2">
+
+```sql
+--
+-- Cause an SQL warning
+--
+create or replace procedure coolstuff.proc2()
+begin
+declare v1 integer;
+declare v2 integer;
+
+select 4+4 into v1, v2 
+ from sysibm.sysdummy1;
+ 
+end; 
+
+call coolstuff.proc2(); 
+```
+
+</TabItem>
+<TabItem label="Example 3">
+
+```sql
+--
+-- Cause an SQL error
+--
+create or replace procedure coolstuff.proc3()
+begin
+declare v1 integer;
+declare v2 integer;
+
+select 1, current date into v1, v2 
+ from sysibm.sysdummy1;
+end; 
+
+call coolstuff.proc3();
+```
+
+</TabItem>
+<TabItem label="Example 4">
+
+```sql
+--
+-- Cause an SQL error
+--
+create or replace procedure coolstuff.proc4()
+begin
+declare v1 integer;
+declare v2 integer;
+
+declare demoC cursor for
+select 1, current date 
+ from sysibm.sysdummy1;
+open demoC;
+fetch from demoC into v1, v2;
+close demoC;
+end; 
+
+call coolstuff.proc4(); 
+```
+
+</TabItem>
+<TabItem label="Example 5">
+
+```sql
+--
+-- Cause an SQL error
+--
+create table qtemp.tempy (textish clob(2m));
+create or replace procedure coolstuff.proc5()
+begin
+declare lc integer;
+declare lv integer;
+declare v_text clob(2m); 
+set lc = 220000;
+set lv = 0;
+while (lv<lc) do
+ set lv = lv + 1;
+ set v_text = v_text concat '1234567890';
+end while;
+prepare ins_stmt from 'insert into qtemp.tempy values(?, ?)';
+execute ins_stmt using v_text;
+end; 
+
+call coolstuff.proc5(); 
+```
+
+</TabItem>
+<TabItem label="Example 6">
+
+```sql
+--
+-- Cause an SQL error
+--
+create table qtemp.tempy (textish clob(2m));
+create or replace procedure coolstuff.proc6()
+begin
+declare lc integer;
+declare lv integer;
+declare v_text clob(2m); 
+set lc = 2200;
+set lv = 0;
+set v_text = 'create table qtemp.tempy2 as (select ''';
+while (lv<lc) do
+ set lv = lv + 1;
+ set v_text = v_text concat '1234567890';
+end while;
+
+set v_text = v_text concat ''', 1 from sysibm.sysdummy1) with data'; 
+call systools.lprintf('stmt length: ' concat length(v_text));
+execute immediate v_text;
+
+end; 
+call coolstuff.proc6(); 
+```
+
+</TabItem></Tabs>
+
+
+#### 4. Capturing errors from programs (RPGLE)
 
 This part will demonstrate how to capture errors from ILE programs that utilize embedded SQL.
 
@@ -767,7 +916,7 @@ If no error appeared:
 2. either refresh the SELF view manually or turn on auto refresh - both are buttons on the SELF view panel.
 </Aside>
 
-#### 4. Using SELF outside of VS Code
+#### 5. Using SELF outside of VS Code
 
 The SELF view will show any errors captured by the same user that is connected inside of Visual Studio Code. You can use the SQL statement to set the SELF mode in any job where SQL can be run. Then, when logs occur in those jobs, they will appear in the SELF view.
 
