@@ -150,7 +150,7 @@ The Debug Service needs a certificate to be able to be started. This is required
 
 By default, certificates are generated in `/QIBM/UserData/IBMiDebugService/certs` (which is the recommended location). The path to the Debug Service certificate is set in `/QIBM/ProdData/IBMiDebugService/bin/DebugService.env` with `DEBUG_SERVICE_KEYSTORE_FILE`.
 
-The Debug Service certificate can only be generated if it's missing. In this case, the IBM i Debugger view will show this error:
+If the certificate is missing, the IBM i Debugger view will show this error:
 
 ![](./debug10.png)
 
@@ -158,11 +158,17 @@ Clicking on the Setup Service Certificate button will start a process that offer
 * `debug_service.pfx`
   * the Debug Service certificate, used by the service to encrypt the communication.
 * `debug_service.crt`
-  * the client certificate that clients must download if the `Secure Debug` option is turned on in Code for IBM i.
+  * the client certificate that clients must download to be able to connect to the Debug Service.
+
+Generating the certificates will also update the Debug Service configuration file `/QIBM/ProdData/IBMiDebugService/bin/DebugService.env` to set the correct path to the required JDK and save the encrypted certificate password.
 
 If these certificates are deleted for some reason, they can be simply regenerated from the IBM i Debugger view as described above. They are used only to encrypt the traffic between the clients and Debug Service.
 
-If `Secure Debug` is on and the client certificate cannot be found locally or does not match the remote certificate, Code for IBM i will show a warning in the IBM i Debugger view and offer an action to import the client certificate.
+It also possible to regenerate the certificates by right-clicking on the Debug Service and choosing `Regenerate service certificate`
+
+![](./debug14.png)
+
+If the client certificate cannot be found locally or does not match the remote certificate, Code for IBM i will show a warning in the IBM i Debugger view and offer an action to import the client certificate.
 
 ![](./debug11.png)
 
@@ -208,7 +214,7 @@ While you can configure the ports in the Connection Settings, it is recommended 
 If `DBGSRV_SECURED_PORT` is changed, make sure to:
 
 * restart the Debug Service
-* change the Debug Service port number in the connection settings to your new port (`DBGSRV_SECURED_PORT`). **Every user will need to do this step.** */}
+* reconnect every Code for IBM i instances. **Every user will need to do this step.** */}
 
 # FAQ
 
@@ -265,7 +271,7 @@ If you receive this message, do as it says. Simply start the Debug Server with `
 
 ## IP not in cert list
 
-**It is always recommended you use a hostname in the connection settings to make use of the debugger when in secure mode**.
+**It is always recommended you use a hostname in the connection settings to make use of the debugger**.
 
 ![](./error_1.png)
 
