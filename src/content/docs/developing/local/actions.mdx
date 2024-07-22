@@ -48,6 +48,21 @@ These variables can be used for local development. They can be referenced in `ac
 | `&HOME`         | Current home directory. Typically not the same as deploy directory.               |
 | `&BRANCH`       | The current branch name in git. Can also use `{branch}`                           |
 
+## Compiling non-IFS sources
+
+When working in the local workspace, it is possible to define an Action that will automatically copy to a temporary member and compile from there. This is required for legacy object likes like DSPF, PF and LF, or other commands that use `SRCFILE` instead of `SRCSTMF`.
+
+If you have a local (inside `actions.json`) `ile` action, and the command contains `&SRCFILE`, then the source will be copied to a temporary member inside the build library from your local workspace before running the compile command.
+
+```json
+{
+  "command": "CRTDSPF FILE(&CURLIB/&NAME) SRCFILE(&SRCFILE) TEXT('DSPF from local')",
+  "environment": "ile",
+  "type": "file",
+  "name": "Create Display File (CRTDSPF)",
+}
+```
+
 ## PASE environment variables
 
 When you run Actions in the pase environment, all variables from VS Code (things like `&CURLIB`, `&BUILDLIB`, custom variables, `.env` variables) are inherited into the spawned pase shell.
