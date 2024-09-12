@@ -1,0 +1,51 @@
+---
+title: Protecting Source
+---
+
+import { Icon } from '@astrojs/starlight/components';
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+Generally accepted best practice is that developers should not be able to directly change production source. 
+
+However, if you operate with *ALLOBJ or other elevated authority, there are a few setting that may protect you against making accidental changes to production source.
+
+Source that is protected from change by these settings is shown with a **Padlock** icon:
+<CardGrid>
+<Card>
+![Padlock Left](../../../assets/protect_01.png)
+</Card><Card>
+![Padlock Editor](../../../assets/protect_02.png)
+</Card>
+</CardGrid>
+
+### Code for IBM i Extension Level Protection
+
+By default, clicking on source opens it for editing. Change `Default Open Mode` to `browse` to protect all source in all connections by default.
+
+![Extension level protection](../../../assets/protect_04.png)
+
+To override `Broswe`, right click and choose `Edit` to open the source and allow changes.
+
+### Connection Level Protection #1
+
+Protect **all** filters and source in a connection by choosing `Browse` as the `Read only mode` setting, so that by default source will be opened as read-only. 
+
+![Connection protection #1 right click](../../../assets/protect_03.png)
+
+To override `Broswe`, right click and choose `Edit` to open the source and allow changes.
+
+### Connection Level Protection #2
+
+Protect source in specific libraries or IFS directories by making entries in the `Protected paths` setting:
+
+![Connection protection #2](../../../assets/protect_06.png)
+
+Note that this protection cannot be overridden by right clicking on the source.
+
+### Filter Level Protection
+
+Put a checkmark in the `Protected` setting of a filter to protect all source defined in the filter from being changed: 
+
+![Filter protection](../../../assets/protect_05.png)
+
+There is no way to override this protection other then un-checking this setting in the filter.
