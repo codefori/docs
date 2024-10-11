@@ -258,14 +258,14 @@ We do not give any service user data that exists on your system. But, we feed th
 #### We do not
 
 * Send any data in your own tables, views, programs, etc
-* Send user from the IBM i system
+* Send user info from the IBM i system
 * Train external services using any data from your systems
 * Send any requests to any service without the user explicity using any of the AI functionality.
 
 #### We do
 
 * Send table metadata which can be found from `QSYS2.SYSCOLUMNS2` and `QSYS2.SYSKEYCST` in the context based on user input, including table names, column names, types and comments
-* Send system metadata (when using asking for the activity summary) which is found with `TABLE(QSYS2.SYSTEM_STATUS(RESET_STATISTICS=>'YES',DETAILED_INFO=>'ALL'))` when requested by the user.
+* Send system metadata (when the user is asking for the activity summary) which is found with `TABLE(QSYS2.SYSTEM_STATUS(RESET_STATISTICS=>'YES',DETAILED_INFO=>'ALL'))` when requested by the user.
 
 ### Open source
 
