@@ -266,3 +266,9 @@ We do not give any service user data that exists on your system. But, we feed th
 
 * Send table metadata which can be found from `QSYS2.SYSCOLUMNS2` and `QSYS2.SYSKEYCST` in the context based on user input, including table names, column names, types and comments
 * Send system metadata (when using asking for the activity summary) which is found with `TABLE(QSYS2.SYSTEM_STATUS(RESET_STATISTICS=>'YES',DETAILED_INFO=>'ALL'))` when requested by the user.
+
+### Open source
+
+Our AI integration is fully open-source. We don't want to hide how we are connecting our users to services, and we are ensuring that by supporting multiple provides (like GitHub Copilot, plus even more with Continue), then we are giving our users the choice of what, if any, AI services they are using.
+
+You can see all our AI integration code in the [GitHub repository for the Db2 for IBM i extension](https://github.com/codefori/vscode-db2i/tree/main/src/chat).
