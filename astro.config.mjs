@@ -44,6 +44,10 @@ export default defineConfig({
 					link: 'quickstart/',
 				},
 				{
+					label: 'Help and Support',
+					link: 'help-and-support/',
+				},
+				{
 					label: 'Developing',
 					items: [
 						{
