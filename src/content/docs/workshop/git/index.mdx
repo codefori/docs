@@ -619,3 +619,145 @@ After syncing, you will have all the missing changes on your local device.
 ![](./assets/pr_8.png)
 
 </Card></CardGrid>
+
+#### 7. Add additional code
+
+<br />
+
+##### The `depts` program
+
+<CardGrid>
+<Card>
+
+<br />
+<br />
+<br />
+
+In your source directory, go ahead and create a new file named `depts.sqlrpgle`. 
+
+This will be a program that we can call via SQL that returns a simple result set.
+
+* It used `EXTNAME` to use a tables columns as subfields of a data structure.
+* We use `LIKEDS` with `DIM` to create an array of rows for our result set.
+* The data structure array is returning as an SQL result set.
+
+Ensure this program compiles successfully before continuing.
+
+<Aside type="note">
+This assumes `department` exists and is on your library list.
+</Aside>
+
+</Card><Card>
+
+```rpgle
+**free
+
+ctl-opt dftactgrp(*no);
+
+dcl-ds departments extname('DEPARTMENT') template;
+end-ds;
+
+dcl-ds rows likeds(departments) dim(100);
+
+dcl-s maxRows uns(5) inz(%elem(rows)) ;
+
+// Handle nulls correctly, since nulls in RPG aren't nice
+exec sql 
+  declare c0 cursor for
+  select 
+    deptno, 
+    deptname, 
+    ifnull(mgrno, '-1') as mgrno, 
+    admrdept, 
+    ifnull(location, 'Unknown') as location
+  from department
+  for read only ;
+
+exec sql open c0 ;
+
+exec sql fetch c0 for :maxRows rows into :rows ;
+
+exec sql close c0 ;
+
+exec sql set result sets array :rows for 10 rows;
+
+return;
+```
+
+</Card></CardGrid>
+
+Then, using SQL (either through Visual Studio Code or Access Client Solutions), this program is called - even without a procedure - and should produce a result set with `call depts()`:
+
+![](./assets/depts.png)
+
+##### `UpdateDepartments` procedure
+
+Next, we're going to create two new files. One `.sqlrpgle` program named `UPDDEPT` to update a table, and one SQL Procedure (`.sql`) named `UpdateProcedure` to call the program. These can both exist in your source directory.
+
+<CardGrid>
+<Card>
+
+```rpgle
+**free
+
+ctl-opt dftactgrp(*no);
+
+dcl-pi upddept;
+  deptno char(3);
+  deptname char(36);
+  mgrno char(6);
+  admrdept char(3);
+  location char(16);
+end-pi;
+
+dcl-ds result qualified dim(1);
+  success char(1);
+end-ds;
+
+exec sql
+  update dept
+    set deptname = :deptname,
+        mgrno = :mgrno,
+        admrdept = :admrdept,
+        location = :location
+    where deptno = :deptno;
+
+if (SQLCOD = 0);
+  result(1).success = 'Y';
+else;
+  result(1).success = 'N';
+endif;
+
+exec sql set result sets array :result for 1 rows;
+
+return;
+```
+
+</Card><Card>
+
+Ensure to create the program first, so when you call the procedure, it can be found correctly (since the procedure depends on the program!)
+
+```sql
+create or replace procedure UpdateDepartment(
+  IN deptno char(3),
+  IN newName char(36),
+  IN newManager char(6),
+  IN parentDepartment char(3),
+  IN newLocation char(16)
+)
+LANGUAGE RPGLE
+MODIFIES SQL DATA
+EXTERNAL NAME UPDDEPT GENERAL;
+```
+
+Notice that the paramater types in the procedure match the parameter types of the program. This is important!
+
+<Aside type="note">
+This assumes `department` exists and is on your library list.
+</Aside>
+
+</Card></CardGrid>
+
+The procedure can now be called via SQL, which subsequently calls the RPGLE program and returns a result set:
+
+![](./assets/upddepts.png)
