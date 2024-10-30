@@ -475,3 +475,31 @@ This new route can only be called with a `PATCH` request, which means we cannot 
 <Aside type="note">
 There are lot of issues with the PATCH code. For example, we are not validating the input, we are not handling errors, and we are not returning the correct status codes. This is a good exercise to improve the code.
 </Aside>
+
+## Adding the OpenAPI validator
+
+We have built the routes according to the specification, but we have not validated that the routes match the specification. We can do this by adding an OpenAPI validator to our application. We can embed the OpenAPI specification into our application and use a library to validate the routes.
+
+### Adding the validator
+
+We need to do two things:
+
+1. Run `npm i express-openapi-validator` in the VS Code terminal to install the OpenApi validator for ExpressJS package.
+2. Create `src/spec/openapi.yaml` and paste [the OpenAPI specification from the Gist] into it.
+
+Following that, we need to follow the simple [OpenApi Validator tutorial](https://www.npmjs.com/package/express-openapi-validator) to add the validator to our application. The following changes are to be made to `src/index.ts`:
+
+![](./assets/n_addvalidator.png)
+
+### Testing the validator
+
+The validator will now check that the inputs and outputs of API calls match the specification. If they do not, it will return a 400 status code with an error message. We can test this by calling the same 'GET /departments/:id' API with different parameters:
+
+* `localhost:3000/departments/B01` (valid)
+* `localhost:3000/departments/B0` (invalid)
+
+![](./assets/n_testvalidator.png)
+
+<Aside type="note">
+Perhaps after adding the validator some of your API calls are no longer working, or are returning errors. This is a good thing! It means that the validator is working and that your API is not matching the specification. You can now go back and fix the API to match the specification.
+</Aside>
