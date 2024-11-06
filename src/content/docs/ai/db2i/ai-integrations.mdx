@@ -150,7 +150,7 @@ ollama pull granite3-dense:8b
 
 Open the VSCode Command Palette (Press ctrl+shift+p) and search for `Continue: open config.json`. This will open the Continue central config file `$HOME/.continue/config.json` in your editor. To enable the Granite models in Ollama, add the following configuration to the `models` section:
 
-```json
+```json title="~/.continue/config.json"
 "models": [
    {
      "title": "Granite Code 8b",
@@ -166,7 +166,7 @@ save this file and select the Granite model in the chat window.
 
 ### Examples
 
-Once you have the extension installed and the AI provider configured, you can ask questions about your database using the chat window using the `@db2i` context provider. In Continue, a context provider is very similar to a chat participant in GitHub Copilot. The `@db2i` context provider is a domain expert in Db2 for IBM i and can provide relevent information about your database and help you write SQL queries.
+Once you have the extension installed and the AI provider configured, you can ask questions about your database using the chat window using the `@db2i` context provider. In Continue, a context provider is very similar to a chat participant in GitHub Copilot. It provides additional context to the AI model to help it generate more accurate SQL queries.
 
 More on context providers can be found [here](https://docs.continue.dev/customize/context-providers/).
 
