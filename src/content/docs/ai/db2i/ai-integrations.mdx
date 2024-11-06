@@ -218,22 +218,26 @@ tell me about the columns in sample.employee
   * To get better results, make sure to set the current schema in the SQL job settings, or reference the schema in your queries: `SAMPLE.EMPLOYEE`
 </Aside>
 
+let's break down the process of how the `@db2i` chat participant and the `@Db2i` context provider work:
 
 
+### Here’s a breakdown of the process:
+![alt text](image-19.png)
 
 
+1. **Activate the `@Db2i` Context Provider**
+   - Start by typing the "@" symbol in the chat text box to invoke the `@Db2i` context provider.
+2. **Enter Your Query**
+   - Use a prompt like:
+     ```
+     How can I get the department name for each employee ?
+     ```
+3. **SQL Generation with Contextual Insights**
+   - With the relevant column metadata from `employee` and `department` tables, the model generates an accurate SQL `JOIN` statement.
+4. **Execute and View Results Instantly**
+   - Copy the generated SQL into the active SQL editor, run the query, and instantly view the result set right inside VSCode! 🔥
 
-
-
-
-
-
-
-
-
-
-
-
+By integrating database context directly into our prompts, we make SQL generation not only faster but more accurate and insightful.
 
 ### What data is shared?
 
@@ -249,3 +253,20 @@ If you do not want to share your data with any AI services, then do not invoke t
 * Send user info from the IBM i system
 * Train external services using any data from your systems
 * Send any requests to any service without the user explicitly using any of the AI functionality.
+
+
+## Known Limitations
+
+The `@db2i` chat participant and the `@Db2i` context provider are designed to provide accurate and insightful SQL generation based on the user's database context. However, there are some limitations to keep in mind:
+
+1. **Schema Resolution**
+   - The `@db2i` chat participant and the `@Db2i` context provider rely on the active SQL Job's schema to resolve table references. If the schema is not set or is incorrect, the model may not be able to resolve table references accurately.
+   - To get better results, make sure to set the current schema in the SQL job settings, or reference the schema in your queries: `SAMPLE.EMPLOYEE`
+2. **Complex Queries**
+   - The `@db2i` chat participant and the `@Db2i` context provider are optimized for generating simple SQL queries. For more complex queries, the model may not be able to provide accurate results.
+   - For complex queries, it is recommended to manually write the SQL query or use the model's generated SQL as a starting point.
+3. **Data Sensitivity**
+   - The `@db2i` chat participant and the `@Db2i` context provider do not store or transmit any user data. All database metadata is fetched from the SQL Job Manager based on the user's active connection.
+   - To ensure data privacy and security, it is recommended to review the model's generated SQL before executing it in the active SQL editor.
+4. **Model Accuracy**
+   - The `@db2i` chat participant and the `@Db2i` context provider are continuously being improved to provide more accurate and insightful SQL generation. If you encounter any issues or have feedback, please let us know!
