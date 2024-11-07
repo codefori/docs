@@ -1,19 +1,20 @@
 ---
-title: Db2 for i Code Assistant
+title: Db2 for i Code Assistant 
+
 sidebar:
     order: 1
 ---
-import { Aside, CardGrid, Card, LinkCard, Steps } from '@astrojs/starlight/components';
+import { Aside, CardGrid, Card, LinkCard, Steps, Badge } from '@astrojs/starlight/components';
 import { Image } from 'astro:assets';
 
-### Open source
 
-Our AI integration is fully open-source. We don't want to hide how we are connecting our users to services, and we are ensuring that by supporting multiple provides (like GitHub Copilot, plus even more with Continue), then we are giving our users the choice of what, if any, AI services they are using.
+<Aside title="A Note about Open Source">
+  Our AI integration is fully open-source. We are transparent about how we connect our users to services and support multiple providers (such as GitHub Copilot and Continue). This gives our users the freedom to choose which AI services they want to use, if any.
 
-You can see all our AI integration code in the [GitHub repository for the Db2 for IBM i extension](https://github.com/codefori/vscode-db2i/tree/main/src/aiProviders).
+  You can see all our AI integration code in the [GitHub repository for the Db2 for IBM i extension](https://github.com/codefori/vscode-db2i/tree/main/src/aiProviders).
+</Aside>
 
-
-The Db2 for IBM i extension, as of 1.6.0, has the ability to integrate with specific AI extensions:
+<Badge text="New!" size="large" /> The Db2 for IBM i extension, as of 1.6.0, has the ability to integrate with specific AI extensions:
 
 <CardGrid>
   <Card title="GitHub Copilot" icon="github">
