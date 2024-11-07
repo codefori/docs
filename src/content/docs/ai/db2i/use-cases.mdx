@@ -3,5 +3,20 @@ title: Use cases
 sidebar:
     order: 2
 ---
+import { Aside, CardGrid, Card, LinkCard, Steps } from '@astrojs/starlight/components';
 
-Examples and tuturials forthcoming!
+<Aside>
+    ✏️ More Examples and Tutorials coming soon!
+</Aside>
+This is a collection of use cases for the Db2 for i Code Assistant in Github Copilot and Continue. For these examples, I will be using Continue, but the same features apply to Copilot.
+
+
+## SQL Generation
+
+Bread and Butter example: Generate SQL statements for a given table:
+
+![alt text](image-22.png)
+
+Under the hood, We fetch relevant information about the referenced table: `sample.employee` and generate the SQL statement for you:
+
+![alt text](image-24.png)
