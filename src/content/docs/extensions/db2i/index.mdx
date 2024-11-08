@@ -1,14 +1,16 @@
 ---
-title: Db2 for i 
+title: Guide
+sidebar:
+  order: 1
 ---
 
-import { CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+import { CardGrid, Card, Tabs, TabItem, LinkCard  } from '@astrojs/starlight/components';
 import { Aside } from '@astrojs/starlight/components';
 import { Icon } from '@astrojs/starlight/components';
 
 The Db2 for i extension allows users to browse database schemas, execute SQL statements, and more, on an IBM i.
 
-![](./main.png)
+![](./images/main.png)
 
 ## Install
 
@@ -62,7 +64,7 @@ cl: dspffd sample/employee
 
 This view allows users to manage different SQL jobs, each with their own unique JDBC configuration. A new job can be created by clicking the database icon in the SQL Job Manage title bar. Or, if you have not created a new job before, there is a big button to do the same action.
 
-![](./sqlJobManager-newJob.png)
+![](./images/sqlJobManager-newJob.png)
 
 Your active job will be marked with a highlighted icon. **The active job is used for all SQL statement execution**, including SQL that powers the Schema Browser, user-executed SQL statements, etc. You can change the active job by simply clicking the job you choose to use. You will see the highlighted icon change to indicate the active job.
 
@@ -86,7 +88,7 @@ SQL Error Logging Facility (SELF) offers a comprehensive view that can help user
 
 Additional documentation of SELF can be found [here](https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self)
 
-![](./selfcodes.png)
+![](./images/selfcodes.png)
 
 Each item in the SELF view is for a specific `SQLCODE` which is displayed in parenthesis. The `SQLCODE` tracks the actual error or warning triggered by a given SQL statement. 
 
@@ -105,13 +107,13 @@ values).
 - *ALL specifies all SQLCODEs that are error or warning conditions.
 - *NONE turns off SELF processing.
 
-![](./selfdefault.png)
+![](./images/selfdefault.png)
 
 The SELF Level can also be set on a per job basis by right clicking on the active job in the [SQL Job Manager](#sql-job-manager)
 
 ### Auto Refresh
 
-![](./selfauto.png)
+![](./images/selfauto.png)
 
 We added the option for users to configure `Auto Refresh` on the SELF view. When enabled, the SELF view will update on a constant interval (every 30 seconds). The SELF view can be cleared by clicking the trash icon. 
 
@@ -121,13 +123,13 @@ We have added Visual Explain into the database extension with a more lightweight
 
 The Visual Explain view has button on the header to control which nodes should be highlights, as well as the ability to export the data as JSON, and more.
 
-![](./dove.png)
+![](./images/dove.png)
 
 ## Notebooks
 
 Notebooks now supports Db2 for IBM i when using the database extension. If you have not heard of Notebooks before, [check out this blog post](https://code.visualstudio.com/blogs/2021/11/08/custom-notebooks) on the Visual Studio Blog. IBM i Notebooks allow users to build documents of markdown, SQL statements and CL commands all in one view, that can be saved, re-used, re-run and shared to other people. This allows you to create documentation, a step-by-step guide, and many other things, specifically for IBM i.
 
-![](./notebook.png)
+![](./images/notebook.png)
 
 <Aside type="tip">
 We are expecting a full release of Notebooks in vscode-db2i 1.0.0.
@@ -232,43 +234,4 @@ limit 10
 
 ## AI Integrations
 
-The Db2 for IBM i extension, as of 1.6.0, has the ability to integrate with specific AI extensions:
-
-* [GitHub Copilot Chat](https://code.visualstudio.com/docs/copilot/overview) (✅, requires GitHub Copilot licence)
-* [Continue](https://www.continue.dev) (⏳ coming soon)
-
-### What is possible?
-
-As of 1.6.0, you can use GitHub Copilot Chat, with the `@db2i` provider, to ask questions either about Db2 for IBM i or about specific tables in the current schema of the selected job. You can ask things like:
-
-> What columns make up an employee?
-
-> Can you get the department name for each employee?
-
-> Write a select statement to count how many employees are in each department
-
-In the future, we will be adding Continue support, so you can use another service of your choice, or your own locally hosted models (with [Ollama](https://ollama.com), for example).
-
-### What data is shared?
-
-If you do not want to share your data with any AI services, then do not invoke the functionality through VS Code. For example, we only fetch metadata when the user explicity requests it through the chat windows. We do not fetch any metadata without the user explicitly using the chat windows in either Copilot Chat or Continue. Simply don't install the extensions, or don't use the `@db2i` context.
-
-We do not give any service user data that exists on your system. But, we feed the following metadata into the context of the chat so it can generate more accurate answers.
-
-#### We do not
-
-* Send any data in your own tables, views, programs, etc
-* Send user info from the IBM i system
-* Train external services using any data from your systems
-* Send any requests to any service without the user explicity using any of the AI functionality.
-
-#### We do
-
-* Send table metadata which can be found from `QSYS2.SYSCOLUMNS2` and `QSYS2.SYSKEYCST` in the context based on user input, including table names, column names, types and comments
-* Send system metadata (when the user is asking for the activity summary) which is found with `TABLE(QSYS2.SYSTEM_STATUS(RESET_STATISTICS=>'YES',DETAILED_INFO=>'ALL'))` when requested by the user.
-
-### Open source
-
-Our AI integration is fully open-source. We don't want to hide how we are connecting our users to services, and we are ensuring that by supporting multiple provides (like GitHub Copilot, plus even more with Continue), then we are giving our users the choice of what, if any, AI services they are using.
-
-You can see all our AI integration code in the [GitHub repository for the Db2 for IBM i extension](https://github.com/codefori/vscode-db2i/tree/main/src/chat).
+<LinkCard title="Db2 for i Code Assistant" href="../../ai/db2i/code-assistant/"  />

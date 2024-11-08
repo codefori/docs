@@ -99,7 +99,12 @@ export default defineConfig({
 					items: [
 						{
 							label: 'Db2 for i',
-							link: 'extensions/db2i/', 
+							autogenerate:{ directory: 'extensions/db2i/'}, 
+							collapsed: true,
+							badge: {
+								text: 'New AI!',
+								variant: 'note'
+							},
 						},
 						{
 							label: 'RPGLE',
