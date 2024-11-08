@@ -101,6 +101,10 @@ export default defineConfig({
 							label: 'Db2 for i',
 							autogenerate:{ directory: 'extensions/db2i/'}, 
 							collapsed: true,
+							badge: {
+								text: 'New AI!',
+								variant: 'note'
+							},
 						},
 						{
 							label: 'RPGLE',
@@ -113,21 +117,6 @@ export default defineConfig({
 						}
 					],
 					collapsed: false,
-				},
-				{
-					label: "AI Code Assistants",
-					collapsed: false,
-					badge: {
-						text: 'New!',
-						variant: 'note'
-					},
-					items: [
-						{
-							label: 'Db2 for i',
-							autogenerate:{ directory: 'ai/db2i/'}, 
-							collapsed: true,
-						},
-					]
 				},
 				{
 					label: 'Extension Development',

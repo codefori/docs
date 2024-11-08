@@ -1,18 +1,10 @@
 ---
-title: Db2 for i Code Assistant 
-
+title: Code Assistant 
 sidebar:
     order: 1
 ---
 import { Aside, CardGrid, Card, LinkCard, Steps, Badge } from '@astrojs/starlight/components';
 import { Image } from 'astro:assets';
-
-
-<Aside title="A Note about Open Source">
-  Our AI integration is fully open-source. We are transparent about how we connect our users to services and support multiple providers (such as GitHub Copilot and Continue). This gives our users the freedom to choose which AI services they want to use, if any.
-
-  You can see all our AI integration code in the [GitHub repository for the Db2 for IBM i extension](https://github.com/codefori/vscode-db2i/tree/main/src/aiProviders).
-</Aside>
 
 <Badge text="New!" size="large" /> The Db2 for IBM i extension, as of 1.6.0, has the ability to integrate with specific AI extensions:
 
@@ -265,6 +257,14 @@ If you do not want to share your data with any AI services, then do not invoke t
 
 * Send table metadata which can be found from `QSYS2.SYSCOLUMNS2` and `QSYS2.SYSKEYCST` in the context based on user input, including table names, column names, types and comments
 * Send system metadata (when the user is asking for the activity summary) which is found with `TABLE(QSYS2.SYSTEM_STATUS(RESET_STATISTICS=>'YES',DETAILED_INFO=>'ALL'))` when requested by the user.
+
+---
+
+<Aside title="A Note about Open Source">
+  Our AI integration is fully open-source. We are transparent about how we connect our users to services and support multiple providers (such as GitHub Copilot and Continue). This gives our users the freedom to choose which AI services they want to use, if any.
+
+  You can see all our AI integration code in the [GitHub repository for the Db2 for IBM i extension](https://github.com/codefori/vscode-db2i/tree/main/src/aiProviders).
+</Aside>
 
 ## Known Limitations
 
