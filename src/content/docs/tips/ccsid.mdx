@@ -26,11 +26,14 @@ The special CCSID value 65535 means "no conversion" - and this will disable the 
 
 If you still are experiencing issues after setting the CCSID value, you may want to check that the IBM i PASE environment locale is set correctly:
 
-### OS 7.4 or greater:
+<details>
+<summary><b>OS 7.4 or greater</b></summary>
 
 [7.4 and above defaults to UTF-8](https://www.ibm.com/docs/en/i/7.4?topic=system-default-pase-ccsid-locale-changed-utf-8)<Icon name="external" color="cyan" class="icon-inline" /> and there should be no issue.
+</details>
 
-### OS 7.3 or earlier:
+<details>
+<summary><b>OS 7.3 or earlier</b></summary>
 
 The SSH daemon must start with the correct `PASE_LANG` and `QIBM_PASE_CCSID` environment variables set. You probably want to use a locale that defaults to CCSID 1208. **Locale is case sensitive**. E.g., `FR_FR` is different from `fr_FR`.
 
@@ -40,6 +43,7 @@ The SSH daemon must start with the correct `PASE_LANG` and `QIBM_PASE_CCSID` env
 2. **Restart** the SSH daemon.
 
 You are also able to change the environment variables at a `*JOB` level, but it is recommend to do it once for your entire system.
+</details>
 
 ## More information
 
@@ -60,7 +64,8 @@ Since Code for IBM i tries to depend on the server to handle all encoding transl
 
 Learn more about object naming rules [in the IBM documentation](https://www.ibm.com/docs/en/i/7.1?topic=rules-names-name).
 
-### Deep dive
+<details>
+   <summary>Learn more</summary>
 
 Use the following SQL/CL commands to create an object with a qualified name.
 
@@ -103,3 +108,15 @@ where LIBRARY_BIT like '%Ü%'
 ```
 
 ![Bad result set](../../../assets/ccsid1.png)
+
+</details>
+
+## Common Errors
+
+As of Code for IBM i 2.x.x, the extension now uses a new component to execute CL commands and SQL statements. This component is called `cqsh`.
+
+### The CCSID of the SSH connection does not match the job CCSID
+
+This error occurs when the CCSID of the SSH connection does not match the job CCSID. The job CCSID is determined by the user profile CCSID or the system value `QCCSID`. The CCSID of the SSH connection is determined by whichever user is running the SSHD - this usually `QSECOFR` and the CCSID of the user profile.
+
+This message appears when the `cqsh` is not available (not installed or not runnable) and the extension falls back to the old method of executing commands. When that happens, we check the SSHD CCSID and compare it to the job CCSID. If they do not match, the error is thrown, as QSH will not use the user job CCSID, but the SSHD CCSID.
