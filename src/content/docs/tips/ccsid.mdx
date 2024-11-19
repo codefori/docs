@@ -20,7 +20,7 @@ The conversion is done in both directions: When reading object and members names
 
 If you change the CCSID for your profile on the server, you may have to change your filters as well, if you have used any of the special characters in the filter!
 
-The special CCSID value 65535 means "no conversion" - and this will disable the SQL support. It is **not** recommended to use CCSID 65535 and most newer systems have a CCSID different from 65535. But you may experience this value on older systems. The solution here would be to change the user profile to a CCSID value corresponding to your national language, e.g. 280 in Italy or 297 in France.
+The special CCSID value 65535 means "no conversion" and this will ruin your Code for IBM i experience. It is **not** recommended to use CCSID 65535 and most newer systems have a CCSID different from 65535. But you may experience this value on older systems. The solution here would be to change the user profile to a CCSID value corresponding to your national language, e.g. 280 in Italy or 297 in France.
 
 ## Setting environment variables
 
