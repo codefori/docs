@@ -113,7 +113,16 @@ where LIBRARY_BIT like '%Ü%'
 
 ## Common Errors
 
-As of Code for IBM i 2.x.x, the extension now uses a new component to execute CL commands and SQL statements. This component is called `cqsh`.
+As of Code for IBM i 2.14, the extension now uses a new component to execute CL commands and SQL statements. This component is called `cqsh`.
+
+### The job CCSID is set to 65535
+
+As mentioned above, we require the user profile CCSID to be set to a valid CCSID. If the CCSID is set to `*SYSVAL` and the system value `QCCSID` is set to 65535, then VS Code will not know how to handle variant characters.
+
+The solution is to set the CCSID on the user profile to a valid CCSID by using `CHGUSRPRF USER(x) CCSID(y)`. If you are unsure which CCSID to use either:
+
+* Use the `CHGUSRPRF` command show in the error message, which has has the default CCSID for the user profile in the parameter filled out.
+* Look up the default CCSID for your jobs. You can do this from 5250 by running `DSPJOB OPTION(*DFNA)` and looking for 'Default coded character set identifier'
 
 ### The CCSID of the SSH connection does not match the job CCSID
 
