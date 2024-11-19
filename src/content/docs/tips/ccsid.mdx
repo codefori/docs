@@ -126,7 +126,7 @@ The solution is to set the CCSID on the user profile to a valid CCSID by using `
 
 ### The CCSID of the SSH connection does not match the job CCSID
 
-This error occurs when the CCSID of the SSH connection does not match the job CCSID. The job CCSID is determined by the user profile CCSID or the system value `QCCSID`. The CCSID of the SSH connection is determined by whichever user is running the SSHD - this usually `QSECOFR` and the CCSID of the user profile.
+This error occurs when the CCSID of the SSH connection does not match the job CCSID. The job CCSID is determined by the user profile CCSID or the system value `QCCSID`. The CCSID of the SSH connection is determined by whichever user is running the SSHD - this is usually `QSECOFR` and the CCSID of the user profile.
 
 This message appears when the `cqsh` is not available (not installed or not runnable) and the extension falls back to the old method of executing commands. When that happens, we check the SSHD CCSID and compare it to the job CCSID. If they do not match, the error is thrown, as QSH will not use the user job CCSID, but the SSHD CCSID.
 
