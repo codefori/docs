@@ -34,6 +34,7 @@ const linkType = (type: string|undefined): string => {
   }
 
   if (type.startsWith(`Promise<`)) {
+    console.log(type);
     return `Promise&lt;${linkType(type.slice(8, -1))}&gt;`;
   }
 
@@ -89,6 +90,7 @@ const parseFile = async (tsPath: string) => {
   let variables: string[] = [];
 
   function handleDeclatation(symbol: Declaration) {
+
     if (symbol instanceof InterfaceDeclaration) {
       interfaces.push(`### ${symbol.name}`, ``, `#### Properties`, ``);
       for (const property of symbol.properties) {
@@ -135,7 +137,11 @@ const parseFile = async (tsPath: string) => {
       if (instanceMethods.length > 0) {
         classes.push(`#### Methods`, ``);
         for (const prop of instanceMethods) {
-          classes.push(`* ${prop.isAsync ? `async ` : ``}**${prop.name}**(${prop.parameters.map(p => `${p.name}: ${linkType(p.type)}`).join(', ')}): ${prop.type}`);
+          if (prop.name === 'countFiles') {
+            console.log(prop);
+          }
+
+          classes.push(`* ${prop.isAsync ? `async ` : ``}**${prop.name}**(${prop.parameters.map(p => `${p.name}: ${linkType(p.type)}`).join(', ')}): ${linkType(prop.type)}`);
         }
         classes.push(``);
       }
@@ -151,7 +157,7 @@ const parseFile = async (tsPath: string) => {
     } else if (symbol instanceof DefaultDeclaration) {
 
     } else {
-      console.log(symbol);
+      // console.log(symbol);
     }
   }
 
@@ -170,12 +176,10 @@ const parseFile = async (tsPath: string) => {
   }
 
   const imports = parsed.imports;
-  let subLines: string[] = [];
   for (const importDetail of imports) {
     if (importDetail.libraryName.startsWith('.')) {
       const dPath = path.join(parsed.filePath, `..`, importDetail.libraryName + `.d.ts`);
       if (await exists(dPath)) {
-        // console.log(`Found ${dPath}`);
         await parseFile(dPath);
       }
     }
@@ -206,8 +210,6 @@ for (const file of Object.keys(sections)) {
   }
 }
 
-Object.keys(sections).map(k => sections[k]).flat();
-
-console.log(Object.keys(sections));
+// console.log(Object.keys(sections));
 
 await writeFile('src/content/docs/dev/api.md', allLines.join('\n'));
