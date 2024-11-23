@@ -117,4 +117,4 @@ await parseFile('node_modules/@halcyontech/vscode-ibmi-types/typings.d.ts');
 
 const allLines = Object.keys(sections).map(k => sections[k]).flat();
 
-await writeFile('src/content/docs/dev/api.md', allLines);
+await writeFile('src/content/docs/dev/api.mdx', allLines);

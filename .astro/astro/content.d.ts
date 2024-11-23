@@ -180,13 +180,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
-"dev/api.md": {
-	id: "dev/api.md";
+"dev/api.mdx": {
+	id: "dev/api.mdx";
   slug: "dev/api";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
+} & { render(): Render[".mdx"] };
 "dev/examples.mdx": {
 	id: "dev/examples.mdx";
   slug: "dev/examples";
