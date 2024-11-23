@@ -1,6 +1,6 @@
 import { ClassDeclaration, InterfaceDeclaration, TypescriptParser } from "typescript-parser";
 import path from "path";
-import { stat, writeFile } from "fs/promises";
+import { stat, writeFile, readFile } from "fs/promises";
 
 const exists = (path: string): Promise<boolean> => {
   return new Promise((resolve) => {
@@ -10,10 +10,17 @@ const exists = (path: string): Promise<boolean> => {
 
 const PRIVATE = 0;
 let parsedFiles: string[] = [];
+let sections: { [key: string]: string } = {};
 const parser = new TypescriptParser();
 
 // or a filepath
+const HEADER_MDX = 'src/api/header.mdx';
 const WORKSPACE = 'node_modules/@halcyontech/vscode-ibmi-types/';
+
+if (await exists(HEADER_MDX)) {
+  const header = await readFile(HEADER_MDX, 'utf8');
+  sections['header'] = header + `\n\n`;
+}
 
 const parseFile = async (tsPath: string) => {
   if (parsedFiles.includes(tsPath)) {
@@ -96,16 +103,18 @@ const parseFile = async (tsPath: string) => {
     if (importDetail.libraryName.startsWith('.')) {
       const dPath = path.join(parsed.filePath, `..`, importDetail.libraryName + `.d.ts`);
       if (await exists(dPath)) {
-        subLines.push(...await parseFile(dPath));
+        parseFile(dPath);
       } else {
         console.log(`Could not find ${dPath}`);
       }
     }
   }
 
-  return [`## ${baseName}`, ...classes, ...interfaces, ...subLines];
+  sections[baseName] = [`## ${baseName}`, ...classes, ...interfaces, ``].join('\n');
 }
 
-const lines = await parseFile('node_modules/@halcyontech/vscode-ibmi-types/typings.d.ts');
+await parseFile('node_modules/@halcyontech/vscode-ibmi-types/typings.d.ts');
 
-await writeFile('output.md', lines.join('\n'));
+const allLines = Object.keys(sections).map(k => sections[k]).flat();
+
+await writeFile('src/content/docs/dev/api.md', allLines);
