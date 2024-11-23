@@ -1,4 +1,5 @@
-import { ClassDeclaration, InterfaceDeclaration, TypescriptParser } from "typescript-parser";
+import { ClassDeclaration, DefaultDeclaration, File, InterfaceDeclaration, TypescriptParser } from "typescript-parser";
+import type {Declaration} from "typescript-parser";
 import path from "path";
 import { stat, writeFile, readFile } from "fs/promises";
 
@@ -27,6 +28,8 @@ const parseFile = async (tsPath: string) => {
     return [];
   }
 
+  console.log(`Parsing ${tsPath}`);
+
   const parsed = await parser.parseFile(tsPath, WORKSPACE);
 
   parsedFiles.push(tsPath);
@@ -34,15 +37,14 @@ const parseFile = async (tsPath: string) => {
   const baseName = path.basename(tsPath);
   // console.log(tsPath);
 
-  let id = parsed.identifier;
   let interfaces: string[] = [];
   let classes: string[] = [];
 
-  for (const variable of parsed.declarations) {
+  function handleDeclatation(variable: Declaration) {
     if (variable instanceof InterfaceDeclaration) {
       interfaces.push(`### ${variable.name}`, ``, `#### Properties`, ``);
       for (const property of variable.properties) {
-        interfaces.push(`- \`${property.name}${property.isOptional ? `?` : ``}: ${property.type}\``);
+        interfaces.push(`- ${property.name}${property.isOptional ? `?` : ``}: ${property.type}`);
       }
       interfaces.push(``);
       
@@ -55,10 +57,10 @@ const parseFile = async (tsPath: string) => {
       if (staticProps.length > 0 || staticMethods.length > 0) {
         classes.push(`#### Static`, ``);
         for (const prop of staticProps) {
-          classes.push(`- \`${prop.name}: ${prop.type}\``);
+          classes.push(`- ${prop.name}: ${prop.type}`);
         }
         for (const prop of staticMethods) {
-          classes.push(`- \`${prop.isAsync ? `async ` : ``}${prop.name}(${prop.parameters.map(p => `${p.name}: ${p.type}`).join(', ')}): ${prop.type}\``);
+          classes.push(`- ${prop.isAsync ? `async ` : ``}${prop.name}(${prop.parameters.map(p => `${p.name}: ${p.type}`).join(', ')}): ${prop.type}`);
         }
         classes.push(``);
       }
@@ -67,7 +69,7 @@ const parseFile = async (tsPath: string) => {
 
       if (ctor) {
         classes.push(`#### Constructor`, ``);
-        classes.push(`- \`${variable.name}(${ctor.parameters.map(p => `${p.name}: ${p.type}`).join(', ')}): ${variable.name}\``);
+        classes.push(`- ${variable.name}(${ctor.parameters.map(p => `${p.name}: ${p.type}`).join(', ')}): ${variable.name}`);
         classes.push(``);
       }
 
@@ -77,7 +79,7 @@ const parseFile = async (tsPath: string) => {
       if (instanceProps.length > 0) {
         classes.push(`#### Properties`, ``);
         for (const prop of instanceProps) {
-          classes.push(`- \`${prop.name}${prop.isOptional ? `?` : ``}: ${prop.type}\``);
+          classes.push(`* ${prop.name}${prop.isOptional ? `?` : ``}: ${prop.type}`);
         }
         classes.push(``);
       }
@@ -85,17 +87,35 @@ const parseFile = async (tsPath: string) => {
       if (instanceMethods.length > 0) {
         classes.push(`#### Methods`, ``);
         for (const prop of instanceMethods) {
-          classes.push(`- \`${prop.isAsync ? `async ` : ``}${prop.name}(${prop.parameters.map(p => `${p.name}: ${p.type}`).join(', ')}): ${prop.type}\``);
+          classes.push(`* ${prop.isAsync ? `async ` : ``}${prop.name}(${prop.parameters.map(p => `${p.name}: ${p.type}`).join(', ')}): ${prop.type}`);
         }
         classes.push(``);
       }
 
+    // } else if (variable instanceof DefaultDeclaration) {
+    //   if (variable.isExported) {
+    //     if (`resource` in variable.exportedDeclaration) {
+    //       const f = variable.exportedDeclaration.resource as File;
+    //       console.log(f.filePath);
+    //       parseFile(f.filePath);
+    //     }
+    //   }
+
     } else {
-      console.log(variable);
+      // console.log(variable);
     }
   }
 
-  // console.log(interfaces);
+  if (parsed.declarations.length > 0) {
+    for (const variable of parsed.declarations) {
+      console.log(`\t` + variable.name);
+      handleDeclatation(variable);
+    }
+
+    if (classes.length > 0 || interfaces.length > 0) {
+      sections[baseName] = [`## ${baseName}`, ...classes, ...interfaces, ``].join('\n');
+    }
+  }
 
   const imports = parsed.imports;
   let subLines: string[] = [];
@@ -103,18 +123,19 @@ const parseFile = async (tsPath: string) => {
     if (importDetail.libraryName.startsWith('.')) {
       const dPath = path.join(parsed.filePath, `..`, importDetail.libraryName + `.d.ts`);
       if (await exists(dPath)) {
-        parseFile(dPath);
+        // console.log(`Found ${dPath}`);
+        await parseFile(dPath);
       } else {
         console.log(`Could not find ${dPath}`);
       }
     }
   }
-
-  sections[baseName] = [`## ${baseName}`, ...classes, ...interfaces, ``].join('\n');
 }
 
 await parseFile('node_modules/@halcyontech/vscode-ibmi-types/typings.d.ts');
 
 const allLines = Object.keys(sections).map(k => sections[k]).flat();
 
-await writeFile('src/content/docs/dev/api.mdx', allLines);
+console.log(Object.keys(sections));
+
+await writeFile('src/content/docs/dev/api.md', allLines);
