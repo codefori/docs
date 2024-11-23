@@ -7,13 +7,16 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "devdocs": "npx tsx src/api/gen.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/starlight": "^0.28.6",
+    "@halcyontech/vscode-ibmi-types": "^2.13.5",
     "astro": "^4.16.9",
     "sharp": "^0.32.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "typescript-parser": "^2.6.1"
   }
 }
