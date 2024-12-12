@@ -70,7 +70,20 @@ To debug a program from the Object Browser, right-click on the program object an
 To make use of the Debug Service, you need the following PTFs:
 
 <Tabs>
-<TabItem label="Version 2" >
+<TabItem label="Version 2.0.2 >
+
+* IBM i debug client v2.0.2 requires the following host PTFs:
+   * 7.3 PTF SJ02996
+   * 7.4 PTF SJ03026
+   * 7.5 PTF SJ03030
+* Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
+   * `/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit`
+   * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)   
+* 5770WDS option 60 is required
+   * Workstation Tools - Base
+
+</TabItem>
+<TabItem label="Version 2.0.0" >
 
 * Host debugger in 5770SS1:
    * IBM i 7.5 PTF SI86229 and SI82343
