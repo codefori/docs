@@ -60,6 +60,16 @@ sql: select * from sample.employee;
 cl: dspffd sample/employee
 ```
 
+### Updatable cells
+
+It's possible to update directly from running a SQL statement. You can use the `update:` prefix with a select statement to make the result set updatable. This will allow you to edit the data in the result set and then save the changes back to the database.
+
+A fully qualified table name is required for the fields to be editable.
+
+```sql
+update: select * from sample.employee;
+```
+
 ## SQL Job Manager
 
 This view allows users to manage different SQL jobs, each with their own unique JDBC configuration. A new job can be created by clicking the database icon in the SQL Job Manage title bar. Or, if you have not created a new job before, there is a big button to do the same action.
