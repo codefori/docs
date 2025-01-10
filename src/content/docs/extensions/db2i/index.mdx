@@ -70,6 +70,22 @@ A fully qualified table name is required for the fields to be editable.
 update: select * from sample.employee;
 ```
 
+## Syntax checking
+
+When connected to an IBM i, should be enabled. Here is what triggers to syntax checker:
+
+* as you edit an SQL file, the statement being edited will be syntax checked after a short period of time (enabled by default)
+* when you open an SQL file, the entire document will be checked (disabled by default and has a limit of 200 statements in the document)
+* when the 'check syntax' button is pressed, which is shown when an SQL document is open and are connected to a system (has the same statement limit)
+
+The syntax checker configuration is available through the VS Code settings (and not the Connection Settings).
+
+![](./images/syntaxchecker.png)
+
+<Aside type="tip">
+  Use the `{}` (brackets icon) near the language ID in the status bar to see if the syntax checker is enabled or not. This is shown in the screenshot above.
+</Aside>
+
 ## SQL Job Manager
 
 This view allows users to manage different SQL jobs, each with their own unique JDBC configuration. A new job can be created by clicking the database icon in the SQL Job Manage title bar. Or, if you have not created a new job before, there is a big button to do the same action.
