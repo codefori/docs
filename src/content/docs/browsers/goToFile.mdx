@@ -1,0 +1,21 @@
+---
+title: Go To File
+---
+
+There is a fast way to navigate to source memebrs and streamfiles through VS Code without using the Object Browser or IFS Browser. This is done by using the `IBM i: Go to File` feature.
+
+![Browsers](../../../assets/goToFile.png)
+
+To use the `Go To File` feature, press `Ctrl+Alt+P` or `Cmd+Option+P` on Mac. This will open a dialog box where you can type the name of the file you want to open. The dialog box will show a list of files that match the name you typed. You can use the arrow keys to navigate through the list and press `Enter` to open the file. You can also paste in a source member path or IFS path.
+
+* Source member: `LIB/SRCPF/SRCMBR.EXT`
+* Streamfile: `/path/to/file.txt`
+
+The list will also have previously opened files listed at the top, and a small available list below it (titled Cache).
+
+### Finding source members
+
+The Go to File tool also has a way to search libraries and source files for a member.
+
+1. To find source files, enter the library name followed by a slash and an asterisk. For example, `MYLIB/*` will show all source files in the MYLIB library.
+2. To find members in a source file, enter the source file name followed by a slash and an asterisk. For example, `MYLIB/SRCPF/*` will show all members in the SRCPF source file in the MYLIB library.
