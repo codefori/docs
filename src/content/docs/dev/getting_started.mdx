@@ -4,7 +4,7 @@ sidebar:
     order: 1
 ---
 
-import { CardGrid, Card } from '@astrojs/starlight/components';
+import { CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
 It's very easy to work with the vscode-ibmi extension.
 
@@ -22,7 +22,25 @@ To build a .`vsix` of the extension, you can use:
 npm run package
 ```
 
-### Run test cases
+### Running tests
+
+We have two types of test suites:
+
+1. Backend test cases which run using vitest
+2. Frontend extension test cases which run inside of the Visual Studio Code Extension Host while debugging.
+
+The backend test cases are primarily for testing the API and the frontend test cases are for testing the extension's UI and VS Code commands.
+
+#### Run backend test cases
+
+1. Make a copy of `src/api/.env.sample` named `.env` and enter details of the system for the tests to run on
+2. `npm run test`
+
+<Aside type="tip">
+   Install the [Vitest extension](https://marketplace.visualstudio.com/items?itemName=vitest.explorer) to debug the test cases through Visual Studio Code.
+</Aside>
+
+#### Run runtime test cases
 
 To run the tests, start debugging the **Extension Tests** configuration and connect to a system for the tests to run.
 

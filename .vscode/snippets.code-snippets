@@ -18,7 +18,7 @@
     "scope": "md, markdown",
     "prefix": "warning",
     "body": [
-      "<Aside type="${1:note|tip|caution|danger}">,
+      "<Aside type=\"${1:note|tip|caution|danger}\">",
       "   ${2:message}",
       "</Aside>"
     ]
