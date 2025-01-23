@@ -10,6 +10,7 @@ export default defineConfig({
 	trailingSlash: 'always',	
 	integrations: [
 		starlight({
+			pagination: false,
 			title: 'Code for IBM i Docs',
 			logo: {
 				src: './public/icon.png',
@@ -23,7 +24,7 @@ export default defineConfig({
 				baseUrl: 'https://github.com/codefori/docs/edit/main/'
 			},
 			customCss: [
-				'./src/styles/custom.css',	
+				'./src/styles/custom.css',
 			],
 			sidebar: 
 			[
@@ -32,16 +33,16 @@ export default defineConfig({
 					link: '/',
 				},
 				{
-					label: 'Login',
-					link: 'login/',
-					badge: {
-						variant: 'note',
-						text: 'Start Here!'
-					}
+					label: 'Install',
+					link: 'install/',
 				},
 				{
 					label: 'Quick Start',
 					link: 'quickstart/',
+					badge: {
+						variant: 'note',
+						text: 'Start Here!'
+					}
 				},
 				{
 					label: 'Help and Support',
@@ -126,20 +127,20 @@ export default defineConfig({
 					
 			],
 			defaultLocale: 'root',
-			locales: {
-				root: {
-					label: 'English',
-					lang: 'en',
-				},
-				da: {
-					label: 'Dansk',
-					lang: 'da',
-				},
-				fr: {
-					label: 'Français',
-					lang: 'fr',
-				},
-			},
+			// locales: {
+			// 	root: {
+			// 		label: 'English',
+			// 		lang: 'en',
+			// 	},
+			// 	da: {
+			// 		label: 'Dansk',
+			// 		lang: 'da',
+			// 	},
+			// 	fr: {
+			// 		label: 'Français',
+			// 		lang: 'fr',
+			// 	},
+			// },
 		}),
 	],
 	markdown: {

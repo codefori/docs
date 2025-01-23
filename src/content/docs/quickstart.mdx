@@ -2,16 +2,80 @@
 title: Quick Start
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 
-### Make a connection
+### Connect First Time
 
-1. Press F1
-2. Find 'IBM i: New Connection'
-3. Enter in your connection details in the window that opens
-4. Hit Connect
+<CardGrid>
 
-Tip: next time, try using 'IBM i: Connect to previous'
+<Card>
+
+Click on the IBM i icon and then on 'Connect to an IBM i'.
+
+</Card><Card>
+
+![](../../assets/connect_02.png)
+
+</Card></CardGrid>
+
+---
+
+<CardGrid>
+<Card>
+Enter the systems details in the window that appears. You need either a password or a private key.
+
+Alternatively, press <kbd>F1</kbd>, search for `IBM i: New Connection`, and complete the form.
+</Card>
+<Card>
+![](../../assets/connect_03.png)
+</Card>
+</CardGrid>
+
+### Connect Subsequent
+
+<CardGrid>
+<Card>
+If you have already connected to an IBM i system, click on the conection in the IBM i: Servers browser.
+</Card>
+<Card>
+![](../../assets/connect_04.png)
+</Card>
+</CardGrid>
+
+<CardGrid>
+<Card>
+After logging in, a status bar item will appear showing the name of the IBM i system to which you are connected.
+</Card>
+<Card>
+![assets/connect_05.png](../../assets/connect_05.png)
+</Card>
+</CardGrid>
+
+### Logout (Disconnect)
+You can close a connection  and logout out from a server in several ways
+<CardGrid>
+
+<Card>
+Use the keyboard: <kbd>Ctrl(Cmd)</kbd> + <kbd>Alt</kbd > + <kbd>D</kbd>
+</Card>
+<Card>
+</Card>
+<Card>
+Click the `Disconnect from system` icon in the status bar... 
+</Card>
+<Card>
+![Dicconnect icon](../../assets/connect_08.png)
+</Card>
+<Card>
+Press <kbd>F1</kbd> and search for `IBM i: Disconnect`
+</Card>
+<Card>
+![Search Disconnect](../../assets/connect_07.png)
+</Card>
+
+</CardGrid>
+
+---
 
 ### Browse/Edit source members
 

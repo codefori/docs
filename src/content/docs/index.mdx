@@ -1,79 +1,42 @@
 ---
 title: Code for IBM i 
 description: Maintain and compile your RPGLE, CL, COBOL, C/CPP on the IBM i right from Visual Studio Code
+template: splash
+hero:
+  tagline: Maintain and compile your RPGLE, CL, COBOL, C/CPP on the IBM i right from Visual Studio Code
+  image:
+    file: ../../assets/codefori.png
+  actions:
+    - text: Installation
+      link: /docs/install/
+      icon: right-arrow
+      variant: primary
+    - text: Quick start
+      link: /docs/quickstart/
+      icon: information
 ---
 
 import { CardGrid, Card, Badge, LinkCard, Icon } from '@astrojs/starlight/components';
 
-Maintain and compile your RPGLE, CL, COBOL, C/CPP on the IBM i right from Visual Studio Code.
-
-#### Getting started 🚀
+<hr />
 
 <CardGrid>
-   <LinkCard title="Installing" href="#installation" description="How to get Code for IBM i" />
-   <LinkCard title="Compile some code" href="/docs/developing/editing-compiling/" description="Compile your RPGLE, COBOL or CL" />
+   <Card title="Installing" icon="approve-check">
+      Learn how to <a href="/docs/install/">install Code for IBM i</a>
+   </Card>
+   <Card title="Compile some code" icon="document">
+      <a href="/docs/developing/editing-compiling/">Compile your RPGLE, COBOL or CL</a>
+   </Card>
+   <Card title="RPGLE" icon="approve-check-circle">
+      <a href="/docs/extensions/rpgle/">See how VS Code can help you write modern RPGLE</a>
+   </Card>
+   <Card title="Db2 for IBM i" icon="seti:db">
+      <a href="/docs/extensions/db2i/">Understand how to work with the database</a>
+   </Card>
+   <Card title="Terminals" icon="bars">
+      <a href="/docs/tips/terminals/">Open 5250 right from VS Code</a>
+   </Card>
+   <Card title="IBM i and git" icon="seti:git">
+      <a href="/docs/developing/local/getting-started/">Want to use git with IBM i?</a>
+   </Card>
 </CardGrid>
-
-#### Write some code 🛠️
-
-<CardGrid>
-   <LinkCard title="RPGLE" href="/docs/extensions/rpgle/" description="See how VS Code can help you write modern RPGLE" />
-   <LinkCard title="Db2 for IBM i" href="/docs/extensions/db2i/" description="Understand how to work with the database" />
-</CardGrid>
-
-#### Extras 👀
-
-<CardGrid>
-   <LinkCard title="Terminals" href="/docs/tips/terminals/" description="Open 5250 right from VS Code" />
-   <LinkCard title="IBM i and git" href="/docs/developing/local/getting-started/" description="Want to use git with IBM i?" />
-</CardGrid>
-
----
-
-![intro_01.png](../../assets/intro_01.png)
-
-## Requirements
-
-- IBM i 7.3 TR 5 minimum
-- SSH Daemon must be started on IBM i.
-   - (Licensed program 5733-SC1 provides SSH support.)
-   - `STRTCPSVR *SSHD` starts the daemon.
-   - User `QSSHD` is enabled.
-- Some familiarity with VS Code. An introduction can be found [here](https://code.visualstudio.com/docs/getstarted/introvideos)<Icon name="external" color="cyan" class="icon-inline" />.
-
-Optionally, ensure you know how to connect to pase from a shell. See this [official IBM i OSS docs](https://ibmi-oss-docs.readthedocs.io/en/latest/user_setup/README.html#step-1-install-an-ssh-client)<Icon name="external" color="cyan" class="icon-inline" />.
-
-## Installation
-
-<CardGrid>
-
-<Card>
-
-From the Visual Studio Code Marketplace: [Code for IBM i](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.code-for-ibmi)<Icon name="external" color="cyan" class="icon-inline" />
-
-Or from the Extensions view inside of Visual Studio Code.
-
-</Card><Card>
-
-![install_01,png](../../assets/install_01.png)
-
-</Card></CardGrid>
-
-### Recommended Extensions
-
-It's recommended you also install the [IBM i Development Pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack)<Icon name="external" color="cyan" class="icon-inline" />, a curated set of extensions built on or adding value to Code for IBM i. This includes database tools, RPGLE tools, COBOL tools, and more.
-
-## Extension Development
-
-Check out our [Developer documentation](./dev/getting_started/) page!
-
-## Getting Started
-
-To work on this documentation:
-
-- clone repo
-- install astro ```npm i```
-- run local with ```npm run dev```
-- by default, runs on http://localhost:4321/docs/
-- test build with ```npm run build```
-- Read more about [Astro](https://starlight.astro.build/getting-started/)<Icon name="rocket" color="rebeccapurple" class="icon-inline" />
