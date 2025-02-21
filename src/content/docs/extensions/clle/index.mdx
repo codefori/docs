@@ -25,73 +25,100 @@ Or it can be installed from the Extension view inside Visual Code.
 </CardGrid>
 ## Content Assist
 
-Content Assist is triggered by `Ctrl+space`. This is best explained by examples.
+Suppose you want to create a data area with the CRTDTAARA command. Enter CRTDTAARA __follwed by a space__, then press _Ctrl+Space_ to invoke Content Assist to produce a pick list like this: 
 
-### Content Assist Example 1
-
-Suppose you want to create a data area with the CRTDTAARA command. Enter CRTDTAARA __follwed by a space__, like this: ![Example Step 1](../../../../assets/clle/ExCL_01.png)
-
-Press `Ctrl+space` to invoke Content Assist to produce a pick list like this: 
 ![Example step 2](../../../../assets/clle/ExCL_02.png)
 
-Press `enter` or `tab` to accept the highlighted "`All parameters`" from the pick list and a skeleton command is created: ![Example step 3](../../../../assets/clle/ExCL_03.png)
+<CardGrid><Card>
 
-The cursors is in the first parameter value `DTAARA`. Enter the data area name, then press the `tab` key to move the cursor to the next parameter, `TYPE`: ![Example step 4](../../../../assets/clle/ExCL_04.png)  
+Press _Enter_ or _Tab_ to accept the highlighted _All parameters_ from the pick list and a skeleton command is created.
 
-Press `Ctrl+space` to produce a pick list of valid types: ![Example step 5](../../../../assets/clle/ExCL_05.png)
+</Card><Card>
 
-Highlight `*CHAR`, then `tab` to move to the `LENGTH` parameter. Enter 20, then tab to `VALUE`. The value can be a text string or it can be a variable. Use`Ctrl+space` to get a pick list of variables (just one in this example): ![Example step 6](../../../../assets/clle/ExCL_06.png)
+![Example step 3](../../../../assets/clle/ExCL_03.png)
 
-Chose the variable. Delete the other unneeded parameter and you have a completed command: ![Example step 7](../../../../assets/clle/ExCL_07.png)
+</Card></CardGrid>
 
+<CardGrid><Card>
 
-### Content Assist Example 2
+Use`Ctrl+space` to get a pick list of special values or available variables (just one in this example):
 
-If you are familar with a command, you do not have to create a skeleton  with all parameters. Suppose you have typed this far: ![Example 2 step 1](../../../../assets/clle/ExCL_21.png)
+</Card><Card>
 
-When you type `t` a pick list of parameters that start with `t` is provided: ![Example 2 step 2](../../../../assets/clle/ExCL_22.png)
+![Example step 5](../../../../assets/clle/ExCL_05.png)
 
-If a pick list is too long, you can enter additional characters to reduce it. In this case, if you entered `ty` only `TYPE` would appear in the pick list.
-
-Select `TYPE` and the cursor is in the type value field where you can do `Ctrl+space` to get a pick list of valid types: ![Example 2 step 3](../../../../assets/clle/ExCL_23.png)
-
+</Card></CardGrid>
 
 ### Content Assist Snippets
 
-Prompting of most CL commands requires a connection to a server. However, there are a number of commands that are provided as snippets, which don't require a connection. `DCL`, for example, is provided as a snippet. 
+Prompting of most CL commands requires a connection to a server. However, there are a number of commands that are provided as snippets, which don't require a connection. `DCL`, for example, is provided as a snippet.
 
-Commands that are provided as snippets are preceeded by a "box":  ![Example 2 step 3](../../../../assets/clle/ExCL_Box.png)
+<CardGrid><Card>
 
-To declare a variable, enter just "d" and get a list of commands that begin with "d":
+To declare a variable, enter just `d` and get a list of commands that begin with `d`:
+
+</Card><Card>
 
 ![Command assist](../../../../assets/clle/assist_01.png)
 
-Since the "`DCL`" command is highlighted, hit enter and get a pick list of available parameters:
+</Card></CardGrid>
+
+<CardGrid><Card>
+
+Since the `DCL` command is highlighted, hit enter and get a pick list of available parameters:
+
+</Card><Card>
 
 ![Command assist all keywords](../../../../assets/clle/assist_02.png)
 
-The "`VAR`" parameter value is selected, so enter the variable name, then tab to the "`TYPE`" parameter value:
+</Card></CardGrid>
+
+<CardGrid><Card>
+
+The `VAR` parameter value is selected, so enter the variable name, then tab to the `TYPE` parameter value:
+
+</Card><Card>
 
 ![Command assist parameter](../../../../assets/clle/assist_03.png)
 
-If all the valid valued for "`TYPE`" are know, just enter a valid value, for example "*CHAR". Or delete the highlighted value and key `Ctrl+Space` to get a pick list of the valid values:
+</Card></CardGrid>
+
+<CardGrid><Card>
+
+If all the valid valued for `TYPE` are know, just enter a valid value, for example `*CHAR`. Or delete the highlighted value and key _Ctrl+Space_ to get a pick list of the valid values:
+
+</Card><Card>
+
+![Command assist parameter](../../../../assets/clle/assist_03.png)
+
+</Card></CardGrid>
+
+<CardGrid><Card>
+
+If all the valid valued for `TYPE` are know, just enter a valid value, for example `*CHAR`. Or delete the highlighted value and key _Ctrl+Space_ to get a pick list of the valid values:
+
+</Card><Card>
 
 ![Command assist parameter](../../../../assets/clle/assist_04.png)
 
+</Card></CardGrid>
+
 ## CL Code Runner
 
-A CL command may be executed by highlighting the command and pressing `Ctrl+r`. 
+A CL command may be executed by highlighting the command and pressing _Ctrl+R_. 
 
 ### Code Runner Example
+
 The two lines of the `CRTMSGF` command are highlighted:
+
 ![Run CL example 1](../../../../assets/clle/RunCL_01.png)
 
-Press `Ctrl+r` and success is reported:![Run CL example 1](../../../../assets/clle/RunCL_02.png)
+Press _Ctrl+R_ and success is reported:
 
-Click `Open output` if you want more detail or if the command fails: ![Run CL example 1](../../../../assets/clle/RunCL_03.png)
+![Run CL example 1](../../../../assets/clle/RunCL_02.png)
 
+Click _Open output_ if you want more detail or if the command fails: 
 
+![Run CL example 1](../../../../assets/clle/RunCL_03.png)
 
-
-Not all CL commands may be executed.  
-
+Not all CL commands may be executed.
