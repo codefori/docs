@@ -86,27 +86,8 @@ export default defineConfig({
 					collapsed: false,
 				},
 				{
-					label: 'Tips',
-					autogenerate: { directory: 'tips/' },
-					collapsed: false,
-				},
-				{
-					label: 'Settings',
-					autogenerate: { directory: 'settings/' },
-					collapsed: false,
-				},
-				{
-					label: 'Extensions',
+					label: 'Languages',
 					items: [
-						{
-							label: 'Db2 for i',
-							autogenerate:{ directory: 'extensions/db2i/'}, 
-							collapsed: true,
-							badge: {
-								text: 'New AI!',
-								variant: 'note'
-							},
-						},
 						{
 							label: 'RPGLE',
 							autogenerate: { directory: 'extensions/rpgle/' }, 
@@ -119,8 +100,27 @@ export default defineConfig({
 						{ 
 							label: 'Renderer',
 							link: 'extensions/renderer'
-						}
+						},
+						{
+							label: 'Db2 for i',
+							autogenerate:{ directory: 'extensions/db2i/'}, 
+							collapsed: true,
+							badge: {
+								text: 'New AI',
+								variant: 'default'
+							},
+						},
 					],
+					collapsed: false,
+				},
+				{
+					label: 'Tips',
+					autogenerate: { directory: 'tips/' },
+					collapsed: false,
+				},
+				{
+					label: 'Settings',
+					autogenerate: { directory: 'settings/' },
 					collapsed: false,
 				},
 				{
