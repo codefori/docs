@@ -2,6 +2,12 @@
 title: SEU Colour support
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="danger">
+   As of Code for IBM i 2.15.0, SEU colours will not be supported.
+</Aside>
+
 Some time in 2025, SEU Colour support will be removed. We [announced this change May 2024](https://github.com/orgs/codefori/discussions/2057). This means occasionally you may see invalid hexadecimal characters appear in your code where before, or when opened in SEU, were not there and instead provided unique colours.
 
 This is because SEU uses the 5250 protocol to render colour information to the screen. This is not a standard feature of the source member, and as such, it is not supported by Code for IBM i.
