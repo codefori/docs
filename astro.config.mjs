@@ -99,7 +99,11 @@ export default defineConfig({
 						},
 						{ 
 							label: 'Renderer',
-							link: 'extensions/renderer'
+							link: 'extensions/renderer',
+							badge: {
+								text: 'dds',
+								variant: 'default'
+							},
 						},
 						{
 							label: 'Db2 for i',
