@@ -115,6 +115,10 @@ export default defineConfig({
 						{ 
 							label: 'CLLE',
 							link: 'extensions/clle'
+						},
+						{ 
+							label: 'Renderer',
+							link: 'extensions/renderer'
 						}
 					],
 					collapsed: false,
