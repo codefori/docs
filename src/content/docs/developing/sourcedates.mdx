@@ -2,7 +2,7 @@
 title: Source Dates
 ---
 
-import { CardGrid, Card, Icon } from '@astrojs/starlight/components';
+import { CardGrid, Card, Icon, Aside } from '@astrojs/starlight/components';
 
 Source dates are supported in Code for IBM i, but not by default.
 
@@ -25,6 +25,11 @@ There are two types of editing modes for source dates
 
 * *Edit mode* which is the traditional style for editing. When a line changes, the source date of that line will be updated. It does not understand undo/redo. It is considered the 'dumb' mode.
 * *Diff mode* is the modern approach to source date tracking. Instead of tracking edits line by line, it is doing [a diff](https://en.wikipedia.org/wiki/Diff)<Icon name="external" color="cyan" class="icon-inline" /> to understand what has changed in the document. It diffs the base document (from last open or last save) against the latest dirty version of the document. This is a Test enhancement. It does understand undo/redo. It is considered the 'smarter' mode of the two modes.
+
+
+<Aside type="caution">
+   As of Code for IBM i 2.15.0, the 'edit' tracking mode has been removed and only diff will be used. The documentation will be updated to reflect that change for 3.0.0.
+</Aside>
 
 ## Source date filtering
 
