@@ -1,0 +1,42 @@
+---
+title: Roadmap
+sidebar:
+    order: 3
+hero:
+  title: Db2 for IBM i AI roadmap
+  tagline: A plan for what we want to work on for the AI tooling
+---
+
+import { Steps, Badge } from '@astrojs/starlight/components';
+
+Here is a list of things that we want to work on in 2025 for the AI tooling in the Db2 for IBM i extension. The order of the list does not represent priority.
+
+<br />
+
+<Steps>
+
+1. **Standardise Copilot and Continue to use the same contexts and prompts.** <Badge text="WIP" variant="note" />
+
+2. **Better support system naming, and specifically, the library list**
+
+   Right now, we only resolve objects found in the current schema/library. We need to improve this logic to resolve based on the library list (or _path list_ as called in SQL). This will better support IBM i shops.
+
+3. **Improved SELF code information being reported.**
+
+4. **Index advice being provided by the chat interface.**
+
+   We already have index advice and explain data inside of the extension. It would be nice if we could use the chat interface to provide this information in a more user friendly way.
+
+5. **Include information about procedures and functions**
+
+   It would be nice if our chat interface could help the user understand the procedures and functions that are in the database. This would be similar to how we provide information about tables and views today.
+
+6. **Incorporate the _Insert from Examples_ content into the prompts**
+
+   This will help the models understand the context of the SQL statement and provide better suggestions based on real world examples.
+
+7. **Incorporate the _Db2 for IBM i documentation_ into the prompts**
+
+   To help the model better understand some of the uniqueness of Db2 for IBM i, it would be great if we could provide it documentation in real time. (Perhaps this is where GitHub Tools come into play? Or MCP?)
+
+</Steps>
