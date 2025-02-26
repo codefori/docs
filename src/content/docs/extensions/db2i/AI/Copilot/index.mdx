@@ -4,24 +4,6 @@ title: Specific usage
 import { Aside, CardGrid, Card, LinkCard, Steps, Badge } from '@astrojs/starlight/components';
 import { Image } from 'astro:assets';
 
-## Getting Started: Github Copilot
-
-![alt text](../Copilot/image.png)
-
-You can use GitHub Copilot, with the `@db2i` chat participant, to ask questions either about Db2 for IBM i or about specific tables in the current schema of the selected job. You can ask things like:
-
-```text
-@db2i What columns make up an employee?
-```
-
-```text
-@db2i Can you get the department name for each employee?
-```
-
-```text
-@db2i Write a select statement to count how many employees are in each department
-```
-
 ### Install the GitHub Copilot extension
 
 <Steps>
@@ -42,27 +24,58 @@ You can use GitHub Copilot, with the `@db2i` chat participant, to ask questions 
 
 Once GitHub Copilot is installed, you can ask questions about your database using the `@db2i` chat participant. Here are some examples:
 
+<CardGrid><Card>
 
-**Example 1** Summarize the columns in the `EMPLOYEE` table
+**Example 1**: Summarize the columns in the `EMPLOYEE` table
 
 This is a simple example to show how you can ask questions about the structure of your database. You can ask the chat participant to summarize the columns in a table.
 
-![alt text](image-2.png)
+</Card><Card>
 
-**Example 2:** Get the department name for each employee
+![alt text](references.png)
 
-This example shows how you can ask the chat participant to write a query that joins two tables to get the department name for each employee. The chat participant will generate the SQL query for you that you can run directly in your SQL editor in VS Code.
+</Card></CardGrid>
 
-![alt text](image-4.png)
+<CardGrid><Card>
 
-Run the Generated SQL to get the result:
-![alt text](image-5.png)
+**Example 2:** Ask to find out what objects are related to `employee`?
 
-<Aside type="tip">
-    You can set the current schema by running the `SET SCHEMA` command in the SQL script editor.
-</Aside>
+This example shows how you can ask the chat participant to find out what objects are related to the `employee` table. The chat participant will return a list of related objects, including the `department` table.
 
-**Example 3:** Calculate the Average salary for each department
+It will tell you if it can't get the related objects or if there are none.
 
-A slightly more complex example that shows how you can ask the chat participant to write a query that calculates the average salary for each department.
-![alt text](image-11.png)
+</Card><Card>
+
+![alt text](related.png)
+
+</Card></CardGrid>
+
+<CardGrid><Card>
+
+**Example 3:** Try out a follow up question.
+
+The screenshots that after the participant has responsed, it will sometimes offer some additional follow up questions. Simply clicking on one of these will ask the question to the chat participant.
+
+</Card><Card>
+
+![alt text](followup.png)
+
+</Card></CardGrid>
+
+---
+
+**Example 4**: Using our 'Run SQL statement' tool to summarize information.
+
+This example shows how you can use the `Run SQL statement` tool to ask information about the data in your system. Before the tool will run any SQL statement, it will ask you to confirm that you want to run the SQL statement. This is a safety feature to prevent you from running SQL statements that could modify your data.
+
+<CardGrid><Card>
+
+![alt text](toolA.png)
+
+</Card><Card>
+
+It will then take the result set of the statement and summarize the information based on your request.
+
+![alt text](toolB.png)
+
+</Card></CardGrid>
