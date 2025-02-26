@@ -320,6 +320,20 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"extensions/db2i/AI/Continue/Continue.mdx": {
+	id: "extensions/db2i/AI/Continue/Continue.mdx";
+  slug: "extensions/db2i/ai/continue/continue";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"extensions/db2i/AI/Copilot/Copilot.mdx": {
+	id: "extensions/db2i/AI/Copilot/Copilot.mdx";
+  slug: "extensions/db2i/ai/copilot/copilot";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "extensions/db2i/AI/code-assistant.mdx": {
 	id: "extensions/db2i/AI/code-assistant.mdx";
   slug: "extensions/db2i/ai/code-assistant";

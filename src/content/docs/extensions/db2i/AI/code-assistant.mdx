@@ -1,12 +1,12 @@
 ---
-title: Code Assistant 
+title: Code Assistant
 sidebar:
     order: 1
 ---
 import { Aside, CardGrid, Card, LinkCard, Steps, Badge } from '@astrojs/starlight/components';
 import { Image } from 'astro:assets';
 
-<Badge text="New!" size="large" />The Db2 for IBM i extension, as of 1.6.3, has the ability to integrate with specific AI extensions:
+<Badge text="Start Here" size="large" />The Db2 for IBM i extension, as of 1.6.3, has the ability to integrate with specific AI extensions:
 
 <CardGrid>
   <Card title="GitHub Copilot" icon="github">
@@ -39,143 +39,6 @@ Common Use cases of the SQL code assistant include:
 <Aside type="tip">
   Check out [Use cases](../use-cases/) for more tutorials and examples.
 </Aside>
-
-
-## Getting Started: Github Copilot
-
-![alt text](image.png)
-
-You can use GitHub Copilot, with the `@db2i` chat participant, to ask questions either about Db2 for IBM i or about specific tables in the current schema of the selected job. You can ask things like:
-
-```text
-@db2i What columns make up an employee?
-```
-
-```text
-@db2i Can you get the department name for each employee?
-```
-
-```text
-@db2i Write a select statement to count how many employees are in each department
-```
-
-### Install the GitHub Copilot extension
-
-<Steps>
-
-1. Install GitHub Copilot from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot).
-
-2. Install the Db2 for IBM i extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=IBM.db2-for-i).
-3. Connect to your IBM i system using the Code for IBM i extension.
-4. Once connected, the `@db2i` chat participant is available in the chat window. You can ask questions about your database, and get help with writing SQL queries.
-
-</Steps>
-
-<Aside type="note">
-  Chat participants are domain experts that can answer questions about a specific topic. The `@db2i` chat participant is a domain expert in Db2 for IBM i. It can answer questions about the structure of your database, and help you write SQL queries. 
-</Aside>
-
-### Examples
-
-Once GitHub Copilot is installed, you can ask questions about your database using the `@db2i` chat participant. Here are some examples:
-
-
-**Example 1** Summarize the columns in the `EMPLOYEE` table
-
-This is a simple example to show how you can ask questions about the structure of your database. You can ask the chat participant to summarize the columns in a table.
-
-![alt text](image-2.png)
-
-**Example 2:** Get the department name for each employee
-
-This example shows how you can ask the chat participant to write a query that joins two tables to get the department name for each employee. The chat participant will generate the SQL query for you that you can run directly in your SQL editor in VS Code.
-
-![alt text](image-4.png)
-
-Run the Generated SQL to get the result:
-![alt text](image-5.png)
-
-<Aside type="tip">
-    You can set the current schema by running the `SET SCHEMA` command in the SQL script editor.
-</Aside>
-
-**Example 3:** Calculate the Average salary for each department
-
-A slightly more complex example that shows how you can ask the chat participant to write a query that calculates the average salary for each department.
-![alt text](image-11.png)
-
-
-## Getting Started: Continue
-![alt text](image-17.png)
-
-Continue is the leading open source AI code assistant for VS Code. It provides a wide range of AI features:
-
-* Chat Interface
-* Code Completion
-* Autocomplete
-
-### Install the Continue extension for VS Code
-
-<Steps>
-  1. Install the Continue extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Continue.continue).
-  ![alt text](image-14.png)
-  2. Once Installed, there will be a new icon in your VS Code menu (mine is on the top right). Click on the icon to open the chat window.
-  ![alt text](image-15.png)
-</Steps>
-
-Once you have the extension installed, you can configure the AI provider you want to use. Continue supports multiple AI providers (including [Watsonx](https://docs.continue.dev/customize/model-providers/more/watsonx)!). You can choose the provider you want to use by clicking on the settings icon in the chat window.
-
-For demonstration purposes, we will use the Ollama Provider for hosting LLMs locally on your machine.
-
-### Setting up Ollama Provider
-
-Here is a step-by-step guide to setting up the Ollama provider with the IBM Granite models in Continue:
-
-#### 1. Install Ollama
-
-Install Ollama on your machine by following the link below:
-<LinkCard title="Install Ollama" href="https://ollama.com/download" />
-
-#### 2. Fetch the IBM Granite 3.0 models
-
-The IBM Granite 3.0  models are available in the Ollama model registry. More information about the IBM Granite models can be found [here](https://ollama.com/blog/ibm-granite).
-
-Using the Ollama CLI, fetch the IBM Granite 3.0 8b model by running the following command:
-```bash
-ollama pull granite3-dense:8b
-```
-
-#### 3. Configure the Ollama provider in Continue
-
-Open the VSCode Command Palette (Press ctrl+shift+p) and search for `Continue: open config.json`. This will open the Continue central config file `$HOME/.continue/config.json` in your editor. To enable the Granite models in Ollama, add the following configuration to the `models` section:
-
-```json title="~/.continue/config.json"
-"models": [
-   {
-     "title": "Granite Code 8b",
-     "provider": "ollama",
-     "model": "granite3-dense:8b"
-   }
- ],
-```
-
-save this file and select the Granite model in the chat window.
-
-![alt text](image-16.png)
-
-### Examples
-
-Once you have the extension installed and the AI provider configured, you can ask questions about your database using the chat window using the `@db2i` context provider. In Continue, a context provider is very similar to a chat participant in GitHub Copilot. It provides additional context to the AI model to help it generate more accurate SQL queries.
-
-More on context providers can be found [here](https://docs.continue.dev/customize/context-providers/).
-
-**Example 1:** Summarize the columns in the `EMPLOYEE` table
-
-![alt text](image-18.png)
-
-**Example 2:** Get the department name for each employee
-
-![alt text](image-19.png)
 
 
 ## How does this work? 
@@ -221,7 +84,7 @@ let's break down the process of how the `@db2i` chat participant and the `@Db2i`
 
 
 ### Here’s a breakdown of the process:
-![alt text](image-19.png)
+![alt text](../AI/image-19.png)
 
 
 1. **Activate the `@Db2i` Context Provider**
