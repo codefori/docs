@@ -327,9 +327,9 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
-"extensions/db2i/AI/Copilot/Copilot.mdx": {
-	id: "extensions/db2i/AI/Copilot/Copilot.mdx";
-  slug: "extensions/db2i/ai/copilot/copilot";
+"extensions/db2i/AI/Copilot/index.mdx": {
+	id: "extensions/db2i/AI/Copilot/index.mdx";
+  slug: "extensions/db2i/ai/copilot";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
