@@ -9,11 +9,11 @@ import { Image } from 'astro:assets';
 <Badge text="Start Here" size="large" />The Db2 for IBM i extension, as of 1.6.3, has the ability to integrate with specific AI extensions:
 
 <CardGrid>
-  <Card title="GitHub Copilot" icon="github">
-    ✅ Requires GitHub Copilot licence
-  </Card>
   <Card title="Continue" icon="rocket">
     ✅ Multiple AI Providers available, including Watsonx!
+  </Card>
+  <Card title="GitHub Copilot" icon="github">
+    ✅ Requires GitHub Copilot licence
   </Card>
 </CardGrid>
 <CardGrid>
@@ -62,6 +62,13 @@ tell me about the columns in sample.employee
 
 - For each token, we check if it corresponds to a valid table or object reference within the active SQL Job.
 - In this example, `sample.employee` is recognized as a valid table reference.
+- We handlee qualified and unqualfied object references different. If you use a qualfified reference (e.g. `sample.employee`), then the agent knows to look in the `sample` schema/library. If you use an unqualified reference (e.g. `employee`), then the agent will look in the library list of the active SQL job to resolve the object.
+
+---
+
+<Aside type="tip">
+   TLDR: We will resolve unqualifed objects in your request by using your jobs library list.
+</Aside>
 
 #### Step 3: Retrieve Metadata for Valid References
 
@@ -118,8 +125,7 @@ If you do not want to share your data with any AI services, then do not invoke t
 
 ### We do
 
-* Send table metadata which can be found from `QSYS2.SYSCOLUMNS2` and `QSYS2.SYSKEYCST` in the context based on user input, including table names, column names, types and comments
-* Send system metadata (when the user is asking for the activity summary) which is found with `TABLE(QSYS2.SYSTEM_STATUS(RESET_STATISTICS=>'YES',DETAILED_INFO=>'ALL'))` when requested by the user.
+* Send table metadata which can be found from `QSYS2.SYSCOLUMNS2`, `QSYS2.SYSKEYCST` and results from `QSYS2.GENERATE_SQL`.
 
 ---
 
