@@ -84,7 +84,6 @@ tell me about the columns in sample.employee
 
 <Aside type="tip">
   * Since Database metadata is fetched from the SQL Job Manager, it is important to ensure that the SQL Job Manager is connected and configured correctly.
-  * To get better results, make sure to set the current schema in the SQL job settings, or reference the schema in your queries: `SAMPLE.EMPLOYEE`
 </Aside>
 
 let's break down the process of how the `@db2i` chat participant and the `@Db2i` context provider work:
@@ -141,7 +140,6 @@ The `@db2i` chat participant and the `@Db2i` context provider are designed to pr
 
 1. **Schema Resolution**
    - The `@db2i` chat participant and the `@Db2i` context provider rely on the active SQL Job's schema to resolve table references. If the schema is not set or is incorrect, the model may not be able to resolve table references accurately.
-   - To get better results, make sure to set the current schema in the SQL job settings, or reference the schema in your queries: `SAMPLE.EMPLOYEE`
 2. **Complex Queries**
    - The `@db2i` chat participant and the `@Db2i` context provider are optimized for generating simple SQL queries. For more complex queries, the model may not be able to provide accurate results.
    - For complex queries, it is recommended to manually write the SQL query or use the model's generated SQL as a starting point.
