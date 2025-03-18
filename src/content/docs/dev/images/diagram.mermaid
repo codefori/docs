@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant N as Nav
+    participant I as IBM i
+    participant S as Service
+    participant C as Code for IBM i
+    
+    N->>I: PTF is installed?
+    note over N,I: /QIBM/ProdData/IBMiDebugService
+    N->>I: What is the Debug Service version?
+    note over N,I: /QIBM/ProdData/IBMiDebugService/package.json<br>File has service version and Java requirement
+    N->>I: Generate keystore,<br/>password and certificate
+    N->>I: Persistant client certificate stored
+    note over N,I: /QIBM/UserData/IBMiDebugService/certs/c.crt<br>This path doesn't change as clients depend on it.
+    N->>+S: Start the service up
+
+    N-->C: 🚀
+    
+    C->>I: Is the Debug Server running?
+    note over C,I: A nicety to make the UX better
+    I->>C: Absolutely
+    C->>I: Is the Debug Service running?
+    I->>C: Absolutely
+    C->>I: Grab the service client certificate
+    note over C,I: Predetermined path as noted above
+    C->>S: Initiate DAP
