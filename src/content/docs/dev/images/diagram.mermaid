@@ -19,7 +19,8 @@ sequenceDiagram
     note over C,I: A nicety to make the UX better
     I->>C: Absolutely
     C->>I: Is the Debug Service running?
-    I->>C: Absolutely
+    I->>C: Yes/No
+    C-->>N: If not, then send the user to Nav
     C->>I: Grab the service client certificate
     note over C,I: Predetermined path as noted above
     C->>S: Initiate DAP
