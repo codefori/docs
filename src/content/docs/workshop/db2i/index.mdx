@@ -17,6 +17,8 @@ import { Aside, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/compone
 * Visual Explain
 * SELF
 * Notebooks
+* Updatable result sets
+* *Challenge:* writing SQL procedures and functions
 
 ---
 
@@ -393,6 +395,21 @@ limit 10;
 
 </Card></CardGrid>
 
+#### 7. Using the syntax checker
+
+<CardGrid>
+<Card>
+
+The SQL extension has a built-in syntax checker that will check the SQL statement for syntax errors. This is done when the SQL documents are edited, or when triggered by the user. If the SQL statement is invalid, the editor will show a red squiggly line under the invalid part of the statement.
+
+You can use the 'Check SQL syntax' button on the SQL document to trigger the syntax checker.
+
+</Card><Card>
+
+![](./assets/syntaxchecker.png)
+
+</Card></CardGrid>
+
 ---
 
 ## Exporting data
@@ -657,8 +674,7 @@ It is possible to configure which nodes will be highlighted in the Explain resul
 SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the Results View. Additional documentation of SELF can be found [here](https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self).
 
 <Aside type="caution">
-SELF can only work with users who have `*ALLOBJ` authority. This is because SELF data could contain information about other users and what SQL they're executing. 
-This section may have to be skipped in the lab environment due to lack of authority.
+SELF can only work with users who have `*ALLOBJ` authority. This is because SELF data could contain information about other users and what SQL they're executing. This section may have to be skipped in the lab environment due to lack of authority.
 </Aside>
 
 ### Tasks
@@ -1078,3 +1094,109 @@ Under the ▶️ (play) button is 'Open as Notebook'. Selecting that will open t
 </Card></CardGrid>
 
 ![](./assets/notebooks_6_b.png)
+
+---
+
+## Updatable result sets
+
+### Intro
+
+The Db2 for IBM i extension has the ability to update result sets directly in the result set view. This is a powerful feature that allows users to quickly update data without having to write SQL statements.
+
+To accomplish this, use the `update` prefix in the SQL statement. This will allow the user to update the result set directly in the result set view. A fully qualified object name is required.
+
+### Tasks
+
+```sql
+update: select * from sample.employee
+
+update: select * from sample.department
+```
+
+After the statement has been executed, you will see the result set in the result set view. You can then click on the cell you want to update and change the value. Once the value has been changed, you can press the Enter key to save the changes.
+
+---
+
+## *Challenge*: Write an SQL procedure
+
+With all the new tools you've got, it's time to write an SQL procedure. The procedure should take a department ID (`char(3)`) as input and return all employees in that department.
+
+```sql
+-- SQL statement to fetch employees by WORKDEPT
+select * from SNDBX3.EMPLOYEE where WORKDEPT = 'A00';
+
+-- SQL Procedure to fetch employees by WORKDEPT
+call GetEmployeesByWorkDept('A00');
+```
+
+<details>
+<summary>Click to see the solution</summary>
+
+Nice try! Ask your instructor for help if you need it.
+
+<div style="display:none">
+
+```sql
+-- SQL Procedure to fetch employees by WORKDEPT
+CREATE OR REPLACE PROCEDURE GetEmployeesByWorkDept (
+    IN dept CHAR(3)
+)
+LANGUAGE SQL
+DYNAMIC RESULT SETS 1
+BEGIN
+    -- Select employees based on the given WORKDEPT
+    DECLARE SELECT_STATEMENT CURSOR FOR
+        SELECT EMPNO, FIRSTNME, LASTNAME, JOB, SALARY
+        FROM SNDBX3.EMPLOYEE
+        WHERE WORKDEPT = dept;
+
+    -- Open the cursor to return the result set
+    OPEN SELECT_STATEMENT;
+    SET RESULT SETS CURSOR SELECT_STATEMENT;
+END;
+
+call GetEmployeesByWorkDept('A00');
+```
+
+</div>
+
+</details>
+
+## *Challenge*: Write an SQL function
+
+With all the new tools you've got, it's time to write an SQL function. The function should take a department ID (`char(3)`) as input and return the total salary of all employees in that department.
+
+```sql
+values GetTotalSalaryByWorkDept('A00');
+```
+
+<details>
+<summary>Click to see the solution</summary>
+
+Nice try! Ask your instructor for help if you need it.
+
+<div style="display:none">
+
+```sql
+-- SQL Function to calculate the sum of salaries for a given WORKDEPT
+CREATE OR REPLACE FUNCTION GetTotalSalaryByWorkDept (
+    dept CHAR(3)
+)
+RETURNS DECIMAL(10, 2)
+LANGUAGE SQL
+DETERMINISTIC
+BEGIN
+    DECLARE total_salary DECIMAL(10, 2);
+
+    -- Calculate the sum of salaries for the given WORKDEPT
+    SELECT SUM(SALARY)
+    INTO total_salary
+    FROM SNDBX3.EMPLOYEE
+    WHERE WORKDEPT = dept;
+
+    RETURN COALESCE(total_salary, 0);
+END;
+```
+
+</div>
+</details>
