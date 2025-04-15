@@ -41,7 +41,7 @@ SQL statements are executed using the active job selected in the SQL Job Manager
 
 ### SQL processors
 
-Newer version of SQL provided by Db2 for i allows you to run CL commands in a script. There are also `json`, `csv`, and `sql` processors, which will open the result set in the chosen format.
+Newer version of SQL provided by Db2 for i allows you to run CL commands in a script. There are also `json`, `csv`, `sql` and `rpg` processors, which will open the result set in the chosen format.
 
 ```sql
 -- result set as normal table
@@ -55,6 +55,9 @@ csv: select * from sample.employee;
 
 -- result set as SQL insert statement
 sql: select * from sample.employee;
+
+-- RPG data structure based on result set columns
+rpg: select * from sample.employee;
 
 -- run CL commands. output is directed to IBM i output channel
 cl: dspffd sample/employee
