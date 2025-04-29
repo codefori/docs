@@ -1,0 +1,18 @@
+---
+title: ASP configuration
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+If you store your source code, or objects, in another iASP other than *SYSBAS, then your user profile needs to be configured with a job description that has the ASP set to the iASP you want to use.
+
+There are two steps for this:
+
+* Set the `INLASPGRP` parameter in [`CRTJOBD`](https://www.ibm.com/docs/en/i/7.3.0?topic=ssw_ibm_i_73/cl/crtjobd.html) or `CHGJOBD` to the ASP group you want to use.
+* If needed, set which job description to use in your user profile by changing the `JOBD` parameter in [`CHGUSRPRF`](https://www.ibm.com/docs/en/i/7.3.0?topic=ssw_ibm_i_73/cl/chgusrprf.html).
+
+Some people prefer having a user profile for each ASP.
+
+<Aside type="note">
+Code for IBM i used to have a method of setting the *source ASP* in the connection settings. It was removed in favour of this.
+</Aside>
