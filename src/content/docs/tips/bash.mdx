@@ -18,13 +18,50 @@ This should return `/QOpenSys/pkgs/bin/bash`.  If it doesn't then you need to ta
 
 ## Setting Bash as the Default Shell
 
+*Some techniques come directly from the official [IBM i OSS docs page](https://ibmi-oss-docs.readthedocs.io/en/latest/troubleshooting/SETTING_BASH.html)*
+
+### Technique #1: Code for IBM i
+
 When you connect to a server,  _Code for IBM i_ checks that bash is your default shell. If bash is not the default shell,  it will offer to set bash as the default. 
 
 ![bash set offer](../../../assets/Tips_Bash_Offer.png)
 
 This is the most convenient way to set bash as your default shell. You can ignore this prompt, but be aware that not all capabalities may work.
 
-You can get information on setting bash as your default shell [from IBM here](https://ibmi-oss-docs.readthedocs.io/en/latest/troubleshooting/SETTING_BASH.html).
+### Technique #2: chsh
+
+1. Use yum to install the `chsh` package (for instamce, `yum install chsh`)
+
+2. From a shell, use the `chsh` command to set your shell
+  (for instance, `/QOpenSys/pkgs/bin/chsh -s /QOpenSys/pkgs/bin/bash`).
+  You can set the shell for another user via the `-u` option
+  (for instance, `/QOpenSys/pkgs/bin/chsh -s /QOpenSys/pkgs/bin/bash -u otherusr`).
+
+### Technique #3: sql
+
+You can set bash to be your default shell by running the following command from
+anywhere you have an SQL context, such as the Run SQL Scripts tool:
+
+```sql
+CALL QSYS2.SET_PASE_SHELL_INFO('*CURRENT', '/QOpenSys/pkgs/bin/bash')
+```
+
+You can also set bash to be the default shell for all users, by running:
+
+```sql
+CALL QSYS2.SET_PASE_SHELL_INFO('*DEFAULT', '/QOpenSys/pkgs/bin/bash')
+```
+
+Or, for a specific user:
+
+```sql
+CALL QSYS2.SET_PASE_SHELL_INFO('OTHRUSR', '/QOpenSys/pkgs/bin/bash')
+```
+
+More information on this IBM i service can be found on [developerWorks](https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/IBM%20i%20Technology%20Updates/page/QSYS2.SET_PASE_SHELL_INFO%20Procedure)
+
+Also, the default shell setting can be queried out with [QSYS2.USER_INFO](https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/IBM%20i%20Technology%20Updates/page/QSYS2.USER_INFO%20catalog)
+
 
 ## Adding Bash to your PATH
 
