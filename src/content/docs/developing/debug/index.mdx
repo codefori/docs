@@ -137,7 +137,25 @@ After you have installed the PTFs, the connection inside of Visual Studio Code w
 
 ## Configuring & starting the service
 
-JULIA TO FILL THIS IN yo
+This must be done with user that has *ALLOBJ and *SYSADM privlages.
+Below are the base requirements to configure the certificate: 
+- Master key 1 is set (this can be done in Navigator for IBM i under Security > Cryptographic Services Key Management > Manage Master Keys)
+- *SYSTEM store is populated with a valid certificate (this can be done in Digital Certificate Manager)
+
+1. On Navigator for IBM i, go to Network > Servers > TCP/IP Servers
+2. Scroll down to System Debugger and right click
+3. Hover over Stop Instance, select Debug Service
+![](image-4.png)
+4. Right click System Debugger again, select Regenerate Debug Service Trust Store 
+![](image-3.png)
+5. Enter in the password for the *SYSTEM store, click OK
+![](image-1.png)
+6. Select the certificate you want to use, click OK
+![](image-2.png)
+7. Right click System Debugger again, hover over Start Instance, select Debug Service
+![](image-5.png)
+
+**NOTE:** This needs to be done each time you renew or replace that certificate, it does not automatically update when you update the *SYSTEM store
 
 # Common issues
 
