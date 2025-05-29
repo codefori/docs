@@ -299,6 +299,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"developing/local/gitflow.mdx": {
+	id: "developing/local/gitflow.mdx";
+  slug: "developing/local/gitflow";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "developing/local/migrate.mdx": {
 	id: "developing/local/migrate.mdx";
   slug: "developing/local/migrate";
