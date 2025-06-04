@@ -31,7 +31,7 @@ instance.onEvent(`connected`, () => {
 
 Code for IBM i ships an API (via VS Code command) that can be used by an extension to execute a remote command on the IBM i.
 
-It has a parameter which is an object with some properties:
+It has a parameter which is an object with some properties. When executing a command in the `ile` or `qsh` environment, it will use the library list from the current connection.
 
 ```ts
 interface CommandInfo {
@@ -42,9 +42,6 @@ interface CommandInfo {
   command: string;
 }
 ```
-
-* Command can also use [Promptable fields](../../developing/actions/execution/#prompted).
-* When executing a command in the `ile` or `qsh` environment, it will use the library list from the current connection.
 
 The command returns an object:
 
