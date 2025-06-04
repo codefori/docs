@@ -57,16 +57,9 @@ interface CommandResult {
 ```
 
 ```ts
-const result: CommandResult = await vscode.commands.executeCommand(`code-for-ibmi.runCommand`, {
-  environment: `pase`,
-  command: `ls`
-});
-
-// or
-
-const result = await vscode.commands.executeCommand(`code-for-ibmi.runCommand`, {
-  environment: `pase`,
-  command: `ls`
+const rows = await instance.getConnection().runCommand({
+  command: `WRKACTJOB`,
+  environment: `ile`
 });
 ```
 
