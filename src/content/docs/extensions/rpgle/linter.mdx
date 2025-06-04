@@ -21,8 +21,8 @@ If a linter rules file does not exist, you will be asked asked if you want to cr
 ## Relative lint config
 
 * If you are developing in source members (`LIB/QRPGLESRC/MYSOURCE.RPGLE`)
-   * the the linter config exists in `LIB/VSCODE/RPGLINT.JSON`. 
-   * Each library has its own rules configuration file, binding it to all RPGLE sources in that library. 
+   * the the linter config exists in `LIB/VSCODE/RPGLINT.JSON`.
+   * Each library has its own rules configuration file, binding it to all RPGLE sources in that library.
    * config changes get pickup when RPGLE sources are re-opened.
 * When developing in the IFS:
    * linter rules config exist in `.vscode/rpglint.json` relative to the current working directory.
@@ -52,8 +52,8 @@ Below are some available lint configs. [See the `rpglint.json` schema for the mo
 | 🌟 | StringLiteralDupe | boolean | Duplicate string literals are not allowed. |
 | 🌟 | RequireBlankSpecial | boolean | *BLANK must be used over empty string literals. |
 | 🌟 | CopybookDirective | string | Force which directive which must be used to include other source. (`COPY` or `INCLUDE`) |
-| 🌟 | DirectivesCase | string | Directives must be in the specified case. (`lower` or `upper`) |
-| 🌟 | UppercaseDirectives | boolean | **Deprecated** use `DirectivesCase` instead. Directives must be in uppercase. |
+| 🌟 | DirectiveCase | string | Directives must be in the specified case. (`lower` or `upper`) |
+| 🌟 | UppercaseDirectives | boolean | **Deprecated** use `DirectiveCase` instead. Directives must be in uppercase. |
 | 🤔 | NoSQLJoins | boolean | JOINs in Embedded SQL are not allowed. |
 | 🌟 | NoGlobalsInProcedures | boolean | Globals are not allowed in procedures. |
 | 🌟 | SpecificCasing | array | Specific casing for op codes, declartions or built-in functions codes. |
@@ -66,7 +66,7 @@ Below are some available lint configs. [See the `rpglint.json` schema for the mo
 | 🔒 | NoExecuteImmediate | boolean | Embedded SQL statement with EXECUTE IMMEDIATE not allowed. |
 | 🔒 | NoExtProgramVariable | boolean | Declaring a prototype with EXTPGM and EXTPROC using a procedure is now allowed. |
 | 🤔🌟 | IncludeMustBeRelative | boolean | When using copy or include statements, path must be relative to the root. Usage is only recommended for local/workspace projects. |
-| 🤔 | SQLHostVarCheck | boolean | Warns when referencing variables in Embedded SQL that are also defined locally. | 
+| 🤔 | SQLHostVarCheck | boolean | Warns when referencing variables in Embedded SQL that are also defined locally. |
 | 🤔 | RequireOtherBlock | boolean | Requires `SELECT` blocks to have an `OTHER` block. |
 
 **Type key**
