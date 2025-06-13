@@ -1,0 +1,124 @@
+---
+title: Writing Tests
+---
+
+import { Aside, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Naming Conventions
+
+### Test Cases
+
+In RPGUnit, a test case is an exported procedures that starts with the name `test`. This also means that you should not export procedures starting with `test` if they are not intended to be a test case.
+
+**Example test cases:**
+* `test_getEmployeeDetail`
+* `test_getDeptDetail`
+* `testIsPalindrome`
+* `testFactorial`
+
+### Test Suites
+
+A test suite consists of one or more test cases in a file or source member. This test suite will be compiled into a service program in order to run the test cases. Although RPGUnit itself does not enforce an specific naming convention for test suites, the `IBM i Testing` extension does based on whether you are working on local files on your PC or source members on the IBM i.
+
+* **Local Files**: The file must end in `.test.rpgle`, `.test.sqlrpgle`, `.test.cblle`, or `.test.sqlcblle` in order to be detected by the extension. The file can be put in any directory.
+* **Source Members**: Source members can be put in any source file, but it is recommended to store them in a source file named `QTESTSRC`. By default this is where the extension will look for test suites in your library list. You can configure the extension to search other source files by going to the extension's settings and searching for the **Test Source Files** setting.
+  ![Test Source Files](Testing_TestSourceFiles.png)
+
+**Example test suites:**
+* Local Files
+  * `employee.test.rpgle`
+  * `department.test.rpgle`
+  * `string.test.rpgle`
+  * `math.test.rpgle`
+* Source Members
+  * `QTESTSRC` source file with members:
+    * `EMPLOYEE.RPGLE`
+    * `DEPARTMENT.RPGLE`
+    * `STRING.RPGLE`
+    * `MATH.RPGLE`
+
+## Assertions and Utilities
+
+In order to use RPGUnit procedures you need to add the `TESTCASE` copybook to your test suite:
+
+```rpgle
+/include qinclude,TESTCASE
+```
+
+**Assertions:**
+
+<Tabs>
+  <TabItem label="aEqual" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="iEqual" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="nEqual" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="assert" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="fail" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="assertJobLogContains" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="assertMessageQueueContains" >
+    TODO: Add spec here
+  </TabItem>
+</Tabs>
+
+**Utilities:**
+
+<Tabs>
+  <TabItem label="CLRPFM" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="RCLACTGRP" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="runCmd" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="getMonitoredMessage" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="waitSeconds" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="displayStatusMessage" >
+    TODO: Add spec here
+  </TabItem>
+</Tabs>
+
+## Setup and Teardown
+
+<Tabs>
+  <TabItem label="setUpSuite" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="setUp" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="tearDown" >
+    TODO: Add spec here
+  </TabItem>
+  <TabItem label="tearDownSuite" >
+    TODO: Add spec here
+  </TabItem>
+</Tabs>
+
+## Generating Stubs
+
+## Example Test Suites
+
+To get started with some sample tests, check out these examples:
+* [ibmi-company_system](https://github.com/IBM/ibmi-company_system/tree/main/qtestsrc)
+* RPGUnit [templates](https://github.com/tools-400/irpgunit/tree/main/host/iRPGUnit/QTEMPLATE) and [self tests](https://github.com/tools-400/irpgunit/tree/main/host/iRPGUnit/QTESTCASES)
+
+<Aside type="tip">
+  If you have example tests that you would like to share with the community, please open a pull request [here](https://github.com/codefori/docs) to add them to this page.
+</Aside>
