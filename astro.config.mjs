@@ -65,6 +65,40 @@ export default defineConfig({
 							collapsed: true,
 						},
 						{
+							label: 'Testing',
+							badge: {
+								text: 'NEW',
+								variant: 'tip'
+							},
+							collapsed: true,
+							items: [
+									{
+										label: 'Overview',
+										link: 'developing/testing/overview',
+									},
+									{
+										label: 'Writing Tests',
+										link: 'developing/testing/writing',
+									},
+									{
+										label: 'Running Tests',
+										link: 'developing/testing/running',
+									},
+									{
+										label: 'Configuring Tests',
+										link: 'developing/testing/configuring',
+									},
+									{
+										label: 'Code Coverage',
+										link: 'developing/testing/coverage',
+									},
+									{
+										label: 'Troubleshooting',
+										link: 'developing/testing/troubleshooting',
+									}
+								]
+						},
+						{
 							label: 'Debugging',
 							link: 'developing/debug/',
 						},
