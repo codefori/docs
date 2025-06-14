@@ -11,11 +11,11 @@ It is possible for the user to develop in a local workspace folder and deploy+co
 If the user opens a Workspace before connecting to an IBM i:
 
 1. A new information message will show the user what their current library is,
-2. If this is the first time connecting with this workspace, it will
+2. If this is the first time connecting with this workspace, Code for IBM i will
    * prompt the user to set a default Deploy directory,
-   * if no `actions.json` file is found will ask the user if they'd like to create a default
-3. a new right-click option will appear on IFS directories to deploy to that directory
-4. a 'Deploy' button will appear on the status bar
+   * ask the user if they'd like to create a default `actions.json` file if no `actions.json` file is found in the user's `~/.vscode` directory on the IBM i.
+3. A new right-click menu option will appear on IFS directories in the IFS Browser to deploy to that directory ('Set Deploy Workspace Location').
+4. A 'Deploy' button will appear on the status bar.
 
 ## Guides
 
