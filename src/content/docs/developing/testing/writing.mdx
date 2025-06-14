@@ -4,7 +4,7 @@ title: Writing Tests
 
 import { Aside, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Naming Conventions
+## Naming Requirements
 
 ### Test Cases
 
@@ -111,7 +111,15 @@ In order to use RPGUnit procedures you need to add the `TESTCASE` copybook to yo
   </TabItem>
 </Tabs>
 
-## Generating Stubs
+## Generating Test Stubs
+
+To simplify the process of writing tests, you can have the extension generate stubs for individual test cases or an entire test suite. To do this, place your cursor inside any export procedure and click the code action button (💡). This will give you an option to generate a test case for the specific procedure you are in or to generate a test suite containing test cases for every procedure.
+
+![Generating Test Stubs](Testing_GeneratingTestStubs.png)
+
+After selecting an option, a test suite will be created if it does not already exist with a scaffold that will include not only the test case stubs, but also the necessary includes and prototypes (if necessary). The generated test case stubs themselves will each be structured into the following sections: declarations, inputs, actual results, expected results, and assertions. As the developer, you will need to fill in the inputs and expected results.
+
+![Generated Test Stub](Testing_GeneratedTestStub.png)
 
 ## Example Test Suites
 
@@ -120,5 +128,5 @@ To get started with some sample tests, check out these examples:
 * RPGUnit [templates](https://github.com/tools-400/irpgunit/tree/main/host/iRPGUnit/QTEMPLATE) and [self tests](https://github.com/tools-400/irpgunit/tree/main/host/iRPGUnit/QTESTCASES)
 
 <Aside type="tip">
-  If you have example tests that you would like to share with the community, please open a pull request [here](https://github.com/codefori/docs) to add them to this page.
+  🙏 If you have example tests that you would like to share with the community, please open a pull request [here](https://github.com/codefori/docs) to add them to this list!
 </Aside>
