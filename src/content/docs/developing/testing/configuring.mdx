@@ -19,20 +19,21 @@ The following hierarchy is used to determine the configuration for local files:
 Shown below is an example of a project structure with the `testing.json` file at the global and directory level:
 
 <FileTree>
-- .vscode
-  - testing.json                      **Global configuration**
-- qsqlsrc
-  - employee.sql
-- qrpglesrc
-  - utilsA.rpgle
-  - utilsB.rpgle
-  - employee.rpgle
-- qtestsrc
-  - utils
-    - testing.json                    **Directory level configuration**
-    - utilsA.test.rpgle
-    - utilsB.test.rpgle
-  - employee.test.rpgle
+- my-project
+  - .vscode
+    - testing.json                      **Global configuration**
+  - qsqlsrc
+    - employee.sql
+  - qrpglesrc
+    - utilsA.rpgle
+    - utilsB.rpgle
+    - employee.rpgle
+  - qtestsrc
+    - utils
+      - testing.json                    **Directory level configuration**
+      - utilsA.test.rpgle
+      - utilsB.test.rpgle
+    - employee.test.rpgle
 </FileTree>
 
 ### Source Members
