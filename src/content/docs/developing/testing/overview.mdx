@@ -37,12 +37,24 @@ The following extensions can be installed from the Visual Studio Code Marketplac
 
 The `RPGUNIT` library must be be installed on your IBM i in order to leverage the framework and assertions that it provides. It can be installed easily via the extension using the steps below which is the recommended approach or manually using the instructions [here](https://irpgunit.sourceforge.io/help/).
 
-<Aside type="note">
-  By default, `RPGUNIT` is the name of the RPGUnit product library which will be installed on the host. This can be configured if necessary by going to the extension's settings and searching for the **Product Library** setting.
-  ![Product Library](Testing_ProductLibrary.png)
-</Aside>
+#### Preconditions
+RPGUnit requires OS400 7.5 for the latest features. It can also be installed on 7.4 and 7.3 if the following PTFs have been installed:
 
-To install the library via the extension, follow these steps:
+**7.4**
+* ILE RPG runtime: SI71537
+* ILE RPG compiler: SI71536
+* SQL Precompile support UTF-8 stream files: SI70942
+
+**7.3**
+* ILE RPG runtime: SI71535
+* ILE RPG compiler: SI71534
+* SQL Precompile support UTF-8 stream files: SI70936
+
+If the PTFs have not been installed, the library must be recompiled to disable the latest features, such as `assertEqual()`. PTFs SI70942 and SI70936 are required for compiling test suites from UTF-8 (CCSID: 1208) source stream files.
+
+#### Library Installation via Extension
+
+Once the PTFs are installed, you can install the library via the extension using the folllowing steps:
 
 <Steps>
   1. Connect to your IBM i system.
@@ -58,9 +70,14 @@ To install the library via the extension, follow these steps:
     ![Installation Logs](Testing_InstallationLogs.png)
 </Steps>
 
+<Aside type="note">
+  By default, `RPGUNIT` is the name of the RPGUnit product library which will be installed on the host. This can be configured if necessary by going to the extension's settings and searching for the **Product Library** setting.
+  ![Product Library](Testing_ProductLibrary.png)
+</Aside>
+
 ### 3. CODECOV
 
 To generate code coverage results, the `CODECOV` command must be installed on your IBM i via PTF:
-    * **V7R3**: PTF SI80728
-    * **V7R4**: PTF SI80737 & SI81204
-    * **V7R5**: PTF SI81216 & SI81217
+    * **7.3**: PTF SI80728
+    * **7.4**: PTF SI80737 & SI81204
+    * **7.5**: PTF SI81216 & SI81217

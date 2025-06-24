@@ -10,7 +10,8 @@ import { Aside, CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/compone
 
 In RPGUnit, a test case is an exported procedures that starts with the name `test`. This also means that you should not export procedures starting with `test` if they are not intended to be a test case.
 
-**Example test cases:**
+Listed below are some example test case names that follow this naming convention:
+
 * `test_getEmployeeDetail`
 * `test_getDeptDetail`
 * `testIsPalindrome`
@@ -24,13 +25,14 @@ A test suite consists of one or more test cases in a file or source member. This
 * **Source Members**: Source members can be put in any source file, but it is recommended to store them in a source file named `QTESTSRC`. By default this is where the extension will look for test suites in your library list. You can configure the extension to search other source files by going to the extension's settings and searching for the **Test Source Files** setting.
   ![Test Source Files](Testing_TestSourceFiles.png)
 
-**Example test suites:**
-* Local Files
+Listed below are some example test suite names that follow this naming convention:
+
+* **Local Files**
   * `employee.test.rpgle`
   * `department.test.rpgle`
   * `string.test.rpgle`
   * `math.test.rpgle`
-* Source Members
+* **Source Members**
   * `QTESTSRC` source file with members:
     * `EMPLOYEE.RPGLE`
     * `DEPARTMENT.RPGLE`
