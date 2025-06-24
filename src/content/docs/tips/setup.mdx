@@ -87,3 +87,35 @@ mv id_rsa id_rsa.pem
 mv id_rsa_original id_rsa
 ```
 Now configure the Code for IBM i connection using `id_rsa.pem` instead of `id_rsa`. In this way, your original key is still there to make connections as always, and you have a new copy in PEM format using which Code for IBM i connections operate correctly.
+
+## QSH / `cqsh` returning `SIGABRT`
+
+We have seen reports of QSH or `cqsh` returning `SIGABRT` when running commands. This is what it might look like in the Code for IBM i output:
+
+```
+/home/OLVERA: /home/OLVERA/.vscode/cqsh_1
+echo "Hello world"
+{
+    "code": 0,
+    "signal": "SIGABRT",
+    "stdout": "",
+    "stderr": ""
+}
+```
+The issue is easy to recreate by piping `liblist` to `qsh`:
+
+```bash title="Terminal"
+-bash-5.2$ echo liblist | /QopenSys/usr/bin/qsh
+IOT/Abort trap
+```
+
+Additionally, you can use `liblist` in `QSH` or `STRQSH` in 5250:
+
+```bash title="STRQSH"
+$ liblist
+qsh: 001-0078 Process ended by signal 5.
+```
+
+### Potential fix
+
+It has been reported that this issue can be resolved by reinstalling the PASE PTF: **5770SS1 PASE**
