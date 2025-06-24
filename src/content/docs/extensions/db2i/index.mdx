@@ -41,7 +41,7 @@ SQL statements are executed using the active job selected in the SQL Job Manager
 
 ### SQL prefixes
 
-Newer version of SQL provided by Db2 for i allows you to run CL commands in a script. There are also `json`, `csv`, `sql` and `rpg` prefixes, which will open the result set in the chosen format.
+SQL provided by Db2 for i allows you to run CL commands in a script. Additionally there are `json`, `csv`, `sql` and `rpg` prefixes, which will open the result set in the chosen format.
 
 ```sql
 -- result set as normal table
@@ -79,7 +79,7 @@ Enter the value `null` to set a column to *null*. If the column cannot accept at
 
 ## Syntax checking
 
-When connected to an IBM i, should be enabled. Here is what triggers to syntax checker:
+When connected to an IBM i, the syntax checker has the following options:
 
 * as you edit an SQL file, the statement being edited will be syntax checked after a short period of time (enabled by default)
 * when you open an SQL file, the entire document will be checked (disabled by default and has a limit of 200 statements in the document)
@@ -110,6 +110,10 @@ You are able to right-click on any job to save those job settings, allowing it t
 ## Using the Schema Browser
 
 The Db2 for i extension adds a view called Schema Browser which allows the user to add existing schemas to the list and will allow them to browse existing database objects. You can right-click on SQL objects to show more actions. Each SQL object type may have unique actions. 
+
+<Aside type="note">
+   The Schema Browser requires an active SQL Job to function.
+</Aside>
 
 ### Viewing table contents
 
@@ -152,9 +156,9 @@ We added the option for users to configure `Auto Refresh` on the SELF view. When
 
 ## Visual Explain
 
-We have added Visual Explain into the database extension with a more lightweight approach of explain data. The typically run button on the document now has options to either run, run and explain or explain without running, which will show the explain nodes and node details in the same result set view.
+We have added Visual Explain into the database extension with a more lightweight approach of explain data. The typical run button on the document now has options to either run, run and explain or explain without running, which will show the explain nodes and node details in the same result set view.
 
-The Visual Explain view has button on the header to control which nodes should be highlights, as well as the ability to export the data as JSON, and more.
+The Visual Explain view has a button on the header to control which nodes should be highlights, as well as the ability to export the data as JSON, and more.
 
 ![](./images/dove.png)
 
@@ -180,7 +184,7 @@ There are a few ways to create an IBM i Notebook:
 
 ### The life of a Notebook
 
-A notebook is made up of cells. A cell is asscociated with a language (for example, `sql`, `cl`, or `markdown`). Cells (other than `markdown`) can be executed. Each cell has a result and typically gets rendered below the cell input after execution. 
+A notebook is made up of cells. A cell is associated with a language (for example, `sql`, `cl`, or `markdown`). Cells (other than `markdown`) can be executed. Each cell has a result and typically gets rendered below the cell input after execution. 
 
 Execution is different for each language type:
 
