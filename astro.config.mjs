@@ -89,10 +89,6 @@ export default defineConfig({
 										link: 'developing/testing/configuring',
 									},
 									{
-										label: 'Code Coverage',
-										link: 'developing/testing/coverage',
-									},
-									{
 										label: 'Troubleshooting',
 										link: 'developing/testing/troubleshooting',
 									}

@@ -18,9 +18,9 @@ In RPGUnit, a test case is an exported procedures that starts with the name `tes
 
 ### Test Suites
 
-A test suite consists of one or more test cases in a file or source member. This test suite will be compiled into a service program in order to run the test cases. Although RPGUnit itself does not enforce an specific naming convention for test suites, the `IBM i Testing` extension does based on whether you are working on local files on your PC or source members on the IBM i.
+A test suite consists of one or more test cases in a file or source member. This test suite will be compiled into a service program in order to run the test cases. Although RPGUnit itself does not enforce an specific naming convention for test suites, the **IBM i Testing** extension does based on whether you are working on local files on your PC or source members on the IBM i.
 
-* **Local Files**: The file must end in `.test.rpgle`, `.test.sqlrpgle`, `.test.cblle`, or `.test.sqlcblle` in order to be detected by the extension. The file can be put in any directory.
+* **Local Files**: The file name must end in `.test.rpgle`, `.test.sqlrpgle`, `.test.cblle`, or `.test.sqlcblle` in order to be detected by the extension. File names are also not restricted to 10 characters as the extension will use the same rules that Source Orbit uses to handle [long file names](https://ibm.github.io/sourceorbit/#/./pages/general/rules?id=long-file-names) when compiling the test. Noteably, since all files must include `.test`, the resulting object name will start with `T`. These files can also be put in any directory.
 * **Source Members**: Source members can be put in any source file, but it is recommended to store them in a source file named `QTESTSRC`. By default this is where the extension will look for test suites in your library list. You can configure the extension to search other source files by going to the extension's settings and searching for the **Test Source Files** setting.
   ![Test Source Files](Testing_TestSourceFiles.png)
 
@@ -37,80 +37,6 @@ A test suite consists of one or more test cases in a file or source member. This
     * `STRING.RPGLE`
     * `MATH.RPGLE`
 
-## Assertions and Utilities
-
-In order to use RPGUnit procedures you need to add the `TESTCASE` copybook to your test suite:
-
-```rpgle
-/include qinclude,TESTCASE
-```
-
-**Assertions:**
-
-<Tabs>
-  <TabItem label="aEqual" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="iEqual" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="nEqual" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="assert" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="fail" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="assertJobLogContains" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="assertMessageQueueContains" >
-    TODO: Add spec here
-  </TabItem>
-</Tabs>
-
-**Utilities:**
-
-<Tabs>
-  <TabItem label="CLRPFM" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="RCLACTGRP" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="runCmd" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="getMonitoredMessage" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="waitSeconds" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="displayStatusMessage" >
-    TODO: Add spec here
-  </TabItem>
-</Tabs>
-
-## Setup and Teardown
-
-<Tabs>
-  <TabItem label="setUpSuite" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="setUp" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="tearDown" >
-    TODO: Add spec here
-  </TabItem>
-  <TabItem label="tearDownSuite" >
-    TODO: Add spec here
-  </TabItem>
-</Tabs>
-
 ## Generating Test Stubs
 
 To simplify the process of writing tests, you can have the extension generate stubs for individual test cases or an entire test suite. To do this, place your cursor inside any export procedure and click the code action button (💡). This will give you an option to generate a test case for the specific procedure you are in or to generate a test suite containing test cases for every procedure.
@@ -120,6 +46,691 @@ To simplify the process of writing tests, you can have the extension generate st
 After selecting an option, a test suite will be created if it does not already exist with a scaffold that will include not only the test case stubs, but also the necessary includes and prototypes (if necessary). The generated test case stubs themselves will each be structured into the following sections: declarations, inputs, actual results, expected results, and assertions. As the developer, you will need to fill in the inputs and expected results.
 
 ![Generated Test Stub](Testing_GeneratedTestStub.png)
+
+## API Reference
+
+In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` copybook to your test suite:
+
+```rpgle
+/include qinclude,TESTCASE
+```
+
+### Setup and Teardown
+
+<Tabs>
+  <TabItem label="setUpSuite" >
+    <Card title="Set Up Test Suite">
+      Used to set up a test suite before the first test case is started. 
+      This procedure can be used to set up test data or allocate resources before the first test case is started.
+
+      **Syntax**
+        ```rpgle
+        setUpSuite();
+        ```
+
+      **Example**
+        ```rpgle
+        dcl-proc setUpSuite export;
+          // Setup test suite code here
+        end-proc;
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="setUp" >
+    <Card title="Set Up Test Case">
+      Used to set up a test case before it is executed.
+      This procedure is called for each test case.
+
+      **Syntax**
+        ```rpgle
+        setUp();
+        ```
+
+      **Example**
+        ```rpgle
+        dcl-proc setUp export;
+          // Setup test case code here
+        end-proc;
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="tearDownSuite" >
+    <Card title="Tear Down Test Suite">
+      Used to tear down a test suite after the last test case has been executed.
+      This procedure can be used to remove test data or deallocate resources after the last test case has been executed.
+
+      **Syntax**
+        ```rpgle
+        tearDownSuite();
+        ```
+
+      **Example**
+        ```rpgle
+        dcl-proc tearDownSuite export;
+          // Tear down test suite code here
+        end-proc;
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="tearDown" >
+    <Card title="Tear Down Test Case">
+      Used to tear down a test case after it has been executed.
+      This procedure is called for each test case.
+
+      **Syntax**
+        ```rpgle
+        tearDown();
+        ```
+
+      **Example**
+        ```rpgle
+        dcl-proc tearDown export;
+          // Tear down test case code here
+        end-proc;
+        ```
+    </Card>
+  </TabItem>
+</Tabs>
+
+### Assertions
+
+<Tabs>
+  <TabItem label="RPGUnit ≥ 5.1" >
+    <Tabs>
+      <TabItem label="assertEqual" >
+        <Card title="Equality Assertion">
+          Compares the given `expected` and `actual` values (can be a string, numeric, float, date, time, timestamp).
+          The assertion fails, if both values are different. If the `message` parameter is specified, it is appeneded to the log.
+
+          **Syntax**
+            ```rpgle
+            assertEqual( 'expected' : 'actual' [: 'message' );
+            ```
+
+          **Example**
+            ```rpgle
+            // ✅ Pass
+            assertEqual( 'Hello' : 'Hello' );
+            assertEqual( 123 : 123 );
+
+            // ❌ Fail
+            assertEqual( 123.45 : 123.46 );
+            assertEqual( D'2024-09-16' : D'2023-01-11' );
+            assertEqual( T'11.22.33' : T'22.33.44' );
+            assertEqual( Z'2024-09-16-11.22.33.123456' : Z'2024-01-11-11.22.33.123456' );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="assertThat" >
+        <Card title="Custom Assertion">
+          Asserts that the given `actual` value satisfies the condition specified by the given `matcher`.
+          Calls the `matcher` for comparing `actual`. The assertion fails if the `mathcer` return `false`.
+          If the `message` parameter is specified, it is appeneded to the log.
+
+          **Syntax**
+            ```rpgle
+            assertThat( expected : actual : matcher [: message );
+            ```
+
+          **Example**
+            ```rpgle
+            assertThat( actual : %paddr('matcher') : pUserData );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="nEqual" >
+        <Card title="Boolean Equality Assertion">
+          Compares the given `expected` and `actual` Boolean values. The assertion fails, if both values are different.
+          If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
+
+          **Syntax**
+            ```rpgle
+            nEqual( expected : actual [: 'fieldName' );
+            ```
+
+          **Example**
+            ```rpgle
+            // ✅ Pass
+            nEqual( *off : 1=2 );
+
+            // ❌ Fail
+            nEqual( *on : 'ABC'='DEF' );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="assert" >
+        <Card title="Truthy Assertion">
+          Checks if the specified Boolean expression is `true`. The assertion fails if the expression evaluates to false.
+          When the assertion fails, the value of `message` is added to the test report.
+
+          **Syntax**
+            ```rpgle
+            assert( booleanExpression : 'message' );
+            ```
+
+          **Example**
+            ```rpgle
+            // ✅ Pass
+            assert( 1=1 : 'Impossible to fail' );
+
+            // ❌ Fail
+            assert( 1=0 : 'Obviously wrong' );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="fail" >
+        <Card title="Fail">
+          Produces an error and appends the specified `message` to the test report. The test case is terminated.
+
+          **Syntax**
+            ```rpgle
+            fail( 'message' );
+            ```
+
+          **Example**
+            ```rpgle
+            monitor;
+              produceAnException(doFailure);
+            
+              // ❌ Fail: Only runs if exception was not caught
+              fail('produceAnException(..) should have raised an error.');
+            on-error;
+              // ✅ Pass: Only runs if exception was caught
+            endmon;
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="assertJobLogContains" >
+        <Card title="Job Log Contains Assertion">
+          Checks whether the job log contains the specified message ID between *NOW* and `timeLimit`. The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
+
+          **Syntax**
+            ```rpgle
+            assertJobLogContains( msgId : timeLimit );
+            ```
+
+          **Example**
+            ```rpgle
+            testStartTime = getFullTimeStamp();
+            sndMCH1211Msg();
+            
+            // ✅ Pass
+            assertJobLogContains( 'MCH1211' : testStartTime );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="assertMessageQueueContains" >
+        <Card title="Message Queue Contains Assertion">
+          Checks whether a given message queue contains the specified message between *NOW* and `timeLimit`.
+          The message is identified by any combination of ID, message text or message help where unused selection parameters must be omitted.
+          * Message ID can be set to `*EMPTY` to test whether a message queue is empty (all other parameters must be omitted).
+          * Message text and message help can be specified as *generic* strings values.
+          * The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
+
+          **Syntax**
+            ```rpgle
+            assertMessageQueueContains( userOrQueue : library [: msgId [: msgText [: msgHelp : timeLimit );
+            ```
+
+          **Example**
+            ```rpgle
+            testStartTime = getFullTimeStamp();
+            sndToMSGQ();
+            
+            // ✅ Pass
+            assertMessageQueueContains('QMSGQT' : 'QTEMP' : *omit : 'MSGQT - iRPGUnit' : *omit : testStartTime);
+            
+            testStartTime = getFullTimeStamp();
+            
+            // ✅ Pass
+            assertMessageQueueContains('QMSGQT' : 'QTEMP' : '*EMPTY' : *omit : *omit : testStartTime);
+            ```
+        </Card>
+      </TabItem>
+    </Tabs>
+  </TabItem>
+  <TabItem label="RPGUnit ≤ 5.1" >
+    <Tabs>
+      <TabItem label="aEqual" >
+        <Card title="String Equality Assertion">
+          Compares the given `expected` and `actual` String values. The assertion fails, if both values are different.
+          If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
+
+          **Syntax**
+            ```rpgle
+            aEqual( 'expected' : 'actual' [: 'fieldName' );
+            ```
+
+          **Example**
+            ```rpgle
+            // ✅ Pass
+            aEqual( 'Hello' : 'Hello' );
+            
+            // ❌ Fail
+            aEqual( 'HelloWorld' : 'Hello' );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="iEqual" >
+        <Card title="Integer Equality Assertion">
+          Compares the given `expected` and `actual` Integer values. The assertion fails, if both values are different.
+          If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
+
+          **Syntax**
+            ```rpgle
+            iEqual( expected : actual [: 'fieldName' );
+            ```
+
+          **Example**
+            ```rpgle
+            // ✅ Pass
+            iEqual( 123 : 123 );
+            
+            // ❌ Fail
+            iEqual( 123 : 456 );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="nEqual" >
+        <Card title="Boolean Equality Assertion">
+          Compares the given `expected` and `actual` Boolean values. The assertion fails, if both values are different.
+          If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
+
+          **Syntax**
+            ```rpgle
+            nEqual( expected : actual [: 'fieldName' );
+            ```
+
+          **Example**
+            ```rpgle
+            // ✅ Pass
+            nEqual( *off : 1=2 );
+
+            // ❌ Fail
+            nEqual( *on : 'ABC'='DEF' );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="assert" >
+        <Card title="Truthy Assertion">
+          Checks if the specified Boolean expression is `true`. The assertion fails if the expression evaluates to false.
+          When the assertion fails, the value of `message` is added to the test report.
+
+          **Syntax**
+            ```rpgle
+            assert( booleanExpression : 'message' );
+            ```
+
+          **Example**
+            ```rpgle
+            // ✅ Pass
+            assert( 1=1 : 'Impossible to fail' );
+
+            // ❌ Fail
+            assert( 1=0 : 'Obviously wrong' );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="fail" >
+        <Card title="Fail">
+          Produces an error and appends the specified `message` to the test report. The test case is terminated.
+
+          **Syntax**
+            ```rpgle
+            fail( 'message' );
+            ```
+
+          **Example**
+            ```rpgle
+            monitor;
+              produceAnException(doFailure);
+            
+              // ❌ Fail: Only runs if exception was not caught
+              fail('produceAnException(..) should have raised an error.');
+            on-error;
+              // ✅ Pass: Only runs if exception was caught
+            endmon;
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="assertJobLogContains" >
+        <Card title="Job Log Contains Assertion">
+          Checks whether the job log contains the specified message ID between *NOW* and `timeLimit`. The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
+
+          **Syntax**
+            ```rpgle
+            assertJobLogContains( msgId : timeLimit );
+            ```
+
+          **Example**
+            ```rpgle
+            testStartTime = getFullTimeStamp();
+            sndMCH1211Msg();
+            
+            // ✅ Pass
+            assertJobLogContains( 'MCH1211' : testStartTime );
+            ```
+        </Card>
+      </TabItem>
+      <TabItem label="assertMessageQueueContains" >
+        <Card title="Message Queue Contains Assertion">
+          Checks whether a given message queue contains the specified message between *NOW* and `timeLimit`.
+          The message is identified by any combination of ID, message text or message help where unused selection parameters must be omitted.
+          * Message ID can be set to `*EMPTY` to test whether a message queue is empty (all other parameters must be omitted).
+          * Message text and message help can be specified as *generic* strings values.
+          * The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
+
+          **Syntax**
+            ```rpgle
+            assertMessageQueueContains( userOrQueue : library [: msgId [: msgText [: msgHelp : timeLimit );
+            ```
+
+          **Example**
+            ```rpgle
+            testStartTime = getFullTimeStamp();
+            sndToMSGQ();
+            
+            // ✅ Pass
+            assertMessageQueueContains('QMSGQT' : 'QTEMP' : *omit : 'MSGQT - iRPGUnit' : *omit : testStartTime);
+            
+            testStartTime = getFullTimeStamp();
+            
+            // ✅ Pass
+            assertMessageQueueContains('QMSGQT' : 'QTEMP' : '*EMPTY' : *omit : *omit : testStartTime);
+            ```
+        </Card>
+      </TabItem>
+    </Tabs>
+  </TabItem>
+</Tabs>
+
+### Utilities
+
+#### Commonly Used APIs
+
+<Tabs>
+  <TabItem label="getFullTimeStamp" >
+    <Card title="Get Full Time Stamp">
+      Returns the full current timestamp, without rounding the microseconds like `%timestamp()` does.
+
+      **Syntax**
+        ```rpgle
+        getFullTimeStamp();
+        ```
+
+      **Return value**
+        ```rpgle
+        timestamp
+        ```
+
+      **Example**
+        ```rpgle
+        tmStmp = getFullTimeStamp();
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="waitSeconds" >
+    <Card title="Wait Seconds">
+      Suspends the current job for a specified number of seconds. Optionally displays a status message.
+      When the job resumes the original status message is restored.
+
+      **Syntax**
+        ```rpgle
+        waitSeconds( seconds [: message )
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        waitSeconds(3 : 'Waiting 3 seconds ...');
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="getMonitoredMessage" >
+    <Card title="Get Monitored Message">
+      Retrieves the latest `*ESCAPE` message from the job log. Usually called within the `on-error` section of a `monitor` block. 
+
+      **Syntax**
+        ```rpgle
+        getMonitoredMessage( [: doRmvMsg );
+        ```
+
+      **Return value**
+
+        Returns a data structure with the following information:
+          * `id` - Message ID
+          * `text` - First level text
+          * `pgm` - Sender: program name
+          * `mod` - Sender: module name
+          * `proc` - Sender: procedure name
+          * `specNb` - Sender: statement number
+
+      **Example**
+        ```rpgle
+        monitor;
+          a = 10;
+          b = 0;
+          c = a / b;
+        
+          // ❌ Fail: Only runs if exception was not caught
+          fail('Division by zero did not raise an error.');
+        on-error;
+          msgInfo = getMonitoredMessage(*ON);
+        endmon;
+        
+        // ✅ Pass
+        aEqual( 'MCH1211' : msgInfo.Id );
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="setLowMessageKey" >
+    <Card title="Set Low Message Key">
+      Sets the message key of the oldest message in the job log, that is considered to be returned by `getMonitoredMessage()`.
+      This procedure is automatically called by the RPGUnit, before executing a unit test. Use this procedure with care.
+
+      **Syntax**
+        ```rpgle
+        setLowMessageKey( msgKey );
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        setLowMessageKey(msgKey);
+        ```
+    </Card>
+  </TabItem>
+</Tabs>
+
+#### Status Message APIs
+
+<Tabs>
+  <TabItem label="displayStatusMessage" >
+    <Card title="Display Status Message">
+      Displays a given status message in the status line at the bottom of the screen.
+
+      **Syntax**
+        ```rpgle
+        displayStatusMessage( message );
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        displayStatusMessage('Hello World!');
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="restoreStatusMessage" >
+    <Card title="Restore Status Message">
+      Replaces the current status message with the previous message.
+
+      **Syntax**
+        ```rpgle
+        restoreStatusMessage();
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        // Display status message.
+        displayStatusMessage('Hello World!');
+        
+        // Overwrite status message.
+        displayStatusMessage('The quick brown fox ...');
+        
+        // Restore previous 'Hello World!' message.
+        restoreStatusMessage();
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="clearStatusMessage" >
+    <Card title="Clear Status Message">
+      Clears (removes) the status message that is currently being displayed at the bottom of the screen.
+
+      **Syntax**
+        ```rpgle
+        clearStatusMessage();
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        clearStatusMessage();
+        ```
+    </Card>
+  </TabItem>
+</Tabs>
+
+#### CL Command APIs
+
+<Tabs>
+  <TabItem label="CLRPFM" >
+    <Card title="Clear Physical File">
+      Uses `CLRPFM` to remove the data from `member` of file `file`. The file must be stored in `*CURLIB`.
+
+      **Syntax**
+        ```rpgle
+        clrpfm( fileName [: memberName );
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        clrpfm( 'MYFILE' : 'MYMEMBER' );
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="RCLACTGRP" >
+    <Card title="Reclaim Activation Group">
+      Uses `RCLACTGRP` to reclaim the activation group specified at parameter `activationGroup`.
+
+      **Syntax**
+        ```rpgle
+        rclActGrp( activationGroupName );
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        rclActGrp( '*ELIGIBLE' );
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="runCmd" >
+    <Card title="Run CL Command">
+      Uses the `QCMDEXC` API to execute the CL command specified at parameter `command`.
+
+      **Syntax**
+        ```rpgle
+        runCmd( command );
+        ```
+
+      **Return value**
+        ```rpgle
+        void
+        ```
+
+      **Example**
+        ```rpgle
+        runCmd( 'ALCOBJ OBJ((*CURLIB/FILE *FILE *EXCL))' );
+        ```
+    </Card>
+  </TabItem>
+</Tabs>
+
+#### Source Type APIs
+
+<Tabs>
+  <TabItem label="getMemberType" >
+    <Card title="Get Member Type">
+      Returns the source type of a given source member.
+
+      **Syntax**
+        ```rpgle
+        getMemberType( sourceFile : library : member );
+        ```
+
+      **Return value**
+        ```rpgle
+        char(10)
+        ```
+
+      **Example**
+        ```rpgle
+        srcType = getMemberType('QINCLUDE': 'RPGUNIT': 'ASSERT');
+        ```
+    </Card>
+  </TabItem>
+  <TabItem label="getStmfType" >
+    <Card title="Get Stream File Type">
+      Returns the source type of a given stream file.
+
+      **Syntax**
+        ```rpgle
+        getStmfType( srcStmf );
+        ```
+
+      **Return value**
+        ```rpgle
+        char(10)
+        ```
+
+      **Example**
+        ```rpgle
+        srcType = getStmfType('/home/dev/mypgm.rpgle');
+        ```
+    </Card>
+  </TabItem>
+</Tabs>
 
 ## Example Test Suites
 
