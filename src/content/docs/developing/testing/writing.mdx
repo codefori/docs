@@ -22,7 +22,7 @@ Listed below are some example test case names that follow this naming convention
 A test suite consists of one or more test cases in a file or source member. This test suite will be compiled into a service program in order to run the test cases. Although RPGUnit itself does not enforce an specific naming convention for test suites, the **IBM i Testing** extension does based on whether you are working on local files on your PC or source members on the IBM i.
 
 * **Local Files**: The file name must end in `.test.rpgle`, `.test.sqlrpgle`, `.test.cblle`, or `.test.sqlcblle` in order to be detected by the extension. File names are also not restricted to 10 characters as the extension will use the same rules that Source Orbit uses to handle [long file names](https://ibm.github.io/sourceorbit/#/./pages/general/rules?id=long-file-names) when compiling the test. Noteably, since all files must include `.test`, the resulting object name will start with `T`. These files can also be put in any directory.
-* **Source Members**: Source members can be put in any source file, but it is recommended to store them in a source file named `QTESTSRC`. By default this is where the extension will look for test suites in your library list. You can configure the extension to search other source files by going to the extension's settings and searching for the **Test Source Files** setting.
+* **Source Members**: Source members can be named freely, but it is recommended to use some sort of prefix or suffix (ie. `T`, `_T`, `T_`, etc.) to avoid naming conflicts as the tests will be compiled into service programs. These source members can be put in any source file, but it is recommended to store them in a source file named `QTESTSRC`. By default this is where the extension will look for test suites in your library list. You can configure the extension to search other source files by going to the extension's settings and searching for the **Test Source Files** setting.
   ![Test Source Files](Testing_TestSourceFiles.png)
 
 Listed below are some example test suite names that follow this naming convention:
@@ -34,10 +34,10 @@ Listed below are some example test suite names that follow this naming conventio
   * `math.test.rpgle`
 * **Source Members**
   * `QTESTSRC` source file with members:
-    * `EMPLOYEE.RPGLE`
+    * `EMPLOYEET.RPGLE`
     * `DEPARTMENT.RPGLE`
-    * `STRING.RPGLE`
-    * `MATH.RPGLE`
+    * `T_STRING.RPGLE`
+    * `MATH_T.RPGLE`
 
 ## Generating Test Stubs
 
