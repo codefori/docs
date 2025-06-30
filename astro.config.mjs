@@ -155,12 +155,12 @@ export default defineConfig({
 				{
 					label: 'Settings',
 					autogenerate: { directory: 'settings/' },
-					collapsed: false,
+					collapsed: true,
 				},
 				{
 					label: 'Extension Development',
 					autogenerate: { directory: 'dev/'},
-					collapsed: false,
+					collapsed: true,
 				}
 					
 			],

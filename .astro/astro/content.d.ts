@@ -327,6 +327,41 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"developing/testing/configuring.mdx": {
+	id: "developing/testing/configuring.mdx";
+  slug: "developing/testing/configuring";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"developing/testing/overview.mdx": {
+	id: "developing/testing/overview.mdx";
+  slug: "developing/testing/overview";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"developing/testing/running.mdx": {
+	id: "developing/testing/running.mdx";
+  slug: "developing/testing/running";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"developing/testing/troubleshooting.mdx": {
+	id: "developing/testing/troubleshooting.mdx";
+  slug: "developing/testing/troubleshooting";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"developing/testing/writing.mdx": {
+	id: "developing/testing/writing.mdx";
+  slug: "developing/testing/writing";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "extensions/clle/index.mdx": {
 	id: "extensions/clle/index.mdx";
   slug: "extensions/clle";
@@ -449,6 +484,13 @@ declare module 'astro:content' {
 "settings/profiles.mdx": {
 	id: "settings/profiles.mdx";
   slug: "settings/profiles";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"settings/system.mdx": {
+	id: "settings/system.mdx";
+  slug: "settings/system";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
