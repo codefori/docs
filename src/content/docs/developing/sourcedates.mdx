@@ -7,29 +7,21 @@ import { CardGrid, Card, Icon, Aside } from '@astrojs/starlight/components';
 Source dates are supported in Code for IBM i, but not by default.
 
 ## Prerequisites to using source dates
+
 For source dates to be enabled, the QCCSID system value must not be 65535. See [our documentation about encoding](../../tips/ccsid/) and [IBM's documentation about the QCCSID system value](https://www.ibm.com/docs/en/i/7.5?topic=faqs-i-system-value-qccsid)<Icon name="external" color="cyan" class="icon-inline" />.
 
 ## Source date settings
 
 Source dates can be enabled in the connection settings.
 
-There are three options pertaining to source dates:
+There are two options pertaining to source dates:
 
 * *Enable Source Dates*: If source date support is enabled for source members
-* *Source date tracking mode*: What type of mode should be used to track changes. More below.
 * *Source Dates in Gutter*: Whether the source dates should appear in the gutter of the editor when enabled
 
-## Tracking modes
+## How dates are tracked
 
-There are two types of editing modes for source dates
-
-* *Edit mode* which is the traditional style for editing. When a line changes, the source date of that line will be updated. It does not understand undo/redo. It is considered the 'dumb' mode.
-* *Diff mode* is the modern approach to source date tracking. Instead of tracking edits line by line, it is doing [a diff](https://en.wikipedia.org/wiki/Diff)<Icon name="external" color="cyan" class="icon-inline" /> to understand what has changed in the document. It diffs the base document (from last open or last save) against the latest dirty version of the document. This is a Test enhancement. It does understand undo/redo. It is considered the 'smarter' mode of the two modes.
-
-
-<Aside type="caution">
-   As of Code for IBM i 2.15.0, the 'edit' tracking mode has been removed and only diff will be used. The documentation will be updated to reflect that change for 3.0.0.
-</Aside>
+*Diff mode* is the modern approach to source date tracking. Instead of tracking edits line by line, it is doing [a diff](https://en.wikipedia.org/wiki/Diff)<Icon name="external" color="cyan" class="icon-inline" /> to understand what has changed in the document. It diffs the base document (from last open or last save) against the latest dirty version of the document. This is a Test enhancement. It does understand undo/redo. It is considered the 'smarter' mode of the two modes.
 
 ## Source date filtering
 
@@ -37,7 +29,7 @@ There are two types of editing modes for source dates
 
 <Card>
 
-This feature is only enabled when using 'Diff mode' tracking, as well as having the source dates gutter enabled.
+This feature is only enabled when the source dates gutter is enabled.
 
 Hovering over the gutter will show two buttons to:
 
@@ -68,4 +60,12 @@ There is also a button on the status bar the user can use to start a new date fi
 
 </Card></CardGrid>
 
----
+## Source sequence view
+
+This feature is only enabled when the source dates gutter is enabled.
+
+You are able to hover over the gutter to enable or disable the sequence view. This will show the `SRCSEQ` value of the source member in the gutter. The sequence view will revert back to the source date when the file is edited.
+
+Source sequences are not retained. This means that when saving a member, Code for IBM i will resequence the source member.
+
+![Source sequence view](../../../assets/srcseq_view.png)
