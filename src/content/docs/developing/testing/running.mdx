@@ -4,6 +4,14 @@ title: Running Tests
 
 import { Aside, CardGrid, Card, Steps } from '@astrojs/starlight/components';
 
+## Setup
+
+### Library List
+
+Before running any tests, it is recommended that `RPGUNIT.LIB` and `QDEVTOOLS.LIB` are added to your library list to avoid issues with resolving include files. In the case you are working with local test files and are using `iproj.json`, you can add this to your `preUsrlibl` in `iproj.json`. In the case of source members, you can add these libraries via the **User Library List** view in Code for IBM i. You may see the following warnings in the case these libraries are not on your library list:
+
+![](Testing_LibraryValidation.png)
+
 ## Test Explorer
 
 For tests to be discovered by the extension, you must first [connect to an IBM i](../../../quickstart/). Once connected, the extension will automatically discover any RPG/COBOL tests as local files from your workspace or as source members from your library list. These tests will all be listed in the built-in **Test Explorer** view in VS Code (look for the beaker icon).
@@ -14,9 +22,9 @@ From here you can hover on any test case, test suite, folder, library, or source
 
 <Steps>
   1. **Deployment *(Local Files Only)***: The contents of your workspace folder will be deployed to a directory in the IFS. The default deployment directory suggested will be of the following format: `/home/<user>/builds/<workspace-folder>/`. This is the same deployment process that takes place when you compile any local files via Code for IBM i.
-  2. **Read Test Configuration**: To customize the parameters used to compile your tests, a global and directory specific test configuration will be read. Learn more about this in the [Test Configuration](../configuring/#test-configuration) section.
-  3. **Compilation**: Given the test configuration and tests selected for execution, the tests will be compiled via the `RUCRTRPG` or `RUCRTCLB` command. This step will be skipped for tests which have had no change since the last compilation.
-  4. **Execution**: The compiled test program will be executed via the `RUCALLTST` command. The parameters for this command are configured as VS Code settings. Again, learn more about this in the [Execution Configuration](../configuring/#execution-configuration) section.
+  2. **Read Compile Configuration**: To customize the parameters used to compile your tests, a global and directory specific test configuration file will be read. Learn more about this in the [Compile Configuration](../configuring/#compile-configuration) section.
+  3. **Compilation**: Given the compile configuration and tests selected for execution, the tests will be compiled via the `RUCRTRPG` or `RUCRTCLB` command. This step will be skipped for tests which have had no change since the last compilation.
+  4. **Execution**: The compiled test program will be executed via the `RUCALLTST` command. The parameters for this command are configured in the VS Code settings or the test configuration file. Learn more about this in the [Execution Configuration](../configuring/#execution-configuration) section.
 </Steps>
 
 <Aside type="note">
