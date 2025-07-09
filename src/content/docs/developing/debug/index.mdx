@@ -93,6 +93,12 @@ To make use of the Debug Service, you need the following PTFs:
    * `/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit`
    * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)   
 
+<Aside type="danger">
+   Two defective PTF's are included in IBM i 7.5 [Java PTF Group SF99955 level 15](http://www.ibm.com/support/docview.wss?uid=nas4SF99955), released on 2025-07-03: **SJ05893 and SJ05889**.
+   
+   After applying these PTFs, the debug service will no longer start. Please remove these PTFs for the debug service to work again.
+</Aside>
+
 </TabItem>
 
 <TabItem label="Version 2.0.2" >
