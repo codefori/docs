@@ -4,7 +4,7 @@ title: Configuring Tests
 
 import { Aside, CardGrid, Card, Tabs, TabItem, FileTree, Steps } from '@astrojs/starlight/components';
 
-## Test Configuration
+## Compile Configuration
 
 The process of defining how to compile your tests is greatly simplified using a configuration file called `testing.json`. This file allows you to specify the parameters for the RPGUnit compile commands (`RUCRTRPG` and `RUCRTCBL`) and the code coverage command (`CODECOV`) in JSON format. The scope in which these parameters are applied is determined by the location of the `testing.json` file and depends on whether you are working with local files or source members.
 
@@ -72,14 +72,15 @@ Use the following steps to create a default configuration for your project:
       {
           "rpgunit": {
               "rucrtrpg": {
-                  "tgtCcsid": 37,
+                  "tgtCcsid": "*JOB",
                   "dbgView": "*SOURCE",
+                  "rpgPpOpt": "*LVL2",
                   "cOption": [
                       "*EVENTF"
                   ]
               },
               "rucrtcbl": {
-                  "tgtCcsid": 37,
+                  "tgtCcsid": "*JOB",
                   "dbgView": "*SOURCE",
                   "cOption": [
                       "*EVENTF"
@@ -96,9 +97,34 @@ Use the following steps to create a default configuration for your project:
 
 ## Execution Configuration
 
-When it comes time to executing the tests, the extension essentially runs the `RUCALLTST` command provided by RPGUnit. The parameters for this command are configured in the VS Code settings.
+When it comes time to executing the tests, the extension essentially runs the `RUCALLTST` command provided by RPGUnit. The parameters for this command modify how the tests are executed, such as the order to run the tests and whether to reclaim resources after each test case. These parameters can be configured in the either the VS Code settings or in the `testing.json` configuration file.
+
+### VS Code Settings
+
+Configuring the execution parameters via the VS Code settings is the suggested option if you prefer to treat these parameters as preferences that will allow each developer to configure for how tests are executed. These settings can be found by going to the extension's settings and searching for **IBM i Testing** (from **Run Order** to **Reclaim Resources**).
 
 ![](Testing_ExecutionConfiguration.png)
+
+### Configuration File
+
+The alternative option is to configure the execution parameters in the `testing.json` configuration file (the same one used for compile command configuration). This is useful if you want to enforce specific execution parameters to be used by all developers working on a project.
+
+Here is an example with all execution parameters set in the `testing.json` file:
+
+```json
+{
+    "rpgunit": {
+        "rucalltst": {
+            "order": "*API",
+            "libl": "*CURRENT",
+            "jobD": "*DFT",
+            "detail": "*BASIC",
+            "output": "*ALLWAYS",
+            "rclRsc": "*NO"
+        }
+    }
+}
+```
 
 ## Compile, Execution, and Coverage Parameters
 
@@ -121,7 +147,7 @@ When it comes time to executing the tests, the extension essentially runs the `R
     |`compileOpt` |Pre-Compiler COMPILEOPT |Refer to the `COMPILEOPT` parameter in `CRTSQLRPGI` command help.                                                                                                                                                           |        |
     |`tgtRls`     |Target release          |Refer to the `TGTRLS` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
     |`incDir`     |Include directory       |Specifies one or more directories to add to the search path used by the compiler to find copy files. The compiler will search the directories specified here if the copy files in the source program can not be resolved.   |        |
-    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |37      |
+    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |*JOB    |
     |`wrapperCmd` |Wrapper Command         |Specifies a custom command to wrap the `RUCRTRPG` command.                                                                                                                                                                  |        |
   </TabItem>
   <TabItem label="RUCRTCBL" >
@@ -141,7 +167,7 @@ When it comes time to executing the tests, the extension essentially runs the `R
     |`compileOpt` |Pre-Compiler COMPILEOPT |Refer to the `COMPILEOPT` parameter in `CRTSQLCBLI` command help.                                                                                                                                                           |        |
     |`tgtRls`     |Target release          |Refer to the `TGTRLS` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
     |`incDir`     |Include Directory       |Specifies one or more directories to add to the search path used by the compiler to find copy files. The compiler will search the directories specified here if the copy files in the source program can not be resolved.   |        |
-    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |37      |
+    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |*JOB    |
     |`wrapperCmd` |Wrapper Command         |Specifies a custom command to wrap the `RUCRTCBL` command.                                                                                                                                                                  |        |
   </TabItem>
   <TabItem label="CODECOV" >
@@ -157,41 +183,56 @@ When it comes time to executing the tests, the extension essentially runs the `R
     |Run Order               |Specifies the order for running the test procedures. Useful to check that there is no dependencies between test procedures.                                                                                                                                                           |*API     |
     |Library List            |Specifies the library list for executing the specified unit test.                                                                                                                                                                                                                     |*CURRENT |
     |Job Description         |Specifies the name of the job description that is used to set the library list, when the `IBM i Testing: Library List` setting is set to `*JOBD`. `*DFT` can be used here to indicate the library of the unit test suite (service program) is searched for job description `RPGUNIT`. |*DFT     |
-    |Job Description Library |Specifies the library that is searched for the job description. `*LIBL` can be used here to indicate all libraries in the user and system portions of the job's library list are searched until the first match is found.                                                             |         |
     |Report Detail           |Specifies how detailed the test run report should be.                                                                                                                                                                                                                                 |*BASIC   |
     |Create Report           |Specifies whether a report is created.                                                                                                                                                                                                                                                |*ALLWAYS |
     |Reclaim Resources       |Specifies when to reclaim resources. Resources, such as open files, can be reclaimed after each test case or at the end of the test suite. This option is useful if the test suite calls OPM programs, which do not set the `*INLR` indicator.                                        |*NO      |
   </TabItem>
 </Tabs>
 
-    <Aside type="note">
-        The `wrapperCmd` parameter in the `RUCRTRPG` and `RUCRTCBL` sections are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
+<Aside type="note">
+    The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specifications are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
 
-        **Example `testing.json` configuration**:
-        ```json
-        {
-            "rpgunit": {
-                "rucrtrpg": {
-                    "tgtCcsid": 37,
-                    "dbgView": "*SOURCE",
-                    "cOption": [
-                        "*EVENTF"
-                    ],
-                    "wrapperCmd": {
-                        "cmd": "MYLIB/MYCMD TSTCMD",
-                        "params": {
-                            "desc": "My description"
-                        }
-                    }
-                }
-            }
-        }
-        ```
-        **Resolved command**:
-        ```
-        MYLIB/MYCMD TSTCMD(RPGUNIT/RUCRTRPG TSTPGM(MYUSER/TEMPDET)
-        SRCSTMF('/home/MYUSER/builds/ibmi-company_system/qtestsrc/empdet.test.sqlrpgle')
-        TGTCCSID(37) DBGVIEW(*SOURCE) COPTION(*EVENTF) RPGPPOPT(*LVL2)
-        INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My description')
-        ```
-    </Aside>
+    **Example `testing.json` configuration**:
+    ```json
+    {
+      "rpgunit": {
+          "rucrtrpg": {
+              "tgtCcsid": "*JOB",
+              "dbgView": "*SOURCE",
+              "cOption": [
+                  "*EVENTF"
+              ],
+              "wrapperCmd": {
+                  "cmd": "MYLIB/MYCMD TSTCMD",
+                  "params": {
+                      "desc": "My description"
+                  }
+              }
+          },
+          "rucalltst": {
+              "wrapperCmd": {
+                  "cmd": "MYLIB/MYCMD CALLCMD",
+                  "params": {
+                      "desc": "My description"
+                  }
+              }
+          }
+      }
+    }
+    ```
+    **Resolved compile command**:
+    ```js
+    MYLIB/MYCMD TSTCMD(RPGUNIT/RUCRTRPG TSTPGM(MYUSER/TEMPDET)
+    SRCSTMF('/home/MYUSER/builds/ibmi-company_system/qtestsrc/empdet.test.sqlrpgle')
+    TGTCCSID(*JOB) DBGVIEW(*SOURCE) COPTION(*EVENTF) RPGPPOPT(*LVL2)
+    INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My description')
+    ```
+
+    **Resolved execution command**:
+    ```js
+    MYLIB/MYCMD CALLCMD(RPGUNIT/RUCALLTST TSTPGM(MYUSER/TEMPDET) ORDER(*REVERSE)
+    DETAIL(*ALL) OUTPUT(*ALLWAYS) LIBL(*CURRENT) JOBD(*DFT) RCLRSC(*NO)
+    XMLSTMF('/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET_1751646914682.xml'))
+    DESC('My description')
+    ```
+</Aside>
