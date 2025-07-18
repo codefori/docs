@@ -1,10 +1,25 @@
 ---
-title: Connection 
+title: Connection
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
 Multiple connections can be defined and some settings are specific to a connection and can be saved for the connection and later reloaded.
+
+### Read only mode
+
+When checked, you can not change any content on the server, run any actions on the server or open any terminal.
+You can only browse the content of the server, and members and streamfiles will always be opened in readonly mode.
+
+<Aside type="note">
+    This setting can be controlled by the IBM i system administrator in the [system settings](../system/).
+</Aside>
+
+<Aside type="danger">
+    This setting can only protect against changes from Code for IBM i. It will not protect against changes from any other interface or application.
+
+    Configuration of IBM i object security on the server is advised!
+</Aside>
 
 ### Current library
 
