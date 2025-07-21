@@ -1,5 +1,5 @@
 ---
-title: Guide 
+title: Guide
 ---
 import { Aside, CardGrid, Card, Icon, Tabs, TabItem } from '@astrojs/starlight/components';
 
@@ -91,12 +91,12 @@ To make use of the Debug Service, you need the following PTFs:
 
 * Java 11 information:
    * `/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit`
-   * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)   
+   * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)
 
-<Aside type="danger">
-   Two defective PTF's are included in IBM i 7.5 [Java PTF Group SF99955 level 15](http://www.ibm.com/support/docview.wss?uid=nas4SF99955), released on 2025-07-03: **SJ05893 and SJ05889**.
-   
-   After applying these PTFs, the debug service will no longer start. Please remove these PTFs for the debug service to work again.
+<Aside type="note">
+   IBM i 7.5 Java PTF Group SF99955 level 15 and IBM i 7.4 Java PTF Group SF99665 level 28 contained two defective PTF's for Java 11. These PTF's has now been superceded by newer PTF's included in PTF Group SF99955 level 16 for 7.5 and PTF Group SF99665 level 29 for 7.4.
+
+   For more information, read [this IBM Support document](https://www.ibm.com/support/pages/node/7239287)
 </Aside>
 
 </TabItem>
@@ -109,7 +109,7 @@ To make use of the Debug Service, you need the following PTFs:
    * 7.3 PTF SJ02996
 * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
    * `/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit`
-   * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)   
+   * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)
 * 5770WDS option 60 is required
    * Workstation Tools - Base
 
@@ -122,7 +122,7 @@ To make use of the Debug Service, you need the following PTFs:
    * IBM i 7.3 PTF SI85976 and SI82198
 * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
    * `/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit`
-   * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)   
+   * [IBM documentation for PTFs](https://www.ibm.com/support/pages/download-installation-and-usage-java-11-ibm-i-os)
 * 5770WDS option 60 is required
    * Workstation Tools - Base
 
@@ -144,7 +144,7 @@ After you have installed the PTFs, the connection inside of Visual Studio Code w
 ## Configuring & starting the service
 
 This must be done with user that has *ALLOBJ and *SYSADM privlages.
-Below are the base requirements to configure the certificate: 
+Below are the base requirements to configure the certificate:
 - Master key 1 is set (this can be done in Navigator for IBM i under Security > Cryptographic Services Key Management > Manage Master Keys)
 - *SYSTEM store is populated with a valid certificate (this can be done in Digital Certificate Manager)
 
@@ -152,7 +152,7 @@ Below are the base requirements to configure the certificate:
 2. Scroll down to System Debugger and right click
 3. Hover over Stop Instance, select Debug Service
 ![](image-4.png)
-4. Right click System Debugger again, select Regenerate Debug Service Trust Store 
+4. Right click System Debugger again, select Regenerate Debug Service Trust Store
 ![](image-3.png)
 5. Enter in the password for the *SYSTEM store, click OK
 ![](image-1.png)
