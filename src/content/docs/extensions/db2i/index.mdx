@@ -77,6 +77,22 @@ update: select * from sample.employee;
 
 Enter the value `null` to set a column to *null*. If the column cannot accept at least 4 characters, then `-` (a dash) may be used.
 
+### Binding parameters
+
+It is possible to bind to SQL parameters inside of SQL statements - both `?` markers and named parameters (e.g. `:param1`) are supported - by using the `bind:` prefix. `bind:` is followed by a list of strings or numbers, either space or comma separated. When executing the prefix, it will find the most previous statement in the document to bind to.
+
+```sql
+select * from employee where empno = ?;
+
+bind: '000010';
+bind: '000020';
+
+select * from employee where empno = ? and workdept = ?;
+
+bind: '000010', 'A00';
+bind: '000020', 'A00';
+```
+
 ## Syntax checking
 
 When connected to an IBM i, the syntax checker has the following options:
