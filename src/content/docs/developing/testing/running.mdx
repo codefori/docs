@@ -23,7 +23,7 @@ From here you can hover on any test case, test suite, folder, library, or source
 <Steps>
   1. **Deployment *(Local Files Only)***: The contents of your workspace folder will be deployed to a directory in the IFS. The default deployment directory suggested will be of the following format: `/home/<user>/builds/<workspace-folder>/`. This is the same deployment process that takes place when you compile any local files via Code for IBM i.
   2. **Read Compile Configuration**: To customize the parameters used to compile your tests, a global and directory specific test configuration file will be read. Learn more about this in the [Compile Configuration](../configuring/#compile-configuration) section.
-  3. **Compilation**: Given the compile configuration and tests selected for execution, the tests will be compiled via the `RUCRTRPG` or `RUCRTCLB` command. This step will be skipped for tests which have had no change since the last compilation.
+  3. **Compilation**: Given the compile configuration and tests selected for execution, the tests will be compiled via the `RUCRTRPG` or `RUCRTCBL` command. This step will be skipped for tests which have had no change since the last compilation.
   4. **Execution**: The compiled test program will be executed via the `RUCALLTST` command. The parameters for this command are configured in the VS Code settings or the test configuration file. Learn more about this in the [Execution Configuration](../configuring/#execution-configuration) section.
 </Steps>
 
