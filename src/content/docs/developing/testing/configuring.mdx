@@ -189,50 +189,49 @@ Here is an example with all execution parameters set in the `testing.json` file:
   </TabItem>
 </Tabs>
 
-<Aside type="note">
-    The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specifications are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
+### Vendor Integration
+The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specifications are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
 
-    **Example `testing.json` configuration**:
-    ```json
-    {
-      "rpgunit": {
-          "rucrtrpg": {
-              "tgtCcsid": "*JOB",
-              "dbgView": "*SOURCE",
-              "cOption": [
-                  "*EVENTF"
-              ],
-              "wrapperCmd": {
-                  "cmd": "MYLIB/MYCMD TSTCMD",
-                  "params": {
-                      "desc": "My description"
-                  }
+**Example `testing.json` configuration**:
+```json
+{
+  "rpgunit": {
+      "rucrtrpg": {
+          "tgtCcsid": "*JOB",
+          "dbgView": "*SOURCE",
+          "cOption": [
+              "*EVENTF"
+          ],
+          "wrapperCmd": {
+              "cmd": "MYLIB/MYCMD TSTCMD",
+              "params": {
+                  "desc": "My description"
               }
-          },
-          "rucalltst": {
-              "wrapperCmd": {
-                  "cmd": "MYLIB/MYCMD CALLCMD",
-                  "params": {
-                      "desc": "My description"
-                  }
+          }
+      },
+      "rucalltst": {
+          "wrapperCmd": {
+              "cmd": "MYLIB/MYCMD CALLCMD",
+              "params": {
+                  "desc": "My description"
               }
           }
       }
-    }
-    ```
-    **Resolved compile command**:
-    ```js
-    MYLIB/MYCMD TSTCMD(RPGUNIT/RUCRTRPG TSTPGM(MYUSER/TEMPDET)
-    SRCSTMF('/home/MYUSER/builds/ibmi-company_system/qtestsrc/empdet.test.sqlrpgle')
-    TGTCCSID(*JOB) DBGVIEW(*SOURCE) COPTION(*EVENTF) RPGPPOPT(*LVL2)
-    INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My description')
-    ```
+  }
+}
+```
+**Compile Command**:
+```js
+MYLIB/MYCMD TSTCMD(RPGUNIT/RUCRTRPG TSTPGM(MYUSER/TEMPDET)
+SRCSTMF('/home/MYUSER/builds/ibmi-company_system/qtestsrc/empdet.test.sqlrpgle')
+TGTCCSID(*JOB) DBGVIEW(*SOURCE) COPTION(*EVENTF) RPGPPOPT(*LVL2)
+INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My description')
+```
 
-    **Resolved execution command**:
-    ```js
-    MYLIB/MYCMD CALLCMD(RPGUNIT/RUCALLTST TSTPGM(MYUSER/TEMPDET) ORDER(*REVERSE)
-    DETAIL(*ALL) OUTPUT(*ALLWAYS) LIBL(*CURRENT) JOBD(*DFT) RCLRSC(*NO)
-    XMLSTMF('/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET_1751646914682.xml'))
-    DESC('My description')
-    ```
-</Aside>
+**Execution Command**:
+```js
+MYLIB/MYCMD CALLCMD(RPGUNIT/RUCALLTST TSTPGM(MYUSER/TEMPDET) ORDER(*REVERSE)
+DETAIL(*ALL) OUTPUT(*ALLWAYS) LIBL(*CURRENT) JOBD(*DFT) RCLRSC(*NO)
+XMLSTMF('/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET_1751646914682.xml'))
+DESC('My description')
+```
