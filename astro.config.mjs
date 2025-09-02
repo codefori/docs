@@ -89,6 +89,10 @@ export default defineConfig({
 										link: 'developing/testing/configuring',
 									},
 									{
+										label: 'CLI & Automated Tests',
+										link: 'developing/testing/cli',
+									},
+									{
 										label: 'Troubleshooting',
 										link: 'developing/testing/troubleshooting',
 									}
