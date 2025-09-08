@@ -1,16 +1,31 @@
 ---
-title: Connection 
+title: Connection
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
 Multiple connections can be defined and some settings are specific to a connection and can be saved for the connection and later reloaded.
 
+### Read only mode
+
+When checked, you can not change any content on the server, run any actions on the server or open any terminal.
+You can only browse the content of the server, and members and streamfiles will always be opened in readonly mode.
+
+<Aside type="note">
+    This setting can be controlled by the IBM i system administrator in the [system settings](../system/).
+</Aside>
+
+<Aside type="danger">
+    This setting can only protect against changes from Code for IBM i. It will not protect against changes from any other interface or application.
+
+    Configuration of IBM i object security on the server is advised!
+</Aside>
+
 ### Current library
 
 The library which will be set as the current library during compilation.
 
-You can change the current library with the 'Change build library' command (F1 -> Change build library).
+You can change the current library with the 'Change Current Library' command in the Command Palette (F1).
 
 ### Home Directory
 
@@ -20,7 +35,7 @@ Home directory for user. This directory is also the root for the IFS browser.
 
 Temporary library. Stores temporary objects used by Code for i. Will be created automatically if it does not exist. Cannot be QTEMP. Default value is `ILEDITOR`.
 
-<Aside type="danger">
+<Aside type="note">
     If your IBM i runs replication software, there is no need to replicate the temporary library. Your sysadmin may add it to the list of objects to be ignored.
 </Aside>
 
@@ -28,7 +43,7 @@ Temporary library. Stores temporary objects used by Code for i. Will be created 
 
 Temporary IFS directory. Stores temporary IFS files used by Code for i. Will be created automatically if it does not exist. Must be in root or QOpenSys filesystem. Default value is `/tmp`.
 
-<Aside type="danger">
+<Aside type="note">
     If your IBM i runs replication software, there is no need to replicate the temporary directory. Your sysadmin may add it to the list of path to be ignored.
 </Aside
 >

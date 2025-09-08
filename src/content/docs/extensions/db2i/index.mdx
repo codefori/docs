@@ -77,6 +77,22 @@ update: select * from sample.employee;
 
 Enter the value `null` to set a column to *null*. If the column cannot accept at least 4 characters, then `-` (a dash) may be used.
 
+### Binding parameters
+
+It is possible to bind to SQL parameters inside of SQL statements - both `?` markers and named parameters (e.g. `:param1`) are supported - by using the `bind:` prefix. `bind:` is followed by a list of strings or numbers, either space or comma separated. When executing the prefix, it will find the most previous statement in the document to bind to.
+
+```sql
+select * from employee where empno = ?;
+
+bind: '000010';
+bind: '000020';
+
+select * from employee where empno = ? and workdept = ?;
+
+bind: '000010', 'A00';
+bind: '000020', 'A00';
+```
+
 ## Syntax checking
 
 When connected to an IBM i, the syntax checker has the following options:
@@ -118,6 +134,21 @@ The Db2 for i extension adds a view called Schema Browser which allows the user 
 ### Viewing table contents
 
 If you are using the Schema Browser to browse objects, you are able to use the 'View contents' icon when hovering over a table, view, or alias to cause a basic SQL select statement to be generated and executed.
+
+
+## Using Examples
+
+The Examples view provides users with a set of SQL example scripts that can be used as a learning tool or as a starting point for their own SQL scripts. These examples are grouped into categories to make it easy to find what you are looking for. You can hover over any example to get a preview of the SQL script or click on it to open a copy which you can freely edit.
+
+![](./images/examplesPreview.png)
+
+On top of the built-in examples, users can also add specific directories containing their own SQL examples using the `Add...` button under the `Custom Examples Directories` submenu on the Examples view. All SQL files in the specified directories and at most one subdirectory level deeper will be picked up. By default, the folder name will be the category and the file name will be the name of the example. This can be customized by optionally including a comment in the file with the tags `category` and `description`.
+
+![](./images/examplesAdd.png)
+
+Once you have added a custom examples directory, you can quickly save new examples to that directory using the `Save As New Example` button in the Examples view.
+
+![](./images/examplesSave.png)
 
 ## SQL Error Logging Facility (SELF)
 
