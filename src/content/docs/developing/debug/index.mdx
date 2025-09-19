@@ -68,6 +68,29 @@ To debug a program from the Object Browser, right-click on the program object an
 To make use of the Debug Service, you need the following PTFs:
 
 <Tabs>
+<TabItem label="Version 3.0.1" >
+
+* IBM i 7.6
+   * Debug Service PTF SJ06921
+   * Navigator for i PTF SJ06431
+   * Java 17 LPP 5770JV1 Option 20 (not Java from Yum)
+* IBM i 7.5
+   * Debug Service PTF SJ06931
+   * Navigator for i PTF SJ06353
+   * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
+* IBM i 7.4
+   * Debug Service PTF SJ06934
+   * Navigator for i PTF SJ06355
+   * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
+* IBM i 7.3
+   * Debug Service PTF SJ05014
+   * Navigator for i PTF SJ06783
+   * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
+
+**All OS versions require** 5770WDS option 60 (Workstation Tools - Base).
+
+</TabItem>
+
 <TabItem label="Version 3" >
 
 * IBM i 7.6
@@ -162,6 +185,13 @@ Below are the base requirements to configure the certificate:
 ![](image-5.png)
 
 **NOTE:** This needs to be done each time you renew or replace that certificate, it does not automatically update when you update the *SYSTEM store
+
+## Updating the service
+
+When there are newer Debug service or Navigator/HTTP Group PTFs, the following steps might be required:
+1. Restart ADMIN1 server
+   - If HTTP Group PTF does not show as applied, IPL might be required.
+2. Regenerate debug service trust store (as described above)
 
 # Common issues
 
