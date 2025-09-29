@@ -3,13 +3,13 @@ title: Overview
 ---
 import { Aside, CardGrid, Card, Icon, Tabs, TabItem } from '@astrojs/starlight/components';
 
-# ILE Debugging
+## Debugging
 
-Debugging ILE programs is now available inside of Visual Studio Code. 
+Debugging IBM i programs is now available inside of Visual Studio Code. 
 
 <Aside type="note">You must have `bash` set as your default shell. [See Bash Shell Required](/docs/tips/bash/) for more info. </Aside>
 
-## Supported Features
+### Supported Features
 
 Supported language types:
 
@@ -42,14 +42,14 @@ Supported service entry point debug features:
  - Saving service entry points across multiple IDE sessions
  - Refreshing service entry points after programs are recompiled
 
-## Limitations
+### Limitations
 
 The following features are not supported in the current release:
 -	Code coverage
 
 
 
-# Starting to debug
+## Starting to debug
 
 <CardGrid>
 
@@ -93,7 +93,7 @@ To debug a program from the Object Browser, right-click on the program object an
 
 </Card></CardGrid>
 
-## Managing Service Entry Points
+### Managing Service Entry Points
 <CardGrid>
 
 <Card>
@@ -109,7 +109,7 @@ Service Entry Point (SEP) can be set using the **Set Service Entry Point** popup
 - Service Entry Points are saved in the debug service job on the host. When a new debug client connects to a running debug service, it will restore the saved service entry points for the current user.
 - If a program or service program is recompiled, you can use the **Refresh** action from the context menu to refresh the selected SEP, or use the **Refresh All Service Entry Points** toolbar action to refresh all SEPs in the **Service Entry Points** view.
 
-## Settings
+### Settings
 
 The following settings are available from the **Debugger** tab of the **IBM i: Connection Settings** page. The page can be accessed from the Command Palette.
 
@@ -124,9 +124,9 @@ The following settings are available from the **Debugger** tab of the **IBM i: C
 The debug port and SEP debug port are specified in the DebugService.env file on the host. 
 
 
-# Common issues
+## Common issues
 
-## Debug hangs
+### Debug hangs
 
 There is a [known issue](https://github.com/codefori/vscode-ibmi/issues/1059)<Icon name="github" class="icon-inline" /> that when you start debugging from VS Code, the debugger hangs and doesn't launch.
 
@@ -134,7 +134,7 @@ The fix is to check if you've got a prior debug job stuck in `MSGW`. You can do 
 
 **Users should no longer face this issue** as we now submit debug jobs to `QSYSWRK` with `QSYSNOMAX`.
 
-## `STRDBGSVR` requirement
+### `STRDBGSVR` requirement
 
 The Debug Service that is started depends on the traditional Debug Server.
 
@@ -142,7 +142,7 @@ The Debug Service that is started depends on the traditional Debug Server.
 
 If you receive this message, do as it says. Simply start the Debug Server with `STRDBGSVR` from a greenscreen.
 
-## IP not in cert list
+### IP not in cert list
 
 **It is always recommended you use a hostname in the connection settings to make use of the debugger**.
 
@@ -166,7 +166,7 @@ Your entry might look like this:
 
 If you find that you've added your local hostname entry and the error is still occurring, then you may need to delete the existing certificates from `/QIBM/ProdData/IBMiDebugService/bin/certs` on the IFS and generate them again in the Walkthrough.
 
-# Frequently Asked Questions
+## Frequently Asked Questions
 
 **Question**: Can I pass parameters to the batch program being debugged?  
 **Answer**: Use the **Debug As Batch** action, change **Command used to start debugging** to specify program parameters.
