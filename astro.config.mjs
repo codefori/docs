@@ -100,6 +100,10 @@ export default defineConfig({
 						},
 						{
 							label: 'Debugging',
+							badge: {
+								text: 'Updated',
+								variant: 'success'
+							},
 							collapsed: true,
 							items: [
 									{
