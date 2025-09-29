@@ -100,7 +100,17 @@ export default defineConfig({
 						},
 						{
 							label: 'Debugging',
-							link: 'developing/debug/',
+							collapsed: true,
+							items: [
+									{
+										label: 'Overview',
+										link: 'developing/debug/overview',
+									},
+									{
+										label: 'Configuring',
+										link: 'developing/debug/configure',
+									}
+								]
 						},
 						{
 							label: 'ILEDocs',
