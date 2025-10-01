@@ -9,6 +9,23 @@ Debugging IBM i programs is now available inside of Visual Studio Code.
 
 <Aside type="note">You must have `bash` set as your default shell. [See Bash Shell Required](/docs/tips/bash/) for more info. </Aside>
 
+### Table of Contents
+ 
+- [Supported Features](#supported-features)
+- [Limitations](#limitations)
+- [Starting to debug](#starting-to-debug)
+- [Managing Service Entry Points](#managing-service-entry-points)
+- [Settings](#settings)
+- [Common issues](#common-issues)
+
+    * [STRDBGSVR requirement](#strdbgsvr-requirement)
+
+    * [Self-signed certificate issue](#self-signed-certificate-issue)
+
+    * [IP not in cert list](#ip-not-in-cert-list)
+
+- [Frequently Asked Questions](#frequently-asked-questions)
+
 ### Supported Features
 
 Supported language types:
@@ -32,20 +49,21 @@ Supported batch debug features:
  - Debugging with the **Update Production Files** option
 
 
-Supported service entry point debug features:
+Supported Service Entry Point (SEP) debug features:
 
  - Setting a service entry point on a program, service program, module or procedure
  - Enabling, disabling and removing a service entry point 
  - Setting a condition on a service entry point
  - Modifying the user profile of a service entry point
  - Logging service entry point activities in an output channel
- - Saving service entry points across multiple IDE sessions
+ - Saving service entry points across multiple client sessions
  - Refreshing service entry points after programs are recompiled
 
 ### Limitations
 
 The following features are not supported in the current release:
 -	Code coverage
+-   Additional source lookup path. If the debug source is moved to a different location after the program is compiled, there is no way to instruct the debugger to lookup the source in a different location.
 
 
 
@@ -55,37 +73,7 @@ The following features are not supported in the current release:
 
 <Card>
 
-After [configuring](../configure/) the Debug Service, launching a debug session is a click of a button away. When you have active source open, a new Debug button will appear in the navigation bar. Breakpoints can be set prior to debugging, or during the debugging session.
-
-</Card><Card>
-
-![](./debug1.png)
-
-</Card></CardGrid>
-
----
-
-<CardGrid>
-
-<Card>
-
-Clicking the Debug button will display an input box which will allow the user to customise the command which starts the debug job. This allows the developer to pass in parameters, or call another program to launch the debug session.
-
-After the debug session has started, every session will break on entry. You can read more about the debugging UI on the [Debug actions section on the Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging#_debug-actions)<Icon name="external" color="cyan" class="icon-inline" />.
-
-</Card><Card>
-
-![](./debug2.png)
-
-</Card></CardGrid>
-
----
-
-<CardGrid>
-
-<Card>
-
-To debug a program from the Object Browser, right-click on the program object and select the **Debug Program** option. Like before this will also display an input box to modify the command which starts the debug job.
+After [configuring](../configure/) the Debug Service, launching a debug session is a click of a button away. To start a batch debug session, right-click on a program object from the Object Browser and select the **Start Debugging > Debug as Batch** action.
 
 </Card><Card>
 
@@ -93,20 +81,53 @@ To debug a program from the Object Browser, right-click on the program object an
 
 </Card></CardGrid>
 
+---
+
+<CardGrid>
+
+<Card>
+
+Selecting the Debug action will display an input box which allows the user to customise the command that starts the debug job. This allows the developer to pass in parameters, or call another program to launch the debug session.
+
+After the debug session has started, every session will break on entry. You can read more about the debugging UI on the [Debug actions section on the Visual Studio Code documentation](https://code.visualstudio.com/docs/editor/debugging#_debug-actions)<Icon name="external" color="cyan" class="icon-inline" />.
+
+</Card><Card>
+
+![](./debug1.png)
+---
+
+<CardGrid>
+
+<Card>
+
+The debug source will be opened in the editor area. A floating Debug panel which contains the common debug actions (e.g. continue, step over, stop, etc) will appear at the top. Breakpoints can be set prior to debugging, or during the debugging session. You can see the value of a local variable in the **Variables** view. You can also hover over a variable in the debug editor to show its value. A monitored expression can be added to the **Watch** view.
+
+</Card><Card>
+
+![](./debug2.png)
+
+</Card></CardGrid>
+
+
 ### Managing Service Entry Points
 <CardGrid>
 
 <Card>
-Service Entry Point (SEP) can be set using the **Set Service Entry Point** popup menu action from the **Project Explorer** and **Object Browser**. SEP can also be set using the **Create Service Entry Point** toolbar action from the **Service Entry Points** view in the **Run and Debug** side bar. The action will prompt for the Service Entry Point location. The Service Entry Point location can be in a short format which includes the library name and program name (e.g. `MY_LIB/MY_PGM`), or in a long format which also includes the program type, module name and procedure name (e.g. `MY_LIB/MY_PGM *PGM/MY_MOD/MY_PROC`). The supported program types are `*PGM` and `*SRVPGM`.
+
+Service Entry Point (SEP) can be set using the **Set Service Entry Point** popup menu action from the **Object Browser**. SEP can also be set using the **Create Service Entry Point** toolbar action from the **Service Entry Points** view in the **Run and Debug** side bar. The action will prompt for the service entry point location. The service entry point location can be in a short format which includes the library name and program name (e.g. `MY_LIB/MY_PGM`), or in a long format which also includes the program type, module name and procedure name (e.g. `MY_LIB/MY_PGM *PGM/MY_MOD/MY_PROC`). The supported program types are `*PGM` and `*SRVPGM`.
+
 </Card><Card>
+
 ![Debug Service Entry Point](debugSEPView.png)
+
 </Card></CardGrid>
+
 - A checkbox at a SEP indicates that the SEP is enabled. You can clear the checkbox to disable the SEP.
 - You can use the **Edit Condition…** inline action to set a condition on a SEP. The condition is an expression that is evaluated to a boolean value at the given context.
 - You can use the **Remove Service Entry Point** inline action to remove the selected SEP, or the **Remove All Service Entry Points** toolbar action to remove all SEPs from the view.
 - You can use the **Modify User Profile...** context menu action to modify the owner of the job where the service entry point is hit. The default owner user profile is the currently logged on user.
-- Service Entry Point related messages appear in the **IBM i Service Entry Points** output channel.
-- Service Entry Points are saved in the debug service job on the host. When a new debug client connects to a running debug service, it will restore the saved service entry points for the current user.
+- Service entry point related messages appear in the **IBM i Service Entry Points** output channel.
+- Service entry points are saved in the debug service job on the host. When a new debug client connects to a running debug service, it will restore the saved service entry points for the current user.
 - If a program or service program is recompiled, you can use the **Refresh** action from the context menu to refresh the selected SEP, or use the **Refresh All Service Entry Points** toolbar action to refresh all SEPs in the **Service Entry Points** view.
 
 ### Settings
@@ -121,18 +142,10 @@ The following settings are available from the **Debugger** tab of the **IBM i: C
 
 - **Debug trace**: Enable tracing for **Debug Adapter Protocol**.
 
-The debug port and SEP debug port are specified in the DebugService.env file on the host. 
+The debug port and SEP debug port are specified in the DebugService.env file on the host.
 
 
 ## Common issues
-
-### Debug hangs
-
-There is a [known issue](https://github.com/codefori/vscode-ibmi/issues/1059)<Icon name="github" class="icon-inline" /> that when you start debugging from VS Code, the debugger hangs and doesn't launch.
-
-The fix is to check if you've got a prior debug job stuck in `MSGW`. You can do this with `WRKACTJOB`, or a similar command like `WRKSBSJOB QBATCH`.
-
-**Users should no longer face this issue** as we now submit debug jobs to `QSYSWRK` with `QSYSNOMAX`.
 
 ### `STRDBGSVR` requirement
 
@@ -140,7 +153,32 @@ The Debug Service that is started depends on the traditional Debug Server.
 
 ![](./error_2.png)
 
-If you receive this message, do as it says. Simply start the Debug Server with `STRDBGSVR` from a greenscreen.
+If you receive this message, do as it says. Simply start the Debug Server with `STRDBGSVR` from a green screen.
+
+### Self-signed certificate issue
+
+If you are getting a self-signed certificate error or a certificate signature failure when starting a batch debug session or setting a SEP, please use the following steps for diagnostics:
+
+- Find out the certificate location on the client machine
+
+    * Turn on **Debug trace** (see details in FAQ entry "Can I get trace information for the debug service?" )
+
+    * Inspect the "Connection settings" line in the Debug Console when starting a batch debug session or setting a SEP.
+
+    * The "capath" field under "Connection Settings" contains the fully qualified path of the client certificate.
+
+    * If the "capath" field is undefined, update your Code for IBM i extension to a newer level; otherwise continue with the next step.
+
+- Inspect the TrustStore and debug_service.crt files on the host
+
+    * When you use Navigator to generate the debug service trust store, you will get the following two files on the host:
+
+        /QIBM/UserData/IBMIDEBUGSERVICE/TrustStore
+
+        /QIBM/UserData/IBMIDEBUGSERVICE/certs/debug_service.crt
+
+    * Verify that the debug_service.crt file has the same contents as the certificate on the client machine, which is indicated by the "capath" value in the previous step. Both .crt files are text files. You can open a .crt file in a text editor to inspect its contents. If the certificate on the client machine is different from the debug_service.crt file on the host, you can remove the certificate on the client machine. Code for IBM i will download the client certificate again upon the next connection to the host.
+
 
 ### IP not in cert list
 
@@ -232,9 +270,6 @@ You need to restart the debug service after changing a port number.
 **Question**: I am getting a message “EQAVS1007E myHost on port 8005 could not be connected” when I start a debug session.  
 **Answer**: IBM i Debug Service is not started yet. You need to start debug service before starting a debug session.
 
-**Question**: I am seeing a message “IBM i Debug Server has not been started yet. Please run the STRDBGSVR command from a user profile with enough authority.”.  
-**Answer**: You need to run STRDBGSVR from a terminal session to start Debug Server (QB5ROUTER) first. IBM i Debug Service requires a running Debug Server. 
-
 **Question**: I am seeing a message “Your debug server version is not up to date. IBM i Debug Service requires a host PTF update.”.  
 **Answer**: IBM i Debug Service depends on the following debug server PTFs for strong password encryption. You need to load one of the PTFs below or a superseded PTF.
 - V7R3 PTF  SI82198 
@@ -243,6 +278,15 @@ You need to restart the debug service after changing a port number.
 
 **Question**: I do not have the QDBGSRV user profile after installing the debug service on IBM i 7.5.  
 **Answer**: The debug service PTFs on 7.3/7.4/7.5 are update installs. An update install depends on a previous installation of the debug service PTF. The update install does not create the QDBGSRV user profile. If you have not installed debug service before, please install the v1 debug service PTF first, and then update the debug service PTF to the next levels.
+
+**Question**: I am getting the error that the startDebugServiceNavigator.log file cannot be created when starting debug service.  
+**Answer**: You can use the "DSPAUT OBJ('ifs_path')" command to verify the authority of the following IFS folders:
+
+    /QIBM
+    /QIBM/UserData
+    /QIBM/UserData/IBMiDebugService
+
+You should have *PUBLIC *RX authority on /QIBM and /QIBM/UserData, and *PUBLIC *RWX authority on /QIBM/UserData/IBMiDebugService.
 
 **Question**: How can I set a Service Entry Point on a procedure?  
 **Answer**: Select the **Set Service Entry Point** action on the target program or service program. In the service entry point location prompt, change the last part of the entry field value “/*ALL/*ALL” to specify the module name and procedure name.
@@ -267,6 +311,7 @@ You need to restart the debug service and the debug router (QB5ROUTER) after the
 **Question**: What diagnostic information should I collect to report a debug problem?  
 **Answer**: Please collect the following diagnostic information:
 - The content of the DebugService_log.txt file under /QIBM/UserData/IBMIDEBUGSERVICE.
-- The content of the debug service workspace log in /QIBM/UserData/IBMIDEBUGSERVICE/startDebugService_workspace/USER/.metadata/.log, where USER is the user profile that starts the debug service.
+- The content of the startDebugServiceNavigator.log file under /QIBM/UserData/IBMIDEBUGSERVICE/startDebugService_workspace.
+- The content of the debug service workspace log in /QIBM/UserData/IBMIDEBUGSERVICE/startDebugService_workspace/QDBGSRV/.metadata/.log. Please note that some IFS browsing tools hide this file, as the name starts with a dot.
 - Check the **Debug trace** option from the Debugger tab of the Connection Settings page. Save the trace text in the **Debug Console** to a file. Edit the file to remove the user password that appears under the trace statement for the launch request.
 
