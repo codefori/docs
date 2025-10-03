@@ -37,6 +37,8 @@ To make use of the Debug Service, you need the following PTFs:
 
 **All OS versions require** 5770WDS option 60 (Workstation Tools - Base).
 
+<Aside type="note">You need to restart the ADMIN1 server after applying a Navigator PTF. </Aside>
+
 </TabItem>
 
 <TabItem label="Version 3" >
@@ -136,7 +138,7 @@ Below are the base requirements to configure the certificate:
 
 ## Updating the service
 
-When there are newer Debug service or Navigator/HTTP Group PTFs, the following steps might be required:
+When there are newer Debug service or Navigator/HTTP Group PTFs, the following steps are required:
 1. Restart ADMIN1 server
    - If HTTP Group PTF does not show as applied, IPL might be required.
 2. Regenerate debug service trust store (as described above)
