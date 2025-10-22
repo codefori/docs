@@ -207,7 +207,22 @@ If you find that you've added your local hostname entry and the error is still o
     /QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit (IBM i below 7.6)  
     /QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit (IBM i 7.6)  
 
-**Question**: How can I start IBM i Debug Service from a green screen terminal?  
+**Question**: How can I start IBM i Debug Service?  
+**Answer**: You can start IBM i Debug Service using one of the following solutions:
+
+    - Using the Navigator  
+    - Using the IBM i Debugger view in the client 
+
+**Question**: How can I stop IBM i Debug Service?  
+**Answer**: You can stop IBM i Debug Service using one of the following solutions:
+
+    - Using the Navigator 
+    - Using the IBM i Debugger view in the client 
+    - Running the following command from the host:
+
+    QSH CMD('/QIBM/ProdData/IBMiDebugService/bin/stopDebugService.sh') 
+
+**Question**: How can I start IBM i Debug Service from a 5250 terminal?  
 **Answer**: You can start IBM i Debug Service from a 5250 terminal using the following command on IBM i 7.3 to 7.5:
 
     SBMJOB USER(QDBGSRV) CURLIB(QGPL) JOB(QDBGSRV) JOBQ(QSYS/QUSRNOMAX) JOBD(*USRPRF) OUTQ(QUSRSYS/QDBGSRV) CMD(QSH CMD('export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit;/QIBM/ProdData/IBMiDebugService/bin/startDebugService.sh > /QIBM/UserData/IBMiDebugService/startDebugService_workspace/startDebugServiceNavigator.log 2>&1'))  
