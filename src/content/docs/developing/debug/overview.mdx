@@ -204,26 +204,31 @@ If you find that you've added your local hostname entry and the error is still o
 **Question**: What is the JRE requirement for running the debug service?  
 **Answer**: A Java 11 JRE is required to run IBM i Debug Service on IBM i below 7.6. A Java 17 JRE is required to run IBM i Debug Service on IBM i 7.6. You can use the **JAVA_HOME** environment variable to specify a runtime JRE. If **JAVA_HOME** is not set, the following runtime JREs will be used:
 
-    /QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit (IBM i below 7.6)
-    /QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit (IBM i 7.6)
+    /QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit (IBM i below 7.6)  
+    /QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit (IBM i 7.6)  
 
 **Question**: How can I start IBM i Debug Service?  
 **Answer**: You can start IBM i Debug Service using one of the following solutions:
 
-    - Using the Navigator
-    - Using the IBM i Debugger view in the client
-    - Running the following command from the host:
-
-      QSH CMD('/QIBM/ProdData/IBMiDebugService/bin/startDebugService.sh')
+    - Using the Navigator  
+    - Using the IBM i Debugger view in the client 
 
 **Question**: How can I stop IBM i Debug Service?  
 **Answer**: You can stop IBM i Debug Service using one of the following solutions:
 
-    - Using the Navigator
-    - Using the IBM i Debugger view in the client
+    - Using the Navigator 
+    - Using the IBM i Debugger view in the client 
     - Running the following command from the host:
 
-    QSH CMD('/QIBM/ProdData/IBMiDebugService/bin/stopDebugService.sh')
+    QSH CMD('/QIBM/ProdData/IBMiDebugService/bin/stopDebugService.sh') 
+
+**Question**: How can I start IBM i Debug Service from a 5250 terminal?  
+**Answer**: You can start IBM i Debug Service from a 5250 terminal using the following command on IBM i 7.3 to 7.5:
+
+    SBMJOB USER(QDBGSRV) CURLIB(QGPL) JOB(QDBGSRV) JOBQ(QSYS/QUSRNOMAX) JOBD(*USRPRF) OUTQ(QUSRSYS/QDBGSRV) CMD(QSH CMD('export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit;/QIBM/ProdData/IBMiDebugService/bin/startDebugService.sh > /QIBM/UserData/IBMiDebugService/startDebugService_workspace/startDebugServiceNavigator.log 2>&1'))  
+
+
+On IBM i 7.6, you need to change "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit" to "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit".
 
 **Question**: What port numbers are used by the debug service?  
 **Answer**: IBM i Debug Service uses three port numbers: the debug daemon port (default is 8001), the secure debug port (default is 8005) and the service entry point daemon port (default is 8008). The secure debug port is used by the secure communication between the debug service and the debug client. The debug daemon port is only used to stop the debug service. The service entry point daemon port is used for service entry point communication.
@@ -268,9 +273,9 @@ You need to restart the debug service after changing a port number.
 **Question**: I am getting the error that the startDebugServiceNavigator.log file cannot be created when starting debug service.  
 **Answer**: You can use the "DSPAUT OBJ('ifs_path')" command to verify the authority of the following IFS folders:
 
-    /QIBM
-    /QIBM/UserData
-    /QIBM/UserData/IBMiDebugService
+    /QIBM  
+    /QIBM/UserData  
+    /QIBM/UserData/IBMiDebugService  
 
 You should have *PUBLIC *RX authority on /QIBM and /QIBM/UserData, and *PUBLIC *RWX authority on /QIBM/UserData/IBMiDebugService.
 
