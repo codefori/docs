@@ -14,7 +14,7 @@ This is because SEU uses the 5250 protocol to render colour information to the s
 
 Christian Jorgensen has written a stored procedure that can do the cleanup of those source members, which we recommend to everyone to use.
 
-```SQL
+```sql
 create or replace procedure Remove_SEU_colour_codes( 
   Lib varchar(10), Fil varchar(10), Mbr varchar(10)
 )
@@ -32,6 +32,6 @@ end
 
 You call it like this:
 
-```SQL
+```sql
 call Remove_SEU_colour_codes( LIB => '<library>', FIL => '<sourcefile>', MBR => '<member>' )
 ```

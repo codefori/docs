@@ -65,7 +65,7 @@ One notable preference is the **Show Test Stub Preview** which controls whether 
 
 In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` copybook to your test suite:
 
-```rpgle
+```RPGLE
 /include qinclude,TESTCASE
 ```
 
@@ -78,12 +78,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       This procedure can be used to set up test data or allocate resources before the first test case is started.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         setUpSuite();
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         dcl-proc setUpSuite export;
           // Setup test suite code here
         end-proc;
@@ -96,12 +98,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       This procedure is called for each test case.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         setUp();
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         dcl-proc setUp export;
           // Setup test case code here
         end-proc;
@@ -114,12 +118,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       This procedure can be used to remove test data or deallocate resources after the last test case has been executed.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         tearDownSuite();
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         dcl-proc tearDownSuite export;
           // Tear down test suite code here
         end-proc;
@@ -132,12 +138,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       This procedure is called for each test case.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         tearDown();
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         dcl-proc tearDown export;
           // Tear down test case code here
         end-proc;
@@ -157,12 +165,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           The assertion fails, if both values are different. If the `message` parameter is specified, it is appeneded to the log.
 
           **Syntax**
-            ```rpgle
-            assertEqual( 'expected' : 'actual' [: 'message' );
+            ```RPGLE
+            **free
+            assertEqual( 'expected' : 'actual' : 'message' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             // ✅ Pass
             assertEqual( 'Hello' : 'Hello' );
             assertEqual( 123 : 123 );
@@ -182,12 +192,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           If the `message` parameter is specified, it is appeneded to the log.
 
           **Syntax**
-            ```rpgle
-            assertThat( expected : actual : matcher [: message );
+            ```RPGLE
+            **free
+            assertThat( expected : actual : matcher : message );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             assertThat( actual : %paddr('matcher') : pUserData );
             ```
         </Card>
@@ -198,12 +210,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
 
           **Syntax**
-            ```rpgle
-            nEqual( expected : actual [: 'fieldName' );
+            ```RPGLE
+            **free
+            nEqual( expected : actual : 'fieldName' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             // ✅ Pass
             nEqual( *off : 1=2 );
 
@@ -218,12 +232,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           When the assertion fails, the value of `message` is added to the test report.
 
           **Syntax**
-            ```rpgle
+            ```RPGLE
+            **free
             assert( booleanExpression : 'message' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             // ✅ Pass
             assert( 1=1 : 'Impossible to fail' );
 
@@ -237,12 +253,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           Produces an error and appends the specified `message` to the test report. The test case is terminated.
 
           **Syntax**
-            ```rpgle
+            ```RPGLE
+            **free
             fail( 'message' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             monitor;
               produceAnException(doFailure);
             
@@ -259,12 +277,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           Checks whether the job log contains the specified message ID between *NOW* and `timeLimit`. The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
 
           **Syntax**
-            ```rpgle
+            ```RPGLE
+            **free
             assertJobLogContains( msgId : timeLimit );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             testStartTime = getFullTimeStamp();
             sndMCH1211Msg();
             
@@ -282,12 +302,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           * The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
 
           **Syntax**
-            ```rpgle
-            assertMessageQueueContains( userOrQueue : library [: msgId [: msgText [: msgHelp : timeLimit );
+            ```RPGLE
+            **free
+            assertMessageQueueContains( userOrQueue : library : msgId : msgText : msgHelp : timeLimit );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             testStartTime = getFullTimeStamp();
             sndToMSGQ();
             
@@ -311,12 +333,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
 
           **Syntax**
-            ```rpgle
-            aEqual( 'expected' : 'actual' [: 'fieldName' );
+            ```RPGLE
+            **free
+            aEqual( 'expected' : 'actual' : 'fieldName' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             // ✅ Pass
             aEqual( 'Hello' : 'Hello' );
             
@@ -331,12 +355,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
 
           **Syntax**
-            ```rpgle
-            iEqual( expected : actual [: 'fieldName' );
+            ```RPGLE
+            **free
+            iEqual( expected : actual : 'fieldName' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             // ✅ Pass
             iEqual( 123 : 123 );
             
@@ -351,12 +377,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           If the `fieldName` parameter is specified, the message is prefixed with `fieldName:`.
 
           **Syntax**
-            ```rpgle
-            nEqual( expected : actual [: 'fieldName' );
+            ```RPGLE
+            **free
+            nEqual( expected : actual : 'fieldName' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             // ✅ Pass
             nEqual( *off : 1=2 );
 
@@ -371,12 +399,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           When the assertion fails, the value of `message` is added to the test report.
 
           **Syntax**
-            ```rpgle
+            ```RPGLE
+            **free
             assert( booleanExpression : 'message' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             // ✅ Pass
             assert( 1=1 : 'Impossible to fail' );
 
@@ -390,12 +420,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           Produces an error and appends the specified `message` to the test report. The test case is terminated.
 
           **Syntax**
-            ```rpgle
+            ```RPGLE
+            **free
             fail( 'message' );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             monitor;
               produceAnException(doFailure);
             
@@ -412,12 +444,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           Checks whether the job log contains the specified message ID between *NOW* and `timeLimit`. The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
 
           **Syntax**
-            ```rpgle
+            ```RPGLE
+            **free
             assertJobLogContains( msgId : timeLimit );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             testStartTime = getFullTimeStamp();
             sndMCH1211Msg();
             
@@ -435,12 +469,14 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           * The value of `timeLimit` should be created with the `getFullTimeStamp()` utility.
 
           **Syntax**
-            ```rpgle
-            assertMessageQueueContains( userOrQueue : library [: msgId [: msgText [: msgHelp : timeLimit );
+            ```RPGLE
+            **free
+            assertMessageQueueContains( userOrQueue : library : msgId : msgText : msgHelp : timeLimit );
             ```
 
           **Example**
-            ```rpgle
+            ```RPGLE
+            **free
             testStartTime = getFullTimeStamp();
             sndToMSGQ();
             
@@ -468,17 +504,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Returns the full current timestamp, without rounding the microseconds like `%timestamp()` does.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         getFullTimeStamp();
         ```
 
       **Return value**
-        ```rpgle
+        ```
         timestamp
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         tmStmp = getFullTimeStamp();
         ```
     </Card>
@@ -489,17 +527,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       When the job resumes the original status message is restored.
 
       **Syntax**
-        ```rpgle
-        waitSeconds( seconds [: message )
+        ```RPGLE
+        **free
+        waitSeconds( seconds : message )
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         waitSeconds(3 : 'Waiting 3 seconds ...');
         ```
     </Card>
@@ -509,8 +549,9 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Retrieves the latest `*ESCAPE` message from the job log. Usually called within the `on-error` section of a `monitor` block. 
 
       **Syntax**
-        ```rpgle
-        getMonitoredMessage( [: doRmvMsg );
+        ```RPGLE
+        **free
+        getMonitoredMessage( : doRmvMsg );
         ```
 
       **Return value**
@@ -524,7 +565,8 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
           * `specNb` - Sender: statement number
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         monitor;
           a = 10;
           b = 0;
@@ -547,17 +589,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       This procedure is automatically called by the RPGUnit, before executing a unit test. Use this procedure with care.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         setLowMessageKey( msgKey );
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         setLowMessageKey(msgKey);
         ```
     </Card>
@@ -572,17 +616,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Displays a given status message in the status line at the bottom of the screen.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         displayStatusMessage( message );
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         displayStatusMessage('Hello World!');
         ```
     </Card>
@@ -592,17 +638,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Replaces the current status message with the previous message.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         restoreStatusMessage();
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         // Display status message.
         displayStatusMessage('Hello World!');
         
@@ -619,17 +667,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Clears (removes) the status message that is currently being displayed at the bottom of the screen.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         clearStatusMessage();
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         clearStatusMessage();
         ```
     </Card>
@@ -644,17 +694,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Uses `CLRPFM` to remove the data from `member` of file `file`. The file must be stored in `*CURLIB`.
 
       **Syntax**
-        ```rpgle
-        clrpfm( fileName [: memberName );
+        ```RPGLE
+        **free
+        clrpfm( fileName : memberName );
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         clrpfm( 'MYFILE' : 'MYMEMBER' );
         ```
     </Card>
@@ -664,17 +716,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Uses `RCLACTGRP` to reclaim the activation group specified at parameter `activationGroup`.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         rclActGrp( activationGroupName );
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         rclActGrp( '*ELIGIBLE' );
         ```
     </Card>
@@ -684,17 +738,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Uses the `QCMDEXC` API to execute the CL command specified at parameter `command`.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         runCmd( command );
         ```
 
       **Return value**
-        ```rpgle
+        ```
         void
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         runCmd( 'ALCOBJ OBJ((*CURLIB/FILE *FILE *EXCL))' );
         ```
     </Card>
@@ -709,17 +765,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Returns the source type of a given source member.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         getMemberType( sourceFile : library : member );
         ```
 
       **Return value**
-        ```rpgle
+        ```
         char(10)
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         srcType = getMemberType('QINCLUDE': 'RPGUNIT': 'ASSERT');
         ```
     </Card>
@@ -729,17 +787,19 @@ In order to use the APIs provided by RPGUnit, you need to add the `TESTCASE` cop
       Returns the source type of a given stream file.
 
       **Syntax**
-        ```rpgle
+        ```RPGLE
+        **free
         getStmfType( srcStmf );
         ```
 
       **Return value**
-        ```rpgle
+        ```
         char(10)
         ```
 
       **Example**
-        ```rpgle
+        ```RPGLE
+        **free
         srcType = getStmfType('/home/dev/mypgm.rpgle');
         ```
     </Card>
