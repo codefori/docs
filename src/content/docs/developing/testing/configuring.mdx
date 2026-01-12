@@ -85,6 +85,15 @@ Use the following steps to create a default configuration for your project:
                   "cOption": [
                       "*EVENTF"
                   ]
+              },
+              "rucalltst": {
+                  "order": "*API",
+                  "libl": "*CURRENT",
+                  "jobD": "*DFT",
+                  "detail": "*BASIC",
+                  "output": "*ALLWAYS",
+                  "rclRsc": "*NO",
+                  "onFailure": "*ABORT"
               }
           },
           "codecov": {
@@ -120,7 +129,8 @@ Here is an example with all execution parameters set in the `testing.json` file:
             "jobD": "*DFT",
             "detail": "*BASIC",
             "output": "*ALLWAYS",
-            "rclRsc": "*NO"
+            "rclRsc": "*NO",
+            "onFailure": "*ABORT"
         }
     }
 }
@@ -186,15 +196,17 @@ Here is an example with all execution parameters set in the `testing.json` file:
     |`exclude` |Exclude |Objects to exclude                                                                          |        |
   </TabItem>
   <TabItem label="RUCALLTST" >
-    |Parameter |Name              |Description                                                                                                                                                                                                                                                                           |Default  |
-    |----------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-    |`tstPgm`  |Test program      |Specifies the name of the test program (`*SRVPGM`). By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                                                                                                  |         |
-    |`order`   |Run Order         |Specifies the order for running the test procedures. Useful to check that there is no dependencies between test procedures.                                                                                                                                                           |*API     |
-    |`libl`    |Library List      |Specifies the library list for executing the specified unit test.                                                                                                                                                                                                                     |*CURRENT |
-    |`jobD`    |Job Description   |Specifies the name of the job description that is used to set the library list, when the `IBM i Testing: Library List` setting is set to `*JOBD`. `*DFT` can be used here to indicate the library of the unit test suite (service program) is searched for job description `RPGUNIT`. |*DFT     |
-    |`detail`  |Report Detail     |Specifies how detailed the test run report should be.                                                                                                                                                                                                                                 |*BASIC   |
-    |`output`  |Create Report     |Specifies whether a report is created.                                                                                                                                                                                                                                                |*ALLWAYS |
-    |`rclRsc`  |Reclaim Resources |Specifies when to reclaim resources. Resources, such as open files, can be reclaimed after each test case or at the end of the test suite. This option is useful if the test suite calls OPM programs, which do not set the `*INLR` indicator.                                        |*NO      |
+    |Parameter    |Name              |Description                                                                                                                                                                                                                                                                           |Default  |
+    |-------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+    |`tstPgm`     |Test program      |Specifies the name of the test program (`*SRVPGM`). By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                                                                                                  |         |
+    |`order`      |Run Order         |Specifies the order for running the test procedures. Useful to check that there is no dependencies between test procedures.                                                                                                                                                           |*API     |
+    |`libl`       |Library List      |Specifies the library list for executing the specified unit test.                                                                                                                                                                                                                     |*CURRENT |
+    |`jobD`       |Job Description   |Specifies the name of the job description that is used to set the library list, when the `IBM i Testing: Library List` setting is set to `*JOBD`. `*DFT` can be used here to indicate the library of the unit test suite (service program) is searched for job description `RPGUNIT`. |*DFT     |
+    |`detail`     |Report Detail     |Specifies how detailed the test run report should be.                                                                                                                                                                                                                                 |*BASIC   |
+    |`output`     |Create Report     |Specifies whether a report is created.                                                                                                                                                                                                                                                |*ALLWAYS |
+    |`rclRsc`     |Reclaim Resources |Specifies when to reclaim resources. Resources, such as open files, can be reclaimed after each test case or at the end of the test suite. This option is useful if the test suite calls OPM programs, which do not set the `*INLR` indicator.                                        |*NO      |
+    |`onFailure`  |On Failure        |Specifies test execution behavior after a failing assertion.                                                                                                                                                                                                                          |*ABORT   |
+    |`wrapperCmd` |Wrapper Command   |Specifies a custom command to wrap the `RUCALLTST` command.                                                                                                                                                                                                                           |         |
   </TabItem>
 </Tabs>
 
