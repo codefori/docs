@@ -35,7 +35,14 @@ The following extensions can be installed from the Visual Studio Code Marketplac
 
 ### 2. RPGUnit
 
-The `RPGUNIT` library ***(`5.1.0-beta.005` minimum)*** must be be installed on your IBM i in order to leverage the framework and assertions that it provides. It can be installed easily via the extension using the steps below which is the recommended approach or manually using the instructions [here](https://irpgunit.sourceforge.io/help/).
+The `RPGUNIT` library must be installed on your IBM i in order to leverage the framework and assertions that it provides. It can be installed easily via the extension using the steps below which is the recommended approach or manually using the instructions [here](https://irpgunit.sourceforge.io/help/).
+
+The required RPGUnit version depends on which version of the **IBM i Testing** extension you have installed:
+
+| Extension Version | Required RPGUnit Version   |
+|-------------------|----------------------------|
+| ≤ 1.2.3           | 5.1.0                      |
+| 1.3.0             | ≥ 6.0.0                    |
 
 #### Preconditions
 RPGUnit requires OS400 7.5 for the latest features. It can also be installed on 7.4 and 7.3 if the following PTFs have been installed:
