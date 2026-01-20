@@ -16,6 +16,30 @@ import { Aside, CardGrid, Card, Icon, Tabs, TabItem } from '@astrojs/starlight/c
 To make use of the Debug Service, you need the following PTFs:
 
 <Tabs>
+<TabItem label="Version 3.0.3" >
+
+* IBM i 7.6
+   * Debug Service PTF SJ08472
+   * HTTP Group PTF SF99962 level 7 or higher
+   * Java 17 LPP 5770JV1 Option 20 (not Java from Yum)
+* IBM i 7.5
+   * Debug Service PTF  SJ08535
+   * HTTP Group PTF SF99952 level 26 or higher
+   * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
+* IBM i 7.4
+   * Debug Service PTF SJ08540
+   * HTTP Group PTF SF99662 level 48 or higher
+   * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
+* IBM i 7.3
+   * Debug Service PTF SJ08544
+   * HTTP Group PTF SF99722 level 64 or higher
+   * Java 11 is required via LPP 5770JV1 Option 19 (not Java from Yum)
+
+**All OS versions require** 5770WDS option 60 (Workstation Tools - Base).
+
+<Aside type="note">You need to restart the ADMIN1 server after applying a Navigator PTF.</Aside>
+
+</TabItem>
 <TabItem label="Version 3.0.2" >
 
 * IBM i 7.6
@@ -38,7 +62,7 @@ To make use of the Debug Service, you need the following PTFs:
 **All OS versions require** 5770WDS option 60 (Workstation Tools - Base).
 
 <Aside type="note">You need to restart the ADMIN1 server after applying a Navigator PTF.</Aside>
-<Aside type="caution">The 3.0.2 Debug Service PTF must not be applied at IPL as a delayed PTF until the next fix comes out.</Aside>
+<Aside type="caution">Please upgrade to 3.0.3 if you apply the PTF at IPL as a delayed PTF.</Aside>
 
 </TabItem>
 <TabItem label="Version 3.0.1" >
