@@ -210,19 +210,61 @@ Here is an example with all execution parameters set in the `testing.json` file:
   </TabItem>
 </Tabs>
 
-<Aside type="note">
-In most cases you do not need to modify the `tstPgm`, `srcFile`, `srcMbr`, and `srcStmf` parameters because the extension will determine these parameters for you. However, to still provide the flexibility to set these parameters manually, you can still do so via the `testing.json` file. Note that the following variables can be used:
+## Advanced Configuration
 
+Some compile and execution configuration parameters (`TSTPGM`, `SRCFILE`, `SRCMBR`, `SRCSTMF`) are special because the extension typically manages and sets them for you. This is because they can be determined by the extension based on what tests are being compiled and executed. However, to provide maximum flexibility in configuring even these parameters, users can still do so via the `testing.json` file. A simple use case could be that you want to build your source member tests into your current library instead of the library containing the source.
+
+Under the covers, the extension has default values for these special parameters along with supported variables based on whether you are working with local files or source members. The defaults below can be overwritten in the `testing.json` file:
+
+<Tabs>
+<TabItem label="Source Members">
+```json
+{
+    "rpgunit": {
+        "rucrtrpg": {
+            "tstPgm": "&OPENLIB/&OPENMBR",
+            "srcFile": "&OPENLIB/&OPENSPF",
+            "srcMbr": "&OPENMBR"
+        },
+        "rucalltst": {
+            "tstPgm": "&OPENLIB/&OPENMBR"
+        }
+    }
+}
+```
+Supported Variables:
+* `&CURLIB`: Current library, changeable in the **Library List**
 * `&OPENLIB`: Library name where the test source member lives
 * `&OPENSPF`: Source file name where the test source member lives
 * `&OPENMBR`: Name of the test source member
-* `&CURLIB`: Current library
-* `&NAME`: Name of the test file
-* `&SHORTNAME`: Shortened name of the test file
-* `&FULLPATH`: Full path of the file on the remote system
-</Aside>
 
-### Vendor Integration
+</TabItem>
+
+<TabItem label="Local Files">
+```json
+{
+    "rpgunit": {
+        "rucrtrpg": {
+            "tstPgm": "&CURLIB/&SHORTNAME"
+            "srcStmf": "&FULLPATH",
+        },
+        "rucalltst": {
+            "tstPgm": "&CURLIB/&SHORTNAME"
+        }
+    }
+}
+```
+
+Supported Variables:
+* `&CURLIB`: Current library, changeable in the **Library List**
+* `&NAME`: Name of the test file
+* `&SHORTNAME`: Shortened name of the test file (based on rules [here](https://ibm.github.io/sourceorbit/#/./pages/general/rules?id=long-file-names))
+* `&FULLPATH`: Full path of the test file on the remote system
+</TabItem>
+</Tabs>
+
+
+## Vendor Integration
 The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specifications are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
 
 **Example `testing.json` configuration**:
