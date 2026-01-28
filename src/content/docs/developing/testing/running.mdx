@@ -18,6 +18,8 @@ For tests to be discovered by the extension, you must first [connect to an IBM i
 
 ![](Testing_TestExplorer.png)
 
+### Running Tests
+
 From here you can hover on any test case, test suite, folder, library, or source file and use the inline **Run Test** button. Using this action will start the following process:
 
 <Steps>
@@ -32,6 +34,16 @@ From here you can hover on any test case, test suite, folder, library, or source
   ![](Testing_GutterActions.png)
 </Aside>
 
+### Cancelling Tests
+
+The current test deployment, compilation, and execution can be cancelled at anytime by navigating to the **Test Explorer** view and using the **Cancel Test Run** button.
+
+![](Testing_CancellingTest.png)
+
+Any test suites which were executed before cancellation will still have their test results shown in the **Test Results** view. Cancelled test suites will be marked accordingly and a total count of cancelled test suites and cases will be included in the test summary.
+
+![](Testing_CancelledTestResult.png)
+
 ## Test Results
 
 After running any test, the results will be displayed in detail in the **Test Results** view. This will include the number of passed, failed, and errored test cases along with any relevant messages. The results can also be viewed at a high level in the `Testing` view itself where the icon will be updated to reflect the status of the test. Failures associated with a specific line will also be displayed in the editor.
@@ -41,6 +53,12 @@ After running any test, the results will be displayed in detail in the **Test Re
 </Aside>
 
 ![](Testing_TestResults.png)
+
+### Diagnosing Errors
+
+When there is an assertion failure, you can view the actual and expected results (depending on the type of assertion) along with the failure message in the **Test Results** view. In addition, you can scroll through the editor and see the same message inline right next to the failing assertion. Upon clicking on this message, you will get an expanded inline view of the error which also includes a diff of the actual and expected result along with the stack trace.
+
+![](Testing_InlineAssertionError.png)
 
 ## Code Coverage
 
