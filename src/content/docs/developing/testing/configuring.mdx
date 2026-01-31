@@ -85,6 +85,15 @@ Use the following steps to create a default configuration for your project:
                   "cOption": [
                       "*EVENTF"
                   ]
+              },
+              "rucalltst": {
+                  "order": "*API",
+                  "libl": "*CURRENT",
+                  "jobD": "*DFT",
+                  "detail": "*BASIC",
+                  "output": "*ALLWAYS",
+                  "rclRsc": "*NO",
+                  "onFailure": "*ABORT"
               }
           },
           "codecov": {
@@ -120,7 +129,8 @@ Here is an example with all execution parameters set in the `testing.json` file:
             "jobD": "*DFT",
             "detail": "*BASIC",
             "output": "*ALLWAYS",
-            "rclRsc": "*NO"
+            "rclRsc": "*NO",
+            "onFailure": "*ABORT"
         }
     }
 }
@@ -132,6 +142,10 @@ Here is an example with all execution parameters set in the `testing.json` file:
   <TabItem label="RUCRTRPG" >
     |Parameter    |Name                    |Description                                                                                                                                                                                                                 |Default |
     |-------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    |`tstPgm`     |Test program            |Specifies the name of the test program (`*SRVPGM`) to create. By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                              |        |
+    |`srcFile`    |Source file             |Specifies the name of the source file containing a member with the same name as `TSTPGM`. By default, this will be set to `&OPENLIB/&OPENSPF` for source members.                                                           |        |
+    |`srcMbr`     |Source member           |Specifies the name of the member containing the source code to be compiled. By default, this will be set to `&OPENMBR` for source members.                                                                                  |        |
+    |`srcStmf`    |Source stream file      |Specifies the path name of the stream file containing the source code to be compiled. By default, this will be set to `&FULLPATH` for local files.                                                                          |        |
     |`text`       |Text description        |Allows you to enter text that briefly describes the RPGUnit test case and its function.                                                                                                                                     |        |
     |`cOption`    |Compile options         |Refer to the `OPTION` parameter in `CRTRPGMOD` command help.                                                                                                                                                                |*EVENTF |
     |`dbgView`    |Debugging views         |Refer to the `DBGVIEW` parameter in `CRTRPGMOD` command help.                                                                                                                                                               |*SOURCE |
@@ -153,6 +167,10 @@ Here is an example with all execution parameters set in the `testing.json` file:
   <TabItem label="RUCRTCBL" >
     |Parameter    |Name                    |Description                                                                                                                                                                                                                 |Default |
     |-------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+    |`tstPgm`     |Test program            |Specifies the name of the test program (`*SRVPGM`) to create. By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                              |        |
+    |`srcFile`    |Source file             |Specifies the name of the source file containing a member with the same name as `TSTPGM`. By default, this will be set to `&OPENLIB/&OPENSPF` for source members.                                                           |        |
+    |`srcMbr`     |Source member           |Specifies the name of the member containing the source code to be compiled. By default, this will be set to `&OPENMBR` for source members.                                                                                  |        |
+    |`srcStmf`    |Source stream file      |Specifies the path name of the stream file containing the source code to be compiled. By default, this will be set to `&FULLPATH` for local files.                                                                          |        |
     |`text`       |Text description        |Allows you to enter text that briefly describes the RPGUnit test case and its function.                                                                                                                                     |        |
     |`cOption`    |Compile options         |Refer to the `OPTION` parameter in `CRTCBLMOD` command help.                                                                                                                                                                |*EVENTF |
     |`dbgView`    |Debugging views         |Refer to the `DBGVIEW` parameter in `CRTCBLMOD` command help.                                                                                                                                                               |*SOURCE |
@@ -178,18 +196,75 @@ Here is an example with all execution parameters set in the `testing.json` file:
     |`exclude` |Exclude |Objects to exclude                                                                          |        |
   </TabItem>
   <TabItem label="RUCALLTST" >
-    |Setting                 |Description                                                                                                                                                                                                                                                                           |Default  |
-    |------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-    |Run Order               |Specifies the order for running the test procedures. Useful to check that there is no dependencies between test procedures.                                                                                                                                                           |*API     |
-    |Library List            |Specifies the library list for executing the specified unit test.                                                                                                                                                                                                                     |*CURRENT |
-    |Job Description         |Specifies the name of the job description that is used to set the library list, when the `IBM i Testing: Library List` setting is set to `*JOBD`. `*DFT` can be used here to indicate the library of the unit test suite (service program) is searched for job description `RPGUNIT`. |*DFT     |
-    |Report Detail           |Specifies how detailed the test run report should be.                                                                                                                                                                                                                                 |*BASIC   |
-    |Create Report           |Specifies whether a report is created.                                                                                                                                                                                                                                                |*ALLWAYS |
-    |Reclaim Resources       |Specifies when to reclaim resources. Resources, such as open files, can be reclaimed after each test case or at the end of the test suite. This option is useful if the test suite calls OPM programs, which do not set the `*INLR` indicator.                                        |*NO      |
+    |Parameter    |Name              |Description                                                                                                                                                                                                                                                                           |Default  |
+    |-------------|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+    |`tstPgm`     |Test program      |Specifies the name of the test program (`*SRVPGM`). By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                                                                                                  |         |
+    |`order`      |Run Order         |Specifies the order for running the test procedures. Useful to check that there is no dependencies between test procedures.                                                                                                                                                           |*API     |
+    |`libl`       |Library List      |Specifies the library list for executing the specified unit test.                                                                                                                                                                                                                     |*CURRENT |
+    |`jobD`       |Job Description   |Specifies the name of the job description that is used to set the library list, when the `IBM i Testing: Library List` setting is set to `*JOBD`. `*DFT` can be used here to indicate the library of the unit test suite (service program) is searched for job description `RPGUNIT`. |*DFT     |
+    |`detail`     |Report Detail     |Specifies how detailed the test run report should be.                                                                                                                                                                                                                                 |*BASIC   |
+    |`output`     |Create Report     |Specifies whether a report is created.                                                                                                                                                                                                                                                |*ALLWAYS |
+    |`rclRsc`     |Reclaim Resources |Specifies when to reclaim resources. Resources, such as open files, can be reclaimed after each test case or at the end of the test suite. This option is useful if the test suite calls OPM programs, which do not set the `*INLR` indicator.                                        |*NO      |
+    |`onFailure`  |On Failure        |Specifies test execution behavior after a failing assertion.                                                                                                                                                                                                                          |*ABORT   |
+    |`wrapperCmd` |Wrapper Command   |Specifies a custom command to wrap the `RUCALLTST` command.                                                                                                                                                                                                                           |         |
   </TabItem>
 </Tabs>
 
-### Vendor Integration
+## Advanced Configuration
+
+Some compile and execution configuration parameters (`TSTPGM`, `SRCFILE`, `SRCMBR`, `SRCSTMF`) are special because the extension typically manages and sets them for you. This is because they can be determined by the extension based on what tests are being compiled and executed. However, to provide maximum flexibility in configuring even these parameters, users can still do so via the `testing.json` file. A simple use case could be that you want to build your source member tests into your current library instead of the library containing the source.
+
+Under the covers, the extension has default values for these special parameters along with supported variables based on whether you are working with local files or source members. The defaults below can be overwritten in the `testing.json` file:
+
+<Tabs>
+<TabItem label="Source Members">
+```json
+{
+    "rpgunit": {
+        "rucrtrpg": {
+            "tstPgm": "&OPENLIB/&OPENMBR",
+            "srcFile": "&OPENLIB/&OPENSPF",
+            "srcMbr": "&OPENMBR"
+        },
+        "rucalltst": {
+            "tstPgm": "&OPENLIB/&OPENMBR"
+        }
+    }
+}
+```
+Supported Variables:
+* `&CURLIB`: Current library, changeable in the **Library List**
+* `&OPENLIB`: Library name where the test source member lives
+* `&OPENSPF`: Source file name where the test source member lives
+* `&OPENMBR`: Name of the test source member
+
+</TabItem>
+
+<TabItem label="Local Files">
+```json
+{
+    "rpgunit": {
+        "rucrtrpg": {
+            "tstPgm": "&CURLIB/&SHORTNAME"
+            "srcStmf": "&FULLPATH",
+        },
+        "rucalltst": {
+            "tstPgm": "&CURLIB/&SHORTNAME"
+        }
+    }
+}
+```
+
+Supported Variables:
+* `&CURLIB`: Current library, changeable in the **Library List**
+* `&NAME`: Name of the test file
+* `&SHORTNAME`: Shortened name of the test file (based on rules [here](https://ibm.github.io/sourceorbit/#/./pages/general/rules?id=long-file-names))
+* `&FULLPATH`: Full path of the test file on the remote system
+</TabItem>
+</Tabs>
+
+
+## Vendor Integration
 The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specifications are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
 
 **Example `testing.json` configuration**:
