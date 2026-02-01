@@ -20,7 +20,7 @@ The extension can be [installed from the Marketplace](https://marketplace.visual
 
 As of 0.3.0, the Db2 for i extension requires a server component. The component provides improved performance and makes it easy for us to add advanced features. The Db2 for i extension manages the server component installation when you connect to an IBM i with Code for IBM i and will ask the user to confirm any installation or update. The server component is installed into `$HOME/.vscode`, which means a per-user installation. [The server component is also open-source](https://github.com/ThePrez/CodeForIBMiServer)<Icon name="github" class="icon-inline" />.
 
-## Executing statements
+## Executing Statements
 
 Either:
 
@@ -35,37 +35,40 @@ After you have an SQL file open, you can either:
     * use the play button in the top right to execute
     * use the shortcut (control / command + R) to execute the statement
 
-The result set will appear below the statement. As your scroll through the result set, more data will load. When you execute an SQL statement, it will be prepended to your Query History view, where it remains readily accessible.
+The result set will appear below the statement. As your scroll through the result set, more data will load.
 
-SQL statements are executed using the active job selected in the SQL Job Manager view.
+SQL statements are executed using the active job selected in the **SQL Job Manager** view.
 
-### SQL prefixes
+### SQL Prefixes
 
-SQL provided by Db2 for i allows you to run CL commands in a script. Additionally there are `json`, `csv`, `sql` and `rpg` prefixes, which will open the result set in the chosen format.
+SQL provided by Db2 for i allows you to run CL commands in a script. Additionally there are `json`, `csv`, `sql`, `udtf`, and `rpg` prefixes, which will open the result set in the chosen format.
 
 ```sql
--- result set as normal table
+-- Result set as normal table
 select * from sample.employee;
 
--- result set as JSON, will open in a new file
+-- Result set as JSON (will open in a new file)
 json: select * from sample.employee;
 
--- result set as CSV, will open in a new file
+-- Result set as CSV (will open in a new file)
 csv: select * from sample.employee;
 
--- result set as SQL insert statement
+-- Result set as SQL insert statements (will open in a new file)
 sql: select * from sample.employee;
 
--- RPG data structure based on result set columns
+-- User-defined table function based on result set columns (will open in a new file)
+udtf: select * from toystore.staff;
+
+-- RPG data structure based on result set columns (will open in a new file)
 rpg: select * from sample.employee;
 
--- run CL commands. output is directed to IBM i output channel
+-- Run CL commands (output is directed to "Db2 for i: Results" view)
 cl: dspffd sample/employee
 ```
 
-### Updatable cells
+### Updatable Cells
 
-It's possible to update directly from running a SQL statement. You can use the `update:` prefix with a select statement to make the result set updatable. This will allow you to edit the data in the result set and then save the changes back to the database.
+It's possible to update directly from running a SQL statement. You can use the `update:` prefix with a select statement to make the result set updatable. This will allow you to edit the data in the result set and then save the changes back to the database. Use `Shift+Enter` to set a field to `null`.
 
 A fully qualified table name is required for the fields to be editable.
 
@@ -73,11 +76,13 @@ A fully qualified table name is required for the fields to be editable.
 update: select * from sample.employee;
 ```
 
-#### Using nulls
+<Aside type="tip">
+  At the bottom of the **Results** view, you can observe the update statement that will be executed as you edit the data. It will only be executed once you press `Enter`.
+</Aside>
 
-Enter the value `null` to set a column to *null*. If the column cannot accept at least 4 characters, then `-` (a dash) may be used.
+![](./images/updatePrefix.png)
 
-### Binding parameters
+### Binding Parameters
 
 It is possible to bind to SQL parameters inside of SQL statements - both `?` markers and named parameters (e.g. `:param1`) are supported - by using the `bind:` prefix. `bind:` is followed by a list of strings or numbers, either space or comma separated. When executing the prefix, it will find the most previous statement in the document to bind to.
 
@@ -93,7 +98,13 @@ bind: '000010', 'A00';
 bind: '000020', 'A00';
 ```
 
-## Syntax checking
+## Statement History
+
+When you execute an SQL statement, it will be prepended to your **Statement History** view. For any commonly used SQL statements, you can star them to make them easily readily accessible.
+
+![](./images/statementHistory.png)
+
+## Syntax Checking
 
 When connected to an IBM i, the syntax checker has the following options:
 
@@ -111,38 +122,54 @@ The syntax checker configuration is available through the VS Code settings (and 
 
 ## SQL Job Manager
 
-This view allows users to manage different SQL jobs, each with their own unique JDBC configuration. A new job can be created by clicking the database icon in the SQL Job Manage title bar. Or, if you have not created a new job before, there is a big button to do the same action.
+The **SQL Job Manager** view allows users to manage different SQL jobs, each with their own unique JDBC configuration. A new job can be created by clicking the database icon in the **SQL Job Manager** title bar. Or, if you have not created a new job before, there is a big button to do the same action.
 
 ![](./images/sqlJobManager-newJob.png)
 
 Your active job will be marked with a highlighted icon. **The active job is used for all SQL statement execution**, including SQL that powers the Schema Browser, user-executed SQL statements, etc. You can change the active job by simply clicking the job you choose to use. You will see the highlighted icon change to indicate the active job.
 
-### Editing job configuration
+### Editing Job Configuration
 
-You can use the pencil icon on any job to edit the JDBC properties. When the Apply Changes button is pressed, any changes are saved and the job is restarted, to fully apply the changes.
+You can use the 'Edit Connection Properties' inline button (pencil icon) on any job to edit the JDBC properties. When the 'Apply Changes' button is pressed, any changes are saved and the job is restarted to fully apply the changes.
 
-You are able to right-click on any job to save those job settings, allowing it to be easily reused. Using the 'Save settings to config' right-click action will prompt you to enter a name for the configuration. Once saved, you will see a 'Saved Configuration' folder appear, with all your saved configs. Clicking on a saved config will launch a new job with those pre-defined settings. You can use the pencil icon on any saved configuration to edit it.
+![](./images/jobConfiguration.png)
 
-## Using the Schema Browser
+You are able to right-click on any job to save those job settings, allowing it to be easily reused. This is done using the 'Save settings to config' right-click action which will prompt you to enter a name for the configuration. Once saved, you will see a **Saved Configuration** folder appear, with all your saved configs. Clicking on a saved config will launch a new job with those pre-defined settings. You can use the pencil icon on any saved configuration to edit it. Lastly, a saved config can also be set as your default (which will be highlighted in yellow) so that any new jobs which are spun up will default to these job settings.
 
-The Db2 for i extension adds a view called Schema Browser which allows the user to add existing schemas to the list and will allow them to browse existing database objects. You can right-click on SQL objects to show more actions. Each SQL object type may have unique actions. 
+![](./images/savedConfigurations.png)
+
+You also have the ability to set cross system default connection properties which serve as a fallback when no saved config is set as the default. For example, if you prefer to use `sql` rather than `system` naming across all system, this can be set here.
+
+<Aside type="caution">
+  These default connection properties are not connection specific meaning that they are not tied to any one specific Code for IBM i connection. These apply cross system so it is best to ensure that settings which are set are appropriate for all systems.
+</Aside>
+
+## Schema Browser
+
+The Db2 for i extension has view called **Schema Browser** which allows the user to add existing schemas to the list and will allow them to browse existing database objects.
 
 <Aside type="note">
    The Schema Browser requires an active SQL Job to function.
 </Aside>
 
-### Viewing table contents
+![](./images/manageSchemaBrowser.png)
 
-If you are using the Schema Browser to browse objects, you are able to use the 'View contents' icon when hovering over a table, view, or alias to cause a basic SQL select statement to be generated and executed.
+Once you have your desired schemas added, you can browse your database objects based on type. You can use the 'Filter Database Object Types' option to filter which types are are shown. You can also right-click on SQL objects to see more actions (each SQL object type may have unique actions).
+
+![](./images/schemaBrowser.png)
+
+### Viewing Table Contents
+
+If you are using the **Schema Browser** to browse objects, you are able to use the 'View contents' icon when hovering over a table, view, or alias to cause a basic SQL select statement to be generated and executed.
 
 
-## Using Examples
+## SQL Examples
 
-The Examples view provides users with a set of SQL example scripts that can be used as a learning tool or as a starting point for their own SQL scripts. These examples are grouped into categories to make it easy to find what you are looking for. You can hover over any example to get a preview of the SQL script or click on it to open a copy which you can freely edit.
+The **Examples** view provides users with a set of SQL example scripts that can be used as a learning tool or as a starting point for their own SQL scripts. These examples are grouped into categories to make it easy to find what you are looking for. You can hover over any example to get a preview of the SQL script or click on it to open a copy which you can freely edit.
 
 ![](./images/examplesPreview.png)
 
-On top of the built-in examples, users can also add specific directories containing their own SQL examples using the `Add...` button under the `Custom Examples Directories` submenu on the Examples view. All SQL files in the specified directories and at most one subdirectory level deeper will be picked up. By default, the folder name will be the category and the file name will be the name of the example. This can be customized by optionally including a comment in the file with the tags `category` and `description`.
+On top of the built-in examples, users can also add specific directories containing their own SQL examples using the `Add...` button under the `Custom Examples Directories` submenu on the **Examples** view. All SQL files in the specified directories and at most one subdirectory level deeper will be picked up. By default, the folder name will be the category and the file name will be the name of the example. This can be customized by optionally including a comment in the file with the tags `category` and `description`.
 
 ![](./images/examplesAdd.png)
 
@@ -152,7 +179,7 @@ Once you have added a custom examples directory, you can quickly save new exampl
 
 ## SQL Error Logging Facility (SELF)
 
-SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the Results View. 
+SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the **Results** View. 
 
 Additional documentation of SELF can be found [here](https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self)
 
@@ -200,7 +227,7 @@ Notebooks now supports Db2 for IBM i when using the database extension. If you h
 ![](./images/notebook.png)
 
 <Aside type="tip">
-We are expecting a full release of Notebooks in vscode-db2i 1.0.0.
+  We are expecting a full release of Notebooks in vscode-db2i 1.0.0.
 </Aside>
 
 ### How to create a Notebook
@@ -211,7 +238,9 @@ There are a few ways to create an IBM i Notebook:
 2. You can find 'IBMi i: New Notebook' in the command palette.
 3. Open a `.inb` file (which stands for 'i Notebook')
 
-**You can also find Notebook samples from the Examples view, under Notebooks.**
+<Aside type="tip">
+  You can also find Notebook samples from the Examples view, under Notebooks.
+</Aside>
 
 ### The life of a Notebook
 
