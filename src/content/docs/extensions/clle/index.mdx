@@ -5,24 +5,34 @@ title: CLLE Language tools
 import { CardGrid, Card, Tabs, TabItem } from '@astrojs/starlight/components';
 import { Aside, Icon } from '@astrojs/starlight/components';
 
- __Command Language__ is the scripting language for the IBM i operating system.   This extension assists in CLP or CLLE program development, providing:
+**Command Language** is the scripting language for the IBM i operating system.   This extension assists in CLP or CLLE program development, providing:
 
-   - Content assist for CL commands 
-   - Outline view
-   - Go to or peek definition and references
+* Content assist for CL commands and parameters
+* Outline view
+* Go to or peek definition and references
+* Rename variables
+* Hover support for CL commands and parameters
+* Syntax checking
 
-   It also provides support for running a CL statement with `Ctrl+r`.
+It also provides support for running a CL statement with `Ctrl+r`.
 
 ## Installation
 
 The CL Language tools extension can be [installed from the Marketplace](https://marketplace.visualstudio.com/items?itemName=IBM.vscode-clle)<Icon name="external" color="cyan" class="icon-inline" /> and is also part of the [IBM i Development Pack](https://marketplace.visualstudio.com/items?itemName=HalcyonTechLtd.ibm-i-development-pack)<Icon name="external" color="cyan" class="icon-inline" />.
+
 <CardGrid>
+
 <Card>
-Or it can be installed from the Extension view inside Visual Code. 
+
+Or it can be installed from the Extension view inside Visual Code.
+
 </Card><Card>
+
 ![Install CLLE](../../../../assets/clle/Install_CL.png)
 </Card>
+
 </CardGrid>
+
 ## Content Assist
 
 Suppose you want to create a data area with the CRTDTAARA command. Enter CRTDTAARA __follwed by a space__, then press _Ctrl+Space_ to invoke Content Assist to produce a pick list like this: 
@@ -102,6 +112,56 @@ If all the valid valued for `TYPE` are know, just enter a valid value, for examp
 ![Command assist parameter](../../../../assets/clle/assist_04.png)
 
 </Card></CardGrid>
+
+## Outline View
+
+In the **Outline** view, you can get an overview of all declared variables, files, and subroutines. You can click on the name of any item to jump to the definition.
+
+![Outline view](../../../../assets/clle/outlineView.png)
+
+## Peek Definition and References
+
+In the editor, you can right-click on a variable or subroutine and use **Go to Definition** or **Go to References** to quickly jump to the definition or all references of the variable or subroutine.
+
+![Go to References](../../../../assets/clle/goToReferences.png)
+
+You can also use **Find All References** which will pop open the **References** view to show all references.
+
+![Find All References](../../../../assets/clle/findAllReferences.png)
+
+Lastly, you can use any of the options under the right-click **Peak** submenu to get an inline preview of definitions or references without having to leave the current line are working on.
+
+![Peak Definition](../../../../assets/clle/peakDefinition.png)
+
+## Rename
+
+You can right-click a variable and select **Rename Symbol** (or use the `F2` shortcut) to rename the variable. This will pop open a mini text box for you to enter the new variable name. Once you have entered the new name, hit `Enter` to proceed with renaming all instances of that variable or hit `Ctrl+Enter` to get a refactoring preview which you can use to selectively rename specific instances.
+
+![Rename](../../../../assets/clle/rename.png)
+
+## Hover Support
+
+When writing your CL programs, you can hover over a command to view a description of the commad from its documentation.
+
+![Command Hover](../../../../assets/clle/commandHover.png)
+
+This works on individual parameters and is espically useful when determining what are the allowed values for a parameter. Content assist for paramters will also include this same documentation.
+
+![Paramter Hover](../../../../assets/clle/parameterHover.png)
+
+To view the full documentation for a command, scroll to the bottom of the hover window and select the **View Full Documentation** link. This will pop open a panel right in VS Code with the full documentation for the command which includes details on the command, parameter usage, examples, and error messages.
+
+![Full Documentation](../../../../assets/clle/fullDocumentation.png)
+
+## Syntax Checker
+
+As you write your CL programs, the syntax checker will highlight any syntax errors in your code. You can error or navigate to the **Problems** view to see the full details along with errors across all files.
+
+<Aside type="tip">
+   From the VS Code Settings, you can search for "CL Syntax Options" to change various settings including whether the syntax checker automatically when opening documents or when editing a line.
+</Aside>
+
+![Syntax Checker](../../../../assets/clle/syntaxChecker.png)
 
 ## CL Code Runner
 
