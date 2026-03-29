@@ -8,7 +8,7 @@ import { Aside, CardGrid, Card } from '@astrojs/starlight/components';
 
 <Card>
 
-The view `HELP AND SUPPORT` provides the initial links to get help and support, should you encounter any issues in Code for IBM i.
+The `HELP AND SUPPORT` view provides a link to the documentation, and links to get help and support should you encounter any issues in Code for IBM i.
 
 </Card><Card>
 
@@ -18,49 +18,65 @@ The view `HELP AND SUPPORT` provides the initial links to get help and support, 
 
 </CardGrid>
 
-### Get started
+### Get started & Documentation
 
-This link will open the documentation for Code for IBM i in your browser, making it easy to go directly from Code for IBM i to the information on how to use it.
+This link  opens the documentation for Code for IBM i in your browser, making it easy to go directly from Code for IBM i to the information on how to use it.
 
 ### Open official Forum
 
-This link will take you to the Code for IBM i discussions, where you can ask any question on how to use the product.
+This link takes you to the Code for IBM i discussions, where you can ask any question on how to use the product.
 
 ### Review Issues
 
-If you encounter an issue or have a problem that you suspect may be a bug in Code for IBM i, please use this link for the [Issues section](https://github.com/codefori/vscode-ibmi/issues) in the GitHub repository, where you can see all open and closed issue reports created by the users since the start of the project.
-There is a good chance that your problem has been seen before and a solution or workaround found, or a fix may have been created to solve a similar problem.
+If you have a problem, there is a good chance that your problem has been seen before. A solution or workaround may have been found, or a fix may have been created to solve a similar problem. By reviewing the [Issues section](https://github.com/codefori/vscode-ibmi/issues) in the GitHub repository you may be able to solve your issue. 
+
+You can see all open or closed issues reported since the start of the project and sort them by date.
+
+![](../../assets/help_03.png)
+
+You can also search issues by adding text in the search bar:
+
+![](../../assets/help_04.png)
 
 ### Report an Issue
 
 <Aside type="caution">
-**Do not use the VS Code Issue Reporter (found in Help menu item Report Issue)!**
+**Do not use the VS Code Issue Reporter (found in VS Code Help menu, item Report Issue)!**
 
 This issue reporter does not include the configuration and logs necessary to debug your issue, and time will be wasted while the support team will request additional information from you.
 </Aside>
 
-If searching existing issue reports using the link above did not give you the solution to your problem, you can create a new issue report using this link.
+If searching existing issue reports did not give you the solution to your problem, the best way to create a new issue report is by using the `Report an Issue` link. 
+![](../../assets/help_06.png)
+This link collects system information about Code for IBM i, the IBM i server and VS Code. 
 
-<Aside type="tip">
-   Keep your connection to the IBM i system active when creating the issue report (to have all important system information included in the report).
-</Aside>
+It then copies this information into a Github issue and opens the issue for you to complete.
 
-When you click on `Report an Issue` in the `HELP AND SUPPORT` view, your browser will open the GitHub issues page with a template containing the following information:
-- Code for IBM i version, VS Code version and OS
-- Active extensions
-- Remote system information, e.g. IBM i release, TR level, CCSID, enabled features and more
-- Shell environment
-- Variants (used for CCSID troubleshooting)
-- Errors (the last three commands executed on the server and the result)
+#### Steps to create an issue
 
-You must also provide a title and thorough description of the issue with information on how to recreate the issue encountered.
+To provide the most helpful information for the support staff, follow these steps as far as possible to report an issue:
+
+1. Make sure you can reproduce the issue. It is extremely difficult to debug a problem that can't be reproduced.
+2. If the issue is related to some source code, please provide the smallest possible source example that causes the problem and use this when reproducing the issue in the next step. Later, paste the source into the Github issue as **text**. Please do not provide this code as screen shots.
+3. Restart VS Code, connect to the IBM i and immediately cause the problem.
+4. Click the `Report an Issue` link and pick the extension on which to report the issue:
+  ![](../../assets/help_08.png)
+5. In the opened Github issue clearly descibe the steps to cause the problem. Paste screen shots if this helps clarify the issue.
+6. Go to the `OUTPUT` tab and select `Code for IBM i`. Select the complete displayed contents and then copy and paste into the Github issue.:
+   ![](../../assets/help_05.png)
+7. Click Create to save the issue.
 
 <Aside type="danger">
   All issues are available to the public, so any sensitive information must be redacted before submitting the issue report!
 </Aside>
 
 <Aside type="tip">
-   You need to have or create a GitHub account to create an issue report.
+  Github allows you to enter text and paste images in an issue. Generally it is not necessary to create separate documents to attach as files.
+  ![](../../assets/help_07.png)
+</Aside>
+
+<Aside type="tip">
+   You need to have or create a GitHub account to create an issue report. Github accounts are free.
 </Aside>
 
 ### Download Logs
