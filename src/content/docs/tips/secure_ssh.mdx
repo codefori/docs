@@ -1,0 +1,36 @@
+---
+title: Secure access through SSH
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="note">
+This section is for the system or security administrator, who wants to control the use of SSH.
+</Aside>
+
+Code for IBM i connects to the server via SSH, and the SSH server daemon must be running on IBM i. Since SSH is a well-known service used on all platforms, it is good practice to restrict which users can connect to IBM i via SSH.
+
+The exit points in IBM i normally used for controlling network access does not cover the SSH server. The best and simplest method
+for securing the SSH server is changing the configuration file for the service. The configuration file is found here:
+
+`/QOpenSys/QIBM/UserData/SC1/OpenSSH/etc/sshd_config`
+
+If you followed the recommendation in [Secure Code for IBM i on the server](../secure/) and created a group profile for the developers using Code for IBM i, you can add a line to the SSH server configuration to allow only users in the developer group to access the SSH server:
+
+```
+AllowGroups grpdev
+```
+
+<Aside type="note">
+The name of the group profile must be specified in lowercase!
+</Aside>
+
+SSH is used for multiple purposes - terminal access, file transfer and more. If you're using SSH with other users than Code for IBM i developers, you may already have a group profile for SSH users. In this case you can either make the Code for IBM i developers members of the SSH users group, or you can add multiple groups to the `AllowGroups` directive:
+
+```
+AllowGroups grpssh grpdev
+```
+
+Security expert Carol Woodbury has written an excellent [article](https://www.mcpressonline.com/security/ibm-i-os400-i5os/controlling-access-to-ssh-on-ibm-i) about this topic.
+
+For more information about the SSH server configuration options, see the [manual page](https://man.openbsd.org/sshd_config) for `sshd_config`.
