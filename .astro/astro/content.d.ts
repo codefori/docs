@@ -425,6 +425,20 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"extensions/ibmi-fs/index.mdx": {
+	id: "extensions/ibmi-fs/index.mdx";
+  slug: "extensions/ibmi-fs";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"extensions/ibmi-fs/objects.mdx": {
+	id: "extensions/ibmi-fs/objects.mdx";
+  slug: "extensions/ibmi-fs/objects";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "extensions/renderer/index.mdx": {
 	id: "extensions/renderer/index.mdx";
   slug: "extensions/renderer";
@@ -533,6 +547,20 @@ declare module 'astro:content' {
 "tips/protect.mdx": {
 	id: "tips/protect.mdx";
   slug: "tips/protect";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"tips/secure.mdx": {
+	id: "tips/secure.mdx";
+  slug: "tips/secure";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"tips/secure_ssh.mdx": {
+	id: "tips/secure_ssh.mdx";
+  slug: "tips/secure_ssh";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
