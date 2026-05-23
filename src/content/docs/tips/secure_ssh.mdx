@@ -33,4 +33,17 @@ AllowGroups grpssh grpdev
 
 Security expert Carol Woodbury has written an excellent [article](https://www.mcpressonline.com/security/ibm-i-os400-i5os/controlling-access-to-ssh-on-ibm-i) about this topic.
 
+Below is a list of recommended values to keep the connection secure and harden the SSH configuration. These values must be changed in the `/QOpenSys/QIBM/ProdData/SC1/OpenSSH/etc/sshd_config` file on the IFS. Restart the SSH server to apply the changes.
+
+| Key                             | Value    | Explanation                                                                                                                                             |
+|---------------------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Port                            | not `22` | While not making it more secure, changing the default port reduce the number of automated attacks and makes the server less visible to casual scanning. |
+| Protocol                        | `1`      | Only SSH version 2 should be used. Version 1 is obsolete and vulnerable.                                                                                |
+| PermitRootLogin                 | `no`     | The `yes` value allows QSECOFR to log into the system through SSH. Setting it to `no` limits the risk of targeted attack on this login.                 |
+| PasswordAuthentication          | `no`     | Disables password authentication and force the use of key based authentication.                                                                         |
+| ChallengeResponseAuthentication | `no`     | Disables interactive authentication methods suceptible to phishing attacks.                                                                             |
+| PermitTunnel                    | `no`     | Disables tunneling to limit risks of abuse.                                                                                                             |
+| X11Forwarding                   | `no`     | Disables X11 session transfer, rarely used and a possible vector of attack.                                                                             |
+| MaxAuthTries                    | `3`      | Limits the number of unsuccessful connection attempts before disconnection.                                                                             |
+
 For more information about the SSH server configuration options, see the [manual page](https://man.openbsd.org/sshd_config) for `sshd_config`.
