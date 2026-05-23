@@ -439,6 +439,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"extensions/ibmi-fs/views.mdx": {
+	id: "extensions/ibmi-fs/views.mdx";
+  slug: "extensions/ibmi-fs/views";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "extensions/renderer/index.mdx": {
 	id: "extensions/renderer/index.mdx";
   slug: "extensions/renderer";
@@ -575,6 +582,13 @@ declare module 'astro:content' {
 "tips/seuColours.mdx": {
 	id: "tips/seuColours.mdx";
   slug: "tips/seucolours";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"tips/structured-download.mdx": {
+	id: "tips/structured-download.mdx";
+  slug: "tips/structured-download";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
