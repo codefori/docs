@@ -2,31 +2,37 @@
 title: Secure Code for IBM i on the server
 ---
 
-Whenever Code for IBM i connects to the server, it will check for (and possibly create or update) some components stored in the temporary library as defined in the connection setting. These components are not secure by default and may be subject to attacks like security escalation. Developers often do not have the rights to fully set up security, and the commands in this section may require the help of (or be run by) a system or security administrator.
+Whenever Code for IBM i connects to the server, it will check for (and possibly create or update) some components stored in the temporary library as defined in the connection setting. These components are not secure by default and may be subject to attacks like security escalation. 
+
+Developers often do not have the rights to fully set up security, and the commands in this section may require the help of (or be run by) a system or security administrator.
 
 **It is highly recommended to follow the guidelines in the following section to avoid security exposures!**
 
 
-Raising the security level for Code for IBM i can be done by four steps:
+Raising the security level for the library that Code for IBM i uses by a team can be done by four steps:
 
-1. Create a group profile for all the Code for IBM i developers. The group profile should not be granted any special authorities.
-2. Change every Code for IBM i developer to be part of the group.
+1. Create a group profile for a team of developers that use Code for IBM i. The group profile should not be granted any special authorities.
+2. Change every developer in the team to be part of the group.
 3. Make the group profile the owner of the Code for IBM i library.
 4. Exclude public access to the Code for IBM i library.
 
-The CL commands for each step are shown in the example below. Here we create a group profile called `GRPDEV` for the developers `ALICE` and `BOB`, both using the default library ILEDITOR for Code for IBM i components:
+The CL commands for each step are shown in the example below. Here we create a group profile called `GRPDEV` for a team with `ALICE` and `BOB` developers, both using the default library `ILEDITOR` for Code for IBM i components:
 
 ```CL
-/* Create group profile GRPDEV for Code for IBM i developers. */
-CRTUSRPRF USRPRF(GRPDEV) PASSWORD(*NONE) TEXT('Group profile for Code for IBM i developers')
+/* Create group profile GRPDEV for team of developers using Code for IBM i. */
+CRTUSRPRF USRPRF(GRPDEV) PASSWORD(*NONE) TEXT('Group profile for team using Code for IBM i')
 
 /* Make ALICE and BOB part of the group. */
 CHGUSRPRF USRPRF(ALICE) GRPPRF(GRPDEV)
 CHGUSRPRF USRPRF(BOB) GRPPRF(GRPDEV)
 
-/* Make the developer group profile the owner of the Code for IBM i library ILEDITOR. */
+/* Make the group profile the owner of the Code for IBM i library ILEDITOR. */
 CHGOBJOWN OBJ(ILEDITOR) OBJTYPE(*LIB) NEWOWN(GRPDEV)
 
 /* Exclude access for users not in the developer group. */
 GRTOBJAUT OBJ(ILEDITOR) OBJTYPE(*LIB) USER(*PUBLIC) AUT(*EXCLUDE)
 ```
+
+**Note:** The above steps prevent users who are not part of the group access to the Code for IBM i library.  However, all users that are part of the group do have access to anything created in the library by users in the group.  
+
+Security can be strengthened by each user having their own individual library specified as the Code for IBM i library with access by all other users excluded.  This will prevent security exposures.
