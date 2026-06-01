@@ -15,7 +15,9 @@ import { Aside, CardGrid, Card, Steps } from '@astrojs/starlight/components';
   </a>
 </div>
 
-The [IBM i Testing](https://marketplace.visualstudio.com/items?itemName=IBM.vscode-ibmi-testing) extension allows developers to run unit tests and generate code coverage results for RPG and COBOL programs on IBM i. Under the covers, this extension leverages the [RPGUnit](https://irpgunit.sourceforge.io/help) testing framework.
+The [IBM i Testing](https://marketplace.visualstudio.com/items?itemName=IBM.vscode-ibmi-testing) extension allows developers to run unit tests and generate code coverage results for RPG and COBOL programs on IBM i. 
+
+This extension leverages the [RPGUnit](https://irpgunit.sourceforge.io/help) testing framework.
 
 * 👨‍💻 **Run Tests**: Visualize and run tests suites out of local files or source members.
 * ✍️ **Generate Stubs**: Generate test stubs for individual test cases or an entire test suite.
@@ -42,10 +44,10 @@ The required RPGUnit version depends on which version of the **IBM i Testing** e
 | Extension Version | Required RPGUnit Version   |
 |-------------------|----------------------------|
 | ≤ 1.2.3           | 5.1.0                      |
-| 1.3.2             | ≥ 6.0.0                    |
+| ≥ 1.3.2           | ≥ 6.0.0                    |
 
 #### Preconditions
-RPGUnit requires OS400 7.5 for the latest features. It can also be installed on 7.4 and 7.3 if the following PTFs have been installed:
+RPGUnit requires IBM i 7.5 or higher for the latest features. It can also be installed on 7.4 and 7.3 if the following PTFs have been installed:
 
 **7.4**
 * ILE RPG runtime: SI71537
@@ -78,13 +80,14 @@ Once the PTFs are installed, you can install the library via the extension using
 </Steps>
 
 <Aside type="note">
-  By default, `RPGUNIT` is the name of the RPGUnit product library which will be installed on the host. This can be configured if necessary by going to the extension's settings and searching for the **Product Library** setting.
+  By default, `RPGUNIT` is the name of the RPGUnit product library which will be installed on the host and the library is accessible by all users. The library name can be configured if necessary by going to the extension's settings and searching for the **Product Library** setting.
   ![Product Library](Testing_ProductLibrary.png)
+  To manage access to the testing framework, specify a different product library name and install the testing framework to that library.  Then configure access to the library by excluding public user access and adding access for specific users or groups.
 </Aside>
 
 ### 3. CODECOV
 
-To generate code coverage results, the `CODECOV` command must be installed on your IBM i via PTF:
+To generate code coverage results, the `CODECOV` command must be installed on your IBM i via 5770WDS.  Some releases require PTFs:
     * **7.3**: PTF SI80728
     * **7.4**: PTF SI80737 & SI81204
     * **7.5**: PTF SI81216 & SI81217
