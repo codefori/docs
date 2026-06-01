@@ -1,0 +1,815 @@
+---
+title: Object Details
+sidebar:
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This page provides detailed information about each supported object type, including all available features and actions.
+
+---
+
+## 📦 Save Files (SAVF)
+
+Save files are special file objects used to store saved objects and libraries.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `SAVE_FILE_INFO` | Retrieve save file metadata and save command |
+| Table Function | `QSYS2` | `SAVE_FILE_OBJECTS` | List objects, members, and spooled files in save file |
+
+### Features
+
+- 📊 Display save file contents (objects, members, spooled files, IFS directories)
+- ⬇️ Download save file to local system
+- ⬆️ Upload save file(s) from local system
+- 🗑️ Clear save file contents
+- 💾 Save objects/libraries to save file
+- 📂 Restore objects/libraries from save file
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Download** | Download the save file to your local system as a binary file |
+| **Upload** | Upload one or more save files from your local system to IBM i |
+| **Save** | Save objects or libraries into the save file using SAVOBJ/SAVLIB |
+| **Restore** | Restore objects or libraries from the save file using RSTOBJ/RSTLIB |
+| **Clear** | Clear all contents from the save file |
+
+---
+
+## 📨 Data Queues (DTAQ)
+
+Data queues are objects used for inter-process communication, allowing programs to send and receive messages asynchronously.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `DATA_QUEUE_INFO` | Retrieve data queue attributes and configuration |
+| Table Function | `QSYS2` | `DATA_QUEUE_ENTRIES` | List all messages in the data queue |
+| Procedure | `QSYS2` | `CLEAR_DATA_QUEUE` | Clear all messages from the queue |
+| Procedure | `QSYS2` | `SEND_DATA_QUEUE` | Send message to data queue |
+| Procedure | `QSYS2` | `SEND_DATA_QUEUE_UTF8` | Send UTF-8 message to data queue |
+
+### Features
+
+- 📊 Display data queue information and attributes
+- 📋 View messages in the queue
+- ➡️ Send new messages to the queue
+- 🗑️ Clear all messages from the queue
+- 🔑 Support for keyed and non-keyed data queues
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Send Message** | Send a new message to the data queue |
+| **Clear Queue** | Remove all messages from the data queue |
+
+### Information Displayed
+
+- Queue type (keyed/non-keyed)
+- Maximum message length
+- Current number of messages
+- Maximum number of messages
+- Sequence (FIFO/LIFO/Keyed)
+- Force to auxiliary storage setting
+- All messages with their content and keys (if keyed)
+
+---
+
+## 📝 Data Areas (DTAARA)
+
+Data areas are objects that store data that can be accessed by multiple programs.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `DATA_AREA_INFO` | Retrieve data area type, length, and current value |
+
+### Features
+
+- 📊 Display data area information and current value
+- 📋 View data area attributes (type, length, decimal positions)
+- ✏️ Change data area content
+- 🔢 Support for different data area types (*CHAR, *DEC, *LGL)
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Change Value** | Modify the content of the data area using CHGDTAARA |
+
+### Information Displayed
+
+- Data area type (*CHAR, *DEC, *LGL)
+- Length and decimal positions (for *DEC)
+- Current value
+- Text description
+
+---
+
+## 🖨️ Output Queues (OUTQ)
+
+Output queues manage spooled files and printer output.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `OUTPUT_QUEUE_INFO` | Retrieve output queue status and configuration |
+| View | `QSYS2` | `OUTPUT_QUEUE_ENTRIES_BASIC` | List all spooled files in the queue |
+| Procedure | `SYSTOOLS` | `DELETE_OLD_SPOOLED_FILES` | Delete spooled files older than specified days |
+| Function | `SYSTOOLS` | `GENERATE_PDF` | Generate PDF from spooled file |
+
+### Features
+
+- 📊 Display output queue information and statistics
+- 📋 List all spooled files in a queue with details
+- ⏸️ Hold/Release output queues
+- 🗑️ Clear output queue
+- ▶️ Start/Stop printer writers
+- 📄 Generate PDF from spooled files
+- 🗑️ Delete individual or old spooled files
+- 🎨 Dynamic UI based on queue and writer status
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Hold Queue** | Hold the output queue (HLDOUTQ) |
+| **Release Queue** | Release the output queue (RLSOUTQ) |
+| **Clear Queue** | Clear all spooled files from the queue (CLROUTQ) |
+| **Manage Writer** | Start or stop printer writers associated with the queue |
+| **Delete Old Spools** | Delete spooled files older than a specified number of days |
+
+### Information Displayed
+
+- Queue status (held/released)
+- Number of spooled files
+- Writer status
+- List of all spooled files with:
+  - File name and number
+  - Job name, user, and number
+  - Status (ready, held, printing, etc.)
+  - Pages and copies
+  - Creation date and time
+
+---
+
+## 📋 Job Queues (JOBQ)
+
+Job queues manage batch jobs waiting to be processed.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `JOB_QUEUE_INFO` | Retrieve job queue status and statistics |
+| View | `SYSTOOLS` | `JOB_QUEUE_ENTRIES` | List all jobs in the queue with details |
+
+### Features
+
+- 📊 Display job queue information and statistics
+- 📋 List all jobs in a queue with their details
+- ⏸️ Hold/Release/Clear job queues
+- ⏸️ Hold/Release/End individual jobs
+- 🎨 Dynamic UI based on queue and job status
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Hold Queue** | Hold the job queue (HLDJOBQ) |
+| **Release Queue** | Release the job queue (RLSJOBQ) |
+| **Clear Queue** | Clear all jobs from the queue (CLRJOBQ) |
+
+### Information Displayed
+
+- Queue status (held/released)
+- Number of jobs
+- Subsystem information
+- List of all jobs with:
+  - Job name, user, and number
+  - Job status
+  - Job type
+  - Priority
+  - Submission date and time
+
+---
+
+## 💾 User Spaces (USRSPC)
+
+User spaces provide temporary or permanent storage for data that can be accessed by multiple programs.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `USER_SPACE_INFO` | Retrieve user space attributes and configuration |
+| Table Function | `QSYS2` | `USER_SPACE` | Read user space content |
+| Procedure | `QSYS2` | `CHANGE_USER_SPACE` | Modify user space data at specific position |
+
+### Features
+
+- 📊 Display user space information and attributes
+- 📋 View user space content (hexadecimal and text representation)
+- ✏️ Change user space data at specific positions
+- 📏 Support for different user space sizes
+- 🔄 Automatic space extension capabilities
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Change Data** | Modify data at a specific position in the user space |
+
+### Information Displayed
+
+- Current size and initial size
+- Auto-extend setting
+- Space value (initial fill character)
+- Content displayed in both hexadecimal and text format
+- Offset positions for easy reference
+
+---
+
+## 🔑 User Indexes (USRIDX)
+
+User indexes provide fast keyed access to data stored in user-defined entries, similar to a hash table or dictionary.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `USER_INDEX_INFO` | Retrieve user index attributes and configuration |
+| Table Function | `QSYS2` | `USER_INDEX_ENTRIES` | List all entries with keys and values |
+| Procedure | `QSYS2` | `ADD_USER_INDEX_ENTRY` | Add new entry to user index |
+| Table Function | `QSYS2` | `REMOVE_USER_INDEX_ENTRY` | Remove entries from user index |
+
+### Features
+
+- 📊 Display user index information and attributes
+- 📋 View all entries with their keys and values
+- ➕ Add new entries to the user index
+- 🗑️ Remove entries from the user index
+- 🔑 Support for variable-length entries
+- 📏 View entry statistics and index configuration
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Add Entry** | Add a new key-value entry to the user index |
+| **Remove Entry** | Remove an entry from the user index by key |
+
+### Information Displayed
+
+- Entry length attributes
+- Key length
+- Immediate update setting
+- Optimization setting
+- Number of entries
+- List of all entries with keys and values
+
+---
+
+## 📄 Message Files (MSGF)
+
+Message files contain predefined messages used by IBM i applications.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `MESSAGE_FILE_DATA` | Retrieve all message definitions from message file |
+
+### Features
+
+- 📊 Display all messages in the message file
+- 📋 View message details (ID, text, severity, reply type)
+- 📄 First and second level message text
+- ⚙️ Reply type and valid reply values
+- 🚀 Fast table component for performance with many messages
+
+### Information Displayed
+
+- Message ID
+- Message severity
+- First level text
+- Second level text (help text)
+- Reply type
+- Valid reply values
+- Default reply value
+
+<Aside type="note">
+  Message files are **view-only**. Use IBM i commands to modify message definitions.
+</Aside>
+
+---
+
+## 💬 Message Queues (MSGQ)
+
+Message queues store messages sent by programs, system functions, or users, providing communication between jobs.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `MESSAGE_QUEUE_INFO` | Retrieve all messages in the queue with details |
+| Procedure | `QSYS2` | `SEND_MESSAGE` | Send message to message queue |
+
+### Features
+
+- 📊 Display message queue contents with detailed information
+- 📋 View message text (first and second level)
+- 📅 Show message metadata (severity, timestamp, sender job/user)
+- 🗑️ Clear all messages from the queue
+- 📨 Send message to the queue
+- 🚀 Fast table component for performance with many messages
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Send Message** | Send a new message to the message queue |
+| **Clear Queue** | Remove all messages from the queue |
+
+### Information Displayed
+
+- Message ID and type
+- Message severity
+- Message text (first and second level)
+- Sender information (job, user, program)
+- Timestamp
+- Reply status (for inquiry messages)
+
+---
+
+## 🔗 Binding Directories (BNDDIR)
+
+Binding directories contain lists of service programs and modules used during program binding.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `BINDING_DIRECTORY_INFO` | Retrieve all entries in binding directory |
+| View | `QSYS2` | `PROGRAM_EXPORT_IMPORT_INFO` | Retrieve exported symbols from service programs |
+
+### Features
+
+- 📊 Display binding directory entries
+- 📋 View bound objects (library, type, activation)
+- 📅 Creation date and time information
+- ➕ Add new entries to binding directory
+- 🗑️ Delete entries from binding directory
+- 🔍 View exported symbols from service programs
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Add Entry** | Add a new service program or module to the binding directory |
+
+### Information Displayed
+
+- Object name and library
+- Object type (*SRVPGM or *MODULE)
+- Activation group
+- Creation timestamp
+- For service programs: list of exported procedures
+
+---
+
+## 🔧 Programs (PGM) and Service Programs (SRVPGM)
+
+Programs and service programs are executable objects.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `PROGRAM_INFO` | Retrieve comprehensive program information |
+| View | `QSYS2` | `BOUND_MODULE_INFO` | List all bound modules |
+| View | `QSYS2` | `BOUND_SRVPGM_INFO` | List all bound service programs |
+| View | `QSYS2` | `PROGRAM_EXPORT_IMPORT_INFO` | Retrieve exported procedures (for *SRVPGM) |
+
+### Features
+
+- 📊 Display comprehensive program information
+- 📋 View program attributes and properties
+- 🔗 List bound modules
+- 📦 List bound service programs
+- 🔍 View exported symbols (for service programs)
+- 🐛 Debug data availability information
+- 📅 Creation and compilation information
+
+### Information Displayed
+
+- Program type and attributes
+- Activation group
+- Optimization level
+- Debug data availability
+- Creation and compilation timestamps
+- Source file information
+- List of bound modules
+- List of bound service programs
+- Exported procedures (for *SRVPGM)
+- Program size and statistics
+
+<Aside type="note">
+  Programs and service programs are **view-only**. Use IBM i commands to modify or recompile.
+</Aside>
+
+---
+
+## 🧩 Modules (MODULE)
+
+Modules are compiled ILE objects that contain executable code and can be bound into programs or service programs.
+
+### Features
+
+- 📊 Display comprehensive module information
+- 📋 View module attributes (creation date, source file, compiler options)
+- 📏 Detailed size information (code size, data size, debug data)
+- 🔧 List all procedures defined in the module
+- 🔗 View imported and exported symbols
+- 📦 Display referenced system objects
+- ©️ Show copyright information
+- 🎨 Multi-tab interface for organized information display
+
+### Information Displayed
+
+- Module attributes and compiler options
+- Source file and member information
+- Creation and compilation timestamps
+- Size breakdown (code, data, debug)
+- List of procedures with export status
+- Imported and exported symbols
+- Referenced system objects
+- Copyright information
+
+<Aside type="note">
+  Modules are **view-only**. Use IBM i commands to recompile or modify.
+</Aside>
+
+---
+
+## ⚙️ Commands (CMD)
+
+Command objects define IBM i CL commands.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `COMMAND_INFO` | Retrieve command definition and attributes |
+
+### Features
+
+- 📊 Display command definition
+- 📋 View all command parameters
+- 🔑 Parameter keywords and values
+- 📝 Parameter descriptions
+- 🔢 CCSID information
+
+### Information Displayed
+
+- Command processing program
+- Validity checker program
+- Mode (production/debug)
+- Threadsafe indicator
+- Maximum positional parameters
+- Prompt override program
+- List of all parameters with:
+  - Keyword
+  - Type and length
+  - Minimum/maximum values
+  - Default value
+  - Required/optional status
+  - Prompt text
+
+<Aside type="note">
+  Commands are **view-only**. Use IBM i commands to modify command definitions.
+</Aside>
+
+---
+
+## 📄 Job Descriptions (JOBD)
+
+Job descriptions define the runtime environment for batch jobs.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `JOB_DESCRIPTION_INFO` | Retrieve job description attributes and configuration |
+
+### Features
+
+- 📊 Display job description attributes
+- 📋 View job queue, output queue, and message queue
+- 👤 User profile and initial library list
+- ⚙️ Job attributes and system values
+- 🔧 Routing data and request data
+
+### Information Displayed
+
+- Job queue and priority
+- Output queue and priority
+- Message queue
+- User profile
+- Initial library list
+- Job date and job switches
+- Routing data
+- Request data
+- Accounting code
+- Message logging level
+- Inquiry message reply
+
+<Aside type="note">
+  Job descriptions are **view-only**. Use CHGJOBD command to modify.
+</Aside>
+
+---
+
+## 📓 Journal Receivers (JRNRCV)
+
+Journal receivers store journal entries for auditing, recovery, and replication purposes.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `JOURNAL_RECEIVER_INFO` | Retrieve journal receiver attributes and configuration |
+
+### Features
+
+- 📊 Display journal receiver information and attributes
+- 📋 View receiver status and statistics
+- 🔢 View sequence number ranges (first/last)
+- 📅 View attachment and detachment timestamps
+- 🔗 View linked receivers (previous/next in chain)
+- 🌐 View remote journal configuration
+- 🔍 View filter settings (objects, images, programs)
+- 💾 View size and threshold information
+
+### Information Displayed
+
+- Receiver status (online/saved/freed)
+- Sequence number range
+- Attachment and detachment timestamps
+- Associated journal
+- Previous and next receivers in chain
+- Size and threshold information
+- Remote journal configuration
+- Filter settings
+
+<Aside type="note">
+  Journal receivers are **view-only**. Use journal commands to manage receivers.
+</Aside>
+
+---
+
+## 📓 Journals (JRN)
+
+Journals record changes to database files, data areas, and other objects for auditing, recovery, and replication.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `JOURNAL_INFO` | Retrieve journal configuration and settings |
+| View | `QSYS2` | `JOURNAL_RECEIVER_INFO` | Retrieve receiver chain information |
+| Table Function | `QSYS2` | `DISPLAY_JOURNAL` | Display journal entries using SQL queries |
+
+### Features
+
+- 📊 Display journal information and configuration
+- 📋 View journal receiver chain with details
+- 🔗 View attached receiver and receiver statistics
+- 🔢 View sequence number ranges for each receiver
+- 📅 View attachment, detachment, and save timestamps
+- 🌐 View remote journal configuration
+- 🔍 Display journal entries using SQL queries
+- ➕ Generate new journal receivers
+- 💾 View size and threshold information
+- ⚙️ View journal settings (cache, filtering, fixed-length data options)
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Generate Receiver** | Generate a new journal receiver (CHGJRN JRNRCV(*GEN)) |
+| **Display Journal** | Display journal entries using SQL queries |
+
+### Information Displayed
+
+- Current attached receiver
+- Journal state and attributes
+- Receiver chain with all receivers
+- Sequence number ranges
+- Attachment and detachment timestamps
+- Remote journal configuration
+- Journal settings (cache, filtering, etc.)
+- Journaled objects
+
+---
+
+## 🌐 DDM Files (DDMF)
+
+DDM (Distributed Data Management) files provide access to files on remote systems.
+
+### Features
+
+- 📊 Display DDM file configuration and attributes
+- 🌐 View remote location information (system name/address, port)
+- 🔗 View remote file name and library
+- ⚙️ View access method and file attributes
+- 🔒 View security and connection settings
+- 📋 Support for multi-line field values
+
+### Information Displayed
+
+- Remote location name
+- Remote system name or IP address
+- Remote file name and library
+- Port number
+- Access method
+- Local/remote format
+- Connection settings
+- Security settings
+
+<Aside type="note">
+  DDM files are **view-only**. Use IBM i commands to modify DDM file definitions.
+</Aside>
+
+---
+
+## 🖥️ Subsystem Descriptions (SBSD)
+
+Subsystem descriptions define independent operating environments within IBM i that control how work enters the system and how resources are allocated.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `SUBSYSTEM_INFO` | Retrieve subsystem status and configuration |
+| View | `QSYS2` | `SUBSYSTEM_POOL_INFO` | Retrieve memory pool configuration |
+| View | `QSYS2` | `AUTOSTART_JOB_INFO` | Retrieve autostart job entries |
+| View | `QSYS2` | `WORKSTATION_INFO` | Retrieve workstation entries |
+| View | `QSYS2` | `ROUTING_ENTRY_INFO` | Retrieve routing entries |
+| View | `QSYS2` | `PRESTART_JOB_INFO` | Retrieve prestart job entries |
+| View | `QSYS2` | `JOB_QUEUE_INFO` | Retrieve job queue entries |
+| Table Function | `QSYS2` | `ACTIVE_JOB_INFO` | Retrieve active jobs in subsystem |
+
+### Features
+
+- 📊 Display subsystem information and status (active/inactive)
+- 📋 View memory pools configuration
+- 🚀 View autostart job entries (AJEs)
+- 💻 View workstation entries (WSEs)
+- 📋 View job queue entries (JOBQEs)
+- 🔀 View routing entries (RTGEs)
+- ⚡ View prestart job entries (PJEs)
+- 👥 View active jobs in the subsystem (when active)
+- ▶️ Start subsystem
+- ⏹️ End subsystem with multiple options (*IMMED, *CNTRLD)
+- 🛑 End individual jobs within the subsystem
+- 🎨 Dynamic UI based on subsystem status
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Start Subsystem** | Start the subsystem (STRSBS) |
+| **End Subsystem** | End the subsystem with options (*IMMED or *CNTRLD) |
+
+### Information Displayed
+
+- Subsystem status (active/inactive)
+- Memory pools configuration
+- Autostart job entries
+- Workstation entries
+- Job queue entries
+- Routing entries
+- Prestart job entries
+- Active jobs (when subsystem is active)
+
+---
+
+## 🎯 Classes (CLS)
+
+Classes define the runtime attributes for batch jobs, controlling how jobs execute and consume system resources.
+
+### Features
+
+- 📊 Display class information and attributes
+- 🎚️ View run priority (1-99, lower number = higher priority)
+- ⏱️ View time slice in milliseconds
+- 💾 View maximum temporary storage allowed
+- ⚡ View maximum CPU time limit
+- 👥 View maximum active threads
+- ⏳ View default wait time for locks
+- 🗑️ View purge eligibility status
+- 📅 View usage statistics (last used date, days used count)
+- 🔧 Automatic creation of required SQL objects using QWCRCLSI API
+
+### Information Displayed
+
+- Run priority (1-99)
+- Time slice (milliseconds)
+- Default wait time
+- Maximum CPU time
+- Maximum temporary storage
+- Maximum threads
+- Purge eligibility
+- Usage statistics
+
+<Aside type="note">
+  Classes are **view-only**. Use CHGCLS command to modify class attributes.
+</Aside>
+
+---
+
+## 📁 Files (FILE)
+
+File objects include physical files (PF), logical files (LF), views, and indexes that store and organize data.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `SYSTABLES` | Retrieve table/file metadata and attributes |
+| View | `QSYS2` | `SYSCOLUMNS` | Retrieve column definitions and properties |
+| View | `QSYS2` | `SYSVIEWS` | Retrieve view definition and capabilities |
+| View | `QSYS2` | `SYSTABLESTAT` | Retrieve file statistics (rows, operations, I/O) |
+| View | `QSYS2` | `SYSMEMBERSTAT` | Retrieve member-level statistics |
+| View | `QSYS2` | `SYSINDEXES` | Retrieve index metadata and attributes |
+| View | `QSYS2` | `SYSINDEXSTAT` | Retrieve index statistics and usage metrics |
+| Table Function | `QSYS2` | `OBJECT_STATISTICS` | Retrieve object-level statistics and information |
+| Table Function | `SYSTOOLS` | `RELATED_OBJECTS` | Retrieve dependent objects (indexes, views, constraints) |
+
+### Features
+
+- 📊 Display comprehensive file/table/view/index information
+- 📋 View file attributes (creation date, owner, journaling status, CCSID)
+- 📈 View detailed statistics (row counts, operations, I/O metrics)
+- 👥 Display file members with their statistics
+- 🧭 Display columns and data types
+- 🔗 Show dependent objects (indexes, views, constraints)
+- 🔍 Query file contents using SQL SELECT
+- 📄 View view definitions and capabilities
+- 🎯 Support for both DDS and SQL-based files
+- 🎨 Multi-tab interface for organized information display
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Query File** | Execute a SQL SELECT statement to view file contents |
+
+### Information Displayed
+
+- File type (PF, LF, view, index)
+- File attributes and creation information
+- Record format and CCSID
+- Journaling status
+- Number of members and records
+- File statistics (reads, writes, updates, deletes)
+- Column definitions with data types
+- File members with statistics
+- Dependent objects (indexes, views, constraints)
+- View definition (for views)
+
+---
+
+## 🔍 Query Definitions (*QRYDFN)
+
+Query definitions are objects created by Query/400 or Query Manager that define database queries.
+
+### Features
+
+- 📊 Translate *QRYDFN objects to SQL statements in text editor
+- 🔗 Automatic file reference conversion (LIB/FILE → LIB.FILE)
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **View as SQL** | Open the query definition translated to SQL in a text editor |
+
+### Information Displayed
+
+The query definition is automatically translated to an equivalent SQL SELECT statement, making it easier to understand and potentially migrate to SQL-based queries.
+
+<Aside type="note">
+  Query definitions are **view-only**. Use Query/400 or Query Manager to modify query definitions.
+</Aside>

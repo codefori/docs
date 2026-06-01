@@ -130,7 +130,37 @@ export default defineConfig({
 				},
 				{
 					label: 'Browsers',
-					autogenerate: { directory: 'browsers/' },
+					items: [
+						{
+							label: 'IBM i Browsers',
+							link: 'browsers/',
+						},
+						{
+							label: 'Object Browser',
+							link: 'browsers/object-browser/',
+						},
+						{
+							label: 'IFS Browser',
+							link: 'browsers/ifs-browser/',
+						},
+						{
+							label: 'User Library List',
+							link: 'browsers/user-library-list/',
+						},
+						{
+							label: 'Go To File',
+							link: 'browsers/goToFile/',
+						},
+						{
+							label: 'IBM i FileSystem',
+							autogenerate: { directory: 'extensions/ibmi-fs/' },
+							collapsed: true,
+							badge: {
+								text: 'NEW',
+								variant: 'tip'
+							},
+						},
+					],
 					collapsed: false,
 				},
 				{
@@ -138,14 +168,14 @@ export default defineConfig({
 					items: [
 						{
 							label: 'RPGLE',
-							autogenerate: { directory: 'extensions/rpgle/' }, 
+							autogenerate: { directory: 'extensions/rpgle/' },
 							collapsed: true,
 						},
-						{ 
+						{
 							label: 'CLLE',
 							link: 'extensions/clle'
 						},
-						{ 
+						{
 							label: 'Renderer',
 							link: 'extensions/renderer',
 							badge: {
@@ -155,7 +185,7 @@ export default defineConfig({
 						},
 						{
 							label: 'Db2 for i',
-							autogenerate:{ directory: 'extensions/db2i/'}, 
+							autogenerate:{ directory: 'extensions/db2i/'},
 							collapsed: true,
 							badge: {
 								text: 'New AI',

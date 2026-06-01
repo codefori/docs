@@ -425,6 +425,27 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"extensions/ibmi-fs/index.mdx": {
+	id: "extensions/ibmi-fs/index.mdx";
+  slug: "extensions/ibmi-fs";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"extensions/ibmi-fs/objects.mdx": {
+	id: "extensions/ibmi-fs/objects.mdx";
+  slug: "extensions/ibmi-fs/objects";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"extensions/ibmi-fs/views.mdx": {
+	id: "extensions/ibmi-fs/views.mdx";
+  slug: "extensions/ibmi-fs/views";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "extensions/renderer/index.mdx": {
 	id: "extensions/renderer/index.mdx";
   slug: "extensions/renderer";
@@ -537,6 +558,20 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"tips/secure.mdx": {
+	id: "tips/secure.mdx";
+  slug: "tips/secure";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"tips/secure_ssh.mdx": {
+	id: "tips/secure_ssh.mdx";
+  slug: "tips/secure_ssh";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "tips/setup.mdx": {
 	id: "tips/setup.mdx";
   slug: "tips/setup";
@@ -547,6 +582,13 @@ declare module 'astro:content' {
 "tips/seuColours.mdx": {
 	id: "tips/seuColours.mdx";
   slug: "tips/seucolours";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"tips/structured-download.mdx": {
+	id: "tips/structured-download.mdx";
+  slug: "tips/structured-download";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

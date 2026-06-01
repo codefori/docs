@@ -1,0 +1,330 @@
+---
+title: System Views
+sidebar:
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import { CardGrid, Card } from '@astrojs/starlight/components';
+
+The IBM i FileSystem extension provides powerful **system views** that allow you to monitor and manage various aspects of your IBM i system directly from VS Code. These views provide comprehensive information and interactive actions for jobs, spooled files, and objects.
+
+---
+
+## 📊 Display Object Information (DSPOBJ)
+
+A comprehensive view that displays detailed information about any IBM i object, similar to the DSPOBJD command but with an enhanced, multi-tab interface.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| Table Function | `QSYS2` | `OBJECT_STATISTICS` | Retrieve comprehensive object statistics and metadata |
+| View | `QSYS2` | `OBJECT_LOCK_INFO` | Retrieve all locks on the object |
+| View | `QSYS2` | `OBJECT_PRIVILEGES` | Retrieve object authorizations and permissions |
+
+### Features
+
+- 📊 **Information Tab**: Complete object metadata including owner, creation date, size, and attributes
+- 🔒 **Locks Tab**: View all active locks with state, scope, and job information
+- 👥 **Authorizations Tab**: View user and group authorities with specific permissions
+- 📅 **Usage Statistics**: Last used timestamp, days used count, save/restore information
+- 🎨 **Multi-tab Interface**: Organized display with badges showing lock and authorization counts
+
+### How to Access
+
+<CardGrid>
+<Card title="Command Palette">
+
+Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i FS: Display Object Information"**:
+
+1. Enter the library name
+2. Enter the object name
+3. Select the object type
+4. View the information in a multi-tab interface
+
+</Card>
+
+<Card title="Object Browser">
+
+Right-click on any object in the Object Browser and select **"Additional Information"** from the context menu, or click the info icon (ℹ️) in the editor toolbar when viewing an object.
+
+</Card>
+</CardGrid>
+
+### Information Displayed
+
+**Information Tab:**
+- SQL Name and SQL Type
+- Owner and Definer
+- Object Size
+- ASP Group (for libraries)
+- Text Description
+- Creation, Change, and Last Used timestamps
+- Days Used Count
+- Save/Restore information (timestamp, device, volume, sequence)
+- Journal information
+- Authorization List
+
+**Locks Tab:**
+- Lock State (shared/exclusive)
+- Lock Status
+- Lock Scope
+- Job Name holding the lock
+
+**Authorizations Tab:**
+- Authorization Name (user/group)
+- Object Authority (*ALL, *CHANGE, *USE, *EXCLUDE)
+- Object Operational, Management, Existence, Alter, Reference permissions
+- Data Read, Add, Update, Delete, Execute permissions
+
+<Aside type="tip">
+This view works with **all object types**, even those not specifically supported by the extension, providing a universal way to inspect any IBM i object.
+</Aside>
+
+---
+
+## 👥 Work with Active Jobs (WRKACTJOB)
+
+Display and manage all active jobs in the system with real-time information and interactive actions.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| Table Function | `QSYS2` | `ACTIVE_JOB_INFO` | Retrieve all active jobs with detailed information |
+
+### Features
+
+- 📊 **Real-time Job List**: View all active jobs with current status and statistics
+- 🔍 **Search Functionality**: Filter jobs by name, user, type, status, subsystem, or function
+- 🔄 **Auto-refresh**: Automatic updates every 30 seconds (for non-OUTQ jobs)
+- 📋 **Comprehensive Information**: Subsystem, job name, user, type, function, status, CPU, I/O
+- ⚡ **Interactive Actions**: Hold, release, end, or debug jobs directly from the view
+- 🎨 **Dynamic UI**: Action menu adapts based on job status (subsystem jobs excluded)
+
+### Available Actions
+
+| Action | Description | Availability |
+|--------|-------------|--------------|
+| **Details** | Open WRKJOB view for detailed job information | All jobs |
+| **Hold** | Hold the job (HLDJOB) | Active jobs (not held) |
+| **Release** | Release the job (RLSJOB) | Held jobs |
+| **End** | End the job (ENDJOB) | Active jobs |
+| **Debug** | Start service entry point debugging | Active jobs |
+
+### How to Access
+
+Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i: Work with Active Jobs"** or use the command `vscode-ibmi-fs.wrkactjob`.
+
+### Information Displayed
+
+- **Subsystem**: Subsystem name (blank for non-subsystem jobs)
+- **Job**: Full job name (number/user/name)
+- **User**: Authorization name
+- **Type**: Job type (BATCH, INTER, SBS, etc.)
+- **Function**: Current function being performed
+- **Status**: Job status (ACTIVE, HLD, etc.)
+- **Temp. Stg.**: Temporary storage used
+- **Elapsed CPU %**: CPU percentage since last reset
+- **Elapsed I/O**: Disk I/O count since last reset
+- **CPU Time**: Total CPU time used
+- **Total I/O**: Total disk I/O count
+
+<Aside type="note">
+The action menu is not displayed for subsystem jobs (JOB_TYPE = 'SBS') as they cannot be held or ended directly.
+</Aside>
+
+---
+
+## 💼 Work with Job (WRKJOB)
+
+Display comprehensive information about a specific job with multiple tabs showing job details, statistics, and logs.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| Table Function | `QSYS2` | `JOB_INFO` | Retrieve comprehensive job information |
+| Table Function | `QSYS2` | `ACTIVE_JOB_INFO` | Retrieve active job status and function |
+| Table Function | `QSYS2` | `STACK_INFO` | Retrieve call stack entries |
+| Table Function | `QSYS2` | `JOB_LOCK_INFO` | Retrieve job locks |
+| Table Function | `QSYS2` | `OPEN_FILES` | Retrieve open files |
+| Table Function | `QSYS2` | `SPOOLED_FILE_INFO` | Retrieve spooled files |
+| Table Function | `QSYS2` | `JOBLOG_INFO` | Retrieve job log messages |
+
+### Features
+
+- 📊 **Job Information Tab**: Complete job attributes and configuration
+- 📈 **Job Statistics Tab**: Library list, call stack, locks, open files, and spooled files
+- 📝 **Job Log Tab**: All job log messages with severity and timestamps
+- 🔄 **Auto-refresh**: Automatic updates every 30 seconds (for non-OUTQ jobs)
+- ⚡ **Interactive Actions**: Hold, release, end jobs; open, download, or delete spools
+- 🎨 **Dynamic UI**: Action buttons adapt based on job status
+- 💾 **State Preservation**: Active tab is preserved across refreshes
+
+### Available Actions
+
+**Job Actions:**
+| Action | Description | Availability |
+|--------|-------------|--------------|
+| **Hold Job** | Hold the job (HLDJOB) | Active jobs (not held) |
+| **Release Job** | Release the job (RLSJOB) | Held jobs |
+| **End Job** | End the job (ENDJOB) | Active jobs |
+| **Debug Job** | Start service entry point debugging | Active jobs |
+
+**Spool Actions:**
+| Action | Description |
+|--------|-------------|
+| **Open** | Open spooled file in editor |
+| **Download** | Download spooled file as PDF |
+| **Delete** | Delete spooled file |
+
+### How to Access
+
+- From **WRKACTJOB** or **WRKUSRJOB**: Click "Details" action on any job
+- From command palette: Search for **"IBM i: Work with Job"** and enter job name
+- Direct command: `vscode-ibmi-fs.wrkjob` with job name parameter
+
+### Information Displayed
+
+**Job Info Tab:**
+- Job Status and Active Status
+- Function currently being performed
+- Job Type and Subsystem
+- Job Description
+- Submitter Job Name
+- Timestamps (entered, scheduled, active, end)
+- Job Queue and priorities
+- Threading, storage, and wait settings
+- CCSID and format settings
+- Message logging configuration
+- CPU and I/O statistics
+
+**Job Statistics Tab:**
+- **Library List**: All libraries with type (SYS/CUR/USR), ASP, and description
+- **Call Stack**: Program call stack with position, program, statement, and procedure
+- **Locks**: All object locks with state, status, scope, and member lock type
+- **Open Files**: All open files with member, type, option, and I/O counts
+- **Spooled Files**: All spools with name, status, pages, and interactive actions
+
+**Job Log Tab:**
+- Message ID and severity
+- Message text (first and second level)
+- From program and message file
+- Timestamp
+
+<Aside type="tip">
+The job log messages are displayed in reverse chronological order (most recent first) for easier troubleshooting.
+</Aside>
+
+---
+
+## 👤 Work with User Jobs (WRKUSRJOB)
+
+Display and manage all jobs (active and inactive) in the system with comprehensive filtering and actions.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| Table Function | `QSYS2` | `JOB_INFO` | Retrieve all jobs (active and inactive) |
+| Table Function | `QSYS2` | `ACTIVE_JOB_INFO` | Retrieve active job status |
+
+### Features
+
+- 📊 **Complete Job List**: View all jobs including completed and output queue jobs
+- 🔍 **Search Functionality**: Filter jobs by name, status, type, completion status, or function
+- 📋 **Comprehensive Information**: Job status, active status, type, end severity, completion status
+- ⚡ **Interactive Actions**: View details, hold, release, or end jobs
+- 🎨 **Dynamic UI**: Action menu adapts based on job status (active/inactive)
+- 🔄 **Manual Refresh**: Refresh button to update job list
+
+### Available Actions
+
+| Action | Description | Availability |
+|--------|-------------|--------------|
+| **Details** | Open WRKJOB view for detailed job information | All jobs |
+| **Hold** | Hold the job (HLDJOB) | Active jobs (not held) |
+| **Release** | Release the job (RLSJOB) | Active held jobs |
+| **End** | End the job (ENDJOB) | Active jobs |
+
+### How to Access
+
+Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i: Work with User Jobs"** or use the command `vscode-ibmi-fs.wrkusrjob`.
+
+### Information Displayed
+
+- **Job**: Full job name (number/user/name)
+- **Job Status**: Overall job status (ACTIVE, OUTQ, etc.)
+- **Active Status**: Active job status (HLD, RUN, etc.) - only for active jobs
+- **Type**: Job type (BATCH, INTER, etc.)
+- **End Severity**: Job end severity level
+- **Completion**: Completion status (NORMAL, ABNORMAL, etc.)
+- **Function**: Current function being performed (for active jobs)
+
+<Aside type="note">
+Unlike WRKACTJOB, this view shows **all jobs** including those in output queues and completed jobs, making it useful for reviewing job history and troubleshooting.
+</Aside>
+
+---
+
+## 🖨️ Work with Spooled Files (WRKSPLF)
+
+Display and manage all spooled files in the system with pagination, search, and interactive actions.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| Table Function | `QSYS2` | `SPOOLED_FILE_INFO` | Retrieve all spooled files with details |
+| Function | `SYSTOOLS` | `GENERATE_PDF` | Generate PDF from spooled file |
+
+### Features
+
+- 📊 **Complete Spool List**: View all spooled files in the system
+- 🔍 **Search Functionality**: Filter spools by name, user, data, status, or job
+- 📄 **Pagination**: Navigate through large spool lists with configurable items per page
+- 📋 **Comprehensive Information**: Name, user data, status, job, pages, size, timestamp
+- ⚡ **Interactive Actions**: Open, download as PDF, or delete spooled files
+- 🔄 **Manual Refresh**: Refresh button to update spool list
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Open** | Open spooled file in VS Code editor |
+| **Download** | Download spooled file as PDF to local system |
+| **Delete** | Delete spooled file from the system |
+
+### How to Access
+
+Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i: Work with Spooled Files"** or use the command `vscode-ibmi-fs.wrksplf`.
+
+### Information Displayed
+
+- **Name**: Spooled file name
+- **Data**: User data associated with the spool
+- **Status**: Spool status (READY, HELD, PRINTING, etc.)
+- **User**: User who created the spool
+- **Job**: Job name that created the spool (number/user/name)
+- **Number**: Spooled file number
+- **Timestamp**: Creation date and time
+- **Pages**: Total number of pages
+- **Size (KB)**: Spool file size in kilobytes
+
+### Pagination Controls
+
+- **Items per page**: Default 50, configurable
+- **Page navigation**: First, previous, next, last page buttons
+- **Total count**: Display total number of spools matching search criteria
+
+<Aside type="tip">
+Use the search functionality to quickly find specific spools by name, user, or job. The search is performed on the server side for optimal performance.
+</Aside>
+
+---
+
+<Aside type="note">
+For additional help, consult the [Help and Support](/help-and-support/) page or visit the [GitHub repository](https://github.com/codefori/vscode-ibmi-fs) to report issues.
+</Aside>
