@@ -23,7 +23,7 @@ A test suite consists of one or more test cases in a file or source member. This
 
 * **Local Files**: The file name must end in `.test.rpgle`, `.test.sqlrpgle`, `.test.cblle`, or `.test.sqlcblle` in order to be detected by the extension. File names are also not restricted to 10 characters as the extension will use the same rules that Source Orbit uses to handle [long file names](https://ibm.github.io/sourceorbit/#/./pages/general/rules?id=long-file-names) when compiling the test. Noteably, since all files must include `.test`, the resulting object name will start with `T`. These files can also be put in any directory.
 * **Source Members**: Source members can be named freely, but it is recommended to use some sort of prefix or suffix (ie. `T`, `_T`, `T_`, etc.) to avoid naming conflicts as the tests will be compiled into service programs. These source members can be put in any source file, but it is recommended to store them in a source file named `QTESTSRC`. By default this is where the extension will look for test suites in your library list. You can configure the extension to search other source files by going to the extension's settings and searching for the **Test Source Files** setting.
-  ![Test Source Files](Testing_TestSourceFiles.png)
+  ![Test Source Files](/src/assets/i_testing/TestSourceFiles.png)
 
 Listed below are some example test suite names that follow this naming convention:
 
@@ -43,23 +43,23 @@ Listed below are some example test suite names that follow this naming conventio
 
 To simplify the process of writing tests, you can have the extension generate stubs for individual test cases or an entire test suite. To do this, place your cursor inside any export procedure and click the code action button (💡). This will give you an option to generate a test case for the specific procedure you are in or to generate a test suite containing test cases for every procedure.
 
-![Generating Test Stubs](Testing_GeneratingTestStubs.png)
+![Generating Test Stubs](/src/assets/i_testing/GeneratingTestStubs.png)
 
 After selecting an option, a test suite will be created if it does not already exist with a scaffold that will include not only the test case stubs, but also the necessary includes and prototypes (if necessary). The generated test case stubs themselves will each be structured into the following sections: declarations, inputs, actual results, expected results, and assertions. As the developer, you will need to fill in the inputs and expected results.
 
-![Generated Test Stub](Testing_GeneratedTestStub.png)
+![Generated Test Stub](/src/assets/i_testing/GeneratedTestStub.png)
 
 ### Test Stub Preferences
 
 There are various preferences that can be used to configure how the test stubs are generated. To access these preferences, go to the extension's settings and search for **Test Stub Preferences**.
 
-![Test Stub Preferences](Testing_TestStubPreferences.png)
+![Test Stub Preferences](/src/assets/i_testing/TestStubPreferences.png)
 
 ### Test Stub Preview
 
 One notable preference is the **Show Test Stub Preview** which controls whether to show a preview of the test stub before adding it to the file or source member. Once this preference is enabled, the **Refactor Preview** view will be populated with a set of edits to insert the control options & directives, includes, prototypes, and the test cases. You will need to first select the checkboxes next to the items you want to insert and then click on any item to bring up a preview of the code in the editor. Once you are satisfied with the preview, you can click the **Apply** button to insert the code into your file or source member.
 
-![Test Stub Preview](Testing_TestStubPreview.png)
+![Test Stub Preview](/src/assets/i_testing/TestStubPreview.png)
 
 ## API Reference
 

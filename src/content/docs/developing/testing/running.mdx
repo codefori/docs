@@ -10,13 +10,13 @@ import { Aside, CardGrid, Card, Steps } from '@astrojs/starlight/components';
 
 Before running any tests, it is recommended that `RPGUNIT.LIB` and `QDEVTOOLS.LIB` are added to your library list to avoid issues with resolving include files. In the case you are working with local test files and are using `iproj.json`, you can add this to your `preUsrlibl` in `iproj.json`. In the case of source members, you can add these libraries via the **User Library List** view in Code for IBM i. You may see the following warnings in the case these libraries are not on your library list:
 
-![](Testing_LibraryValidation.png)
+![](/src/assets/i_testing/Testing_LibraryValidation.png)
 
 ## Test Explorer
 
 For tests to be discovered by the extension, you must first [connect to an IBM i](../../../quickstart/). Once connected, the extension will automatically discover any RPG/COBOL tests as local files from your workspace or as source members from your library list. These tests will all be listed in the built-in **Test Explorer** view in VS Code (look for the beaker icon).
 
-![](Testing_TestExplorer.png)
+![](/src/assets/i_testing/Testing_TestExplorer.png)
 
 ### Running Tests
 
@@ -31,18 +31,18 @@ From here you can hover on any test case, test suite, folder, library, or source
 
 <Aside type="note">
   Another option for running specific test cases and viewing test results is using the gutter actions which can be found next to the test case procedures in the editor itself.
-  ![](Testing_GutterActions.png)
+  ![](/src/assets/i_testing/Testing_GutterActions.png)
 </Aside>
 
 ### Cancelling Tests
 
 The current test deployment, compilation, and execution can be cancelled at anytime by navigating to the **Test Explorer** view and using the **Cancel Test Run** button.
 
-![](Testing_CancellingTest.png)
+![](/src/assets/i_testing/Testing_CancellingTest.png)
 
 Any test suites which were executed before cancellation will still have their test results shown in the **Test Results** view. Cancelled test suites will be marked accordingly and a total count of cancelled test suites and cases will be included in the test summary.
 
-![](Testing_CancelledTestResult.png)
+![](/src/assets/i_testing/Testing_CancelledTestResult.png)
 
 ## Test Results
 
@@ -52,13 +52,13 @@ After running any test, the results will be displayed in detail in the **Test Re
   When it comes to diagnosing test errors or failures, it often helps to see the entire CL command that was executed along with the output. You can view this information by navigating to the [IBM i Testing](../troubleshooting/#extension-logs) output channel. Learn more about finding these logs on the [Troubleshooting](../troubleshooting/#logs) page.
 </Aside>
 
-![](Testing_TestResults.png)
+![](/src/assets/i_testing/Testing_TestResults.png)
 
 ### Diagnosing Errors
 
 When there is an assertion failure, you can view the actual and expected results (depending on the type of assertion) along with the failure message in the **Test Results** view. In addition, you can scroll through the editor and see the same message inline right next to the failing assertion. Upon clicking on this message, you will get an expanded inline view of the error which also includes a diff of the actual and expected result along with the stack trace.
 
-![](Testing_InlineAssertionError.png)
+![](/src/assets/i_testing/Testing_InlineAssertionError.png)
 
 ## Code Coverage
 
@@ -66,11 +66,11 @@ You can also run the tests with code coverage to see which lines of code were ex
 
 To do this, hover on the desired tests in the **Test Explorer** view like before, but this time use the inline **Run Test with Coverage** button. In addition to executing the tests, this will populate the **Test Coverage** view with the code coverage results. You can hover on individual files here to see the coverage percentage. By default, this will show statement coverage, but procedure coverage can also be enabled using the [Test Profiles](#test-profiles) described below.
 
-![](Testing_TestCoverage.png)
+![](/src/assets/i_testing/Testing_TestCoverage.png)
 
 The relevant files under test will also be highlighted in the editor where the executed lines will be marked in green and the unexecuted lines will be marked in red.
 
-![](Testing_CodeCoverage.png)
+![](/src/assets/i_testing/Testing_CodeCoverage.png)
 
 ## Test Profiles
 
@@ -80,13 +80,13 @@ To run a set of tests with a specific profile:
 
 1. Navigate to the **Test Explorer** view (or find the specific test case in the editor).
 2. Right-click on the test (or the gutter action) and select the **Execute Using Profile...** option.
-  ![](Testing_ExecuteUsingProfile.png)
+  ![](/src/assets/i_testing/Testing_ExecuteUsingProfile.png)
 3. Select the desired profile to be used.
-  ![](Testing_TestProfiles.png)
+  ![](/src/assets/i_testing/Testing_TestProfiles.png)
 
 <Aside type="tip">
   You can change the default test profile if you prefer using the **Select Default Profile** option.
-  ![](Testing_DefaultProfiles.png)
+  ![](/src/assets/i_testing/Testing_DefaultProfiles.png)
 </Aside>
 
 ## Test Filters and Tags
@@ -95,7 +95,7 @@ The search bar in the **Test Explorer** view is used to filter what tests are di
 * `@IBMi:local`: Show only tests from local files.
 * `@IBMi:qsys`: Show only tests from source members.
 
-![](Testing_TestTags.png)
+![](/src/assets/i_testing/Testing_TestTags.png)
 
 ## Test Logs
 

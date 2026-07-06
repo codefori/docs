@@ -52,8 +52,8 @@ The `code .` command opens VS Code in the current working folder, which becomes 
 
 Now create a new file called `helloworld.pgm.rpgle` with the **New File** button in the File Explorer or **File** > **New File** command.
 
-![](../../../../assets/rpgle/hw_1.png)
-![](../../../../assets/rpgle/hw_2.png)
+![](/src/assets/rpgle/hw_1.png)
+![](/src/assets/rpgle/hw_2.png)
 
 ### Add Hello World source code
 
@@ -80,17 +80,17 @@ return;
 
 You can focus the Outline View by opening the Command Palette (**F1**) and searching 'focus outline'. The definitions from the program should be displayed:
 
-![](../../../../assets/rpgle/hw_3.png)
+![](/src/assets/rpgle/hw_3.png)
 
 ## What next?
 
-Compiling the code from Visual Studio Code requires a different extension due to the fact that the compilers only exist on IBM i. Check out the official [documentation for Code for IBM i](../../) to get started.
+Compiling the code from Visual Studio Code requires a different extension due to the fact that the compilers only exist on IBM i. Check out the official [documentation for Code for IBM i](/src/content/docs/en/) to get started.
 
 ### Content assist
 
 Content assist provides code completion, hover information, and formatting issues to help the user write code correctly. 
 
-![](../../../../assets/rpgle/intellisense.png)
+![](/src/assets/rpgle/intellisense.png)
 
 You can turn the content assist from showing up automatically by changing the 'Suggest On Trigger Characters' setting.
 
@@ -98,7 +98,7 @@ You can turn the content assist from showing up automatically by changing the 'S
 
 Hover over any definitions (variable, structure, procedures, etc) to see type information and documentation.
 
-![](../../../../assets/rpgle/hover.png)
+![](/src/assets/rpgle/hover.png)
 
 ## Code Navigation
 
@@ -108,7 +108,7 @@ Whether writing code in the local workspace or on a remote IBM i, users can util
 
 When using fixed-format RPGLE, the ruler can be displayed. You can turn it on and off with Shift+F4.
 
-![](../../../../assets/rpgle/fixedRuler.png)
+![](/src/assets/rpgle/fixedRuler.png)
 
 Control whether the ruler is enabled by default in the VS Code settings, under 'RPGLE language tools'.
 
@@ -116,13 +116,13 @@ Control whether the ruler is enabled by default in the VS Code settings, under '
 
 With any definition, you are able to use Go to Definition or Peek Definition:
 
-![](../../../../assets/rpgle/peek_defs.png)
+![](/src/assets/rpgle/peek_defs.png)
 
 ### Show references
 
 Just like definitions, you are able to find all references to definitions with Go to References or Peek References:
 
-![](../../../../assets/rpgle/peef_refs.png)
+![](/src/assets/rpgle/peef_refs.png)
 
 ### Go to implementation
 
@@ -131,7 +131,7 @@ Go to implementation works for procedures in two ways.
 * For all sources (members/streamfiles/local) it will do a lookup of the procedure name in the binding directories found on your library list.
 * For local projects it will take you to the implementation of an export procedure wherever it is in your project.
 
-![](../../../../assets/rpgle/implementation.png)
+![](/src/assets/rpgle/implementation.png)
 
 ### Workspace symbols
 
@@ -150,7 +150,7 @@ You can automatically fix all indentation of your free-format sources by using F
 
 When using all free-format source code, you are able to use 'Extract to procedure' which will take the selected lines of code and wrap it into a new procedure and make all variable referenced into parameters.
 
-![](../../../../assets/rpgle/extract_procedure.png)
+![](/src/assets/rpgle/extract_procedure.png)
 
 ## Linter
 
@@ -160,16 +160,16 @@ The extension ships with a built-in linter to ensure developers write the cleane
 
 Use the 'Open RPGLE lint configuration' command from the command palette to automatically create and open the relative lint configuration from the RPGLE source you are working in.
 
-![](../../../../assets/rpgle/lint_create.png)
+![](/src/assets/rpgle/lint_create.png)
 
 ### Lint options
 
 There are some default options enabled when the lint configuration is created. The content assist inside of `rpglint.json` will show other available options:
 
-![](../../../../assets/rpgle/lint_options.png)
+![](/src/assets/rpgle/lint_options.png)
 
 ### Quick fix and formatting
 
 Most lint errors have a Quick Fix for them and the fixes are available when hovering over the error. You can also use 'Format Document' from the command palette to fix all errors with a Quick Fix attached.
 
-![](../../../../assets/rpgle/lint_errors.png)
+![](/src/assets/rpgle/lint_errors.png)
