@@ -213,20 +213,20 @@ export default defineConfig({
 					
 			],
 			defaultLocale: 'root',
-			// locales: {
-			// 	root: {
-			// 		label: 'English',
-			// 		lang: 'en',
-			// 	},
-			// 	da: {
-			// 		label: 'Dansk',
-			// 		lang: 'da',
-			// 	},
-			// 	fr: {
-			// 		label: 'Français',
-			// 		lang: 'fr',
-			// 	},
-			// },
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en',
+				},
+				// da: {
+				// 	label: 'Dansk',
+				// 	lang: 'da',
+				// },
+				// fr: {
+				// 	label: 'Français',
+				// 	lang: 'fr',
+				// },
+			},
 		}),
 	],
 	markdown: {

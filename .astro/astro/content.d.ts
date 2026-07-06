@@ -383,13 +383,6 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
-"extensions/db2i/AI/Continue/Continue.mdx": {
-	id: "extensions/db2i/AI/Continue/Continue.mdx";
-  slug: "extensions/db2i/ai/continue/continue";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
 "extensions/db2i/AI/Copilot/index.mdx": {
 	id: "extensions/db2i/AI/Copilot/index.mdx";
   slug: "extensions/db2i/ai/copilot";
@@ -645,5 +638,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("./../../src/content/config.js");
+	export type ContentConfig = typeof import("../../src/content/config.js");
 }
