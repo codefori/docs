@@ -14,11 +14,11 @@ _*You must change your default shell to `bash`*_. If you do not, parts of _Code 
 
 The easiest way is to enter `which bash` in an SSH terminal session. 
 
-This should return `/QOpenSys/pkgs/bin/bash`.  If it doesn't then you need to talk to you system admin about getting [IBM i Open Source Tools](https://ibmi-oss-docs.readthedocs.io/en/latest/README.html) installed.
+This should return `/QOpenSys/pkgs/bin/bash`.  If it doesn't then you need to talk to you system admin about getting [IBM i Open Source Tools](https://ibmi-oss-docs.readthedocs.io/latest/README.html) installed.
 
 ## Setting Bash as the Default Shell
 
-*Some techniques come directly from the official [IBM i OSS docs page](https://ibmi-oss-docs.readthedocs.io/en/latest/troubleshooting/SETTING_BASH.html)*
+*Some techniques come directly from the official [IBM i OSS docs page](https://ibmi-oss-docs.readthedocs.io/latest/troubleshooting/SETTING_BASH.html)*
 
 ### Technique #1: Code for IBM i
 
@@ -65,7 +65,7 @@ Also, the default shell setting can be queried out with [QSYS2.USER_INFO](https:
 
 ## Adding Bash to your PATH
 
-You must have `/QOpenSys/pkgs/bin/bash` in your PATH.  [IBM provides documentation](https://ibmi-oss-docs.readthedocs.io/en/latest/troubleshooting/SETTING_PATH.html) on how to do this using a `.profile` or `.bashrc` file in your home directory.
+You must have `/QOpenSys/pkgs/bin/bash` in your PATH.  [IBM provides documentation](https://ibmi-oss-docs.readthedocs.io/latest/troubleshooting/SETTING_PATH.html) on how to do this using a `.profile` or `.bashrc` file in your home directory.
 
 Note that if you use a `.bashrc` file it must *_not_* contain any `echo` or `liblist` statements.
 
