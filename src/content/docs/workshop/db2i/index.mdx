@@ -61,15 +61,15 @@ The main goal of this workshop is to understand how you can use Visual Studio Co
 
 Using the Code for IBM i extension, you can create a new connection to an IBM i system.
 
-![](./assets/connect_1.png)
+![](/src/assets/db2_for_i/features/connection/connect_1.png)
 
 If the database extension has never been seen before, you will see a popup asking if you'd like to start an SQL Job. For now, select 'Yes' or 'Always'. More will be covered on this later.
 
-![](./assets/connect_2.png)
+![](/src/assets/db2_for_i/features/connection/connect_2.png)
 
 ### Db2 for i User Interface
 
-![](./assets/connect_3.png)
+![](/src/assets/db2_for_i/features/connection/connect_3.png)
 
 There are three areas that should be known when using the database extension in Visual Studio Code:
 
@@ -94,8 +94,7 @@ There are also additional buttons to open new SQL documents and notebooks.
 
 </Card><Card>
 
-![](./assets/jobmanager_1.png)
-
+![](/src/assets/db2_for_i/features/job_manager/jobmanager_1.png)
 </Card></CardGrid>
 
 ### Tasks
@@ -115,7 +114,7 @@ The selected job will change when you create new jobs.
 
 </Card><Card>
 
-![](./assets/jobmanager_2.png)
+![](/src/assets/db2_for_i/features/job_manager/jobmanager_2.png)
 
 </Card></CardGrid>
 
@@ -132,7 +131,7 @@ Do this for both jobs that you have.
 
 </Card><Card>
 
-![](./assets/jobmanager_3.png)
+![](/src/assets/db2_for_i/features/job_manager/jobmanager_3.png)
 
 </Card></CardGrid>
 
@@ -153,7 +152,7 @@ Do this with both SQL jobs that were started.
 
 </Card><Card>
 
-![](./assets/jobmanager_4.png)
+![](/src/assets/db2_for_i/features/job_manager/jobmanager_4.png)
 
 </Card></CardGrid>
 
@@ -172,7 +171,7 @@ Right click on a job and select 'Save settings into config'. This will allow you
 
 </Card><Card>
 
-![](./assets/jobmanager_5.png)
+![](/src/assets/db2_for_i/features/job_manager/jobmanager_5.png)
 
 </Card></CardGrid>
 
@@ -187,7 +186,7 @@ A new group will appear in the SQL Job Manager with your saved configurations.
 
 </Card><Card>
 
-![](./assets/jobmanager_6.png)
+![](/src/assets/db2_for_i/features/job_manager/jobmanager_6.png)
 
 </Card></CardGrid>
 
@@ -221,7 +220,7 @@ The naming mode used for your SQL is a configuration option that you should stri
 
 </Card><Card>
 
-![](./assets/execute_1.png)
+![](/src/assets/db2_for_i/features/execution/execute_1.png)
 
 </Card></CardGrid>
 
@@ -236,7 +235,7 @@ Clicking the ▶️ (play) button will show a drop down, and the first entry in 
 
 </Card><Card>
 
-![](./assets/jobmanager_4.png)
+![](/src/assets/db2_for_i/features/job_manager/jobmanager_4.png)
 
 </Card></CardGrid>
 
@@ -257,7 +256,7 @@ where 1=1
 
 </Card><Card>
 
-![](./assets/execute_2.png)
+![](/src/assets/db2_for_i/features/execution/execute_2.png)
 
 </Card></CardGrid>
 
@@ -270,7 +269,7 @@ Every time you execute a statement, the statement will be prepended to the state
 
 </Card><Card>
 
-![](./assets/execute_3.png)
+![](/src/assets/db2_for_i/features/execution/execute_3.png)
 
 </Card></CardGrid>
 
@@ -282,7 +281,7 @@ VS Code has a simple UI to show if your job has changes pending to commit in you
 For this, **commitment control will need to be turned on for your job**. Edit your job settings, and under the System tab, set 'Auto commit' to False, 'Transaction isolation' to 'Read uncommitted' and 'True autocommit' to false.
 </Aside>
 
-![](./assets/execute_4.png)
+![](/src/assets/db2_for_i/features/execution/execute_4.png)
 
 ---
 
@@ -309,7 +308,7 @@ Selecting the item from the list will insert it at the cursor location and, if a
 
 </Card><Card>
 
-![](./assets/writing_1.png)
+![](/src/assets/db2_for_i/features/auto_completion/writing_1.png)
 
 </Card></CardGrid>
 
@@ -323,7 +322,7 @@ You can trigger the content assist at any point and expect to see a list of sche
 
 </Card><Card>
 
-![](./assets/writing_2.png)
+![](/src/assets/db2_for_i/features/auto_completion/writing_2.png)
 
 </Card></CardGrid>
 
@@ -334,11 +333,11 @@ If you enter a dot (`.`) after a schema, it will show available objects in the s
 <CardGrid>
 <Card>
 
-![](./assets/writing_3_a.png)
+![](/src/assets/db2_for_i/features/auto_completion/writing_3_a.png)
 
 </Card><Card>
 
-![](./assets/writing_3_b.png)
+![](/src/assets/db2_for_i/features/auto_completion/writing_3_b.png)
 
 </Card></CardGrid>
 
@@ -359,7 +358,7 @@ select d.deptno, d.deptname from sample.department as d;
 
 </Card><Card>
 
-![](./assets/writing_4.png)
+![](/src/assets/db2_for_i/features/auto_completion/writing_4.png)
 
 </Card></CardGrid>
 
@@ -372,7 +371,7 @@ When calling a function or procedure, after entering an open round bracket (`(`)
 
 </Card><Card>
 
-![](./assets/writing_5.png)
+![](/src/assets/db2_for_i/features/auto_completion/writing_5.png)
 
 </Card></CardGrid>
 
@@ -406,7 +405,7 @@ You can use the 'Check SQL syntax' button on the SQL document to trigger the syn
 
 </Card><Card>
 
-![](./assets/syntaxchecker.png)
+![](/src/assets/db2_for_i/features/miscellaneaous/syntaxchecker.png)
 
 </Card></CardGrid>
 
@@ -456,11 +455,11 @@ To add schemas to the Schema Browser, select the 'Manage Schema Browser List'. W
 <CardGrid>
 <Card>
 
-![](./assets/schemas_1.png)
+![](/src/assets/db2_for_i/features/schemas_browser/schemas_1.png)
 
 </Card><Card>
 
-![](./assets/schemas_2.png)
+![](/src/assets/db2_for_i/features/schemas_browser/schemas_2.png)
 
 </Card></CardGrid>
 
@@ -475,7 +474,7 @@ Tables and views have a button on each item to quickly view the data, which will
 
 </Card><Card>
 
-![](./assets/schemas_3.png)
+![](/src/assets/db2_for_i/features/schemas_browser/schemas_3.png)
 
 </Card></CardGrid>
 
@@ -490,7 +489,7 @@ All objects will have the ability to delete and rename.
 
 </Card><Card>
 
-![](./assets/schemas_4.png)
+![](/src/assets/db2_for_i/features/schemas_browser/schemas_4.png)
 
 </Card></CardGrid>
 
@@ -507,7 +506,7 @@ Further improvements are going to be made to 'Generate SQL' in the future to mak
 
 </Card><Card>
 
-![](./assets/schemas_5.png)
+![](/src/assets/db2_for_i/features/schemas_browser/schemas_5.png)
 
 </Card></CardGrid>
 
@@ -515,7 +514,7 @@ Further improvements are going to be made to 'Generate SQL' in the future to mak
 
 All schemas have the ability to filter objects in a schema to find something specific. Click on the 🔎 (search) icon, which will show an input box where a case-insensitive name can be provided.
 
-![](./assets/schemas_6.png)
+![](/src/assets/db2_for_i/features/schemas_browser/schemas_6.png)
 
 ---
 
@@ -547,7 +546,7 @@ where job = 'MANAGER';
 
 </Card><Card>
 
-![](./assets/explain_1.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_1.png)
 
 </Card></CardGrid>
 
@@ -564,7 +563,7 @@ The first most action is a lightbulb icon that acts as the access point for ‘A
 
 </Card><Card>
 
-![](./assets/explain_2.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_2.png)
 
 </Card></CardGrid>
 
@@ -575,7 +574,7 @@ If we love the advice SQE is showing us, we can click on the ‘Generate SQL for
 
 </Card><Card>
 
-![](./assets/explain_3.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_3.png)
 
 </Card></CardGrid>
 
@@ -586,7 +585,7 @@ We might want to revise the index name before executing if we indeed decide to e
 
 </Card><Card>
 
-![](./assets/explain_4.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_4.png)
 
 </Card></CardGrid>
 
@@ -597,7 +596,7 @@ To see summary detail for the VE detail, locate your mouse pointer over the ‘T
 
 </Card><Card>
 
-![](./assets/explain_5.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_5.png)
 
 </Card></CardGrid>
 
@@ -608,7 +607,7 @@ To see the full VE details, click on ‘Display details’.
 
 </Card><Card>
 
-![](./assets/explain_6.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_6.png)
 
 </Card></CardGrid>
 
@@ -621,7 +620,7 @@ Type in goal to find all occurrences of “goal” within the VE detail. The SQL
 
 </Card><Card>
 
-![](./assets/explain_7.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_7.png)
 
 </Card></CardGrid>
 
@@ -636,9 +635,9 @@ Return to the SQL query and execute the query, using ‘Run and explain statemen
 
 </Card><Card>
 
-![](./assets/explain_8.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_8.png)
 
-![](./assets/explain_9.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_9.png)
 
 </Card></CardGrid>
 
@@ -659,11 +658,11 @@ It is possible to configure which nodes will be highlighted in the Explain resul
 
 </Card><Card>
 
-![](./assets/explain_5.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_5.png)
 
 </Card></CardGrid>
 
-![](./assets/explain_10.png)
+![](/src/assets/db2_for_i/features/visual_explain/explain_10.png)
 
 ---
 
@@ -671,7 +670,7 @@ It is possible to configure which nodes will be highlighted in the Explain resul
 
 ### Intro
 
-SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the Results View. Additional documentation of SELF can be found [here](https://www.ibm.com/docs/en/i/7.5?topic=tools-sql-error-logging-facility-self).
+SQL Error Logging Facility (SELF) offers a comprehensive view that can help users understand specific SQL errors or warnings. The SELF view can be accessed through the IBM i panel next to the Results View. Additional documentation of SELF can be found [here](https://www.ibm.com/docs/i/7.5?topic=tools-sql-error-logging-facility-self).
 
 <Aside type="caution">
 SELF can only work with users who have `*ALLOBJ` authority. This is because SELF data could contain information about other users and what SQL they're executing. This section may have to be skipped in the lab environment due to lack of authority.
@@ -703,7 +702,7 @@ The job will then start to capture errors and warnings.
 
 </Card><Card>
 
-![](./assets/self_1.png)
+![](/src/assets/db2_for_i/features/self/self_1.png)
 
 </Card></CardGrid>
 
@@ -720,7 +719,7 @@ This will not change any already running job.
 
 </Card><Card>
 
-![](./assets/self_2.png)
+![](/src/assets/db2_for_i/features/self/self_2.png)
 
 </Card></CardGrid>
 
@@ -735,7 +734,7 @@ Each item in the SELF view is for a specific `SQLCODE` which is displayed in par
 
 When an item is expanded or hovered over, information about the `SQLCODE` is displayed such as the Job Name, Call Stack, Additional Details, and the SQL statement. The counter on the right of each item denotes the number of occurrences (🔥) of the specific `SQLCODE`. Once the number of occurrences for a given code is greater than 100, we display 💯.
 
-![](./assets/self_3.png)
+![](/src/assets/db2_for_i/features/self/self_3.png)
 
 <Aside type="note">
 If you are unable to locate the SELF view, you can use F1→filter 'focus SELF'.
@@ -923,7 +922,7 @@ Then, SQL can be used to call the program as if it were a procedure.
 
 This is only recommended for the purposes of this workshop: `call yourlib.thesqlpgm()`.
 
-![](./assets/self_4.png)
+![](/src/assets/db2_for_i/features/self/self_4.png)
 
 <Aside type="note">
 If no error appeared:
@@ -974,7 +973,7 @@ Each cell has a language associated with it, which determines how the cell will 
 
 </Card><Card>
 
-![](./assets/notebooks_1.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_1.png)
 
 </Card></CardGrid>
 
@@ -989,13 +988,13 @@ On each cell is a ▶️ (play) button which will execute the cell, or you can u
 
 </Card><Card>
 
-![](./assets/notebooks_2_a.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_2_a.png)
 
 </Card></CardGrid>
 
 Multiple cells of different languages can be combined to build a notebook. This shows a notebook built with markdown and CL cells.
 
-![](./assets/notebooks_2_b.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_2_b.png)
 
 #### 3. Saving and sharing Notebooks
 
@@ -1026,7 +1025,7 @@ LIMIT 10
 
 </Card><Card>
 
-![](./assets/notebooks_3.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_3.png)
 
 </Card></CardGrid>
 
@@ -1054,7 +1053,7 @@ desc limit 10
 
 </Card><Card>
 
-![](./assets/notebooks_4.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_4.png)
 
 </Card></CardGrid>
 
@@ -1062,7 +1061,7 @@ desc limit 10
 
 Using the Export button at the top of each Notebook document allows the user to save contents into a static HTML file. This file can be shared, published, or exported as PDF from most browsers.
 
-![](./assets/notebooks_5.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_5.png)
 
 <Aside type="note">
 You can use the `hideStatement` tag in the input SQL cell to hide the statement in the exported document.
@@ -1089,11 +1088,11 @@ Under the ▶️ (play) button is 'Open as Notebook'. Selecting that will open t
 
 </Card><Card>
 
-![](./assets/notebooks_6_a.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_6_a.png)
 
 </Card></CardGrid>
 
-![](./assets/notebooks_6_b.png)
+![](/src/assets/db2_for_i/features/noteboooks/notebooks_6_b.png)
 
 ---
 

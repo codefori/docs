@@ -32,7 +32,7 @@ If the "Command to run" string has a leading `?` like `?CALL &LIBRARY/&NAME`, th
 
 </Card><Card>
 
-![Action Displayed for Modification](../../../../assets/actions_exec_01.png)
+![Action Displayed for Modification](/src/assets/code_for_i/features/actions/actions_exec_01.png)
 
 </Card></CardGrid>
 
@@ -44,7 +44,7 @@ For example, you might want to add `PARM('Douglas' 'Adams')` to the end.
 
 </Card><Card>
 
-![Modified Action](../../../../assets/actions_exec_02.png)
+![Modified Action](/src/assets/code_for_i/features/actions/actions_exec_02.png)
 
 </Card></CardGrid>
 
@@ -72,7 +72,7 @@ CALL &LIBRARY/&NAME PARM('${AAA|First name|Your name}' '${xyz|Last Name}')
 
 If we run the action it prompts like this:
 
-![Prompting Action Example 1](../../../../assets/actions_exec_03.png)
+![Prompting Action Example 1](/src/assets/code_for_i/features/actions/actions_exec_03.png)
 
 If we complete the screen like this:
 
@@ -82,7 +82,7 @@ and click **Execute** a command like this is executed;
 CALL LENNONS1/ATEST PARM('Douglas' 'Adams')
 ```
 
-![Completed Prompted Action](../../../../assets/actions_exec_04.png)
+![Completed Prompted Action](/src/assets/code_for_i/features/actions/actions_exec_04.png)
 
 </TabItem>
 <TabItem label="Example 2">
@@ -94,7 +94,7 @@ CALL &LIBRARY/&NAME PARM('${AAA|Library|&CURLIB}' '${xyz|Report Name}')
 
 &CURLIB will be substituted and the prompt will look like this when executed:
 
-![Prompted Action Example 2](../../../../assets/actions_exec_05.png)
+![Prompted Action Example 2](/src/assets/code_for_i/features/actions/actions_exec_05.png)
 
 </TabItem>
 <TabItem label="Example 3">
@@ -107,6 +107,6 @@ CRTBNDRPG PGM(${buildlib|Build library|&BUILDLIB}/${objectname|Object Name|&NAME
 
 When executed, it prompts like this: 
 
-![Panel to the right](../../../../assets/compile_04.png)
+![Panel to the right](/src/assets/code_for_i/features/actions/compile_04.png)
 
 </TabItem></Tabs>

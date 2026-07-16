@@ -29,7 +29,7 @@ If you still are experiencing issues after setting the CCSID value, you may want
 <details>
 <summary><b>OS 7.4 or greater</b></summary>
 
-[7.4 and above defaults to UTF-8](https://www.ibm.com/docs/en/i/7.4?topic=system-default-pase-ccsid-locale-changed-utf-8)<Icon name="external" color="cyan" class="icon-inline" /> and there should be no issue.
+[7.4 and above defaults to UTF-8](https://www.ibm.com/docs/i/7.4?topic=system-default-pase-ccsid-locale-changed-utf-8)<Icon name="external" color="cyan" class="icon-inline" /> and there should be no issue.
 </details>
 
 <details>
@@ -38,7 +38,7 @@ If you still are experiencing issues after setting the CCSID value, you may want
 The SSH daemon must start with the correct `PASE_LANG` and `QIBM_PASE_CCSID` environment variables set. You probably want to use a locale that defaults to CCSID 1208. **Locale is case sensitive**. E.g., `FR_FR` is different from `fr_FR`.
 
 1. Change the PASE language and CCSID *system wide* by using `WRKENVVAR LEVEL(*SYS)` to set:
-   - the appropriate locale/language, e.g., `PASE_LANG 'FR_FR'`.  You can find infomation on PASE for i Locales [here](https://www.ibm.com/docs/en/i/7.4?topic=ssw_ibm_i_74/apis/pase_locales.htm)<Icon name="external" color="cyan" class="icon-inline" />
+   - the appropriate locale/language, e.g., `PASE_LANG 'FR_FR'`.  You can find infomation on PASE for i Locales [here](https://www.ibm.com/docs/i/7.4?topic=ssw_ibm_i_74/apis/pase_locales.htm)<Icon name="external" color="cyan" class="icon-inline" />
    - `QIBM_PASE_CCSID` should be `1208`.
 2. **Restart** the SSH daemon.
 
@@ -49,7 +49,7 @@ You are also able to change the environment variables at a `*JOB` level, but it 
 
 Some links to pages which containing information on variant characters:
 
-- [IBM definition of Variant characters](https://www.ibm.com/docs/en/db2-for-zos/11?topic=ccsids-variant-characters)<Icon name="external" color="cyan" class="icon-inline" />
+- [IBM definition of Variant characters](https://www.ibm.com/docs/db2-for-zos/11?topic=ccsids-variant-characters)<Icon name="external" color="cyan" class="icon-inline" />
 - [IBM Support](https://www.ibm.com/support/pages/what-impact-changing-qccsid-shipped-65535-another-ccsid)<Icon name="external" color="cyan" class="icon-inline" />
 - [Wikipedia](https://en.wikipedia.org/wiki/EBCDIC)<Icon name="external" color="cyan" class="icon-inline" />
 
@@ -62,7 +62,7 @@ Since Code for IBM i tries to depend on the server to handle all encoding transl
 1. we only support object names in ASCII/37 encoding.
 2. we cannot support quoted/delimited object names with non-ASCII characters since the OS doesn't know what encoding it is and the client doesn't know how to handle 65535.
 
-Learn more about object naming rules [in the IBM documentation](https://www.ibm.com/docs/en/i/7.1?topic=rules-names-name).
+Learn more about object naming rules [in the IBM documentation](https://www.ibm.com/docs/i/7.1?topic=rules-names-name).
 
 <details>
    <summary>Learn more</summary>
@@ -107,7 +107,7 @@ Select * From MEMBERS
 where LIBRARY_BIT like '%Ü%'
 ```
 
-![Bad result set](../../../assets/ccsid1.png)
+![Bad result set](/src/assets/code_for_i/other/ccsid1.png)
 
 </details>
 
@@ -139,6 +139,6 @@ However, as a custom addition, IBM have code in sshd to reset your job attribute
 
 However, the PASE converter functions and job CSSID are cached at PASE startup time, so it still thinks the CCSID is 37.
 
-![](./images/ccsid_bug.png)
+![](/src/assets/code_for_i/other/ccsid_bug.png)
 
 </details>

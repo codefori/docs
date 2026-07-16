@@ -16,7 +16,7 @@ If you have not heard of _gitflow_, then it is recommend to read this article on
 
 When using git and IBM i, developers will develop on their local device and build their changes on IBM i, as described in the [Getting started](./getting-started.mdx) section. The gitflow model is a great way to manage this process.
 
-![](./gitflow/devbranches.png)
+![](/src/assets/git/schemas/devbranches.png)
 
 When using gitflow, developers will create a feature branch for each new feature or bug fix they are working on. This allows them to work independently without affecting the main codebase. Once the feature is complete, they can merge it back into the main branch.
 
@@ -34,4 +34,4 @@ As branches get merged, the objects in the mapped build library for that branch 
 
 Additionally, the branch that gets merged into, for example if `feature/abc` is merged into `develop`, will need the mapped branch library updated with the latest object changes from the branch. This is typically done with some automated pipeline, but can also be done manually by a developer. This will happen a lot if you work with more branches.
 
-![](./gitflow/branchlibraries.png)
+![](/src/assets/git/schemas/branchlibraries.png)
