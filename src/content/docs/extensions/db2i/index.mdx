@@ -344,6 +344,76 @@ The following keyboard shortcuts are set by the extension. This can be freely cu
 | Open SQL Document          | `ctrl+alt+n`   | `cmd+alt+n`   |
 | Execute cell               | `ctrl+r`       | `cmd+r`       |
 
+## Commands and Context Menu Options
+
+### Convert a list to CSV in Clipboard
+
+When working in a SQL editor, you can quickly convert a newline-separated selection into a SQL-friendly comma-separated list and copy it to the clipboard.
+
+This is useful for building `IN` clauses from values copied from logs, reports, or spreadsheets.
+
+### Commands
+
+- `Db2 for i: Copy as SQL List`
+- `Db2 for i: Copy as SQL List (Prompt Format)`
+
+Both commands are available via your Context Menu (right-click) when:
+
+- The active editor language is SQL
+- A text selection is active.
+
+### Example
+
+To convert the following, select all 3 lines:
+
+```text
+S10_1678
+3741
+S10_2016
+```
+
+Right-click and select `Copy as SQL List`.
+Then anywhere in the open editor window or anywhere the Paste option is permitted, use the Paste (Ctrl+V on Windows or Cmd+V on Mac).
+
+Output:
+
+```sql
+'S10_1678', '3741', 'S10_2016'
+```
+
+If you select the `Prompt Format` option, you have additional options supported:
+
+The prompted format shows a list of options, similar to the follows:
+
+![](/src/assets/db2_for_i/features/miscellaneous/sql_list_options.png)
+
+- Wrap in parentheses:
+
+```sql
+('S10_1678', '3741', 'S10_2016')
+```
+
+- Numbers unquoted (when numeric values are detected)
+
+```sql
+('S10_1678', 3741, 'S10_2016')
+```
+or
+```sql
+'S10_1678', 3741, 'S10_2016'
+```
+
+### Behavior notes
+
+- Internal single quotes are escaped correctly (example: `O'Brien` becomes `'O''Brien'`)
+- Empty lines are ignored
+- A confirmation appears for very large selections
+- Clipboard write failures show an error message
+
+### Settings
+
+- `vscode-db2i.delimitedList.quoteNumbers` (default: `true`)
+- `vscode-db2i.delimitedList.wrapInParentheses` (default: `false`)
 
 ## AI Integrations
 
