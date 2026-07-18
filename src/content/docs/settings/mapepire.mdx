@@ -9,18 +9,32 @@ Since version 3, Code for IBM i uses Mapepire to access Db2 for i and run querie
 Mapepire can run in two distinct mode. The mode used by Code for IBM i is determined by the `Connect to remote Mapepire server` connection settings described below.
 
 ## Single mode
-This is the mode used by default by Code for IBM i. In this mode, Mapepire is started in the SSH channel opened from VS Code, and it runs indefinitely in that channel, reading requests from the channel's standard input and replying on the channel's standard output. Mapepire is started by Code for IBM i when you connect to the IBM i. Every connection made from VS Code this way creates a Mapepire Java process. Think of Mapepire as a bridge between VS Code and Db2 for i in this case. The single mode is started using `--single` as an argument when running the mapepire.jar file.
+This is the mode used by default by Code for IBM i. In this mode, Mapepire is started in the SSH channel opened from VS Code, and it runs indefinitely in that channel, reading requests from the channel's standard input and replying on the channel's standard output. Mapepire is started by Code for IBM i when you connect to the IBM i. Every connection made from VS Code this way creates a Mapepire Java process.
+
+The default mode used by Code for IBM i. Mapepire is started by Code for IBM i in an SSH channel opened from VS Code, when you first connect to the IBM i. On the IBM i it creates a Java JVM that exists until you disconnect. Mapepire runs endlessly in its SSH channel, reading requests from the channel's standard input and replying on the channel's standard output.
+
+Think of Mapepire as a bridge between VS Code and Db2 for i in this case. The single mode is started using `--single` as an argument when running the mapepire.jar file.
 
 ![assets/mapepire_01.png](/src/assets/settings/mapepire_02.png)
 
 When connecting and using single mode, Code for IBM i will upload the Mapepire jar file under the current user `.vscode` folder under their home directory before starting Mapepire. (i.e. the remote file is `~/.vscode/mapepire-server-X.Y.Z.jar`). Code for IBM i takes care of checking and updating the jar file when needed.
 
+Single mode does not require a HTTPS connection and this may be easier if there are network restrictions. **_But_** when connecting, starting Mapepire adds the overhead of starting a JVM which can be slow on IBM i.  And if there are many connections more IBM i resources may be consumed which might be significant on a smaller machine. And using the `Db2 for i extension` also creates another SSH channel with its own JVM.
+
 ## Server mode
-When using Server mode, Mapepire is assumed to be started beforehand and running on IBM i. As its name implies, it acts as a server, handling every connection coming from clients on port `8076`, by default. One server is used by everyone. Mapepire is not meant to be started from by clients in this case, it wouldn't make sense. hence why it is assumed that it will be running on the remote IBM i. Every client connects to it through HTTPS. The server mode is started using no argument when running mapepire.jar file.
+Mapepire is assumed to have been started beforehand and is running on IBM i. It acts as a shared database server, handling every connection coming from clients (through HTTPS, by default on port `8076`). This one server is used by everyone and to maintain security it must know your password.
+
+When using Server mode, Mapepire is assumed to be started beforehand and running on IBM i. As its name implies, it acts as a server, handling every connection coming from clients on port `8076`, by default. One server is used by everyone. Mapepire is not meant to be started from by clients in this case, it wouldn't make sense. hence why it is assumed that it will be running on the remote IBM i. Every client connects to it through HTTPS.
+
+Mapepire server mode is started using no argument when running the mapepire.jar file. See [Server Install/Config](https://mapepire-ibmi.github.io/guides/sysadmin/)
 
 ![assets/mapepire_01.png](/src/assets/settings/mapepire_03.png)
 
 When connecting and using Server mode, Code for IBM i doesn't upload and use the Mapepire jar file.
+
+Server mode makes the connection faster and it consumes fewer resources globally on the IBM i. **_But_** it requires more initial work on the sys admin side to set up and ensure it is running.
+
+## Pros and cons
 
 ## Client settings
 <CardGrid>
