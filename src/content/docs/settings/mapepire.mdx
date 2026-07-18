@@ -13,11 +13,14 @@ This is the mode used by default by Code for IBM i. In this mode, Mapepire is st
 
 ![assets/mapepire_01.png](/src/assets/settings/mapepire_02.png)
 
+When connecting and using single mode, Code for IBM i will upload the Mapepire jar file under the current user `.vscode` folder under their home directory before starting Mapepire. (i.e. the remote file is `~/.vscode/mapepire-server-X.Y.Z.jar`). Code for IBM i takes care of checking and updating the jar file when needed.
 
 ## Server mode
 When using Server mode, Mapepire is assumed to be started beforehand and running on IBM i. As its name implies, it acts as a server, handling every connection coming from clients on port `8076`, by default. One server is used by everyone. Mapepire is not meant to be started from by clients in this case, it wouldn't make sense. hence why it is assumed that it will be running on the remote IBM i. Every client connects to it through HTTPS. The server mode is started using no argument when running mapepire.jar file.
 
 ![assets/mapepire_01.png](/src/assets/settings/mapepire_03.png)
+
+When connecting and using Server mode, Code for IBM i doesn't upload and use the Mapepire jar file.
 
 ## Client settings
 <CardGrid>
