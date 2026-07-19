@@ -2,14 +2,21 @@
 title: Profiles
 ---
 
-A Connection Profile allows the user to switch between settings quickly. You could use a profile to quickly change library list and other items specific to a project. A profile stores this information:
+import { CardGrid, Card } from '@astrojs/starlight/components';
 
-- The home / working directory
-- The current library
-- The library list
-- The IFS shortcuts
-- The object browser list
-- The database browser list
+A Profile allows the user to switch between settings quickly. You could use a profile to quickly change library list and other items specific to a project. A profile stores the following settings:
+
+<CardGrid>
+  <Card>
+    - Home/working directory
+    - Current library
+    - Library list
+    - Current iASP
+    - Object browser filters
+    - IFS shortcuts
+  </Card>
+  <Card>![assets/settings_01.png](/src/assets/environment/profiles_01.png)</Card>
+</CardGrid>
 
 If you have no existing profiles, you can create your first one from the User Library List view:
 
