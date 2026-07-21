@@ -189,11 +189,12 @@ Here is an example with all execution parameters set in the `testing.json` file:
     |`wrapperCmd` |Wrapper Command         |Specifies a custom command to wrap the `RUCRTCBL` command.                                                                                                                                                                  |        |
   </TabItem>
   <TabItem label="CODECOV" >
-    |Parameter |Name    |Description                                                                                 |Default |
-    |----------|--------|--------------------------------------------------------------------------------------------|--------|
-    |`module`  |Module  |Specifies programs or service programs and optionally modules to include for code coverage. |        |
-    |`testId`  |Test ID |                                                                                            |        |
-    |`exclude` |Exclude |Objects to exclude                                                                          |        |
+    |Parameter    |Name            |Description                                                                                 |Default |
+    |-------------|----------------|--------------------------------------------------------------------------------------------|--------|
+    |`module`     |Module          |Specifies programs or service programs and optionally modules to include for code coverage. |        |
+    |`testId`     |Test ID         |                                                                                            |        |
+    |`exclude`    |Exclude         |Objects to exclude                                                                          |        |
+    |`wrapperCmd` |Wrapper Command |Specifies a custom command to wrap the `CODECOV` command.                                   |        |
   </TabItem>
   <TabItem label="RUCALLTST" >
     |Parameter    |Name              |Description                                                                                                                                                                                                                                                                           |Default  |
@@ -265,7 +266,7 @@ Supported Variables:
 
 
 ## Vendor Integration
-The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specifications are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
+The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST`/`CODECOV` specifications are not actual parameters of the RPGUnit or CODECOV commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
 
 **Example `testing.json` configuration**:
 ```json
@@ -280,7 +281,7 @@ The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specificatio
           "wrapperCmd": {
               "cmd": "MYLIB/MYCMD TSTCMD",
               "params": {
-                  "desc": "My description"
+                  "desc": "My test command description"
               }
           }
       },
@@ -288,8 +289,16 @@ The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specificatio
           "wrapperCmd": {
               "cmd": "MYLIB/MYCMD CALLCMD",
               "params": {
-                  "desc": "My description"
+                  "desc": "My call command description"
               }
+          }
+      }
+  },
+  "codecov": {
+      "wrapperCmd": {
+          "cmd": "MYLIB/MYCMD COVCMD",
+          "params": {
+              "desc": "My coverage description"
           }
       }
   }
@@ -300,13 +309,24 @@ The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specificatio
 MYLIB/MYCMD TSTCMD(RPGUNIT/RUCRTRPG TSTPGM(MYUSER/TEMPDET)
 SRCSTMF('/home/MYUSER/builds/ibmi-company_system/qtestsrc/empdet.test.sqlrpgle')
 TGTCCSID(*JOB) DBGVIEW(*SOURCE) COPTION(*EVENTF) RPGPPOPT(*LVL2)
-INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My description')
+INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My test command description')
 ```
 
-**Execution Command**:
+**Execution Command (without code coverage)**:
 ```js
 MYLIB/MYCMD CALLCMD(RPGUNIT/RUCALLTST TSTPGM(MYUSER/TEMPDET) ORDER(*REVERSE)
 DETAIL(*ALL) OUTPUT(*ALLWAYS) LIBL(*CURRENT) JOBD(*DFT) RCLRSC(*NO)
-XMLSTMF('/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET_1751646914682.xml'))
-DESC('My description')
+XMLSTMF('/home/MYUSER/.vscode/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET-%F.%T.<MSECONDS>.xml')
+XMLTYPE(*VSCODE1) ONFAILURE(*ABORT)) DESC('My call command description')
+```
+
+**Execution Command (with line-level code coverage)**:
+```js
+MYLIB/MYCMD COVCMD(QDEVTOOLS/CODECOV CMD(MYLIB/MYCMD CALLCMD(RPGUNIT/RUCALLTST TSTPGM(MYUSER/TEMPDET)
+ORDER(*REVERSE) DETAIL(*ALL) OUTPUT(*ALLWAYS) LIBL(*CURRENT) JOBD(*DFT) RCLRSC(*NO)
+XMLSTMF('/home/MYUSER/.vscode/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET-%F.%T.<MSECONDS>.xml')
+XMLTYPE(*VSCODE1) ONFAILURE(*ABORT)) DESC('My call command description'))
+MODULE((MYUSER/TEMPDET *SRVPGM *ALL)) CCLVL(*LINE)
+OUTSTMF('/home/MYUSER/.vscode/tmp/vscode-ibmi-testing/CODECOV/TEMPDET_1751646914682.json'))
+DESC('My coverage description')
 ```
