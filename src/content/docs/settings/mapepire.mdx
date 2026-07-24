@@ -22,8 +22,6 @@ Single mode does not require a separate connection and this may be easier if the
 ## Server mode
 Mapepire is assumed to have been started beforehand and is running on IBM i. It acts as a shared database server, handling every connection coming from clients (through a secure WebSocket connection, by default on port `8076`). This one server is used by everyone and it doesn't support private keys and needs a password to maintain security. So you'll either enter a password every time you connect or save your password in your connection.
 
-When using Server mode, Mapepire is assumed to be started beforehand and running on IBM i. As its name implies, it acts as a server, handling every connection coming from clients on port `8076`, by default. One server is used by everyone. Mapepire is not meant to be started from by clients in this case, it wouldn't make sense. Hence why it is assumed that it will be running on the remote IBM i. Every client connects to it through a secure WebSocket.
-
 Mapepire server mode is started using no argument when running the mapepire.jar file. See [Server Install/Config](https://mapepire-ibmi.github.io/guides/sysadmin/)
 
 ![assets/mapepire_01.png](/src/assets/settings/mapepire_03.png)
