@@ -2,12 +2,22 @@
 title: Profiles
 ---
 
-import { CardGrid, Card } from '@astrojs/starlight/components';
-
-A Profile allows the user to switch between settings quickly. You could use a profile to quickly change library list and other items specific to a project. A profile stores the following settings:
+import { CardGrid, Card, Aside } from '@astrojs/starlight/components';
 
 <CardGrid>
   <Card>
+    A Profile allows the user to switch between settings quickly. You could use a profile to quickly change library list and other items specific to a project.
+  </Card>
+  <Card>
+    ![Profiles](/src/assets/environment/profiles_04.png)
+  </Card>
+</CardGrid>
+
+
+
+<CardGrid>
+  <Card>
+    A profile stores the following settings:
     - Home/working directory
     - Current library
     - Library list
@@ -18,24 +28,93 @@ A Profile allows the user to switch between settings quickly. You could use a pr
   <Card>![assets/settings_01.png](/src/assets/environment/profiles_01.png)</Card>
 </CardGrid>
 
-If you have no existing profiles, you can create your first one from the User Library List view:
+## Manage profiles
 
-![Save Profile](/src/assets/code_for_i/features/environment_profiles/Connect_Profile_Save_01.png)
+### Create a profile
+You can create a profile using the `Profiles` node inline actions. You'll have two options:
+- Create a new blank profile
+- Create a profile based on the current context
 
-After your first profile has been created, the Profiles view will become available. The Profiles view allows you to quickly switch between profiles, as well as update and delete existing profiles. The Profiles view will also show you what the last profile you set is.
+<CardGrid>
+  <Card>
+    ![New Profile](/src/assets/environment/profiles_02.png)
+  </Card>
+  <Card>
+    ![New Profile from current context](/src/assets/environment/profiles_03.png)
+  </Card>  
+</CardGrid>
 
-In the profiles view, the save button in the header bar will prompt the user to save into a brand new profile. You can right click on a profile and save to update a profile.
+You'll be asked for the new profile's name and then the profile editor will open to let you edit/review the profile's settings.
 
-**Changing any of the settings** will not update the profile. If you change the library list and want this to reflect on the profile, you can save over the profile or into a new one.
+### Edit a profile
+Click on a profile to open the profile editor and change its settings.
 
-## Command Profiles
+Only the following settings can be changed from the profile editor:
+- Home/working directory
+- Current library
+- Library list
+- Current iASP
+- Library list command
 
-Command Profiles are special types of profiles that only update the user library list and current library. Command Profiles are created from ILE/CL commands that set the library list and/or the current library.
+The Object filters, IFS shortcuts and Custom variable can only be changed when the profile is active.
 
-When creating a Command Profile, a ILE/CL command is provided that would set the user library list and current library for a job. This is especially useful when working with change management that has commands to setup the user environment.
+<Aside type="note">
+    Editing the currently active profile will open the profile editor in read-only mode, except for the `Library list command` field.
+</Aside>
 
-You can switch between Command Profiles and Connection Profiles as often as you like.
+#### Library list command
+This setting replaces what used to be called `Command Profiles` before Code for IBM i version 3.x.
+The library list command lets you define a CL command that will be executed when the profile becomes active and set the current library and user library list.
 
-![Save Profile](/src/assets/code_for_i/features/environment_profiles/command_profile.png)
+Put `?` in front of the command to prompt it before its execution.
 
-Command Profiles can only be created after the first Connection Profile has been made.
+![Profiles options](/src/assets/environment/profiles_11.png)
+
+<Aside type="note">
+    This is especially useful when working with change management that has commands to setup the user environment.
+</Aside>
+
+### Rename/Copy/Delete
+<CardGrid>
+  <Card>    
+    Right click on a profile to get access to the following actions:
+    - Rename
+    - Copy
+    - Delete
+  </Card>
+  <Card>
+    ![Profiles options](/src/assets/environment/profiles_05.png)
+  </Card>  
+</CardGrid>
+
+## Activate/switch between profiles
+To activate a profile, click on the Set as active profile inline action next to the profile you want to activate.
+
+![Profiles options](/src/assets/environment/profiles_06.png)
+
+When a profile is active, it is highlighted in green in the Environment view and it's name is displayed in the view's title bar.
+
+<Aside type="note">
+    If another profile was already active, its settings are automatically saved before activating the new one.
+</Aside>
+
+![Current profile](/src/assets/environment/profiles_07.png)
+
+The current profile name is also shown next to the connection's name in the bottom status bar.
+
+![Current profile bottom](/src/assets/environment/profiles_08.png)
+
+### Profiles with a library list command
+When a profile with a `Library list command` becomes active, the profile's current library and user library list is updated, based on the job's after the command is executed.
+
+The command can be executed again at any time by clicking on the `Run Library List Command` profile's inline action.
+![liblist command profile](/src/assets/environment/profiles_09.png)
+
+## Unload active profile
+You can unload the active profile and go back to your default context by clicking on the Profiles node's `Unload active profile` inline action.
+
+![liblist command profile](/src/assets/environment/profiles_10.png)
+
+<Aside type="note">
+    The active profile is automatically saved before being unloaded.
+</Aside>
