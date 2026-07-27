@@ -1,77 +1,60 @@
 ---
-title: Custom variables
+title: Custom Variables
 ---
 
-import { CardGrid, Card } from '@astrojs/starlight/components';
+import { CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+You can create custom variable to use in your Actions' `Command to run` strings.    
 
 <CardGrid>
+  <Card>    
+    ![variables](/src/assets/environment/variables_01.png)
+  </Card>
+  <Card>    
+    ![variable in command](/src/assets/environment/variables_02.png)
+  </Card>
+</CardGrid>
 
-<Card>
-
-You can create custom variable to use in your "Command to run" strings. To access custom variables:
-
-Use <kbd>F1</kbd>, then search for "IBM i Custom variables":
-
-</Card><Card>
-
- ![F1 + IBM i Custom Variable](/src/assets/code_for_i/features/actions/actions_custom_01.png)
-
-</Card></CardGrid>
+<Aside type="note">
+    Variables are defined at the profile level, which means that different profiles can define the same variables with different values.
+</Aside>
 
 ---
 
+## Manage custom variables
+
+### Create a custom variable
+You can create a profile using the `Custom Variables` node  `Declare custom variable` inline action.
+
+![create](/src/assets/environment/variables_03.png)
+
+You'll be asked for the new variable's name and then for its value.
+
+### Change custom variable value
+Click on a custom variable to open a prompt asking for the new value.
+
+![create](/src/assets/environment/variables_04.png)
+
+
+### Rename/Copy/Delete
 <CardGrid>
+  <Card>    
+    Right click on a profile to get access to the following actions:
+    - Rename
+    - Copy
+    - Delete
+  </Card>
+  <Card>
+    ![Variables options](/src/assets/environment/variables_05.png)
+  </Card>  
+</CardGrid>
 
-<Card>
- 
- Or from the User Library List browser:
+## Example Usage
 
-</Card><Card>
-
-![Library List Browser](/src/assets/code_for_i/features/actions/actions_custom_01a.png)
-
-</Card></CardGrid>
-
----
-
-<CardGrid>
-
-<Card>
-
-In the **Work with Variables** tab, click on **New Variable** to add your variable.
-
-Click on a custom variable to change it or delete it.
-
-</Card><Card>
-
-![Variables list after Save](/src/assets/code_for_i/features/actions/actions_custom_04.png)
-
-</Card></CardGrid>
-
----
-
-<CardGrid>
-
-<Card>
-
-Here we are adding a variable named `&TARGET_RLSE`.
-
-Press Save and the list of custom variables is shown.
-
-</Card><Card>
-
-![Adding TARGET_RLSE](/src/assets/code_for_i/features/actions/actions_custom_03.png)
-
-</Card></CardGrid>
-
----
-
-#### *Example Usage*
-
-In all the  CRTBNDxxx actions add TGTRLS(&TARGET_RLSE), like this:
+In all the `CRTBNDxxx` actions, add `TGTRLS(&TARGET_RLS)`, like this:
 
 ```CL
-?CRTBNDCL PGM(&OPENLIB/&OPENMBR) SRCFILE(&OPENLIB/&OPENSPF) OPTION(*EVENTF) DBGVIEW(*SOURCE)  TGTRLS(&TARGET_RLSE)
+?CRTBNDCL PGM(&OPENLIB/&OPENMBR) SRCFILE(&OPENLIB/&OPENSPF) OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTRLS(&TARGET_RLS)
 ```
 
-Now a single change to the TARGET_RLSE custom variable can impact all the CRTBNDxxx actions.
+Now a single change to the TARGET_RLS custom variable can impact all the CRTBNDxxx actions.
