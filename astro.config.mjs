@@ -132,17 +132,7 @@ export default defineConfig({
 							},
 							{
 								label: 'Actions',
-								collapsed: true,
-								items: [
-									{
-										label: 'Work with actions',
-										link: 'environment/actions/',
-									},
-									{
-										label: 'Execution',
-										link: 'environment/actions/execution',
-									}
-								]
+								link: 'environment/actions/',
 							},
 							{
 								label: 'Custom variables',
