@@ -509,6 +509,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"settings/mapepire.mdx": {
+	id: "settings/mapepire.mdx";
+  slug: "settings/mapepire";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "settings/profiles.mdx": {
 	id: "settings/profiles.mdx";
   slug: "settings/profiles";
@@ -638,5 +645,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("../../src/content/config.js");
+	export type ContentConfig = typeof import("./../../src/content/config.js");
 }
