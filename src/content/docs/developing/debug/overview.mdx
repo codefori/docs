@@ -202,18 +202,20 @@ If you find that you've added your local hostname entry and the error is still o
 **Answer**: Please check the following settings in the Settings page: **Features > Debug > Allow Breakpoints Everywhere > Allow setting breakpoints in any file**
 
 **Question**: What is the JRE requirement for running the debug service?  
-**Answer**: Here are the supported Java versions for different OS levels in Debug Service v3.0.4:
+**Answer**: The supported Java versions for different OS levels in Debug Service v3.0.4 and higher are::
 
     IBM i 7.6: Java 17
     IBM i 7.4/7.5: Java 11 and Java 17 (Default: Java 11)
     IBM i 7.3: Java 11
 
-**Question**: How can I use Java 17 to start debug service on IBM i 7.4/7.5?  
-**Answer**: You can switch to Java 17 by modifying a setting in host file /QIBM/ProdData/IBMiDebugService/bin/DebugService.env. You can change the following setting
+For Debug Service v3.0.0 to v3.0.3, Java 11 is required on IBM i 7.3/7.4/7.5. Java 17 is required on IBM i 7.6.
+
+**Question**: How can I use Java 17 to start debug service on IBM i 7.4/7.5 for debug service v3.0.4 and higher?  
+**Answer**: You can switch to Java 17 by modifying a setting in host file /QIBM/ProdData/IBMiDebugService/bin/DebugService.env. You can change the following setting and then restart the debug service.
 
     DBGSRV_JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit
 
-to
+Change the setting above to the following to use Java 17:
 
     DBGSRV_JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit
 
