@@ -202,10 +202,20 @@ If you find that you've added your local hostname entry and the error is still o
 **Answer**: Please check the following settings in the Settings page: **Features > Debug > Allow Breakpoints Everywhere > Allow setting breakpoints in any file**
 
 **Question**: What is the JRE requirement for running the debug service?  
-**Answer**: A Java 11 JRE is required to run IBM i Debug Service on IBM i below 7.6. A Java 17 JRE is required to run IBM i Debug Service on IBM i 7.6. You can use the **JAVA_HOME** environment variable to specify a runtime JRE. If **JAVA_HOME** is not set, the following runtime JREs will be used:
+**Answer**: Here are the supported Java versions for different OS levels in Debug Service v3.0.4:
 
-    /QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit (IBM i below 7.6)  
-    /QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit (IBM i 7.6)  
+    IBM i 7.6: Java 17
+    IBM i 7.4/7.5: Java 11 and Java 17 (Default: Java 11)
+    IBM i 7.3: Java 11
+
+**Question**: How can I use Java 17 to start debug service on IBM i 7.4/7.5?  
+**Answer**: You can switch to Java 17 by modifying a setting in host file /QIBM/ProdData/IBMiDebugService/bin/DebugService.env. You can change the following setting
+
+    DBGSRV_JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit
+
+to
+
+    DBGSRV_JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit
 
 **Question**: How can I start IBM i Debug Service?  
 **Answer**: You can start IBM i Debug Service using one of the following solutions:
@@ -223,12 +233,10 @@ If you find that you've added your local hostname entry and the error is still o
     QSH CMD('/QIBM/ProdData/IBMiDebugService/bin/stopDebugService.sh') 
 
 **Question**: How can I start IBM i Debug Service from a 5250 terminal?  
-**Answer**: You can start IBM i Debug Service from a 5250 terminal using the following command on IBM i 7.3 to 7.5:
+**Answer**: You can start IBM i Debug Service from a 5250 terminal using the following command:
 
-    SBMJOB USER(QDBGSRV) CURLIB(QGPL) JOB(QDBGSRV) JOBQ(QSYS/QUSRNOMAX) JOBD(*USRPRF) OUTQ(QUSRSYS/QDBGSRV) CMD(QSH CMD('export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit;/QIBM/ProdData/IBMiDebugService/bin/startDebugService.sh > /QIBM/UserData/IBMiDebugService/startDebugService_workspace/startDebugServiceNavigator.log 2>&1'))  
+    SBMJOB USER(QDBGSRV) CURLIB(QGPL) JOB(QDBGSRV) JOBQ(QSYS/QUSRNOMAX) JOBD(*USRPRF) OUTQ(QUSRSYS/QDBGSRV) CMD(QSH CMD('/QIBM/ProdData/IBMiDebugService/bin/startDebugService.sh > /QIBM/UserData/IBMiDebugService/startDebugService_workspace/startDebugServiceNavigator.log 2>&1'))  
 
-
-On IBM i 7.6, you need to change "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk11/64bit" to "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit".
 
 **Question**: What port numbers are used by the debug service?  
 **Answer**: IBM i Debug Service uses three port numbers: the debug daemon port (default is 8001), the secure debug port (default is 8005) and the service entry point daemon port (default is 8008). The secure debug port is used by the secure communication between the debug service and the debug client. The debug daemon port is only used to stop the debug service. The service entry point daemon port is used for service entry point communication.
@@ -268,7 +276,7 @@ You need to restart the debug service after changing a port number.
 - V7R5 PTF  SI82343
 
 **Question**: I do not have the QDBGSRV user profile after installing the debug service on IBM i 7.5.  
-**Answer**: The debug service PTFs on 7.3/7.4/7.5 are update installs. An update install depends on a previous installation of the debug service PTF. The update install does not create the QDBGSRV user profile. If you have not installed debug service before, please install the v1 debug service PTF first, and then update the debug service PTF to the next levels.
+**Answer**: Starting from v3.0.4, Debug Service will create the user profile QDBGSRV if it does not exist on the host machine.
 
 **Question**: I am getting the error that the startDebugServiceNavigator.log file cannot be created when starting debug service.  
 **Answer**: You can use the "DSPAUT OBJ('ifs_path')" command to verify the authority of the following IFS folders:
