@@ -152,9 +152,9 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"docs": {
-"browsers/goToFile.mdx": {
-	id: "browsers/goToFile.mdx";
-  slug: "browsers/gotofile";
+"browsers/go-to-file.mdx": {
+	id: "browsers/go-to-file.mdx";
+  slug: "browsers/go-to-file";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

@@ -165,7 +165,7 @@ export default defineConfig({
 							},
 							{
 								label: 'Go To File',
-								link: 'browsers/goToFile/',
+								link: 'browsers/go-to-file/',
 							},
 							{
 								label: 'IBM i FileSystem',
