@@ -9,7 +9,7 @@ import { CardGrid, Card, Aside } from '@astrojs/starlight/components';
     A Profile allows the user to switch between settings quickly. You could use a profile to quickly change library list and other items specific to a project.
   </Card>
   <Card>
-    ![Profiles](/src/assets/environment/profiles_04.png)
+    ![Profiles](../../../assets/environment/profiles_04.png)
   </Card>
 </CardGrid>
 
@@ -23,7 +23,7 @@ import { CardGrid, Card, Aside } from '@astrojs/starlight/components';
     - Object browser filters
     - IFS shortcuts
   </Card>
-  <Card>![assets/settings_01.png](/src/assets/environment/profiles_01.png)</Card>
+  <Card>![assets/settings_01.png](../../../assets/environment/profiles_01.png)</Card>
 </CardGrid>
 
 ---
@@ -37,10 +37,10 @@ You can create a profile using the `Profiles` node inline actions. You'll have t
 
 <CardGrid>
   <Card>
-    ![New Profile](/src/assets/environment/profiles_02.png)
+    ![New Profile](../../../assets/environment/profiles_02.png)
   </Card>
   <Card>
-    ![New Profile from current context](/src/assets/environment/profiles_03.png)
+    ![New Profile from current context](../../../assets/environment/profiles_03.png)
   </Card>  
 </CardGrid>
 
@@ -68,7 +68,7 @@ The library list command lets you define a CL command that will be executed when
 
 Put `?` in front of the command to prompt it before its execution.
 
-![Profiles options](/src/assets/environment/profiles_11.png)
+![Profiles options](../../../assets/environment/profiles_11.png)
 
 <Aside type="note">
     This is especially useful when working with change management that has commands to setup the user environment.
@@ -83,7 +83,7 @@ Put `?` in front of the command to prompt it before its execution.
     - Delete
   </Card>
   <Card>
-    ![Profiles options](/src/assets/environment/profiles_05.png)
+    ![Profiles options](../../../assets/environment/profiles_05.png)
   </Card>  
 </CardGrid>
 
@@ -92,7 +92,7 @@ Put `?` in front of the command to prompt it before its execution.
 ## Activate/switch between profiles
 To activate a profile, click on the Set as active profile inline action next to the profile you want to activate.
 
-![Profiles options](/src/assets/environment/profiles_06.png)
+![Profiles options](../../../assets/environment/profiles_06.png)
 
 When a profile is active, it is highlighted in green in the Environment view and it's name is displayed in the view's title bar.
 
@@ -100,24 +100,24 @@ When a profile is active, it is highlighted in green in the Environment view and
     If another profile was already active, its settings are automatically saved before activating the new one.
 </Aside>
 
-![Current profile](/src/assets/environment/profiles_07.png)
+![Current profile](../../../assets/environment/profiles_07.png)
 
 The current profile name is also shown next to the connection's name in the bottom status bar.
 
-![Current profile bottom](/src/assets/environment/profiles_08.png)
+![Current profile bottom](../../../assets/environment/profiles_08.png)
 
 ### Profiles with a library list command
 When a profile with a `Library list command` becomes active, the profile's current library and user library list is updated, based on the job's after the command is executed.
 
 The command can be executed again at any time by clicking on the `Run Library List Command` profile's inline action.
-![liblist command profile](/src/assets/environment/profiles_09.png)
+![liblist command profile](../../../assets/environment/profiles_09.png)
 
 ---
 
 ## Unload active profile
 You can unload the active profile and go back to your default context by clicking on the Profiles node's `Unload active profile` inline action.
 
-![liblist command profile](/src/assets/environment/profiles_10.png)
+![liblist command profile](../../../assets/environment/profiles_10.png)
 
 <Aside type="note">
     The active profile is automatically saved before being unloaded.

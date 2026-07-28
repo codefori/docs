@@ -68,20 +68,20 @@ Once the PTFs are installed, you can install the library via the extension using
 <Steps>
   1. Connect to your IBM i system.
   2. Open the connection settings by hovering on the connection in the status bar and selecting **Settings**.
-    ![Connection Settings](/src/assets/i_testing/Testing_ConnectionSettings.png)
+    ![Connection Settings](../../../../assets/i_testing/Testing_ConnectionSettings.png)
   3. Navigate to the **Components** tab and select **Install component**.
-    ![Components](/src/assets/i_testing/Testing_Components.png)
+    ![Components](../../../../assets/i_testing/Testing_Components.png)
   4. Select *RPGUnit* from the list of available components to install and click **Ok**.
-    ![Install Component](/src/assets/i_testing/Testing_InstallComponent.png)
+    ![Install Component](../../../../assets/i_testing/Testing_InstallComponent.png)
   5. Select the GitHub release to install from. In most cases this will be the latest, but you can also select a specific version. More information on each release can be found on the [irpgunit GitHub Releases](https://github.com/tools-400/irpgunit/releases) page.
-    ![GitHub Releases](/src/assets/i_testing/Testing_GitHubReleases.png)
+    ![GitHub Releases](../../../../assets/i_testing/Testing_GitHubReleases.png)
   6. The extension will begin installing the `RPGUNIT` library on your IBM i system. You can monitor the installation progress in the **IBM i Testing** output channel. This will log all commands executed during the installation as well as any errors or warnings. You will see a notification once the installation is successful or fails.
-    ![Installation Logs](/src/assets/i_testing/Testing_InstallationLogs.png)
+    ![Installation Logs](../../../../assets/i_testing/Testing_InstallationLogs.png)
 </Steps>
 
 <Aside type="note">
   By default, `RPGUNIT` is the name of the RPGUnit product library which will be installed on the host and the library is accessible by all users. The library name can be configured if necessary by going to the extension's settings and searching for the **Product Library** setting.
-  ![Product Library](/src/assets/i_testing/Testing_ProductLibrary.png)
+  ![Product Library](../../../../assets/i_testing/Testing_ProductLibrary.png)
   To manage access to the testing framework, specify a different product library name and install the testing framework to that library.  Then configure access to the library by excluding public user access and adding access for specific users or groups.
 </Aside>
 

@@ -15,7 +15,7 @@ import { Aside, CardGrid, Card, Steps } from '@astrojs/starlight/components';
 
 The [IBM i Testing CLI](https://www.npmjs.com/package/@ibm/itest) (`itest`) is a companion to the [IBM i Testing](https://marketplace.visualstudio.com/items?itemName=IBM.vscode-ibmi-testing) VS Code extension, which allows you to run unit tests and generate code coverage results for RPG and COBOL programs on IBM i. With this CLI, you can run tests in your terminal on your local PC or in PASE on IBM i. This enables you to even script the execution of tests in a CI/CD pipeline.
 
-![](/src/assets/i_testing/Testing_CLI.png)
+![](../../../../assets/i_testing/Testing_CLI.png)
 
 ## Installation
 
@@ -141,6 +141,6 @@ Given that this CLI tool can be used to run tests from the command line, it can 
 
 This step can be used in a workflow that is triggered on pull requests to ensure that all tests pass and code coverage is acceptable before allowing the pull request to be merged. The markdown summary report can even be rendered in the PR comments making it easier for reviewers to see the results.
 
-![](/src/assets/i_testing/Testing_GitHubAction.png)
+![](../../../../assets/i_testing/Testing_GitHubAction.png)
 
 Check out the full [pr.yaml](https://github.com/IBM/ibmi-company_system/blob/main/.github/workflows/pr.yaml) file example in the [ibmi-company_system](https://github.com/IBM/ibmi-company_system) repository. This workflow showcases an end-to-end CI/CD pipeline that consists of build, impact analysis, unit tests, and code coverage!
