@@ -152,9 +152,9 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"docs": {
-"browsers/goToFile.mdx": {
-	id: "browsers/goToFile.mdx";
-  slug: "browsers/gotofile";
+"browsers/go-to-file.mdx": {
+	id: "browsers/go-to-file.mdx";
+  slug: "browsers/go-to-file";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -225,27 +225,6 @@ declare module 'astro:content' {
 "dev/variables.mdx": {
 	id: "dev/variables.mdx";
   slug: "dev/variables";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"developing/actions/custom-vars.mdx": {
-	id: "developing/actions/custom-vars.mdx";
-  slug: "developing/actions/custom-vars";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"developing/actions/execution.mdx": {
-	id: "developing/actions/execution.mdx";
-  slug: "developing/actions/execution";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"developing/actions/index.mdx": {
-	id: "developing/actions/index.mdx";
-  slug: "developing/actions";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -372,6 +351,34 @@ declare module 'astro:content' {
 "developing/testing/writing.mdx": {
 	id: "developing/testing/writing.mdx";
   slug: "developing/testing/writing";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"environment/actions.mdx": {
+	id: "environment/actions.mdx";
+  slug: "environment/actions";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"environment/index.mdx": {
+	id: "environment/index.mdx";
+  slug: "environment";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"environment/profiles.mdx": {
+	id: "environment/profiles.mdx";
+  slug: "environment/profiles";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
+"environment/variables.mdx": {
+	id: "environment/variables.mdx";
+  slug: "environment/variables";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -512,13 +519,6 @@ declare module 'astro:content' {
 "settings/mapepire.mdx": {
 	id: "settings/mapepire.mdx";
   slug: "settings/mapepire";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".mdx"] };
-"settings/profiles.mdx": {
-	id: "settings/profiles.mdx";
-  slug: "settings/profiles";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

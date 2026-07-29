@@ -61,7 +61,7 @@ If you are doing this workshop as part of a hosted lab, then a user profile and 
 #### Install the IBM i Database Driver (Windows)
 
 * [Download the driver for Windows from IBM](https://www.ibm.com/support/pages/ibm-i-access-client-solutions)
-* [Download the driver mirror from GitHub](https://github.com/codefori/docs/blob/main/src/assets/git/other/IBMiAccess_v1r1_WindowsAP_English.zip)
+* [Download the driver mirror from GitHub](https://github.com/codefori/docs/blob/main../../../../assets/git/other/IBMiAccess_v1r1_WindowsAP_English.zip)
 
 ---
 
@@ -89,7 +89,7 @@ Select 'Use this template' and 'Create a new repository'. Fill out your new repo
 
 Ether use the same name as the template, or give it your own unique name. Either way, press 'Create Repository'
 
-![](/src/assets/node_js/git_repo/a_setup_template.png)
+![](../../../../assets/node_js/git_repo/a_setup_template.png)
 
 ### Clone the repository in VS Code
 
@@ -103,7 +103,7 @@ VS Code may as if you want to sign in with GitHub. Make sure that you do to make
 
 </Card><Card>
 
-![](/src/assets/node_js/git_repo/b_clone.png)
+![](../../../../assets/node_js/git_repo/b_clone.png)
 
 </Card></CardGrid>
 
@@ -115,7 +115,7 @@ After you select your repository, it will ask if you want to 'Open' or 'Open in 
 
 </Card><Card>
 
-![](/src/assets/node_js/git_repo/b_clone_name.png)
+![](../../../../assets/node_js/git_repo/b_clone_name.png)
 
 </Card></CardGrid>
 
@@ -131,7 +131,7 @@ Replace the values in the `.env` file with your own IBM i credentials. If you're
 
 </Card><Card>
 
-![](/src/assets/node_js/setup/c_envsetup.png)
+![](../../../../assets/node_js/setup/c_envsetup.png)
 
 </Card></CardGrid>
 
@@ -139,7 +139,7 @@ Replace the values in the `.env` file with your own IBM i credentials. If you're
 
 The next step is to install the dependencies. Open a terminal in VS Code and run `npm install` (or `npm i` for short!). Use Control + ` (backtick) to open the terminal.
 
-![](/src/assets/node_js/setup/d_npm.png)
+![](../../../../assets/node_js/setup/d_npm.png)
 
 <Aside type="note">
 If your application doesn't start up, it usually means the app failed to connect to the database. Check the `.env` file and ensure the credentials are correct.
@@ -149,7 +149,7 @@ If your application doesn't start up, it usually means the app failed to connect
 
 The template comes with a launch configuration for debugging. Press F5 to start the debugger, or select the 'Run and Debug' button in the sidebar as shown in the screenshot. This will start the application and attach the debugger to it.
 
-![](/src/assets/node_js/miscellaneous/e_debug.png)
+![](../../../../assets/node_js/miscellaneous/e_debug.png)
 
 <Aside type="note">
 Remembering how to start the debugger is important, as we will be using it a lot in this workshop.
@@ -157,7 +157,7 @@ Remembering how to start the debugger is important, as we will be using it a lot
 
 You can access the site by using `localhost`, followed by the port number (`PORT` variable) defined in the `.env` file.
 
-![](/src/assets/node_js/miscellaneous/e_result.png)
+![](../../../../assets/node_js/miscellaneous/e_result.png)
 
 <Aside type="note">
 The source for the root route (`localhost:3000/`) is in `src/routes/index.ts`. This is the first file we will be working with in the next section.
@@ -169,13 +169,13 @@ The source for the root route (`localhost:3000/`) is in `src/routes/index.ts`. T
 
 To test that we have a valid database connection, we can uncomment the test route in `src/routes/index.ts`. This route will execute a simple select statement against the database and return the results.
 
-![](/src/assets/node_js/setup/f_enable.png)
+![](../../../../assets/node_js/setup/f_enable.png)
 
 ### Debugging the route
 
 To test the route, we can use the debugger. Start the debugger as we did earlier, and then open a browser to `localhost:3000/test`. This will hit the route and return the results. You can also use Thunder Client to test the route. Under the Thunder Client view, use the 'New Request' button, which opens a brand new tab where you can enter the address you are testing.
 
-![](/src/assets/node_js/miscellaneous/f_test.png)
+![](../../../../assets/node_js/miscellaneous/f_test.png)
 
 ## Understanding our API
 
@@ -189,7 +189,7 @@ To visualise the APIs, we are going to use a tool called Swagger UI. This is a w
 
 Head over to the [classic Swagger Editor here](https://editor.swagger.io/), and then paste the gist provided above.
 
-![](/src/assets/node_js/miscellaneous/g_api.png)
+![](../../../../assets/node_js/miscellaneous/g_api.png)
 
 As you can see from the screenshot, we have a few routes defined. We are going to build these routes in the next section.
 
@@ -224,7 +224,7 @@ export default root;
 
 Update `src/index.ts` to include the new route:
 
-![](/src/assets/node_js/routes/h_addroute.png)
+![](../../../../assets/node_js/routes/h_addroute.png)
 
 </Card></CardGrid>
 
@@ -234,7 +234,7 @@ Anything route defined in this new `employees.ts` file will be prefixed with `/e
 
 To test the route, we can use the debugger. Start the debugger as we did earlier, and then open a browser to `localhost:3000/employees` (or use Thunder Client). This will hit the route and return the results.
 
-![](/src/assets/node_js/routes/h_testroute.png)
+![](../../../../assets/node_js/routes/h_testroute.png)
 
 ### Matching the specificiation
 
@@ -281,19 +281,19 @@ When we run this SQL statement, we will get an array of objects that match the s
 
 Let's update the root route in `src/routes/employees.ts` to execute and return the result set of this statement.
 
-![](/src/assets/node_js/routes/i_addroute.png)
+![](../../../../assets/node_js/routes/i_addroute.png)
 
 We can test the route by calling `localhost:3000/employees` in the browser or Thunder Client.
 
-![](/src/assets/node_js/routes/i_testroute.png)
+![](../../../../assets/node_js/routes/i_testroute.png)
 
 But, notice that our result JSON doesn't match the specification. We still need to add the `length` key to the response. We can do this by wrapping the result set in an object that contains the `length` key.
 
-![](/src/assets/node_js/routes/j_fixroute.png)
+![](../../../../assets/node_js/routes/j_fixroute.png)
 
 Now, when we test the route, we should see the correct response.
 
-![](/src/assets/node_js/routes/j_testroute.png)
+![](../../../../assets/node_js/routes/j_testroute.png)
 
 ## Building a second route (departments)
 
@@ -338,7 +338,7 @@ export default root;
 
 Update `src/index.ts` to include the new route:
 
-![](/src/assets/node_js/routes/k_createroute.png)
+![](../../../../assets/node_js/routes/k_createroute.png)
 
 </Card></CardGrid>
 
@@ -348,7 +348,7 @@ Note that in the `/departments` result set, we already created it to match the '
 
 If you took part in the Git and RPGLE workshop and created the `DEPTS` SQL RPGLE program, then you know that the program returns an SQL result set. We can call this program from our Node.js application and return the result set too! Simply replace the `select` statement with a `call` to the program.
 
-![](/src/assets/node_js/routes/k_rpgle.png)
+![](../../../../assets/node_js/routes/k_rpgle.png)
 
 If you compare the programs result set to the required output of 'GET /departments' in the Swagger Editor, you will see that they do not match. The columns from the program are incorrect. Here is a challenge for you, either:
 
@@ -400,7 +400,7 @@ Now we have two routes in the `/departments` route:
 
 We can test the new route by calling `localhost:3000/departments` in the browser or Thunder Client, and then `localhost:3000/departments/xxx` where `xxx` is a department number.
 
-![](/src/assets/node_js/routes/l_testroute.png)
+![](../../../../assets/node_js/routes/l_testroute.png)
 
 <Aside type="note">
 Make sure the resulting object matches the specification in the Swagger Editor.
@@ -475,7 +475,7 @@ There is a lot of logic happening in this code.
 
 This new route can only be called with a `PATCH` request, which means we cannot test this in the browser very easily. We can test the new route by calling `localhost:3000/departments/xxx` in Thunder Client, with a `PATCH` request and a body with the properties to update.
 
-![](/src/assets/node_js/miscellaneous/m_patchtest.png)
+![](../../../../assets/node_js/miscellaneous/m_patchtest.png)
 
 <Aside type="note">
 There are lot of issues with the PATCH code. For example, we are not validating the input, we are not handling errors, and we are not returning the correct status codes. This is a good exercise to improve the code.
@@ -494,7 +494,7 @@ We need to do two things:
 
 Following that, we need to follow the simple [OpenApi Validator tutorial](https://www.npmjs.com/package/express-openapi-validator) to add the validator to our application. The following changes are to be made to `src/index.ts`:
 
-![](/src/assets/node_js/validator/n_addvalidator.png)
+![](../../../../assets/node_js/validator/n_addvalidator.png)
 
 ### Testing the validator
 
@@ -503,7 +503,7 @@ The validator will now check that the inputs and outputs of API calls match the 
 * `localhost:3000/departments/B01` (valid)
 * `localhost:3000/departments/B0` (invalid)
 
-![](/src/assets/node_js/validator/n_testvalidator.png)
+![](../../../../assets/node_js/validator/n_testvalidator.png)
 
 <Aside type="note">
 Perhaps after adding the validator some of your API calls are no longer working, or are returning errors. This is a good thing! It means that the validator is working and that your API is not matching the specification. You can now go back and fix the API to match the specification.
