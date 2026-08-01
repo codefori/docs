@@ -2,6 +2,9 @@
 title: API
 sidebar:
     order: 3
+    badge:
+      text: Updated
+      variant: success
 ---
 
 It is possible to write VS Code extensions that are based on Code for IBM i. That means your extension can use the connection that the user creates in your extension. This is not an extension tutorial, but an intro on how to access the APIs available within Code for IBM i.
