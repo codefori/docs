@@ -1,13 +1,13 @@
-import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import rpgleLang from './src/syntaxes/rpgle.tmLanguage.json';
+import { defineConfig } from 'astro/config';
 import clLang from './src/syntaxes/cl.tmLanguage.json';
+import rpgleLang from './src/syntaxes/rpgle.tmLanguage.json';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://codefori.github.io',
 	base: '/docs',
-	trailingSlash: 'always',	
+	trailingSlash: 'always',
 	integrations: [
 		starlight({
 			pagination: false,
@@ -26,52 +26,47 @@ export default defineConfig({
 			customCss: [
 				'./src/styles/custom.css',
 			],
-			sidebar: 
-			[
-				{
-					label: 'Home',
-					link: '/',
-				},
-				{
-					label: 'Install',
-					link: 'install/',
-				},
-				{
-					label: 'Quick Start',
-					link: 'quickstart/',
-					badge: {
-						variant: 'note',
-						text: 'Start Here!'
-					}
-				},
-				{
-					label: 'Help and Support',
-					link: 'help-and-support/',
-				},
-				{
-					label: 'Developing',
-					items: [
-						{
-							label: 'Editing and compiling',
-							link: 'developing/editing-compiling/',
-						},
-						{
-							label: 'Source Dates',
-							link: 'developing/sourcedates/',
-						},
-						{
-							label: 'Actions',
-							autogenerate: { directory: 'developing/actions/' },
-							collapsed: true,
-						},
-						{
-							label: 'Testing',
-							badge: {
-								text: 'NEW',
-								variant: 'tip'
+			sidebar:
+				[
+					{
+						label: 'Home',
+						link: '/',
+					},
+					{
+						label: 'Install',
+						link: 'install/',
+					},
+					{
+						label: 'Quick Start',
+						link: 'quickstart/',
+						badge: {
+							variant: 'note',
+							text: 'Start Here!'
+						}
+					},
+					{
+						label: 'Help and Support',
+						link: 'help-and-support/',
+					},
+					{
+						label: 'Developing',
+						items: [
+							{
+								label: 'Editing and compiling',
+								link: 'developing/editing-compiling/',
 							},
-							collapsed: true,
-							items: [
+							{
+								label: 'Source Dates',
+								link: 'developing/sourcedates/',
+							},
+							{
+								label: 'Testing',
+								badge: {
+									text: 'NEW',
+									variant: 'tip'
+								},
+								collapsed: true,
+								items: [
 									{
 										label: 'Overview',
 										link: 'developing/testing/overview',
@@ -97,15 +92,15 @@ export default defineConfig({
 										link: 'developing/testing/troubleshooting',
 									}
 								]
-						},
-						{
-							label: 'Debugging',
-							badge: {
-								text: 'Updated',
-								variant: 'success'
 							},
-							collapsed: true,
-							items: [
+							{
+								label: 'Debugging',
+								badge: {
+									text: 'Updated',
+									variant: 'success'
+								},
+								collapsed: true,
+								items: [
 									{
 										label: 'Overview',
 										link: 'developing/debug/overview',
