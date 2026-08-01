@@ -1,0 +1,124 @@
+---
+title: Profiles
+---
+
+import { CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+<CardGrid>
+  <Card>
+    A Profile allows the user to switch between settings quickly. You could use a profile to quickly change library list and other items specific to a project.
+  </Card>
+  <Card>
+    ![Profiles](../../../assets/environment/profiles_04.png)
+  </Card>
+</CardGrid>
+
+<CardGrid>
+  <Card>
+    A profile stores the following settings:
+    - Home/working directory
+    - Current library
+    - Library list
+    - Current iASP
+    - Object browser filters
+    - IFS shortcuts
+  </Card>
+  <Card>![assets/settings_01.png](../../../assets/environment/profiles_01.png)</Card>
+</CardGrid>
+
+---
+
+## Manage profiles
+
+### Create a profile
+You can create a profile using the `Profiles` node inline actions. You'll have two options:
+- Create a new blank profile
+- Create a profile based on the current context
+
+<CardGrid>
+  <Card>
+    ![New Profile](../../../assets/environment/profiles_02.png)
+  </Card>
+  <Card>
+    ![New Profile from current context](../../../assets/environment/profiles_03.png)
+  </Card>  
+</CardGrid>
+
+You'll be asked for the new profile's name and then the profile editor will open to let you edit/review the profile's settings.
+
+### Edit a profile
+Click on a profile to open the profile editor and change its settings.
+
+Only the following settings can be changed from the profile editor:
+- Home/working directory
+- Current library
+- Library list
+- Current iASP
+- Library list command
+
+The Object filters, IFS shortcuts and Custom variable can only be changed when the profile is active.
+
+<Aside type="note">
+    Editing the currently active profile will open the profile editor in read-only mode, except for the `Library list command` field.
+</Aside>
+
+#### Library list command
+This setting replaces what used to be called `Command Profiles` before Code for IBM i version 3.x.
+The library list command lets you define a CL command that will be executed when the profile becomes active and set the current library and user library list.
+
+Put `?` in front of the command to prompt it before its execution.
+
+![Profiles options](../../../assets/environment/profiles_11.png)
+
+<Aside type="note">
+    This is especially useful when working with change management that has commands to setup the user environment.
+</Aside>
+
+### Rename/Copy/Delete
+<CardGrid>
+  <Card>    
+    Right click on a profile to get access to the following actions:
+    - Rename
+    - Copy
+    - Delete
+  </Card>
+  <Card>
+    ![Profiles options](../../../assets/environment/profiles_05.png)
+  </Card>  
+</CardGrid>
+
+---
+
+## Activate/switch between profiles
+To activate a profile, click on the `Set as active profile` inline action next to the profile you want to activate.
+
+![Profiles options](../../../assets/environment/profiles_06.png)
+
+When a profile is active, it is highlighted in green in the Environment view and it's name is displayed in the view's title bar.
+
+<Aside type="note">
+    If another profile was already active, its settings are automatically saved before activating the new one.
+</Aside>
+
+![Current profile](../../../assets/environment/profiles_07.png)
+
+The current profile name is also shown next to the connection's name in the bottom status bar.
+
+![Current profile bottom](../../../assets/environment/profiles_08.png)
+
+### Profiles with a library list command
+When a profile with a `Library list command` becomes active, the profile's current library and user library list is updated, based on the job's current library and user library list after the command is executed.
+
+The command can be executed again at any time by clicking on the `Run Library List Command` profile's inline action.
+![liblist command profile](../../../assets/environment/profiles_09.png)
+
+---
+
+## Unload active profile
+You can unload the active profile and go back to your default context by clicking on the Profiles node's `Unload active profile` inline action.
+
+![liblist command profile](../../../assets/environment/profiles_10.png)
+
+<Aside type="note">
+    The active profile is automatically saved before being unloaded.
+</Aside>

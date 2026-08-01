@@ -1,0 +1,60 @@
+---
+title: Custom Variables
+---
+
+import { CardGrid, Card, Aside } from '@astrojs/starlight/components';
+
+You can create custom variable to use in your [Actions Command(s) to run](../actions/#commands-to-run) strings.    
+
+<CardGrid>
+  <Card>    
+    ![variables](../../../assets/environment/variables_01.png)
+  </Card>
+  <Card>    
+    ![variable in command](../../../assets/environment/variables_02.png)
+  </Card>
+</CardGrid>
+
+<Aside type="note">
+    Variables are defined at the profile level, which means that different profiles can define the same variables with different values.
+</Aside>
+
+---
+
+## Manage custom variables
+
+### Create a custom variable
+You can create a custom variable using the `Custom Variables` node's `Declare custom variable` inline action.
+
+![create](../../../assets/environment/variables_03.png)
+
+You'll be asked for the new variable's name and then for its value.
+
+### Change custom variable value
+Click on a custom variable to open a prompt asking for the new value.
+
+![create](../../../assets/environment/variables_04.png)
+
+
+### Rename/Copy/Delete
+<CardGrid>
+  <Card>    
+    Right click on a profile to get access to the following actions:
+    - Rename
+    - Copy
+    - Delete
+  </Card>
+  <Card>
+    ![Variables options](../../../assets/environment/variables_05.png)
+  </Card>  
+</CardGrid>
+
+## Example Usage
+
+In all the `CRTBNDxxx` actions, add `TGTRLS(&TARGET_RLS)`, like this:
+
+```CL
+?CRTBNDCL PGM(&OPENLIB/&OPENMBR) SRCFILE(&OPENLIB/&OPENSPF) OPTION(*EVENTF) DBGVIEW(*SOURCE) TGTRLS(&TARGET_RLS)
+```
+
+Now a single change to the TARGET_RLS custom variable can impact all the CRTBNDxxx actions.

@@ -16,6 +16,30 @@ import { Aside, CardGrid, Card, Icon, Tabs, TabItem } from '@astrojs/starlight/c
 To make use of the Debug Service, you need the following PTFs:
 
 <Tabs>
+<TabItem label="Version 3.0.4" >
+
+* IBM i 7.6
+   * Debug Service PTF SJ10811
+   * HTTP Group PTF SF99962 level 12 or higher
+   * Java 17 (LPP 5770JV1 Option 20)
+* IBM i 7.5
+   * Debug Service PTF SJ10738
+   * HTTP Group PTF SF99952 level 31 or higher
+   * Java 11 (LPP 5770JV1 Option 19), or Java 17 (LPP 5770JV1 Option 20)
+* IBM i 7.4
+   * Debug Service PTF SJ10718
+   * HTTP Group PTF SF99662 level 52 or higher
+   * Java 11 (LPP 5770JV1 Option 19), or Java 17 (LPP 5770JV1 Option 20)
+* IBM i 7.3
+   * Debug Service PTF SJ10623
+   * HTTP Group PTF SF99722 level 68 or higher
+   * Java 11 (LPP 5770JV1 Option 19)
+
+**All OS versions require** 5770WDS option 60 (Workstation Tools - Base).
+
+<Aside type="note">You need to restart the ADMIN1 server after applying a HTTP Group PTF.</Aside>
+
+</TabItem>
 <TabItem label="Version 3.0.3" >
 
 * IBM i 7.6
@@ -177,15 +201,15 @@ Below are the base requirements to configure the certificate:
 1. On Navigator for IBM i, go to Network > Servers > TCP/IP Servers
 2. Scroll down to System Debugger and right click
 3. Hover over Stop Instance, select Debug Service
-![](/src/assets/debug/configuration/image-4.png)
+![](../../../../assets/debug/configuration/image-4.png)
 4. Right click System Debugger again, select Regenerate Debug Service Trust Store
-![](/src/assets/debug/configuration/image-3.png)
+![](../../../../assets/debug/configuration/image-3.png)
 5. Enter in the password for the *SYSTEM store, click OK
-![](/src/assets/debug/configuration/image-1.png)
+![](../../../../assets/debug/configuration/image-1.png)
 6. Select the certificate you want to use, click OK
-![](/src/assets/debug/configuration/image-2.png)
+![](../../../../assets/debug/configuration/image-2.png)
 7. Right click System Debugger again, hover over Start Instance, select Debug Service
-![](/src/assets/debug/configuration/image-5.png)
+![](../../../../assets/debug/configuration/image-5.png)
 
 **NOTE:** This needs to be done each time you renew or replace that certificate, it does not automatically update when you update the *SYSTEM store
 
