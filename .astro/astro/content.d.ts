@@ -586,6 +586,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
+"tips/statusbar-color.mdx": {
+	id: "tips/statusbar-color.mdx";
+  slug: "tips/statusbar-color";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "tips/structured-download.mdx": {
 	id: "tips/structured-download.mdx";
   slug: "tips/structured-download";
