@@ -1,5 +1,9 @@
 ---
 title: Global
+sidebar:
+    badge:
+        text: Updated
+        variant: success
 ---
 
 import { CardGrid, Card } from '@astrojs/starlight/components';
@@ -51,6 +55,20 @@ You may use the following variables in any of the strings within Connections:
 ### Connection Settings
 
 These are the various setting relating to the items in the browsers, e.g., the list of source files in the OBJECT BROWSER. While these can be edited in settings.json, most can be more easily maintained by clicking or right clicking on an item in the browser.
+
+### Object Browser filter details
+
+Controls where the definition of an object filter (libraries, objects, members, member text, dates, etc.) is shown in the OBJECT BROWSER:
+
+| Value | Result |
+|-------|--------|
+| `both` (default) | The details are shown next to the filter name **and** in its hover. |
+| `tooltip` | The details are only shown in the filter's hover. |
+| `description` | The details are only shown next to the filter name. |
+
+Use `tooltip` to keep the browser compact when you have long filter definitions, and `description` if you'd rather not have a hover popping up over the tree.
+
+See [Object Browser](../../browsers/object-browser/#filter-details-display) for the details of what is displayed.
 
 ### Log Compile Output
 

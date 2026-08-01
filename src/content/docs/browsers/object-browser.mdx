@@ -53,6 +53,58 @@ The above filter example lists all source files in library `LENNONS1`:
 
 ---
 
+### Filter Options
+
+The filter dialog has the following options:
+
+| Option | Description |
+|--------|-------------|
+| **Filter name** | The name shown in the browser. It must be unique. |
+| **Filtering type** | The strategy used to match names and member text (**not** object types).<br/>`Simple`: a comma-separated list of multi-generic values, e.g. `*`, `Q*` or `*CL*SRC*`. A single `*`, `*ALL` or a blank value returns everything.<br/>`Regex`: a single regular expression. |
+| **Libraries** | Filters the library names. |
+| **Objects** | Filters the object names. |
+| **Object types** | A comma delimited list of object types, e.g. `*ALL`, or `*PGM`, `*SRVPGM`. `*SRCPF` is a special type which returns only source files. |
+| **Members** | Filters the source member names. |
+| **Member type** | Filters the source member types, e.g. `RPGLE`, `SQLRPGLE`. |
+| **Member text** | Filters the source members on their **text description**. The match is case insensitive. Leave `*` (or `*ALL`) to list the members whatever their text is. |
+| **Member created from** | Only lists the source members created **on or after** this date. Leave blank to list the members whatever their creation date is. |
+| **Member changed from** | Only lists the source members last changed **on or after** this date. Leave blank to list the members whatever their last change date is. |
+| **Protected** | Makes the filter read only: it cannot be modified and the source members it lists cannot be saved. |
+
+<Aside type="note">
+    **Member text**, **Member created from** and **Member changed from** only apply to the source members listed under a source file. They do not restrict the libraries and the objects shown by the filter.
+</Aside>
+
+#### Filtering on the member text
+
+The **Member text** filter follows the **Filtering type** of the filter, so with `Simple` you can subset on a fragment of the description (`*PAYROLL*`) or list several ones separated by a comma (`*PAYROLL*, *INVOICE*`), while with `Regex` the whole text is matched against your regular expression.
+
+#### Filtering on the creation/change dates
+
+Both dates are picked with a date picker and are stored in the `YYYY-MM-DD` format. They are **inclusive** (a member created exactly on the given day is listed) and can be used together, for example to list only the members created since the beginning of the year and changed in the last week. A value which is not a valid date is cleared when the filter is saved.
+
+<Aside type="tip">
+    **Member changed from** is based on the last source update of the member, the same date shown in the member's tooltip and used when sorting the members by date.
+</Aside>
+
+### Filter Details Display
+
+By default, the definition of a filter is shown both next to the filter name (the *description*) and in the tooltip which appears when hovering the filter. This is controlled by the **Code for IBM i > Object Browser: Filter Details** [global setting](../../settings/global/#object-browser-filter-details):
+
+| Value | Result |
+|-------|--------|
+| `both` (default) | The details are shown next to the filter name **and** in its hover. |
+| `tooltip` | The details are only shown in the filter's hover. |
+| `description` | The details are only shown next to the filter name. |
+
+The description is built as `library/object/member.memberType (object types)`, followed by the member text between square brackets and by the date subsetting between curly brackets when they are set, e.g.:
+
+```
+MYFILTER   LENNONS1/*ALL/*ALL.* (*SRCPF) [*PAYROLL*] {created ≥ 2026-01-01, changed ≥ 2026-07-01}
+```
+
+Changing the setting refreshes the Object Browser right away.
+
 ### Create Additional Filters
 
 <CardGrid>
@@ -93,7 +145,7 @@ To quickly create filters without having to fill out the filter dialog, click on
 <CardGrid>
 <Card>
 
-Changing a filter definition is quick and easy. Just right click on the filter and chose **Maintain filter** to open up the filter dialog. Or chose **Delete filter** to remove the filter definition.
+Changing a filter definition is quick and easy. Just right click on the filter and chose **Change** to open up the filter dialog. Or chose **Delete** to remove the filter definition.
 
 </Card><Card>
 
