@@ -158,6 +158,10 @@ export default defineConfig({
 							{
 								label: 'Object Browser',
 								link: 'browsers/object-browser/',
+								badge: {
+									text: 'Updated',
+									variant: 'success'
+								}
 							},
 							{
 								label: 'IFS Browser',
