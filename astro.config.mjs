@@ -35,6 +35,10 @@ export default defineConfig({
 					{
 						label: 'Install',
 						link: 'install/',
+						badge: {
+							text: 'Updated',
+							variant: 'success'
+						},
 					},
 					{
 						label: 'Quick Start',
