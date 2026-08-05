@@ -112,7 +112,7 @@ instance.subscribe(context, `connected`, `Refresh my view`, () => myView.refresh
 The available events are `connected`, `disconnected`, `deployLocation` and `deploy`. See [API Examples](../examples/) for more.
 
 :::note
-`Instance.getConfig()`, `Instance.getContent()` and `Instance.onEvent()` are deprecated: use `IBMi.getConfig()`, `IBMi.getContent()` and `Instance.subscribe()` instead.
+`Instance#getConfig`, `Instance#getContent` and `Instance#onEvent` are deprecated: use `IBMi#getConfig`, `IBMi#getContent` and `Instance#subscribe` instead.
 :::
 
 ## `customUI`
@@ -172,7 +172,7 @@ const errors = base.evfeventParser(content.split(`\n`));
 
 | Function | Description |
 |----------|-------------|
-| `getGitAPI()` | The Git extension API, when available. |
+| `getGitAPI()` | Get VS Code's [Git extension API](https://github.com/microsoft/vscode/tree/main/extensions/git#api), when available. |
 | `escapeHtml(html)` | Escapes a string before injecting it in a webview. |
 | `generateTooltipHtmlTable(header, rows)` | Builds the HTML table used in the tree items tooltips. |
 | `objectToToolTip(path, object)`, `memberToToolTip`, `ifsFileToToolTip`, `filterToToolTip`, `profileToToolTip` | Ready-made tooltips for the standard IBM i entities. |

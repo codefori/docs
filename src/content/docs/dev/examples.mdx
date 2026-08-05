@@ -11,15 +11,20 @@ import { Aside, Icon } from '@astrojs/starlight/components';
 
 ## Event listener
 
-The Code for IBM i API provides an event listener. This allows your extension to fire an event when something happens in Code for IBM i.
+The Code for IBM i API provides an event listener. This allows your extension to react when something happens in Code for IBM i.
 
 ```ts
 const instance = getInstance();
 
-instance.onEvent(`connected`, () => {
+// Each context/name couple must be unique.
+instance.subscribe(context, `connected`, `Log the connection`, () => {
   console.log(`It connected!`);
 });
 ```
+
+:::note
+`Instance#onEvent` is deprecated: use `Instance#subscribe` instead.
+:::
 
 ### Available events
 
@@ -32,17 +37,23 @@ instance.onEvent(`connected`, () => {
 
 ## Running commands with the user library list
 
-Code for IBM i ships an API (via VS Code command) that can be used by an extension to execute a remote command on the IBM i.
+`IBMi#runCommand` can be used by an extension to execute a remote command on the IBM i.
 
 It has a parameter which is an object with some properties. When executing a command in the `ile` or `qsh` environment, it will use the library list from the current connection.
 
 ```ts
-interface CommandInfo {
+interface RemoteCommand {
+  command: string;
   /** describes what environment the command will be executed. Is optional and defaults to `ile` */
   environment?: `pase`|`ile`|`qsh`;
   /** set this as the working directory for the command when it is executed. Is optional and defaults to the users working directory in Code for IBM i. */
   cwd?: string;
-  command: string;
+  /** the variables made available to the command; also accepts `&LIBL` and `&CURLIB` in the `ile` environment */
+  env?: Record<string, string>;
+  /** when `true`, the command is run without the user library list */
+  noLibList?: boolean;
+  /** when `true`, the spooled files produced by the command are returned in the result */
+  getSpooledFiles?: boolean;
 }
 ```
 
@@ -57,7 +68,7 @@ interface CommandResult {
 ```
 
 ```ts
-const rows = await instance.getConnection().runCommand({
+const result = await instance.getConnection().runCommand({
   command: `WRKACTJOB`,
   environment: `ile`
 });
@@ -66,12 +77,12 @@ const rows = await instance.getConnection().runCommand({
 You can also provide a custom library list and current library when executing a command in the `ile` environment:
 
 ```ts
-const detail: CommandResult = {
+const detail: RemoteCommand = {
   environment: `ile`,
   command: `CRTBNDRPG...`,
   env: {
     // Space delimited library list
-    '&LIBL': 'LIBA LIBB LIBC'
+    '&LIBL': 'LIBA LIBB LIBC',
     '&CURLIB': 'LIBD'
   }
 }
@@ -457,19 +468,18 @@ You would register a command as you'd normally expect, but expect a parameter fo
 ```ts
 context.subscriptions.push(
   // `node` is the object passed in directly from the IFS Browser.
-  vscode.commands.registerCommand(`code-for-ibmi.deleteIFS`, async (node) => {
+  vscode.commands.registerCommand(`your-extension.deleteIFS`, async (node) => {
     if (node) {
       //Running from right click
       let result = await vscode.window.showWarningMessage(`Are you sure you want to delete ${node.path}?`, `Yes`, `Cancel`);
 
       if (result === `Yes`) {
-        // directory using the connection API.
         const connection = instance.getConnection();
 
         try {
-          // Run a pase command
-          await vscode.commands.executeCommand(`code-for-ibmi.runCommand`, {
-            command: `rm -rf "${node.path}`,
+          // Run a pase command with the connection API
+          await connection.runCommand({
+            command: `rm -rf "${node.path}"`,
             environment: `pase`,
           });
 
@@ -488,11 +498,15 @@ context.subscriptions.push(
 );
 ```
 
+:::caution
+Register your commands under your own extension's identifier: `code-for-ibmi.*` is reserved by Code for IBM i, and registering an identifier that already exists throws an error.
+:::
+
 Following that, we need to register the command so it has a label. We do this in `package.json`
 
 ```json
 {
-  "command": "code-for-ibmi.deleteIFS",
+  "command": "your-extension.deleteIFS",
   "title": "Delete object",
   "category": "Your extension"
 }
@@ -504,10 +518,10 @@ Finally, we add it to a context menu:
 "menus": {
   "view/item/context": [
     {
-      "command": "code-for-ibmi.deleteIFS",
+      "command": "your-extension.deleteIFS",
       "when": "view == ifsBrowser",
       "group": "yourext@1"
-    },
+    }
   ]
 }
 ```
@@ -516,8 +530,17 @@ Finally, we add it to a context menu:
 
 * `view` can be `ifsBrowser` or `objectBrowser`.
 * `viewItem` can be different depending on the view:
-   * for `ifsBrowser`, it can be `directory` or `streamfile`
-   * for `objectBrowser`, it can be `member` (source member), `object` (any object), `SPF` (source file) or `filter`.
+   * for `ifsBrowser`, it can be `directory`, `streamfile` or `shortcut`
+   * for `objectBrowser`, it can be `member` (source member), `object.<type>` or `object.<type>.<attribute>` (any object, e.g. `object.pgm.rpgle`), `SPF` (source file) or `filter`.
+
+Items that are read only or protected get a `_readonly` or `_protected` suffix (e.g. `member_readonly`, `directory_protected`), so use a regular expression when you want to match an item whatever its state:
+
+```json
+{
+  "command": "your-extension.deleteIFS",
+  "when": "view == ifsBrowser && viewItem =~ /^streamfile/"
+}
+```
 
 This allows your extension to provide commands for specific types of objects or specific items in the treeview.
 
@@ -525,7 +548,7 @@ This allows your extension to provide commands for specific types of objects or 
 
 ## Views
 
-Code for IBM i provides a context so you can control when a command, view, etc, can work. `code-for-ibmi.connected` can and should be used if your view depends on a connection. For example
+Code for IBM i provides a context so you can control when a command, view, etc, can work. `code-for-ibmi:connected` can and should be used if your view depends on a connection. For example
 
 This will show a welcome view when there is no connection:
 
