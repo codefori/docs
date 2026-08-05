@@ -140,60 +140,66 @@ Here is an example with all execution parameters set in the `testing.json` file:
 
 <Tabs>
   <TabItem label="RUCRTRPG" >
-    |Parameter    |Name                    |Description                                                                                                                                                                                                                 |Default |
-    |-------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-    |`tstPgm`     |Test program            |Specifies the name of the test program (`*SRVPGM`) to create. By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                              |        |
-    |`srcFile`    |Source file             |Specifies the name of the source file containing a member with the same name as `TSTPGM`. By default, this will be set to `&OPENLIB/&OPENSPF` for source members.                                                           |        |
-    |`srcMbr`     |Source member           |Specifies the name of the member containing the source code to be compiled. By default, this will be set to `&OPENMBR` for source members.                                                                                  |        |
-    |`srcStmf`    |Source stream file      |Specifies the path name of the stream file containing the source code to be compiled. By default, this will be set to `&FULLPATH` for local files.                                                                          |        |
-    |`text`       |Text description        |Allows you to enter text that briefly describes the RPGUnit test case and its function.                                                                                                                                     |        |
-    |`cOption`    |Compile options         |Refer to the `OPTION` parameter in `CRTRPGMOD` command help.                                                                                                                                                                |*EVENTF |
-    |`dbgView`    |Debugging views         |Refer to the `DBGVIEW` parameter in `CRTRPGMOD` command help.                                                                                                                                                               |*SOURCE |
-    |`bndSrvPgm`  |Bind service program    |Refer to the `BNDSRVPGM` parameter in `CRTSRVPGM` command help.                                                                                                                                                             |        |
-    |`bndDir`     |Binding directory       |Refer to the `BNDDIR` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`bOption`    |Binding options         |Refer to the `OPTION` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`define`     |Define condition names  |Specifies condition names that are defined before the compilation begins. Using the parameter `DEFINE(condition-name)` is equivalent to coding the `/DEFINE` condition-name directive on the first line of the source file. |        |
-    |`dltSplf`    |Delete spooled files    |Specifies if all spooled files (compile listing) created by the object creations commands are deleted on success.                                                                                                           |        |
-    |`actGrp`     |Activation group        |Refer to the `ACTGRP` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`module`     |Module                  |Refer to the `MODULE` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`rpgPpOpt`   |Pre-compiler RPGPPOPT   |Refer to the `RPGPPOPT` parameter in `CRTSRVPGM` command.                                                                                                                                                                   |*LVL2   |
-    |`pOption`    |Pre-compiler OPTIONS    |Refer to the `OPTION` parameter in `CRTSQLRPGI` command help.                                                                                                                                                               |        |
-    |`compileOpt` |Pre-Compiler COMPILEOPT |Refer to the `COMPILEOPT` parameter in `CRTSQLRPGI` command help.                                                                                                                                                           |        |
-    |`tgtRls`     |Target release          |Refer to the `TGTRLS` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`incDir`     |Include directory       |Specifies one or more directories to add to the search path used by the compiler to find copy files. The compiler will search the directories specified here if the copy files in the source program can not be resolved.   |        |
-    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |*JOB    |
-    |`wrapperCmd` |Wrapper Command         |Specifies a custom command to wrap the `RUCRTRPG` command.                                                                                                                                                                  |        |
+    |Parameter    |Name                    |Description                                                                                                                                                                                                                 |Default   |
+    |-------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+    |`tstPgm`     |Test program            |Specifies the name of the test program (`*SRVPGM`) to create. By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                              |          |
+    |`srcFile`    |Source file             |Specifies the name of the source file containing a member with the same name as `TSTPGM`. By default, this will be set to `&OPENLIB/&OPENSPF` for source members.                                                           |          |
+    |`srcMbr`     |Source member           |Specifies the name of the member containing the source code to be compiled. By default, this will be set to `&OPENMBR` for source members.                                                                                  |          |
+    |`srcStmf`    |Source stream file      |Specifies the path name of the stream file containing the source code to be compiled. By default, this will be set to `&FULLPATH` for local files.                                                                          |          |
+    |`text`       |Text description        |Allows you to enter text that briefly describes the RPGUnit test case and its function.                                                                                                                                     |*SRCMBRTXT|
+    |`cOption`    |Compile options         |Refer to the `OPTION` parameter in `CRTRPGMOD` command help.                                                                                                                                                                |*EVENTF   |
+    |`dbgView`    |Debugging views         |Refer to the `DBGVIEW` parameter in `CRTRPGMOD` command help.                                                                                                                                                               |*SOURCE   |
+    |`bndSrvPgm`  |Bind service program    |Refer to the `BNDSRVPGM` parameter in `CRTSRVPGM` command help.                                                                                                                                                             |          |
+    |`bndDir`     |Binding directory       |Refer to the `BNDDIR` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |          |
+    |`bOption`    |Binding options         |Refer to the `OPTION` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |          |
+    |`define`     |Define condition names  |Specifies condition names that are defined before the compilation begins. Using the parameter `DEFINE(condition-name)` is equivalent to coding the `/DEFINE` condition-name directive on the first line of the source file. |*NONE     |
+    |`dltSplf`    |Delete spooled files    |Specifies if all spooled files (compile listing) created by the object creations commands are deleted on success.                                                                                                           |*NO       |
+    |`dltMod`     |Delete modules          |Specifies if all modules created by the object creations commands are deleted on success.                                                                                                                                   |*YES      |
+    |`actGrp`     |Activation group        |Refer to the `ACTGRP` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |*CALLER   |
+    |`module`     |Module                  |Refer to the `MODULE` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |          |
+    |`rpgPpOpt`   |Pre-compiler RPGPPOPT   |Refer to the `RPGPPOPT` parameter in `CRTSRVPGM` command.                                                                                                                                                                   |*LVL2     |
+    |`pOption`    |Pre-compiler OPTIONS    |Refer to the `OPTION` parameter in `CRTSQLRPGI` command help.                                                                                                                                                               |*SYSVAL   |
+    |`compileOpt` |Pre-Compiler COMPILEOPT |Refer to the `COMPILEOPT` parameter in `CRTSQLRPGI` command help.                                                                                                                                                           |          |
+    |`tgtRls`     |Target release          |Refer to the `TGTRLS` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |*CURRENT  |
+    |`incDir`     |Include directory       |Specifies one or more directories to add to the search path used by the compiler to find copy files. The compiler will search the directories specified here if the copy files in the source program can not be resolved.   |*NONE     |
+    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |*JOB      |
+    |`proxyCmd`   |Proxy Command           |Specifies a command to substitute the `RUCRTRPG` command.                                                                                                                                                                   |          |
+    |`wrapperCmd` |Wrapper Command         |Specifies a custom command to wrap the `RUCRTRPG` command.                                                                                                                                                                  |          |
   </TabItem>
   <TabItem label="RUCRTCBL" >
-    |Parameter    |Name                    |Description                                                                                                                                                                                                                 |Default |
-    |-------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
-    |`tstPgm`     |Test program            |Specifies the name of the test program (`*SRVPGM`) to create. By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                              |        |
-    |`srcFile`    |Source file             |Specifies the name of the source file containing a member with the same name as `TSTPGM`. By default, this will be set to `&OPENLIB/&OPENSPF` for source members.                                                           |        |
-    |`srcMbr`     |Source member           |Specifies the name of the member containing the source code to be compiled. By default, this will be set to `&OPENMBR` for source members.                                                                                  |        |
-    |`srcStmf`    |Source stream file      |Specifies the path name of the stream file containing the source code to be compiled. By default, this will be set to `&FULLPATH` for local files.                                                                          |        |
-    |`text`       |Text description        |Allows you to enter text that briefly describes the RPGUnit test case and its function.                                                                                                                                     |        |
-    |`cOption`    |Compile options         |Refer to the `OPTION` parameter in `CRTCBLMOD` command help.                                                                                                                                                                |*EVENTF |
-    |`dbgView`    |Debugging views         |Refer to the `DBGVIEW` parameter in `CRTCBLMOD` command help.                                                                                                                                                               |*SOURCE |
-    |`bndSrvPgm`  |Bind service program    |Refer to the `BNDSRVPGM` parameter in `CRTSRVPGM` command help.                                                                                                                                                             |        |
-    |`bndDir`     |Binding directory       |Refer to the `BNDDIR` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`bOption`    |Binding options         |Refer to the `OPTION` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`define`     |Define condition names  |Specifies condition names that are defined before the compilation begins. Using the parameter `DEFINE(condition-name)` is equivalent to coding the `/DEFINE` condition-name directive on the first line of the source file. |        |
-    |`dltSplf`    |Delete spooled files    |Specifies if all spooled files (compile listing) created by the object creations commands are deleted on success.                                                                                                           |        |
-    |`actGrp`     |Activation group        |Refer to the `ACTGRP` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`module`     |Module                  |Refer to the `MODULE` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`pOption`    |Pre-compiler OPTIONS    |Refer to the `OPTION` parameter in `CRTSQLCBLI` command help.                                                                                                                                                               |        |
-    |`compileOpt` |Pre-Compiler COMPILEOPT |Refer to the `COMPILEOPT` parameter in `CRTSQLCBLI` command help.                                                                                                                                                           |        |
-    |`tgtRls`     |Target release          |Refer to the `TGTRLS` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |        |
-    |`incDir`     |Include Directory       |Specifies one or more directories to add to the search path used by the compiler to find copy files. The compiler will search the directories specified here if the copy files in the source program can not be resolved.   |        |
-    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |*JOB    |
-    |`wrapperCmd` |Wrapper Command         |Specifies a custom command to wrap the `RUCRTCBL` command.                                                                                                                                                                  |        |
+    |Parameter    |Name                    |Description                                                                                                                                                                                                                 |Default    |
+    |-------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
+    |`tstPgm`     |Test program            |Specifies the name of the test program (`*SRVPGM`) to create. By default, this will be set to `&OPENLIB/&OPENMBR` for source members and `&CURLIB/&SHORTNAME` for local files.                                              |           |
+    |`srcFile`    |Source file             |Specifies the name of the source file containing a member with the same name as `TSTPGM`. By default, this will be set to `&OPENLIB/&OPENSPF` for source members.                                                           |           |
+    |`srcMbr`     |Source member           |Specifies the name of the member containing the source code to be compiled. By default, this will be set to `&OPENMBR` for source members.                                                                                  |           |
+    |`srcStmf`    |Source stream file      |Specifies the path name of the stream file containing the source code to be compiled. By default, this will be set to `&FULLPATH` for local files.                                                                          |           |
+    |`text`       |Text description        |Allows you to enter text that briefly describes the RPGUnit test case and its function.                                                                                                                                     |*SRCMBRTXT |
+    |`cOption`    |Compile options         |Refer to the `OPTION` parameter in `CRTCBLMOD` command help.                                                                                                                                                                |*EVENTF    |
+    |`dbgView`    |Debugging views         |Refer to the `DBGVIEW` parameter in `CRTCBLMOD` command help.                                                                                                                                                               |*SOURCE    |
+    |`bndSrvPgm`  |Bind service program    |Refer to the `BNDSRVPGM` parameter in `CRTSRVPGM` command help.                                                                                                                                                             |           |
+    |`bndDir`     |Binding directory       |Refer to the `BNDDIR` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |           |
+    |`bOption`    |Binding options         |Refer to the `OPTION` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |           |
+    |`define`     |Define condition names  |Specifies condition names that are defined before the compilation begins. Using the parameter `DEFINE(condition-name)` is equivalent to coding the `/DEFINE` condition-name directive on the first line of the source file. |*NONE      |
+    |`dltSplf`    |Delete spooled files    |Specifies if all spooled files (compile listing) created by the object creations commands are deleted on success.                                                                                                           |*NO        |
+    |`dltMod`     |Delete modules          |Specifies if all modules created by the object creations commands are deleted on success.                                                                                                                                   |*YES       |
+    |`actGrp`     |Activation group        |Refer to the `ACTGRP` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |*CALLER    |
+    |`module`     |Module                  |Refer to the `MODULE` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |           |
+    |`pOption`    |Pre-compiler OPTIONS    |Refer to the `OPTION` parameter in `CRTSQLCBLI` command help.                                                                                                                                                               |*SYSVAL    |
+    |`compileOpt` |Pre-Compiler COMPILEOPT |Refer to the `COMPILEOPT` parameter in `CRTSQLCBLI` command help.                                                                                                                                                           |           |
+    |`tgtRls`     |Target release          |Refer to the `TGTRLS` parameter in `CRTSRVPGM` command help.                                                                                                                                                                |*CURRENT   |
+    |`incDir`     |Include Directory       |Specifies one or more directories to add to the search path used by the compiler to find copy files. The compiler will search the directories specified here if the copy files in the source program can not be resolved.   |*NONE      |
+    |`tgtCcsid`   |Target CCSID            |Specifies the CCSID that the compiler uses to read the source files.                                                                                                                                                        |*JOB       |
+    |`proxyCmd`   |Proxy Command           |Specifies a command to substitute the `RUCRTCBL` command.                                                                                                                                                                   |           |
+    |`wrapperCmd` |Wrapper Command         |Specifies a custom command to wrap the `RUCRTCBL` command.                                                                                                                                                                  |           |
   </TabItem>
   <TabItem label="CODECOV" >
-    |Parameter |Name    |Description                                                                                 |Default |
-    |----------|--------|--------------------------------------------------------------------------------------------|--------|
-    |`module`  |Module  |Specifies programs or service programs and optionally modules to include for code coverage. |        |
-    |`testId`  |Test ID |                                                                                            |        |
-    |`exclude` |Exclude |Objects to exclude                                                                          |        |
+    |Parameter    |Name            |Description                                                                                 |Default |
+    |-------------|----------------|--------------------------------------------------------------------------------------------|--------|
+    |`module`     |Module          |Specifies programs or service programs and optionally modules to include for code coverage. |        |
+    |`testId`     |Test ID         |                                                                                            |        |
+    |`exclude`    |Exclude         |Objects to exclude.                                                                         |        |
+    |`proxyCmd`   |Proxy Command   |Specifies a command to substitute the `CODECOV` command.                                    |        |
+    |`wrapperCmd` |Wrapper Command |Specifies a custom command to wrap the `CODECOV` command.                                   |        |
   </TabItem>
   <TabItem label="RUCALLTST" >
     |Parameter    |Name              |Description                                                                                                                                                                                                                                                                           |Default  |
@@ -205,8 +211,9 @@ Here is an example with all execution parameters set in the `testing.json` file:
     |`detail`     |Report Detail     |Specifies how detailed the test run report should be.                                                                                                                                                                                                                                 |*BASIC   |
     |`output`     |Create Report     |Specifies whether a report is created.                                                                                                                                                                                                                                                |*ALLWAYS |
     |`rclRsc`     |Reclaim Resources |Specifies when to reclaim resources. Resources, such as open files, can be reclaimed after each test case or at the end of the test suite. This option is useful if the test suite calls OPM programs, which do not set the `*INLR` indicator.                                        |*NO      |
-    |`onFailure`  |On Failure        |Specifies test execution behavior after a failing assertion.                                                                                                                                                                                                                          |*ABORT   |
-    |`wrapperCmd` |Wrapper Command   |Specifies a custom command to wrap the `RUCALLTST` command.                                                                                                                                                                                                                           |         |
+    |`onFailure`  |On Failure        |Specifies test execution behavior after a failing assertion.                                                                                                                                                                  |*ABORT   |
+    |`proxyCmd`   |Proxy Command     |Specifies a command to substitute the `RUCALLTST` command.                                                                                                                                                                    |         |
+    |`wrapperCmd` |Wrapper Command   |Specifies a custom command to wrap the `RUCALLTST` command.                                                                                                                                                                   |         |
   </TabItem>
 </Tabs>
 
@@ -265,7 +272,7 @@ Supported Variables:
 
 
 ## Vendor Integration
-The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specifications are not actual parameters of the RPGUnit commands, but rather are provided by the extension to allow wrappering them. This is primarily used when integrating RPGUnit with other vendor tools.
+The `proxyCmd` and `wrapperCmd` parameters in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST`/`CODECOV` specifications are not actual parameters of the RPGUnit or CODECOV commands, but rather are provided by the extension to support vendor tool integration.
 
 **Example `testing.json` configuration**:
 ```json
@@ -280,7 +287,7 @@ The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specificatio
           "wrapperCmd": {
               "cmd": "MYLIB/MYCMD TSTCMD",
               "params": {
-                  "desc": "My description"
+                  "desc": "My test command description"
               }
           }
       },
@@ -288,8 +295,16 @@ The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specificatio
           "wrapperCmd": {
               "cmd": "MYLIB/MYCMD CALLCMD",
               "params": {
-                  "desc": "My description"
+                  "desc": "My call command description"
               }
+          }
+      }
+  },
+  "codecov": {
+      "wrapperCmd": {
+          "cmd": "MYLIB/MYCMD COVCMD",
+          "params": {
+              "desc": "My coverage description"
           }
       }
   }
@@ -300,13 +315,24 @@ The `wrapperCmd` parameter in the `RUCRTRPG`/`RUCRTCBL`/`RUCALLTST` specificatio
 MYLIB/MYCMD TSTCMD(RPGUNIT/RUCRTRPG TSTPGM(MYUSER/TEMPDET)
 SRCSTMF('/home/MYUSER/builds/ibmi-company_system/qtestsrc/empdet.test.sqlrpgle')
 TGTCCSID(*JOB) DBGVIEW(*SOURCE) COPTION(*EVENTF) RPGPPOPT(*LVL2)
-INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My description')
+INCDIR('''/home/MYUSER/builds/ibmi-company_system''')) DESC('My test command description')
 ```
 
-**Execution Command**:
+**Execution Command (without code coverage)**:
 ```js
 MYLIB/MYCMD CALLCMD(RPGUNIT/RUCALLTST TSTPGM(MYUSER/TEMPDET) ORDER(*REVERSE)
 DETAIL(*ALL) OUTPUT(*ALLWAYS) LIBL(*CURRENT) JOBD(*DFT) RCLRSC(*NO)
-XMLSTMF('/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET_1751646914682.xml'))
-DESC('My description')
+XMLSTMF('/home/MYUSER/.vscode/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET-%F.%T.<MSECONDS>.xml')
+XMLTYPE(*VSCODE1) ONFAILURE(*ABORT)) DESC('My call command description')
+```
+
+**Execution Command (with line-level code coverage)**:
+```js
+MYLIB/MYCMD COVCMD(QDEVTOOLS/CODECOV CMD(MYLIB/MYCMD CALLCMD(RPGUNIT/RUCALLTST TSTPGM(MYUSER/TEMPDET)
+ORDER(*REVERSE) DETAIL(*ALL) OUTPUT(*ALLWAYS) LIBL(*CURRENT) JOBD(*DFT) RCLRSC(*NO)
+XMLSTMF('/home/MYUSER/.vscode/tmp/testing/vscode-ibmi-testing/RPGUNIT/TEMPDET-%F.%T.<MSECONDS>.xml')
+XMLTYPE(*VSCODE1) ONFAILURE(*ABORT)) DESC('My call command description'))
+MODULE((MYUSER/TEMPDET *SRVPGM *ALL)) CCLVL(*LINE)
+OUTSTMF('/home/MYUSER/.vscode/tmp/vscode-ibmi-testing/CODECOV/TEMPDET_1751646914682.json'))
+DESC('My coverage description')
 ```
