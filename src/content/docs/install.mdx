@@ -8,16 +8,16 @@ import { CardGrid, Card, Badge, LinkCard, Icon } from '@astrojs/starlight/compon
 
 ## Requirements
 
-- IBM i 7.4 (7.3 may works but is no more supported)
+- IBM i 7.4 (7.3 may work but is not supported)
 - SSH Daemon must be started on IBM i.
    - (Licensed program 5733-SC1 provides SSH support.)
    - `STRTCPSVR *SSHD` starts the daemon.
    - User `QSSHD` is enabled.
 - The user used to log in must be enabled and must have a password
 - Java 8 minimum must be installed to run <a href="/docs/settings/mapepire/">Mapepire</a>
-- The *SIGNON and *DATABASE servers must be running, with TCP ports 8471 and 8476 listening using Mapepire not secured, and TCP ports 9471 and 9476 listening using Mapepire SSL
+- The `*SIGNON` and `*DATABASE` servers must be running, with TCP ports `8471` and `8476` listening using Mapepire not secured, and TCP ports `9471` and `9476` listening using Mapepire SSL
 - DELETE operations at the database level, used in the extension for managing temporary files, must be allowed
-- Mapepire TCP port network address (only when used in server mode, the default is 8076)
+- Mapepire TCP port network address (only when used in server mode, the default is `8076`)
 - Some familiarity with VS Code. An introduction can be found [here](https://code.visualstudio.com/docs/getstarted/introvideos)<Icon name="external" color="cyan" class="icon-inline" />.
 
 Optionally, ensure you know how to connect to pase from a shell. See this [official IBM i OSS docs](https://ibmi-oss-docs.readthedocs.io/latest/user_setup/README.html#step-1-install-an-ssh-client)<Icon name="external" color="cyan" class="icon-inline" />.
