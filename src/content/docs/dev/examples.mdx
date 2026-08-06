@@ -234,6 +234,193 @@ export class CheckStatementComponent implements IBMiComponent {
 
 Once connected, the component is retrieved from the connection with `connection.getComponent<CheckStatementComponent>(CheckStatementComponent.ID)`.
 
+## Running remote commands
+
+Both extensions use `IBMi#runCommand` for everything that has no SQL equivalent. The pattern is always the same: check there is a connection, build the `RemoteCommand`, then branch on `CommandResult.code` — `0` means the command completed. In the `ile` environment `stderr` carries the job log messages produced by the command, which is what these extensions show to the user when something fails.
+
+```ts
+// vscode-ibmi-fs, src/commonOperations.ts
+export const holdJob = async (jobId: JobIdentifier, showConfirmation: boolean = true): Promise<boolean> => {
+  const connection = getInstance()?.getConnection();
+
+  if (!connection) {
+    vscode.window.showErrorMessage(vscode.l10n.t("Not connected to IBM i"));
+    return false;
+  }
+
+  if (showConfirmation) {
+    const confirmed = await vscode.window.showWarningMessage(
+      vscode.l10n.t("Are you sure you want to hold job {0}?", jobId.job),
+      { modal: true },
+      vscode.l10n.t("Hold job")
+    );
+    if (!confirmed) {
+      return false;
+    }
+  }
+
+  try {
+    const cmdrun: CommandResult = await connection.runCommand({
+      command: `QSYS/HLDJOB JOB(${jobId.job})`,
+      environment: `ile`
+    });
+
+    if (cmdrun.code === 0) {
+      vscode.window.showInformationMessage(vscode.l10n.t("Job held."));
+      return true;
+    } else {
+      vscode.window.showErrorMessage(vscode.l10n.t("Unable to hold selected job:\n{0}", String(cmdrun.stderr)));
+      return false;
+    }
+  } catch (error) {
+    vscode.window.showErrorMessage(vscode.l10n.t("Error holding job: {0}", String(error)));
+    return false;
+  }
+};
+```
+
+<Aside type="caution">
+Qualify your commands with `QSYS/` and escape anything that comes from user input or from a tree node: the command is built as a string, so a name containing a quote breaks it. Db2 for IBM i uses `Statement.escapeString` for that.
+
+```ts
+// vscode-db2i, src/database/table.ts
+static async clearFile(library: string, objectName: string): Promise<void> {
+  const command = `QSYS/CLRPFM ${Statement.escapeString(library)}/${Statement.escapeString(objectName)}`;
+
+  const commandResult = await getInstance().getConnection().runCommand({
+    command: command,
+    environment: `ile`
+  });
+
+  if (commandResult.code !== 0) {
+    throw new Error(commandResult.stderr);
+  }
+}
+```
+</Aside>
+
+### Reading the output of a command
+
+A CL command that only writes a spooled file produces no `stdout` on its own: set `getSpooledFiles: true` and the spooled files are returned in `stdout`. IBM i File System uses this to get the library list of a job, since `DSPJOB` has no `OUTFILE` for `OPTION(*LIBL)`.
+
+```ts
+// vscode-ibmi-fs, src/views/wrkjob.ts
+const liblspl = await connection.runCommand({
+  command: `QSYS/DSPJOB JOB(${jobName}) OPTION(*LIBL)`,
+  environment: `ile`,
+  getSpooledFiles: true,
+});
+
+if (!liblspl || !liblspl.stdout) {
+  return [];
+}
+
+// Parse library list from spool output
+// The output has fixed-width columns, so we parse by position
+const lines = liblspl.stdout.split('\n');
+const libraries: LibraryEntry[] = [];
+
+for (const line of lines) {
+  const library = line.substring(3, 13).trim();
+  const type = line.substring(15, 18).trim();
+  const asp = line.substring(26, 36).trim();
+  const description = line.substring(38, 90).trim();
+
+  // Skip separator lines
+  if (!library || library.startsWith('*')) {
+    continue;
+  }
+
+  if (type === 'SYS' || type === 'CUR' || type === 'USR') {
+    libraries.push({ library, type, asp, description });
+  }
+}
+```
+
+### Chaining commands and using a temporary directory
+
+Several CL commands separated by a newline are executed in the same `ile` call, which keeps `QTEMP` and the job for the whole sequence. Combined with `withTempDirectory` — which removes the directory when the callback resolves — this copies a spooled file to the IFS and opens it with the `streamfile` file system.
+
+```ts
+// vscode-ibmi-fs, src/commonOperations.ts
+return connection.withTempDirectory(async (tempDir): Promise<boolean> => {
+  const tempSourcePath = posix.join(tempDir, `${spoolId.job.replaceAll('/', '-')}_${spoolId.spoolname}_${spoolId.nbr}.txt`);
+
+  const result = await connection.runCommand({
+    command: `QSYS/CPYSPLF FILE(${spoolId.spoolname}) JOB(${spoolId.job}) SPLNBR(${spoolId.nbr}) TOFILE(*TOSTMF) TOSTMF('${tempSourcePath}')
+      QSYS/CPY OBJ('${tempSourcePath}') TOOBJ('${tempSourcePath}') TOCCSID(1208) DTAFMT(*TEXT) REPLACE(*YES)`,
+    environment: 'ile'
+  });
+
+  if (result.code === 0) {
+    const uri = vscode.Uri.parse(tempSourcePath).with({ scheme: `streamfile` });
+    await vscode.commands.executeCommand(`vscode.open`, uri, { preview: false, preserveFocus: false });
+    return true;
+  } else {
+    vscode.window.showErrorMessage(vscode.l10n.t("Error opening spool: {0}", String(result.stderr)));
+    return false;
+  }
+});
+```
+
+### The `pase` environment
+
+`environment: 'pase'` runs the command in the shell, which is the simplest way to do file operations on the IFS. Here it is used in a `finally` so the temporary file is removed even when the download fails.
+
+```ts
+// vscode-ibmi-fs, src/commonOperations.ts
+try {
+  await connection.client.getFile(saveLocation.fsPath, tempRemotePath);
+} catch (error) {
+  result.successful = false;
+  result.error = String(error);
+} finally {
+  // Clean up temporary file on IBM i
+  await connection.runCommand({
+    command: `rm -f ${tempRemotePath}`,
+    environment: `pase`
+  });
+}
+```
+
+Db2 for IBM i uses the two environments side by side to execute the cells of a notebook: the `cl` cells go to `ile` with the spooled files, the `shellscript` cells to `pase`.
+
+```ts
+// vscode-db2i, src/notebooks/Controller.ts
+case `cl`:
+  try {
+    const command = await connection.runCommand({
+      command: cell.document.getText(),
+      environment: `ile`,
+      getSpooledFiles: true
+    });
+
+    if (command.stdout) {
+      items.push(vscode.NotebookCellOutputItem.text([`\`\`\``, command.stdout, `\`\`\``].join(`\n`), `text/markdown`));
+    }
+
+    if (command.stderr) {
+      items.push(vscode.NotebookCellOutputItem.text([`\`\`\``, command.stderr, `\`\`\``].join(`\n`), `text/markdown`));
+    }
+  } catch (e) {
+    items.push(
+      vscode.NotebookCellOutputItem.stderr(`Failed to run command. Are you connected?`),
+      vscode.NotebookCellOutputItem.stderr(e instanceof Error ? e.message : String(e))
+    );
+  }
+  break;
+
+case `shellscript`:
+  const command = await connection.runCommand({
+    command: cell.document.getText(),
+    environment: `pase`
+  });
+```
+
+<Aside type="tip">
+`runCommand` only rejects when the command could not be executed at all (no connection, connection lost). A command that fails on the system resolves normally with a non-zero `code`, so both the `try`/`catch` **and** the check on `code` are needed.
+</Aside>
+
 ## Reacting to connection events
 
 Each `context`/`name` couple must be unique, so a view can subscribe once and be cleaned up with the extension context.
