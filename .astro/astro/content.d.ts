@@ -194,6 +194,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
+"dev/component-signatures.mdx": {
+	id: "dev/component-signatures.mdx";
+  slug: "dev/component-signatures";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".mdx"] };
 "dev/debugger.mdx": {
 	id: "dev/debugger.mdx";
   slug: "dev/debugger";
@@ -652,5 +659,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("./../../src/content/config.js");
+	export type ContentConfig = typeof import("../../src/content/config.js");
 }
