@@ -1,0 +1,174 @@
+---
+title: Component Signatures
+sidebar:
+    order: 5
+    badge:
+        text: NEW
+        variant: tip
+---
+
+import { Aside, Icon } from '@astrojs/starlight/components';
+
+Extensions built on top of Code for IBM i can ship their own **components** - SQL routines, programs, or other artifacts that get installed on the connected IBM i. 
+The Core for IBM i team encourages all third-party extension developers to use mechanisms for verifying the authenticity of SQL objects by checking their signatures. The Code for IBM i extension already provides all the mechanisms needed for this verification.
+
+This page shows how to generate that signature for a component, using the real components shipped in the [Db2 for i extension](https://github.com/codefori/vscode-db2i).
+
+## What is a component signature?
+
+Every `IBMiComponent` returns an identification made of a `name`, a `version` and a `signature`:
+
+```ts
+export type ComponentIdentification = {
+  name: string
+  version: number | string
+  signature: string
+  userManaged?: boolean
+}
+```
+
+When Code for IBM i checks a component's state, it calls the component's `getRemoteState`, which is expected to return a `remoteSignature` computed from what is actually installed on the IBM i. That remote signature is then compared with the local `signature` returned by `getIdentification()`:
+
+- if they match, the component is `Installed`
+- if they don't, the component `NeedsUpdate`, and `update()` is called to redeploy it
+
+Because of this, the signature must change whenever the source of the component changes, and it must be reproducible - installing the exact same source should always produce the exact same signature. For SQL routines (procedures and functions), a component's `getRemoteState` computes that signature with `connection.getContent().getSQLRoutineSignature(library, name, type)`, which resolves to the routine's `EXTERNAL_NAME` when it's **external**, or a **SHA-256 hash** of its SQL body otherwise - see it in action below in `getRemoteState()`.
+
+## Case 1: an external routine (fixed signature)
+
+When a component simply wraps an existing IBM i program with an SQL routine, that program's qualified name never changes, so it can be hardcoded as the `signature`. This is what the Db2 for i extension does in `CheckStatementComponent`, which wraps `QSYS/QSQCHKS`:
+
+```ts
+export class CheckStatementComponent implements IBMiComponent {
+  static ID = "CheckStatementComponent";
+  private static readonly VERSION = 1;
+  static readonly FUNCTION_NAME = `CHKSTMNT${CheckStatementComponent.VERSION.toString().padStart(4, "0")}`;
+  private static readonly SIGNATURE = "QSYS/QSQCHKS";
+  private static readonly TYPE = "PROCEDURE";
+
+  getIdentification() {
+    return {
+      name: CheckStatementComponent.ID,
+      version: CheckStatementComponent.VERSION,
+      signature: CheckStatementComponent.SIGNATURE,
+    };
+  }
+
+  async getRemoteState(connection: IBMi, installDirectory: string): Promise<SecureComponentState> {
+    const remoteSignature = await connection.getContent().getSQLRoutineSignature(
+      this.getLibrary(connection),
+      CheckStatementComponent.FUNCTION_NAME,
+      CheckStatementComponent.TYPE,
+    );
+    return {
+      status: remoteSignature ? "Installed" : "NotInstalled",
+      remoteSignature,
+    };
+  }
+
+  // update() creates a procedure with `EXTERNAL NAME QSYS/QSQCHKS`
+}
+```
+
+Since `getSQLRoutineSignature` returns `EXTERNAL_NAME` for external routines, the remote signature always resolves to `QSYS/QSQCHKS`, matching the hardcoded local `SIGNATURE` - there is nothing to regenerate for this kind of component.
+
+[View the full source on GitHub](https://github.com/codefori/vscode-db2i/blob/main/src/connection/components/checkStatement.ts) <Icon name="github" class="icon-inline" />
+
+## Case 2: a homegrown SQL routine (generated signature)
+
+When the routine's body is your own SQL rather than an external wrapper, the signature has to be generated from that body so any change to the SQL forces a new version. This is how `ValidateStatementComponent` does it - it declares its own SQL function and hardcodes the SHA-256 hash of that function's deployed body as the signature:
+
+```ts
+export class ValidateStatementComponent implements IBMiComponent {
+  static ID = "ValidateStatement";
+  private static readonly VERSION = 2;
+  private static readonly SIGNATURE = "1937A5AE221BD126F8514798721DFC7F1259CAA9018443ABE38CCF735F48073C";
+  private static readonly FUNCTION_NAME = `VALIDATE_STATEMENT${ValidateStatementComponent.VERSION.toString().padStart(4, "0")}`;
+
+  getIdentification() {
+    return {
+      name: ValidateStatementComponent.ID,
+      version: ValidateStatementComponent.VERSION,
+      signature: ValidateStatementComponent.SIGNATURE,
+    };
+  }
+
+  async getRemoteState(connection: IBMi, installDirectory: string): Promise<SecureComponentState> {
+    const remoteSignature = await connection.getContent().getSQLRoutineSignature(
+      this.getLibrary(connection),
+      ValidateStatementComponent.FUNCTION_NAME,
+      "FUNCTION"
+    );
+    return {
+      status: remoteSignature ? "Installed" : "NotInstalled",
+      remoteSignature,
+    };
+  }
+
+  async update(connection: IBMi, installDirectory: string): Promise<SecureComponentState> {
+    return connection.withTempDirectory(async tempDir => {
+      // ...deploys getSource() via RUNSQLSTM...
+      return this.getRemoteState(connection, installDirectory);
+    });
+  }
+
+  private getSource(library: string, version: number, oldLib: string) {
+    return /*sql*/`
+    create or replace function ${library}.${ValidateStatementComponent.FUNCTION_NAME}(...)
+    ...
+    `;
+  }
+}
+```
+
+[View the full source on GitHub](https://github.com/codefori/vscode-db2i/blob/main/src/connection/components/validateStatement.ts) <Icon name="github" class="icon-inline" />
+
+## How to generate a new signature for your own routine
+
+1. Bump `VERSION` (and the routine name, since it's versioned in its name) so the new routine doesn't collide with the one already installed.
+2. Update `getSource()` with your new SQL.
+3. Deploy that exact SQL to a real IBM i, so the database actually stores your new `ROUTINEDEF`. Any way of running it works - copy `getSource()`'s output into Run SQL Scripts / `RUNSQLSTM`, or simply let your component's own `update()` deploy it.
+4. Run the core's [`sqlSignature`](https://github.com/codefori/vscode-ibmi/blob/master/tools/sqlSignature.ts) tool against the deployed routine to get the hash IBM i computed for it:
+
+   ```sh title="from the core repo"
+   npx tsx tools/sqlSignature <library>/<name> [PROCEDURE|FUNCTION]
+   ```
+
+   It connects using the same `VITE_*` settings as the core's test suite (read from `src/api/tests/.env`, or the environment) and prints the signature for every matching routine:
+
+   ```
+   Connecting to MYSYSTEM...
+   FUNCTION MYLIB.VALIDATE_STATEMENT0002 => 1937A5AE221BD126F8514798721DFC7F1259CAA9018443ABE38CCF735F48073C
+   ```
+
+5. Copy that hash into `SIGNATURE`.
+
+<Aside type="caution">
+The signature is computed from `ROUTINEDEF` as IBM i stores it, not from the SQL text you wrote - formatting differences the database introduces when storing the routine will end up in the hash. Always generate the signature from the routine as actually deployed, never by hashing your own source text.
+</Aside>
+
+<Aside type="tip">
+Deploying through your component's own `update()` (instead of running the SQL yourself) has the added benefit of exercising the exact deploy code your users will run, so it doubles as a quick test of `update()` itself.
+</Aside>
+
+From then on, whenever a user has an older version installed, `getRemoteState` computes a different hash than the new `SIGNATURE`, returns `NeedsUpdate`, and Code for IBM i calls `update()` to redeploy it automatically.
+
+## Registering your component
+
+Once your `IBMiComponent` is ready, register it against the Code for IBM i instance when your extension activates. This is how the Db2 for i extension registers both components shown above:
+
+```ts
+// src/base.ts
+export async function loadBase(context: ExtensionContext) {
+  const code4iExtension = extensions.getExtension<CodeForIBMi>(`halcyontechltd.code-for-ibmi`);
+  if (code4iExtension) {
+    baseExtension = code4iExtension.isActive ? code4iExtension.exports : await code4iExtension.activate();
+
+    const componentRegistry = baseExtension.componentRegistry;
+    componentRegistry.registerComponent(context, new ValidateStatementComponent());
+    componentRegistry.registerComponent(context, new CheckStatementComponent());
+  }
+}
+```
+
+[View the full source on GitHub](https://github.com/codefori/vscode-db2i/blob/main/src/base.ts) <Icon name="github" class="icon-inline" />
