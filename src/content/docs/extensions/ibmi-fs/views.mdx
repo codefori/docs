@@ -7,7 +7,13 @@ sidebar:
 import { Aside } from '@astrojs/starlight/components';
 import { CardGrid, Card } from '@astrojs/starlight/components';
 
-The IBM i FileSystem extension provides powerful **system views** that allow you to monitor and manage various aspects of your IBM i system directly from VS Code. These views provide comprehensive information and interactive actions for jobs, spooled files, and objects.
+The IBM i FileSystem extension provides powerful **system views** that allow you to monitor and manage various aspects of your IBM i system directly from VS Code. These views provide comprehensive information and interactive actions for jobs, spooled files, subsystems and objects.
+
+All the views can be opened from the **FS Quick Start** menu in the status bar (see [FS Quick Start Menu](../#fs-quick-start-menu)) or from the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`).
+
+<Aside type="tip">
+Views that refresh themselves follow the `code-for-ibmi.views.autoRefreshInterval` setting (in seconds, default `30`, `0` to disable), and paginated tables follow `code-for-ibmi.tables.itemsPerPage` (default `50`). See [Settings](../#settings).
+</Aside>
 
 ---
 
@@ -20,8 +26,9 @@ A comprehensive view that displays detailed information about any IBM i object, 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
 | Table Function | `QSYS2` | `OBJECT_STATISTICS` | Retrieve comprehensive object statistics and metadata |
+| Table Function | `QSYS2` | `LIBRARY_INFO` | Retrieve the ASP group of libraries |
 | View | `QSYS2` | `OBJECT_LOCK_INFO` | Retrieve all locks on the object |
-| View | `QSYS2` | `OBJECT_PRIVILEGES` | Retrieve object authorizations and permissions |
+| Table Function | `QSYS2` | `OBJECT_PRIVILEGES` | Retrieve object authorizations and permissions |
 
 ### Features
 
@@ -34,20 +41,20 @@ A comprehensive view that displays detailed information about any IBM i object, 
 ### How to Access
 
 <CardGrid>
-<Card title="Command Palette">
+<Card title="FS Quick Start / Command Palette">
 
-Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i FS: Display Object Information"**:
+Select **DSPOBJ** in the FS Quick Start menu, or run **IBM i FS: Additional Information** from the Command Palette:
 
 1. Enter the library name
 2. Enter the object name
-3. Select the object type
+3. Enter the object type (e.g. `*PGM`)
 4. View the information in a multi-tab interface
 
 </Card>
 
 <Card title="Object Browser">
 
-Right-click on any object in the Object Browser and select **"Additional Information"** from the context menu, or click the info icon (ℹ️) in the editor toolbar when viewing an object.
+Right-click on any object in the Object Browser and select **Additional Information** from the context menu, or click the **Additional Information** icon in the editor toolbar when viewing an object.
 
 </Card>
 </CardGrid>
@@ -98,24 +105,25 @@ Display and manage all active jobs in the system with real-time information and 
 
 - 📊 **Real-time Job List**: View all active jobs with current status and statistics
 - 🔍 **Search Functionality**: Filter jobs by name, user, type, status, subsystem, or function
-- 🔄 **Auto-refresh**: Automatic updates every 30 seconds (for non-OUTQ jobs)
+- 🔄 **Auto-refresh**: Automatic updates driven by the `code-for-ibmi.views.autoRefreshInterval` setting, plus a manual refresh button in the toolbar
 - 📋 **Comprehensive Information**: Subsystem, job name, user, type, function, status, CPU, I/O
 - ⚡ **Interactive Actions**: Hold, release, end, or debug jobs directly from the view
-- 🎨 **Dynamic UI**: Action menu adapts based on job status (subsystem jobs excluded)
+- 🎨 **Dynamic UI**: Action buttons adapt based on job status and type
 
 ### Available Actions
 
 | Action | Description | Availability |
 |--------|-------------|--------------|
-| **Details** | Open WRKJOB view for detailed job information | All jobs |
-| **Hold** | Hold the job (HLDJOB) | Active jobs (not held) |
+| **Details** | Open the WRKJOB view for the job | All jobs except subsystem jobs |
+| **Details** | Open the Subsystem Description (`*SBSD`) view | Subsystem jobs |
+| **Hold** | Hold the job (HLDJOB) | Jobs not held |
 | **Release** | Release the job (RLSJOB) | Held jobs |
-| **End** | End the job (ENDJOB) | Active jobs |
-| **Debug** | Start service entry point debugging | Active jobs |
+| **End** | End the job (ENDJOB) | All jobs except subsystem jobs |
+| **Debug** | Start service entry point debugging | All jobs except subsystem jobs |
 
 ### How to Access
 
-Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i: Work with Active Jobs"** or use the command `vscode-ibmi-fs.wrkactjob`.
+Select **WRKACTJOB** in the FS Quick Start menu, or run **FS Quick Start: Work with Active Jobs** from the Command Palette.
 
 ### Information Displayed
 
@@ -132,7 +140,7 @@ Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM 
 - **Total I/O**: Total disk I/O count
 
 <Aside type="note">
-The action menu is not displayed for subsystem jobs (JOB_TYPE = 'SBS') as they cannot be held or ended directly.
+Subsystem jobs (JOB_TYPE = 'SBS') cannot be held or ended directly: for them the only action is **Details**, which opens the subsystem description.
 </Aside>
 
 ---
@@ -147,6 +155,7 @@ Display comprehensive information about a specific job with multiple tabs showin
 |------|--------|------|---------|
 | Table Function | `QSYS2` | `JOB_INFO` | Retrieve comprehensive job information |
 | Table Function | `QSYS2` | `ACTIVE_JOB_INFO` | Retrieve active job status and function |
+| Table Function | `QSYS2` | `ACTIVATION_GROUP_INFO` | Retrieve activation groups |
 | Table Function | `QSYS2` | `STACK_INFO` | Retrieve call stack entries |
 | Table Function | `QSYS2` | `JOB_LOCK_INFO` | Retrieve job locks |
 | Table Function | `QSYS2` | `OPEN_FILES` | Retrieve open files |
@@ -156,24 +165,26 @@ Display comprehensive information about a specific job with multiple tabs showin
 ### Features
 
 - 📊 **Job Information Tab**: Complete job attributes and configuration
-- 📈 **Job Statistics Tab**: Library list, call stack, locks, open files, and spooled files
-- 📝 **Job Log Tab**: All job log messages with severity and timestamps
-- 🔄 **Auto-refresh**: Automatic updates every 30 seconds (for non-OUTQ jobs)
-- ⚡ **Interactive Actions**: Hold, release, end jobs; open, download, or delete spools
+- 📈 **Job Statistics Tab**: Library list, activation groups, call stack, locks, open files, and spooled files
+- 📝 **Job Log Tab**: All job log messages with severity and timestamps, with search and pagination
+- 🔄 **Auto-refresh**: Automatic updates driven by the `code-for-ibmi.views.autoRefreshInterval` setting; stops when the job reaches OUTQ status
+- ⚡ **Interactive Actions**: Hold, release, end, or debug jobs; open, download, or delete spools
 - 🎨 **Dynamic UI**: Action buttons adapt based on job status
 - 💾 **State Preservation**: Active tab is preserved across refreshes
 
 ### Available Actions
 
-**Job Actions:**
+**Job Actions** (from the **Job Actions** toolbar button):
+
 | Action | Description | Availability |
 |--------|-------------|--------------|
 | **Hold Job** | Hold the job (HLDJOB) | Active jobs (not held) |
 | **Release Job** | Release the job (RLSJOB) | Held jobs |
-| **End Job** | End the job (ENDJOB) | Active jobs |
+| **End Job** | End the job (ENDJOB) | All jobs not in OUTQ status |
 | **Debug Job** | Start service entry point debugging | Active jobs |
 
 **Spool Actions:**
+
 | Action | Description |
 |--------|-------------|
 | **Open** | Open spooled file in editor |
@@ -182,9 +193,9 @@ Display comprehensive information about a specific job with multiple tabs showin
 
 ### How to Access
 
-- From **WRKACTJOB** or **WRKUSRJOB**: Click "Details" action on any job
-- From command palette: Search for **"IBM i: Work with Job"** and enter job name
-- Direct command: `vscode-ibmi-fs.wrkjob` with job name parameter
+- From **WRKACTJOB**, **WRKUSRJOB**, a Job Queue or a Subsystem Description: click **Details** on any job
+- From the FS Quick Start menu: select **WRKJOB** and enter the job name
+- From the Command Palette: run **FS Quick Start: WRKJOB** and enter the job name
 
 ### Information Displayed
 
@@ -203,6 +214,7 @@ Display comprehensive information about a specific job with multiple tabs showin
 
 **Job Statistics Tab:**
 - **Library List**: All libraries with type (SYS/CUR/USR), ASP, and description
+- **Activation Groups**: Group name and number, state, program library, name and type, in-use indicator
 - **Call Stack**: Program call stack with position, program, statement, and procedure
 - **Locks**: All object locks with state, status, scope, and member lock type
 - **Open Files**: All open files with member, type, option, and I/O counts
@@ -222,7 +234,7 @@ The job log messages are displayed in reverse chronological order (most recent f
 
 ## 👤 Work with User Jobs (WRKUSRJOB)
 
-Display and manage all jobs (active and inactive) in the system with comprehensive filtering and actions.
+Display and manage the jobs (active and inactive) of a user profile with filtering and actions.
 
 ### IBM i SQL Services Used
 
@@ -233,12 +245,14 @@ Display and manage all jobs (active and inactive) in the system with comprehensi
 
 ### Features
 
+- 👤 **User Prompt**: Choose the user profile whose jobs are shown (`*CURRENT` by default); the user is shown in the tab title
+- 🗂️ **Multiple Tabs**: Open the view several times, for different users or even the same one
 - 📊 **Complete Job List**: View all jobs including completed and output queue jobs
 - 🔍 **Search Functionality**: Filter jobs by name, status, type, completion status, or function
 - 📋 **Comprehensive Information**: Job status, active status, type, end severity, completion status
 - ⚡ **Interactive Actions**: View details, hold, release, or end jobs
 - 🎨 **Dynamic UI**: Action menu adapts based on job status (active/inactive)
-- 🔄 **Manual Refresh**: Refresh button to update job list
+- 🔄 **Refresh**: Manual refresh button, plus auto-refresh driven by the `code-for-ibmi.views.autoRefreshInterval` setting
 
 ### Available Actions
 
@@ -251,7 +265,7 @@ Display and manage all jobs (active and inactive) in the system with comprehensi
 
 ### How to Access
 
-Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i: Work with User Jobs"** or use the command `vscode-ibmi-fs.wrkusrjob`.
+Select **WRKUSRJOB** in the FS Quick Start menu, or run **FS Quick Start: Work with User Jobs** from the Command Palette, then enter the user profile (or leave `*CURRENT`).
 
 ### Information Displayed
 
@@ -271,7 +285,7 @@ Unlike WRKACTJOB, this view shows **all jobs** including those in output queues 
 
 ## 🖨️ Work with Spooled Files (WRKSPLF)
 
-Display and manage all spooled files in the system with pagination, search, and interactive actions.
+Display and manage the spooled files of a user profile with pagination, search, and interactive actions.
 
 ### IBM i SQL Services Used
 
@@ -282,12 +296,13 @@ Display and manage all spooled files in the system with pagination, search, and 
 
 ### Features
 
-- 📊 **Complete Spool List**: View all spooled files in the system
+- 👤 **User Prompt**: Choose the user profile whose spooled files are shown (`*CURRENT` by default); the user is shown in the tab title
+- 🗂️ **Multiple Tabs**: Open the view several times, for different users or even the same one
 - 🔍 **Search Functionality**: Filter spools by name, user, data, status, or job
-- 📄 **Pagination**: Navigate through large spool lists with configurable items per page
+- 📄 **Pagination**: Navigate through large spool lists, with the page size set by `code-for-ibmi.tables.itemsPerPage`
 - 📋 **Comprehensive Information**: Name, user data, status, job, pages, size, timestamp
 - ⚡ **Interactive Actions**: Open, download as PDF, or delete spooled files
-- 🔄 **Manual Refresh**: Refresh button to update spool list
+- 🔄 **Refresh**: Manual refresh button, plus auto-refresh driven by the `code-for-ibmi.views.autoRefreshInterval` setting
 
 ### Available Actions
 
@@ -299,7 +314,7 @@ Display and manage all spooled files in the system with pagination, search, and 
 
 ### How to Access
 
-Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM i: Work with Spooled Files"** or use the command `vscode-ibmi-fs.wrksplf`.
+Select **WRKSPLF** in the FS Quick Start menu, or run **FS Quick Start: Work with Spooled Files** from the Command Palette, then enter the user profile (or leave `*CURRENT`).
 
 ### Information Displayed
 
@@ -315,7 +330,7 @@ Use the command palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) and search for **"IBM 
 
 ### Pagination Controls
 
-- **Items per page**: Default 50, configurable
+- **Items per page**: `code-for-ibmi.tables.itemsPerPage` setting (default 50)
 - **Page navigation**: First, previous, next, last page buttons
 - **Total count**: Display total number of spools matching search criteria
 
@@ -325,6 +340,44 @@ Use the search functionality to quickly find specific spools by name, user, or j
 
 ---
 
+## 🏢 Work with Subsystems (WRKSBS)
+
+Display all the subsystems currently active on the system, with the number of jobs each one is running, and drill into a subsystem or end it.
+
+### IBM i SQL Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| View | `QSYS2` | `SUBSYSTEM_INFO` | Retrieve active subsystems (filtered on `STATUS = 'ACTIVE'`) |
+
+### Features
+
+- 📊 **Active Subsystem List**: All active subsystems, sorted by name
+- 👥 **Job Counts**: Current and maximum active jobs of each subsystem
+- ⚡ **Interactive Actions**: Open the subsystem description or end the subsystem
+- 🔄 **Refresh**: Manual refresh button, plus auto-refresh driven by the `code-for-ibmi.views.autoRefreshInterval` setting
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Details** | Open the [Subsystem Description (`*SBSD`)](../objects/) view, with memory pools, autostart/workstation/job queue/routing/prestart entries and the list of active jobs |
+| **End** | End the subsystem (ENDSBS), asking whether to use `*IMMED` or `*CNTRLD`; the list is refetched automatically afterwards |
+
+### How to Access
+
+Select **WRKSBS** in the FS Quick Start menu, or run **FS Quick Start: Work with Subsystems** from the Command Palette.
+
+### Information Displayed
+
+- **Subsystem Description Library**: Library containing the subsystem description
+- **Subsystem Description**: Subsystem name
+- **Maximum Active Jobs**: Maximum number of active jobs allowed (`*NOMAX` when unlimited)
+- **Current Active Jobs**: Number of jobs currently active in the subsystem
+- **Text Description**: Subsystem text description
+
+---
+
 <Aside type="note">
-For additional help, consult the [Help and Support](/help-and-support/) page or visit the [GitHub repository](https://github.com/codefori/vscode-ibmi-fs) to report issues.
+For additional help, consult the [Help and Support](/docs/help-and-support/) page or visit the [GitHub repository](https://github.com/codefori/vscode-ibmi-fs) to report issues.
 </Aside>
