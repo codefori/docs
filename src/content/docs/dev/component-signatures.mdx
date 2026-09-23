@@ -131,7 +131,7 @@ export class ValidateStatementComponent implements IBMiComponent {
 4. Run the core's [`sqlSignature`](https://github.com/codefori/vscode-ibmi/blob/master/tools/sqlSignature.ts) tool against the deployed routine to get the hash IBM i computed for it:
 
    ```sh title="from the core repo"
-   npx tsx tools/sqlSignature <library>/<name> [PROCEDURE|FUNCTION]
+   npm run sqlsignature <library>/<name> [PROCEDURE|FUNCTION]
    ```
 
    It connects using the same `VITE_*` settings as the core's test suite (read from `src/api/tests/.env`, or the environment) and prints the signature for every matching routine:

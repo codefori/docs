@@ -8,6 +8,10 @@ import { Aside } from '@astrojs/starlight/components';
 
 This page provides detailed information about each supported object type, including all available features and actions.
 
+<Aside type="note">
+Besides the actions listed for each type, every object opened in the editor also has the generic **Refresh Object**, **Object Actions** and **Additional Information** toolbar actions (see [Generic Actions](../#generic-actions)).
+</Aside>
+
 ---
 
 ## 📦 Save Files (SAVF)
@@ -18,7 +22,7 @@ Save files are special file objects used to store saved objects and libraries.
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `SAVE_FILE_INFO` | Retrieve save file metadata and save command |
+| Table Function | `QSYS2` | `SAVE_FILE_INFO` | Retrieve save file metadata and save command |
 | Table Function | `QSYS2` | `SAVE_FILE_OBJECTS` | List objects, members, and spooled files in save file |
 
 ### Features
@@ -36,9 +40,13 @@ Save files are special file objects used to store saved objects and libraries.
 |--------|-------------|
 | **Download** | Download the save file to your local system as a binary file |
 | **Upload** | Upload one or more save files from your local system to IBM i |
-| **Save** | Save objects or libraries into the save file using SAVOBJ/SAVLIB |
-| **Restore** | Restore objects or libraries from the save file using RSTOBJ/RSTLIB |
+| **Save** | Save objects, libraries or IFS paths into the save file using SAVOBJ/SAVLIB/SAV |
+| **Restore** | Restore objects, libraries or IFS paths from the save file using RSTOBJ/RSTLIB/RST |
 | **Clear** | Clear all contents from the save file |
+
+<Aside type="tip">
+When [Bob Cozzi's CL Prompter and Formatter for IBM i](https://marketplace.visualstudio.com/items?itemName=CozziResearch.clprompter) is installed, **Save** and **Restore** prompt the CL command (SAV/SAVLIB/SAVOBJ, RST/RSTLIB/RSTOBJ) with the save file already filled in, instead of asking for each parameter one by one. On restore, the library the objects were saved from is proposed as default, and a library save can be restored either as a whole library (RSTLIB) or as single objects (RSTOBJ).
+</Aside>
 
 ---
 
@@ -50,7 +58,7 @@ Data queues are objects used for inter-process communication, allowing programs 
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `DATA_QUEUE_INFO` | Retrieve data queue attributes and configuration |
+| Table Function | `QSYS2` | `DATA_QUEUE_INFO` | Retrieve data queue attributes and configuration |
 | Table Function | `QSYS2` | `DATA_QUEUE_ENTRIES` | List all messages in the data queue |
 | Procedure | `QSYS2` | `CLEAR_DATA_QUEUE` | Clear all messages from the queue |
 | Procedure | `QSYS2` | `SEND_DATA_QUEUE` | Send message to data queue |
@@ -91,7 +99,7 @@ Data areas are objects that store data that can be accessed by multiple programs
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `DATA_AREA_INFO` | Retrieve data area type, length, and current value |
+| Table Function | `QSYS2` | `DATA_AREA_INFO` | Retrieve data area type, length, and current value |
 
 ### Features
 
@@ -123,8 +131,8 @@ Output queues manage spooled files and printer output.
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `OUTPUT_QUEUE_INFO` | Retrieve output queue status and configuration |
-| View | `QSYS2` | `OUTPUT_QUEUE_ENTRIES_BASIC` | List all spooled files in the queue |
+| Table Function | `QSYS2` | `OUTPUT_QUEUE_INFO` | Retrieve output queue status and configuration |
+| Table Function | `QSYS2` | `OUTPUT_QUEUE_ENTRIES` | List all spooled files in the queue |
 | Procedure | `SYSTOOLS` | `DELETE_OLD_SPOOLED_FILES` | Delete spooled files older than specified days |
 | Function | `SYSTOOLS` | `GENERATE_PDF` | Generate PDF from spooled file |
 
@@ -149,6 +157,14 @@ Output queues manage spooled files and printer output.
 | **Manage Writer** | Start or stop printer writers associated with the queue |
 | **Delete Old Spools** | Delete spooled files older than a specified number of days |
 
+**Per Spooled File Actions:**
+
+| Action | Description |
+|--------|-------------|
+| **Open** | Open the spooled file content in a read-only editor |
+| **Download** | Generate a PDF from the spooled file and download it |
+| **Delete** | Delete the individual spooled file |
+
 ### Information Displayed
 
 - Queue status (held/released)
@@ -171,15 +187,16 @@ Job queues manage batch jobs waiting to be processed.
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `JOB_QUEUE_INFO` | Retrieve job queue status and statistics |
-| View | `SYSTOOLS` | `JOB_QUEUE_ENTRIES` | List all jobs in the queue with details |
+| Table Function | `QSYS2` | `JOB_QUEUE_INFO` | Retrieve job queue status and statistics |
+| Table Function | `QSYS2` | `JOB_INFO` | List all jobs in the queue with details |
 
 ### Features
 
 - 📊 Display job queue information and statistics
 - 📋 List all jobs in a queue with their details
 - ⏸️ Hold/Release/Clear job queues
-- ⏸️ Hold/Release/End individual jobs
+- ⏸️ Hold/Release/End/Debug individual jobs
+- 🔍 Open the WRKJOB view for any job in the queue
 - 🎨 Dynamic UI based on queue and job status
 
 ### Available Actions
@@ -189,6 +206,16 @@ Job queues manage batch jobs waiting to be processed.
 | **Hold Queue** | Hold the job queue (HLDJOBQ) |
 | **Release Queue** | Release the job queue (RLSJOBQ) |
 | **Clear Queue** | Clear all jobs from the queue (CLRJOBQ) |
+
+**Per Job Actions:**
+
+| Action | Description | Availability |
+|--------|-------------|--------------|
+| **Details** | Open the [Work with Job (WRKJOB)](../views/#-work-with-job-wrkjob) view for the job | All jobs |
+| **Hold** | Hold the job (HLDJOB) | Jobs not held |
+| **Release** | Release the job (RLSJOB) | Held jobs |
+| **End** | End the job (ENDJOB) | All jobs |
+| **Debug** | Start a service entry point to debug the job | All jobs |
 
 ### Information Displayed
 
@@ -212,7 +239,7 @@ User spaces provide temporary or permanent storage for data that can be accessed
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `USER_SPACE_INFO` | Retrieve user space attributes and configuration |
+| Table Function | `QSYS2` | `USER_SPACE_INFO` | Retrieve user space attributes and configuration |
 | Table Function | `QSYS2` | `USER_SPACE` | Read user space content |
 | Procedure | `QSYS2` | `CHANGE_USER_SPACE` | Modify user space data at specific position |
 
@@ -248,7 +275,7 @@ User indexes provide fast keyed access to data stored in user-defined entries, s
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `USER_INDEX_INFO` | Retrieve user index attributes and configuration |
+| Table Function | `QSYS2` | `USER_INDEX_INFO` | Retrieve user index attributes and configuration |
 | Table Function | `QSYS2` | `USER_INDEX_ENTRIES` | List all entries with keys and values |
 | Procedure | `QSYS2` | `ADD_USER_INDEX_ENTRY` | Add new entry to user index |
 | Table Function | `QSYS2` | `REMOVE_USER_INDEX_ENTRY` | Remove entries from user index |
@@ -288,7 +315,7 @@ Message files contain predefined messages used by IBM i applications.
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `MESSAGE_FILE_DATA` | Retrieve all message definitions from message file |
+| Table Function | `QSYS2` | `MESSAGE_FILE_DATA` | Retrieve all message definitions from message file |
 
 ### Features
 
@@ -296,7 +323,25 @@ Message files contain predefined messages used by IBM i applications.
 - 📋 View message details (ID, text, severity, reply type)
 - 📄 First and second level message text
 - ⚙️ Reply type and valid reply values
+- ➕ Add, change and remove message descriptions
 - 🚀 Fast table component for performance with many messages
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Add Message Description** | Prompt ADDMSGD to add a new message to the message file |
+
+**Per Message Actions:**
+
+| Action | Description |
+|--------|-------------|
+| **Change** | Prompt CHGMSGD for the selected message |
+| **Delete** | Remove the selected message (RMVMSGD) after confirmation |
+
+<Aside type="caution">
+Adding and changing message descriptions requires [Bob Cozzi's CL Prompter and Formatter for IBM i](https://marketplace.visualstudio.com/items?itemName=CozziResearch.clprompter), which is used to prompt the ADDMSGD and CHGMSGD commands.
+</Aside>
 
 ### Information Displayed
 
@@ -308,10 +353,6 @@ Message files contain predefined messages used by IBM i applications.
 - Valid reply values
 - Default reply value
 
-<Aside type="note">
-  Message files are **view-only**. Use IBM i commands to modify message definitions.
-</Aside>
-
 ---
 
 ## 💬 Message Queues (MSGQ)
@@ -322,7 +363,7 @@ Message queues store messages sent by programs, system functions, or users, prov
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `MESSAGE_QUEUE_INFO` | Retrieve all messages in the queue with details |
+| Table Function | `QSYS2` | `MESSAGE_QUEUE_INFO` | Retrieve all messages in the queue with details |
 | Procedure | `QSYS2` | `SEND_MESSAGE` | Send message to message queue |
 
 ### Features
@@ -332,6 +373,7 @@ Message queues store messages sent by programs, system functions, or users, prov
 - 📅 Show message metadata (severity, timestamp, sender job/user)
 - 🗑️ Clear all messages from the queue
 - 📨 Send message to the queue
+- ↩️ Reply to inquiry messages
 - 🚀 Fast table component for performance with many messages
 
 ### Available Actions
@@ -340,6 +382,12 @@ Message queues store messages sent by programs, system functions, or users, prov
 |--------|-------------|
 | **Send Message** | Send a new message to the message queue |
 | **Clear Queue** | Remove all messages from the queue |
+
+**Per Message Actions:**
+
+| Action | Description |
+|--------|-------------|
+| **Reply** | Reply to an inquiry message (SNDRPY); shown only for messages awaiting a reply |
 
 ### Information Displayed
 
@@ -360,8 +408,8 @@ Binding directories contain lists of service programs and modules used during pr
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `BINDING_DIRECTORY_INFO` | Retrieve all entries in binding directory |
-| View | `QSYS2` | `PROGRAM_EXPORT_IMPORT_INFO` | Retrieve exported symbols from service programs |
+| Table Function | `QSYS2` | `BINDING_DIRECTORY_INFO` | Retrieve all entries in binding directory |
+| Table Function | `QSYS2` | `PROGRAM_EXPORT_IMPORT_INFO` | Retrieve exported symbols from service programs |
 
 ### Features
 
@@ -376,7 +424,13 @@ Binding directories contain lists of service programs and modules used during pr
 
 | Action | Description |
 |--------|-------------|
-| **Add Entry** | Add a new service program or module to the binding directory |
+| **Add Entry** | Add a new service program or module to the binding directory (ADDBNDDIRE) |
+
+**Per Entry Actions:**
+
+| Action | Description |
+|--------|-------------|
+| **Remove** | Remove the entry from the binding directory (RMVBNDDIRE) |
 
 ### Information Displayed
 
@@ -396,10 +450,11 @@ Programs and service programs are executable objects.
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `PROGRAM_INFO` | Retrieve comprehensive program information |
-| View | `QSYS2` | `BOUND_MODULE_INFO` | List all bound modules |
-| View | `QSYS2` | `BOUND_SRVPGM_INFO` | List all bound service programs |
-| View | `QSYS2` | `PROGRAM_EXPORT_IMPORT_INFO` | Retrieve exported procedures (for *SRVPGM) |
+| Table Function | `QSYS2` | `PROGRAM_INFO` | Retrieve comprehensive program information |
+| Table Function | `QSYS2` | `BOUND_MODULE_INFO` | List all bound modules |
+| Table Function | `QSYS2` | `BOUND_SRVPGM_INFO` | List all bound service programs |
+| Table Function | `QSYS2` | `PROGRAM_EXPORT_IMPORT_INFO` | Retrieve exported procedures (for *SRVPGM) |
+| Table Function | temporary library | `PGMREFS` | List referenced objects, wrapping the DSPPGMREF command (see [References](#references)) |
 
 ### Features
 
@@ -410,6 +465,8 @@ Programs and service programs are executable objects.
 - 🔍 View exported symbols (for service programs)
 - 🐛 Debug data availability information
 - 📅 Creation and compilation information
+- 📚 List referenced objects (DSPPGMREF)
+- 🎨 Multi-tab interface: Detail, Bounds, Exports and References
 
 ### Information Displayed
 
@@ -423,6 +480,7 @@ Programs and service programs are executable objects.
 - List of bound service programs
 - Exported procedures (for *SRVPGM)
 - Program size and statistics
+- Referenced objects
 
 <Aside type="note">
   Programs and service programs are **view-only**. Use IBM i commands to modify or recompile.
@@ -443,7 +501,15 @@ Modules are compiled ILE objects that contain executable code and can be bound i
 - 🔗 View imported and exported symbols
 - 📦 Display referenced system objects
 - ©️ Show copyright information
+- 📚 List referenced objects (DSPPGMREF)
 - 🎨 Multi-tab interface for organized information display
+
+### IBM i Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| Command | `QSYS` | `DSPMOD` | Retrieve module details (output to a temporary outfile) |
+| Table Function | temporary library | `PGMREFS` | List referenced objects, wrapping the DSPPGMREF command (see [References](#references)) |
 
 ### Information Displayed
 
@@ -455,6 +521,7 @@ Modules are compiled ILE objects that contain executable code and can be bound i
 - Imported and exported symbols
 - Referenced system objects
 - Copyright information
+- Referenced objects
 
 <Aside type="note">
   Modules are **view-only**. Use IBM i commands to recompile or modify.
@@ -470,7 +537,7 @@ Command objects define IBM i CL commands.
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `COMMAND_INFO` | Retrieve command definition and attributes |
+| Table Function | `QSYS2` | `COMMAND_INFO` | Retrieve command definition and attributes |
 
 ### Features
 
@@ -510,7 +577,7 @@ Job descriptions define the runtime environment for batch jobs.
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `JOB_DESCRIPTION_INFO` | Retrieve job description attributes and configuration |
+| Table Function | `QSYS2` | `JOB_DESCRIPTION_INFO` | Retrieve job description attributes and configuration |
 
 ### Features
 
@@ -519,6 +586,17 @@ Job descriptions define the runtime environment for batch jobs.
 - 👤 User profile and initial library list
 - ⚙️ Job attributes and system values
 - 🔧 Routing data and request data
+- ✏️ Change job description parameters
+
+### Available Actions
+
+| Action | Description |
+|--------|-------------|
+| **Change** | Prompt CHGJOBD for the job description |
+
+<Aside type="caution">
+The **Change** action requires [Bob Cozzi's CL Prompter and Formatter for IBM i](https://marketplace.visualstudio.com/items?itemName=CozziResearch.clprompter), which is used to prompt the CHGJOBD command.
+</Aside>
 
 ### Information Displayed
 
@@ -533,10 +611,6 @@ Job descriptions define the runtime environment for batch jobs.
 - Accounting code
 - Message logging level
 - Inquiry message reply
-
-<Aside type="note">
-  Job descriptions are **view-only**. Use CHGJOBD command to modify.
-</Aside>
 
 ---
 
@@ -636,6 +710,10 @@ DDM (Distributed Data Management) files provide access to files on remote system
 - 🔒 View security and connection settings
 - 📋 Support for multi-line field values
 
+<Aside type="note">
+The information is read from the output of the DSPDDMF command.
+</Aside>
+
 ### Information Displayed
 
 - Remote location name
@@ -661,13 +739,13 @@ Subsystem descriptions define independent operating environments within IBM i th
 
 | Type | Schema | Name | Purpose |
 |------|--------|------|---------|
-| View | `QSYS2` | `SUBSYSTEM_INFO` | Retrieve subsystem status and configuration |
-| View | `QSYS2` | `SUBSYSTEM_POOL_INFO` | Retrieve memory pool configuration |
-| View | `QSYS2` | `AUTOSTART_JOB_INFO` | Retrieve autostart job entries |
-| View | `QSYS2` | `WORKSTATION_INFO` | Retrieve workstation entries |
-| View | `QSYS2` | `ROUTING_ENTRY_INFO` | Retrieve routing entries |
-| View | `QSYS2` | `PRESTART_JOB_INFO` | Retrieve prestart job entries |
-| View | `QSYS2` | `JOB_QUEUE_INFO` | Retrieve job queue entries |
+| Table Function | `QSYS2` | `SUBSYSTEM_INFO` | Retrieve subsystem status and configuration |
+| Table Function | `QSYS2` | `SUBSYSTEM_POOL_INFO` | Retrieve memory pool configuration |
+| Table Function | `QSYS2` | `AUTOSTART_JOB_INFO` | Retrieve autostart job entries |
+| Table Function | `QSYS2` | `WORKSTATION_INFO` | Retrieve workstation entries |
+| Table Function | `QSYS2` | `ROUTING_ENTRY_INFO` | Retrieve routing entries |
+| Table Function | `QSYS2` | `PRESTART_JOB_INFO` | Retrieve prestart job entries |
+| Table Function | `QSYS2` | `JOB_QUEUE_INFO` | Retrieve job queue entries |
 | Table Function | `QSYS2` | `ACTIVE_JOB_INFO` | Retrieve active jobs in subsystem |
 
 ### Features
@@ -682,7 +760,7 @@ Subsystem descriptions define independent operating environments within IBM i th
 - 👥 View active jobs in the subsystem (when active)
 - ▶️ Start subsystem
 - ⏹️ End subsystem with multiple options (*IMMED, *CNTRLD)
-- 🛑 End individual jobs within the subsystem
+- ⏸️ Hold, release and end individual jobs within the subsystem, or open them in WRKJOB
 - 🎨 Dynamic UI based on subsystem status
 
 ### Available Actions
@@ -691,6 +769,15 @@ Subsystem descriptions define independent operating environments within IBM i th
 |--------|-------------|
 | **Start Subsystem** | Start the subsystem (STRSBS) |
 | **End Subsystem** | End the subsystem with options (*IMMED or *CNTRLD) |
+
+**Per Job Actions** (active jobs in the subsystem):
+
+| Action | Description | Availability |
+|--------|-------------|--------------|
+| **Details** | Open the [Work with Job (WRKJOB)](../views/#-work-with-job-wrkjob) view for the job | All jobs |
+| **Hold** | Hold the job (HLDJOB) | Jobs not held |
+| **Release** | Release the job (RLSJOB) | Held jobs |
+| **End** | End the job (ENDJOB *IMMED) | All jobs |
 
 ### Information Displayed
 
@@ -720,7 +807,12 @@ Classes define the runtime attributes for batch jobs, controlling how jobs execu
 - ⏳ View default wait time for locks
 - 🗑️ View purge eligibility status
 - 📅 View usage statistics (last used date, days used count)
-- 🔧 Automatic creation of required SQL objects using QWCRCLSI API
+
+### IBM i Services Used
+
+| Type | Schema | Name | Purpose |
+|------|--------|------|---------|
+| Table Function | temporary library | `CLASS_INFO` | Retrieve class attributes through the QWCRCLSI API (see [Components installed by the extension](#components-installed-by-the-extension)) |
 
 ### Information Displayed
 
@@ -754,6 +846,8 @@ File objects include physical files (PF), logical files (LF), views, and indexes
 | View | `QSYS2` | `SYSMEMBERSTAT` | Retrieve member-level statistics |
 | View | `QSYS2` | `SYSINDEXES` | Retrieve index metadata and attributes |
 | View | `QSYS2` | `SYSINDEXSTAT` | Retrieve index statistics and usage metrics |
+| View | `QSYS2` | `SYSKEYS` | Retrieve the key columns of SQL indexes |
+| Table Function | `QSYS2` | `LIBRARY_INFO` | Retrieve the ASP of the library |
 | Table Function | `QSYS2` | `OBJECT_STATISTICS` | Retrieve object-level statistics and information |
 | Table Function | `SYSTOOLS` | `RELATED_OBJECTS` | Retrieve dependent objects (indexes, views, constraints) |
 
@@ -763,9 +857,10 @@ File objects include physical files (PF), logical files (LF), views, and indexes
 - 📋 View file attributes (creation date, owner, journaling status, CCSID)
 - 📈 View detailed statistics (row counts, operations, I/O metrics)
 - 👥 Display file members with their statistics
-- 🧭 Display columns and data types
+- 🧭 Display columns and data types, with key position and uniqueness
+- 🔑 Display the key columns of SQL indexes
 - 🔗 Show dependent objects (indexes, views, constraints)
-- 🔍 Query file contents using SQL SELECT
+- 🔍 Query file contents using SQL SELECT (physical and logical files only)
 - 📄 View view definitions and capabilities
 - 🎯 Support for both DDS and SQL-based files
 - 🎨 Multi-tab interface for organized information display
@@ -774,7 +869,7 @@ File objects include physical files (PF), logical files (LF), views, and indexes
 
 | Action | Description |
 |--------|-------------|
-| **Query File** | Execute a SQL SELECT statement to view file contents |
+| **Query File** | Execute a SQL SELECT statement to view file contents (physical and logical files only) |
 
 ### Information Displayed
 
@@ -785,6 +880,7 @@ File objects include physical files (PF), logical files (LF), views, and indexes
 - Number of members and records
 - File statistics (reads, writes, updates, deletes)
 - Column definitions with data types
+- Key columns (for indexes)
 - File members with statistics
 - Dependent objects (indexes, views, constraints)
 - View definition (for views)
@@ -797,14 +893,9 @@ Query definitions are objects created by Query/400 or Query Manager that define 
 
 ### Features
 
-- 📊 Translate *QRYDFN objects to SQL statements in text editor
+- 📊 **Automatic translation to SQL** - Opening the object retrieves the query definition and shows the equivalent SQL statement directly in a read-only text editor (no webview)
 - 🔗 Automatic file reference conversion (LIB/FILE → LIB.FILE)
-
-### Available Actions
-
-| Action | Description |
-|--------|-------------|
-| **View as SQL** | Open the query definition translated to SQL in a text editor |
+- 🔍 Full VS Code find and SQL syntax highlighting on the generated statement
 
 ### Information Displayed
 
@@ -813,3 +904,28 @@ The query definition is automatically translated to an equivalent SQL SELECT sta
 <Aside type="note">
   Query definitions are **view-only**. Use Query/400 or Query Manager to modify query definitions.
 </Aside>
+
+---
+
+## References
+
+Programs, service programs and modules have a **References** tab listing the objects they reference, the same information returned by the DSPPGMREF command:
+
+- Referenced object (library/name) and type
+- Source name
+- Record format and record format count
+- File usage
+- Level check ID
+- Field count
+
+---
+
+## Components installed by the extension
+
+Some information is not available through IBM i SQL services, so the extension registers these SQL routines as Code for IBM i components. They are installed automatically in the [temporary library](/docs/settings/connection/#temporary-library) (`ILEDITOR` by default), and the table functions are checked against their [signature](/docs/dev/component-signatures/):
+
+| Component | Type | Used by | Purpose |
+|-----------|------|---------|---------|
+| `PGMREFS` | Table Function | `*PGM`, `*SRVPGM`, `*MODULE` | Wraps the DSPPGMREF command (original SQL by Bob Cozzi) |
+| `QWCRCLSI` | Procedure | `*CLS` | External procedure over the QWCRCLSI (Retrieve Class Information) API |
+| `CLASS_INFO` | Table Function | `*CLS` | Returns the attributes of a class, combining `QWCRCLSI` with `QSYS2.OBJECT_STATISTICS` |
