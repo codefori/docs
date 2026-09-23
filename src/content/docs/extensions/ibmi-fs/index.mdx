@@ -151,20 +151,11 @@ The menu is fully customizable through the `vscode-ibmi-fs.quickStartMenu` setti
 - 🗑️ **Remove** one or more entries
 - ⬆️⬇️ **Move** entries up or down to reorder the menu
 - ♻️ **Reset** the menu back to the built-in defaults
-- ⚙️ **Open Settings** to edit the list as JSON
 
-Each entry needs a `label` and a `command`, and may also define a `description`, an `icon` (a [codicon](https://microsoft.github.io/vscode-codicons/dist/codicon.html) name, e.g. `server-process`) and `args`. When the setting is empty the built-in menu shown above is used; when it is set, it completely replaces the defaults.
-
-```json
-"vscode-ibmi-fs.quickStartMenu": [
-  { "label": "WRKACTJOB", "icon": "server-process", "command": "vscode-ibmi-fs.wrkactjob" },
-  { "label": "WRKSPLF QSYSOPR", "icon": "file", "command": "vscode-ibmi-fs.wrksplf", "args": ["QSYSOPR"] },
-  { "label": "WRKSBS", "icon": "organization", "command": "vscode-ibmi-fs.wrksbs" }
-]
-```
+Once customized, your menu completely replaces the built-in defaults; use **Reset** to go back to them.
 
 <Aside type="tip">
-The **DSPOBJ Detailed** entry can be pinned to a fixed object: when added as a custom entry, pass library, object name and object type as `args` (e.g. `["MYLIB", "MYPGM", "*PGM"]`) and the object opens straight away without prompting. The wizard offers this choice when you add an entry.
+The **DSPOBJ Detailed** entry can be pinned to a fixed object: when you add it through the wizard, choose to specify library, object name and object type, and the object opens straight away without prompting.
 </Aside>
 
 ---

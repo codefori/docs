@@ -175,17 +175,17 @@ export default defineConfig({
 								label: 'Go To File',
 								link: 'browsers/go-to-file/',
 							},
-							{
-								label: 'IBM i FileSystem',
-								autogenerate: { directory: 'extensions/ibmi-fs/' },
-								collapsed: true,
-								badge: {
-									text: 'NEW',
-									variant: 'tip'
-								},
-							},
 						],
 						collapsed: false,
+					},
+					{
+						label: 'IBM i FileSystem',
+						autogenerate: { directory: 'extensions/ibmi-fs/' },
+						collapsed: true,
+						badge: {
+							text: 'Updated',
+							variant: 'success'
+						},
 					},
 					{
 						label: 'Languages',
