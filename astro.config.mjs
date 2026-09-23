@@ -145,6 +145,14 @@ export default defineConfig({
 							{
 								label: 'Profiles',
 								link: 'environment/profiles',
+							},
+							{
+								label: 'Shared Snippets',
+								link: 'environment/snippets',
+								badge: {
+									text: 'NEW',
+									variant: 'tip'
+								}
 							}
 						]
 					},
