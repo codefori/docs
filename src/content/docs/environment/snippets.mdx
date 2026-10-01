@@ -1,0 +1,150 @@
+---
+title: Shared Snippets
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Shared snippets are code snippets stored on the IBM i, in the IFS. They are available to every developer who connects to that system with Code for IBM i. This lets a team share templates, boilerplate and coding standards without each developer setting them up locally.
+
+Shared snippets use the same format as [VS Code user-defined snippets](https://code.visualstudio.com/docs/editing/userdefinedsnippets). A snippet written for VS Code works as a shared snippet without changes.
+
+---
+
+## Where shared snippets are stored
+
+All shared snippets files are stored in the `/etc/vscode/snippets` IFS folder, next to the [system-wide settings](../../settings/system/).
+
+| File | Applies to |
+| ---- | ---------- |
+| `/etc/vscode/snippets/global.json` | Every document, whatever its language. |
+| `/etc/vscode/snippets/<languageId>.json` | Only documents using that language, e.g. `rpgle.json` or `sql.json`. |
+
+The file name (without `.json`) must be a VS Code language identifier. The `New language snippets file...` option (see [Open a snippets file](#open-a-snippets-file)) lists the available languages, so you don't need to know the identifiers.
+
+---
+
+## Using shared snippets
+
+When connected, shared snippets appear in the content assist (`Ctrl+Space`) with other completion items:
+
+- the label is the snippet **prefix**. A snippet with no prefix is listed under its **name**.
+- the details show the snippet name followed by `(IBM i shared)`.
+- the documentation shows the snippet **description**.
+- shared snippets are listed before completion items from other providers.
+
+Shared snippets work in source members, streamfiles, local files and untitled documents.
+
+Choosing a snippet inserts its body. Tab stops, placeholders, choices and variables (`$1`, `${1:default}`, `${1|a,b|}`, `$TM_FILENAME`, ...) work like in any VS Code snippet.
+
+---
+
+## Managing snippets files
+
+### Open a snippets file
+
+Shared snippets files can be opened in two ways:
+
+- from the `Snippets` link in the connection status bar item's tooltip.
+- from the Command Palette, with the `IBM i: Shared Snippets` command.
+
+A quick pick then lists:
+
+- **Global Snippets**, i.e. `global.json`.
+- one entry for each existing language snippets file.
+- **New language snippets file...**, to create a snippets file for a language that does not have one yet.
+
+Each entry shows its IFS path and how many snippets it contains, or `Not created yet` if the file does not exist.
+
+The file opens in the editor as a regular streamfile, with the VS Code snippets JSON schema. Content assist and validation are available while you edit it. After you save it, the changes are used right away.
+
+<Aside type="note">
+If the folder or the file does not exist yet, Code for IBM i creates it:
+
+- the `/etc/vscode/snippets` folder is created with `755` permissions (everyone can read, the owner can write).
+- new snippets files are created with `644` permissions and contain a commented example.
+
+System administrators can adjust these authorities later, for example to let a group of developers maintain the snippets.
+</Aside>
+
+### Create a snippet from the editor
+
+Code can be turned into a shared snippet directly from an editor. Right-click in the editor and open the `Create shared IBM i snippet` submenu:
+
+- **From the selection**: the selected text becomes the snippet body. This option is only shown when text is selected.
+- **From the active document**: the whole document becomes the snippet body.
+
+Both actions can also be run from the Command Palette (`IBM i: Create shared snippet from the selection` / `IBM i: Create shared snippet from the active document`).
+
+A four-step wizard then asks for:
+
+<Steps>
+
+1. **The snippets file** to add the snippet to. The file for the current document's language is offered first and is created if needed. You can also pick the global file, another language file, or a new language.
+
+2. **The name** of the snippet. It is shown in the completion details and must be unique within the file (case-insensitive).
+
+3. **The prefix**: the text you type to trigger the snippet. You can give several prefixes, separated by commas. Prefixes cannot contain spaces.
+
+4. **The description** (optional), shown in the completion documentation.
+
+</Steps>
+
+The snippet is added after the last snippet in the file. Existing comments and formatting are kept. The file is then saved and the new snippet is shown in the editor, so you can refine it (for example by adding tab stops).
+
+---
+
+## Snippet format
+
+A snippets file is a JSON object. Each key is the snippet name, and its value describes the snippet. As with VS Code snippets files, comments (`//` and `/* */`) and trailing commas are allowed.
+
+```json
+{
+	// RPGLE procedure skeleton
+	"Procedure": {
+		"prefix": ["dclproc", "proc"],
+		"body": [
+			"dcl-proc ${1:name} export;",
+			"  dcl-pi *n ${2:returnType};",
+			"    $3",
+			"  end-pi;",
+			"",
+			"  $0",
+			"end-proc;"
+		],
+		"description": "Exported procedure with its interface"
+	}
+}
+```
+
+| Property      | Type                   | Description |
+| ------------- | ---------------------- | ----------- |
+| `prefix`      | `string` \| `string[]` | One or more words that trigger the snippet in the content assist. If omitted, the snippet is listed under its name. |
+| `body`        | `string` \| `string[]` | **Required.** The inserted text. An array is joined with line breaks. Supports the [VS Code snippet syntax](https://code.visualstudio.com/docs/editing/userdefinedsnippets#_snippet-syntax). |
+| `description` | `string` \| `string[]` | Shown in the completion documentation. An array is joined with line breaks. |
+
+<Aside type="caution">
+Every snippet must have a `body`. If a file is not valid JSON or contains a snippet without a `body`, an error is shown and none of that file's snippets are loaded until it is fixed.
+</Aside>
+
+---
+
+## Permissions
+
+Shared snippets live in the IFS, so IFS authorities control who can read and change them:
+
+- **Reading**: every user needs read access to `/etc/vscode/snippets` and its files to get the snippets in the content assist.
+- **Creating the folder**: the first user to create a snippets file needs write access to `/etc/vscode`.
+- **Creating a file**: needs write access to `/etc/vscode/snippets`.
+- **Adding or changing snippets**: needs write access to the snippets file. If you don't have it, the file opens with a warning and cannot be saved.
+
+When creating a snippet from the editor, the authorities are checked before the wizard asks any questions. If they are missing, the error message says which authority to ask your system administrator for.
+
+<Aside type="note">
+When [System-wide read only mode](../../settings/system/) is on, the `Snippets` link is not shown in the connection status bar tooltip.
+</Aside>
+
+---
+
+## Refresh
+
+The list of snippets files is cached for 30 seconds. Only files changed since the last listing are downloaded again. Saving a snippets file from Code for IBM i refreshes the cache immediately. Changes made by other users or by other tools are picked up within 30 seconds.
