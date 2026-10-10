@@ -31,6 +31,56 @@ If a linter rules file does not exist, you will be asked asked if you want to cr
    * linter rules exist in `.vscode/rpglint.json` relative to the workspace.
    * Local RPGLE gets scanned automatically when config is changed
 
+## Skipping checks for a statement
+
+Place a skip directive in a `//` comment on its own line, immediately before the statement you want to exclude from a check.
+
+| Comment | Checks skipped for the next statement |
+|---|---|
+| `// @rpglint-skip` | Rule checks and indentation checking. |
+| `// @rpglint-skip-indent` | Indentation checking only; rule checks still apply. |
+| `// @rpglint-skip-rules` | Rule checks only; indentation checking still applies. |
+
+Use the lowercase spelling shown above, with no other text in the directive comment. Put any explanation on a separate comment line before the directive. `@rpglint-skip-rules` does not accept a list of rule names.
+
+For example, with these rules in `rpglint.json`:
+
+```json
+{
+  "indent": 2,
+  "UselessOperationCheck": true
+}
+```
+
+The following source demonstrates each directive:
+
+```text title="RPGLE example"
+**free
+dcl-s total int(10);
+
+// Skip both the extra indentation and the redundant EVAL check.
+// @rpglint-skip
+  eval total = 1;
+
+// Skip the extra indentation only.
+// @rpglint-skip-indent
+  total = 2;
+
+// Skip the redundant EVAL check only.
+// @rpglint-skip-rules
+eval total = 3;
+
+// Normal checking resumes: this EVAL is reported.
+eval total = 4;
+*inlr = *on;
+```
+
+The directive applies to the next statement, not the rest of the file or a whole block. Repeat it before each statement that needs an exception. These comments do not change how the RPG compiler processes the source.
+
+<Aside type="note">
+  Some diagnostics, such as `MissingSemicolon` and `NoUnreferenced`, are checked separately and are not suppressed by these directives.
+</Aside>
+
 ## Lint options
 
 Below are some available lint configs. [See the `rpglint.json` schema for the most up to date rules](https://github.com/codefori/vscode-rpgle/blob/main/schemas/rpglint.json)<Icon name="github" class="icon-inline" />.
