@@ -127,7 +127,15 @@ Your active job will be marked with a highlighted icon. **The active job is used
 
 ### Editing Job Configuration
 
-You can use the 'Edit Connection Properties' inline button (pencil icon) on any job to edit the JDBC properties. When the 'Apply Changes' button is pressed, any changes are saved and the job is restarted to fully apply the changes.
+You can use the 'Edit Connection Properties' inline button (pencil icon) on any job to edit the JDBC properties. These properties are organized into the following categories with some notable options in each:
+
+- **System**: Library list, database name, auto commit, transaction isolation
+- **Format**: Naming convention (`system` vs `sql`), date & time format, date & time separator
+- **Performance**: Data compression, block criteria and size, query optimize goal
+- **Sort**: Sort method, sort language, sort weight
+- **Other**: Access level, data truncation, error detail level
+
+When the 'Apply Changes' button is pressed, any changes are saved and the job is restarted to fully apply the changes.
 
 ![](../../../../assets/db2_for_i/features/sql_jobs/jobConfiguration.png)
 
@@ -135,7 +143,7 @@ You are able to right-click on any job to save those job settings, allowing it t
 
 ![](../../../../assets/db2_for_i/features/sql_jobs/savedConfigurations.png)
 
-You also have the ability to set cross system default connection properties which serve as a fallback when no saved config is set as the default. For example, if you prefer to use `sql` rather than `system` naming across all system, this can be set here.
+You also have the ability to set cross system default connection properties which serve as a fallback when no saved config is set as the default. For example, if you prefer to use `sql` rather than `system` naming across all systems, this can be set here.
 
 <Aside type="caution">
   These default connection properties are not connection specific meaning that they are not tied to any one specific Code for IBM i connection. These apply cross system so it is best to ensure that settings which are set are appropriate for all systems.
